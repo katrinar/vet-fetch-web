@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Vet Fetch</h1>
+    <p>Tell us About Your Pet</p>
+   	<form action="/api/pet" method="post">
+   		<input type="text" name="name" placeholder="Name" /><br />
+   		<input type="text" name="breed" placeholder="Breed" /><br />
+   		<input type="text" name="sex" placeholder="Sex" /><br />
+   		<input type="submit" value="Submit" /><br />
+   	</form>
+
+   	<p>Create a Profile</p>
+   	<form action="/api/profile" method="post">
+   		<input type="text" name="firstName" placeholder="First Name" /><br />
+   		<input type="text" name="lastName" placeholder="Last Name" /><br />
+   		<input type="text" name="email" placeholder="Email" /><br />
+   		<input type="text" name="password" placeholder="Password" /><br />
+   		<input type="submit" value="Submit" /><br />
+   	</form>
+
+
+   	<p>Login</p>
+   	<form action="/account/login" method="post">
+   		<input type="text" name="email" placeholder="Email" /><br />
+   		<input type="text" name="password" placeholder="Password" /><br />
+   		<input type="submit" value="Submit" /><br />
+   	</form>
+
+  </body>
+</html>
