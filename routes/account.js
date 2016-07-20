@@ -17,8 +17,8 @@ router.get('/:action', function(req, res, next){
 	if (action == 'currentuser'){
 		if (req.session == null){
 			res.json({
-				confirmation: 'No Current User',
-				message: 'No session in place.'
+				confirmation: 'Success',
+				message: 'No Current User: No session in place.'
 			})
 
 		return
@@ -27,8 +27,8 @@ router.get('/:action', function(req, res, next){
 
 		if (req.session.user == null){
 			res.json({
-				confirmation: 'No Current User',
-				message: 'No user in current session.'
+				confirmation: 'Success',
+				message: 'No Current User: No user in current session.'
 			})
 
 		return
@@ -40,14 +40,14 @@ router.get('/:action', function(req, res, next){
 
 			if (err){
 				res.json({
-					confirmation: 'Fail: Cannot Find Current User',
-					message: err.message
+					confirmation: 'Fail',
+					message: 'Cannot Find Current User'+ err.message
 				})
 			return
 			}
 
 			res.json({
-				confirmation: 'Success: Found Current User',
+				confirmation: 'Success',
 				currentUser: result
 			})
 			return

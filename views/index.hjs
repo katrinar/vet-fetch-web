@@ -6,6 +6,9 @@
   </head>
   <body>
     <h1>Vet Fetch</h1>
+    <div id="app">
+    </div>
+
     <p>Tell us About Your Pet</p>
    	<form action="/api/pet" method="post">
    		<input type="text" name="name" placeholder="Name" /><br />
@@ -14,22 +17,6 @@
    		<input type="submit" value="Submit" /><br />
    	</form>
 
-   	<p>Create a Profile</p>
-   	<form action="/api/profile" method="post">
-   		<input type="text" name="firstName" placeholder="First Name" /><br />
-   		<input type="text" name="lastName" placeholder="Last Name" /><br />
-   		<input type="text" name="email" placeholder="Email" /><br />
-   		<input type="text" name="password" placeholder="Password" /><br />
-   		<input type="submit" value="Submit" /><br />
-   	</form>
-
-
-   	<p>Login</p>
-   	<form action="/account/login" method="post">
-   		<input type="text" name="email" placeholder="Email" /><br />
-   		<input type="text" name="password" placeholder="Password" /><br />
-   		<input type="submit" value="Submit" /><br />
-   	</form>
-
+    <script type="text/javascript" src="/build/bundle.js"></script>
   </body>
 </html>
