@@ -3,6 +3,24 @@ var bcrypt = require('bcryptjs')
 
 module.exports = {
 	get: function(params, isRaw, callback){
+
+		if (params.id != null){
+
+			Profile.findById(params.id, function(err, profile){
+				if (err){
+					callback(err, null)
+					return
+				}
+
+				if (profile == null){
+					callback(err, null)
+				}
+
+				callback(null, profile.summary())
+			})
+			return
+		}
+		
 		Profile.find(params, function(err, profiles){
 			if(err){
 				if(callback != null)
@@ -42,6 +60,7 @@ module.exports = {
 		var password = params['password'] // plain text password
 		var hashedPassword = bcrypt.hashSync(password, 10)
 		params['password'] = hashedPassword
+		
 		Profile.create(params, function(err, profile){
 			if(err){
 				if(callback != null)

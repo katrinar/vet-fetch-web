@@ -50,7 +50,7 @@ router.get('/:resource/:id', function(req, res, next){
 		return
 	}
 
-	controller.getById(id, false, function(err, result){
+	controller.get({id:id}, false, function(err, result){
 		if(err){
 			res.json({
 				confirmation: 'Fail',
@@ -86,6 +86,10 @@ router.post('/:resource', function(req, res, next){
 				message: err.message
 			})
 			return
+		}
+
+		if (resource == 'profile'){ //install cookie
+			req.session.user = result.id
 		}
 
 		res.json({

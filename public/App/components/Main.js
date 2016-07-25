@@ -1,40 +1,35 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
-import Pets from '../components/Pets'
-import Welcome from '../components/Welcome'
+import Register from '../components/Register'
+import Account from '../components/Account'
 
 class Main extends Component {
 
+
 	componentDidMount() {
 
-		var currentuser = null
-		
-		api.handleGet('/account/currentuser', null, function(err, response){
-			if (err){
-				alert('OOPS: '+ err)
-				return
-			}
-			else {
-				
-				
-				return response
-
-				currentuser = response
-
-			}
-		})
-
-		console.log('Main:' + currentuser)
-
-
+		console.log('Main componentDidMount: Page: '+this.props.page+", Slug: " + this.props.slug)
 	}
 
 	render() {
 
+		var content = null
+		var page = this.props.page
+		if (page == 'home'){
+			content = <Register />
+			console.log(page)
+
+		}
+
+		if (page == 'account'){
+			content = <Account />
+			console.log(page)
+		}
+						
+
 		return (
 			<div>
-				<div>{ <Welcome /> }</div>
-				<div>{ <Pets /> }</div>
+				{ content } 
 			</div>
 		)
 	}
