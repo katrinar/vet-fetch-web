@@ -49,7 +49,7 @@ var Account = (function (Component) {
 						return;
 					}
 
-					console.log("Account Get Current User Response: " + JSON.stringify(result.user));
+					console.log("Account Get Current User: " + JSON.stringify(result.user));
 
 					store.dispatch(actions.currentUserReceived(result.user));
 					return;
@@ -71,7 +71,7 @@ var Account = (function (Component) {
 					store.dispatch(actions.currentUserLogout(result.user));
 					return;
 				});
-				window.location.href = "/";
+				window.location.href = "/home";
 			},
 			writable: true,
 			configurable: true
@@ -86,7 +86,7 @@ var Account = (function (Component) {
 						"h1",
 						null,
 						"Welcome, ",
-						this.props.currentUser.firstName
+						this.props.user.firstName
 					),
 					React.createElement(RegisterPet, null),
 					React.createElement("br", null),
@@ -109,7 +109,7 @@ var Account = (function (Component) {
 var stateToProps = function (state) {
 	console.log("STATE TO PROPS: " + JSON.stringify(state));
 	return {
-		currentUser: state.accountReducer.currentUser
+		user: state.accountReducer.currentUser
 
 	};
 };

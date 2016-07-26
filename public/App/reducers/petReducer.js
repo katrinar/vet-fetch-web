@@ -20,9 +20,10 @@ export default function(state = initialState, action){
 		case constants.PET_CREATED:
 			console.log('REDUCING PET_CREATED: ' +JSON.stringify(action.pet))
 			var newState = Object.assign({}, state)
-			var array = Object.assign([], newState.petsArray)
+			var array = Object.assign([], state)
 			array.push(action.pet)
 			newState['petsArray'] = array
+
 			return newState
 
 		case constants.PETS_RECEIVED:

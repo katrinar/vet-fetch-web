@@ -5,6 +5,7 @@ var ProfileSchema = new mongoose.Schema({
 	lastName:{type:String, lowercase: true, trim: true, default: ''},
 	email:{type:String, lowercase: true, trim: true, default: ''},
 	password:{type: String, default: ''},
+	pets:{type: Array, default: []},
 	timestamp:{type: String, default: Date.now}
 })
 

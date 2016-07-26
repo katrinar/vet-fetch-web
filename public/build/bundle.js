@@ -24025,6 +24025,7 @@
 			firstName: '',
 			lastName: '',
 			email: '',
+			pets: [],
 			password: ''
 		},
 	
@@ -24072,9 +24073,10 @@
 			case _constants2.default.PET_CREATED:
 				console.log('REDUCING PET_CREATED: ' + JSON.stringify(action.pet));
 				var newState = Object.assign({}, state);
-				var array = Object.assign([], newState.petsArray);
+				var array = Object.assign([], state);
 				array.push(action.pet);
 				newState['petsArray'] = array;
+	
 				return newState;
 	
 			case _constants2.default.PETS_RECEIVED:
@@ -25114,7 +25116,7 @@
 						return;
 					}
 	
-					console.log('Account Get Current User Response: ' + JSON.stringify(result.user));
+					console.log('Account Get Current User: ' + JSON.stringify(result.user));
 	
 					_store2.default.dispatch(_actions2.default.currentUserReceived(result.user));
 					return;
@@ -25134,7 +25136,7 @@
 					_store2.default.dispatch(_actions2.default.currentUserLogout(result.user));
 					return;
 				});
-				window.location.href = '/';
+				window.location.href = '/home';
 			}
 		}, {
 			key: 'render',
@@ -25148,7 +25150,7 @@
 						'h1',
 						null,
 						'Welcome, ',
-						this.props.currentUser.firstName
+						this.props.user.firstName
 					),
 					_react2.default.createElement(_RegisterPet2.default, null),
 					_react2.default.createElement('br', null),
@@ -25168,7 +25170,7 @@
 	var stateToProps = function stateToProps(state) {
 		console.log('STATE TO PROPS: ' + JSON.stringify(state));
 		return {
-			currentUser: state.accountReducer.currentUser
+			user: state.accountReducer.currentUser
 	
 		};
 	};

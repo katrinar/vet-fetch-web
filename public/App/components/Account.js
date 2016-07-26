@@ -26,7 +26,7 @@ class Account extends Component {
 				return
 			}
 
-			console.log('Account Get Current User Response: '+JSON.stringify(result.user))
+			console.log('Account Get Current User: '+JSON.stringify(result.user))
 
 			store.dispatch(actions.currentUserReceived(result.user))
 			return
@@ -45,7 +45,7 @@ class Account extends Component {
 			store.dispatch(actions.currentUserLogout(result.user))
 			return
 		})
-		window.location.href = '/'
+		window.location.href = '/home'
 
 	}
 
@@ -54,7 +54,7 @@ class Account extends Component {
 		return(
 			<div>
 				This is your Account Home Page!
-				<h1>Welcome, {this.props.currentUser.firstName}</h1>
+				<h1>Welcome, {this.props.user.firstName}</h1>
 				{ <RegisterPet /> }<br />
 				{ <Pets /> }
 				<a onClick={this.logout} href ='/'>Logout</a>
@@ -66,7 +66,7 @@ class Account extends Component {
 const stateToProps = function(state){
 	console.log('STATE TO PROPS: '+JSON.stringify(state))
 	return {
-		currentUser: state.accountReducer.currentUser
+		user: state.accountReducer.currentUser
 
 	}
 }
