@@ -22955,7 +22955,7 @@
 		_createClass(Register, [{
 			key: 'updateUser',
 			value: function updateUser(event) {
-				console.log('updateUser: ' + event.target.id + ' == ' + event.target.value);
+				// console.log('updateUser: '+event.target.id+' == '+event.target.value)
 				var updatedUser = Object.assign({}, this.state.newUser);
 				updatedUser[event.target.id] = event.target.value;
 				this.setState({
@@ -22972,9 +22972,9 @@
 						return;
 					}
 					_store2.default.dispatch(_actions2.default.profileReceived(result));
-					console.log('Register handlePost: ' + JSON.stringify(result));
+					console.log('REGISTER PROFILE POST RESPONSE: ' + JSON.stringify(result));
 	
-					// window.location.href = '/account'
+					window.location.href = '/account';
 				});
 			}
 		}, {
@@ -23061,7 +23061,7 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('stateToProps: ' + JSON.stringify(state));
+		console.log('REGISTER PROFILE STATE TO PROPS: ' + JSON.stringify(state));
 		return {
 	
 			profile: state.accountReducer.profile
@@ -24048,8 +24048,8 @@
 		CURRENT_USER_RECEIVED: 'CURRENT_USER_RECEIVED',
 		PROFILE_RECEIVED: 'PROFILE_RECEIVED',
 		CURRENT_USER_LOGOUT: 'CURRENT_USER_LOGOUT',
-		PETS_RECEIVED: 'PETS_RECEIVED',
-		PET_CREATED: 'PET_CREATED'
+		PET_CREATED: 'PET_CREATED',
+		PETS_RECEIVED: 'PETS_RECEIVED'
 	};
 
 /***/ },
@@ -24069,23 +24069,25 @@
 	
 		switch (action.type) {
 	
-			case _constants2.default.PETS_RECEIVED:
-				console.log('PETS_RECEIVED: ' + JSON.stringify(action.pets));
+			case _constants2.default.PET_CREATED:
+				console.log('REDUCING PET_CREATED: ' + JSON.stringify(action.pet));
 				var newState = Object.assign({}, state);
+				var array = Object.assign([], newState.petsArray);
+				array.push(action.pet);
+				newState['petsArray'] = array;
+				return newState;
+	
+			case _constants2.default.PETS_RECEIVED:
+				console.log('REDUCING PETS_RECEIVED: ' + JSON.stringify(action.pets));
+				var newState = Object.assign({}, state);
+				newState['pets'] = action.pets;
+	
 				var array = [];
 				for (var i = 0; i < action.pets.length; i++) {
 					var pet = action.pets[i];
 					array.push(pet);
 				}
 	
-				newState['petsArray'] = array;
-				return newState;
-	
-			case _constants2.default.PET_CREATED:
-	
-				var newState = Object.assign({}, state);
-				var array = Object.assign([], newState.petsArray);
-				array.push(action.pet);
 				newState['petsArray'] = array;
 	
 				return newState;
@@ -24102,8 +24104,16 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var initialState = {
-		pets: {},
-		petsArray: []
+		newPet: {
+			id: null,
+			name: '',
+			breed: '',
+			sex: ''
+		},
+	
+		petsArray: [],
+	
+		pets: {}
 	};
 
 /***/ },
@@ -25189,6 +25199,16 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(198);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _reactRedux = __webpack_require__(199);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25203,30 +25223,38 @@
 		function Pets(props, context) {
 			_classCallCheck(this, Pets);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Pets).call(this, props, context));
+			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Pets).call(this, props, context));
 	
-			_this.state = {};
-			return _this;
+			_this2.state = {};
+			return _this2;
 		}
 	
 		_createClass(Pets, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				// var _this = this
-				// api.handleGet('/api/pet', null, function(err, results){
-				// 	if (err){
-				// 		alert(err.message)
-				// 		return
-				// 	}
+				var _this = this;
+				_api2.default.handleGet('/api/pet', null, function (err, results) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
 	
-				// 	console.log('Pets handleGet Response: '+JSON.stringify(results))
-	
-				// 	return
-				// })
+					console.log('PETS GET RESPONSE: ' + JSON.stringify(results.results));
+					_store2.default.dispatch(_actions2.default.petsReceived(results.results));
+					return;
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+	
+				var petList = this.props.pets.map(function (pet, i) {
+					return _react2.default.createElement(
+						'li',
+						{ key: pet.id },
+						pet.name
+					);
+				});
 	
 				return _react2.default.createElement(
 					'div',
@@ -25234,11 +25262,7 @@
 					_react2.default.createElement(
 						'ol',
 						null,
-						_react2.default.createElement(
-							'li',
-							null,
-							' Pets '
-						)
+						petList
 					)
 				);
 			}
@@ -25247,7 +25271,14 @@
 		return Pets;
 	}(_react.Component);
 	
-	exports.default = Pets;
+	var stateToProps = function stateToProps(state) {
+		console.log('PETS STATE TO PROPS: ' + JSON.stringify(state));
+		return {
+			pets: state.petReducer.petsArray
+		};
+	};
+	
+	exports.default = (0, _reactRedux.connect)(stateToProps)(Pets);
 
 /***/ },
 /* 214 */
@@ -25273,6 +25304,16 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(198);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _reactRedux = __webpack_require__(199);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25284,15 +25325,22 @@
 	var RegisterPet = function (_Component) {
 		_inherits(RegisterPet, _Component);
 	
+		_createClass(RegisterPet, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log('RegisterPet componentDidMount');
+			}
+		}]);
+	
 		function RegisterPet(props, context) {
 			_classCallCheck(this, RegisterPet);
 	
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterPet).call(this, props, context));
 	
 			_this.updatePet = _this.updatePet.bind(_this);
-			_this.register = _this.register.bind(_this);
+			_this.registerPet = _this.registerPet.bind(_this);
 			_this.state = {
-				pet: {
+				newPet: {
 					name: '',
 					breed: '',
 					sex: ''
@@ -25302,31 +25350,26 @@
 		}
 	
 		_createClass(RegisterPet, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				console.log('RegisterPet componentDidMount');
-			}
-		}, {
 			key: 'updatePet',
 			value: function updatePet(event) {
-				console.log('updatePet: ' + event.target.id + ' == ' + event.target.value);
-				var updatedPet = Object.assign({}, this.state.pet);
+				// console.log('updatePet: '+event.target.id+' == '+event.target.value)
+				var updatedPet = Object.assign({}, this.state.newPet);
 				updatedPet[event.target.id] = event.target.value;
 				this.setState({
-					pet: updatedPet
+					newPet: updatedPet
 				});
 			}
 		}, {
-			key: 'register',
-			value: function register(event) {
+			key: 'registerPet',
+			value: function registerPet(event) {
 				event.preventDefault();
-				_api2.default.handlePost('/api/pet', this.state.pet, function (err, response) {
+				_api2.default.handlePost('/api/pet', this.state.newPet, function (err, response) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
-					console.log(JSON.stringify(response));
-					window.location.ref = '/account';
+					console.log('REGISTER_PET POST RESPONSE: ' + JSON.stringify(response.result));
+					_store2.default.dispatch(_actions2.default.petCreated(response.result));
 				});
 			}
 		}, {
@@ -25352,8 +25395,8 @@
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'button',
-							{ onClick: this.register },
-							'Register'
+							{ onClick: this.registerPet },
+							'Register your Pet'
 						)
 					)
 				);
@@ -25363,7 +25406,13 @@
 		return RegisterPet;
 	}(_react.Component);
 	
-	exports.default = RegisterPet;
+	var stateToProps = function stateToProps(state) {
+		console.log('REGISTER PET STATE TO PROPS: ' + JSON.stringify(state));
+		return {
+			newPet: state.petReducer.newPet };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(stateToProps)(RegisterPet);
 
 /***/ }
 /******/ ]);

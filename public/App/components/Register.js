@@ -33,7 +33,7 @@ class Register extends Component {
 	}
 
 	updateUser(event){
-		console.log('updateUser: '+event.target.id+' == '+event.target.value)
+		// console.log('updateUser: '+event.target.id+' == '+event.target.value)
 		var updatedUser = Object.assign({}, this.state.newUser)
 		updatedUser[event.target.id] = event.target.value
 		this.setState({
@@ -49,9 +49,9 @@ class Register extends Component {
 				return
 			}
 			store.dispatch(actions.profileReceived(result))
-			console.log('Register handlePost: '+ JSON.stringify(result))
+			console.log('REGISTER PROFILE POST RESPONSE: '+ JSON.stringify(result))
 
-			// window.location.href = '/account'
+			window.location.href = '/account'
 
 		})
 	}
@@ -106,7 +106,7 @@ class Register extends Component {
 }
 
 const stateToProps = function(state){
-	console.log('stateToProps: '+JSON.stringify(state))
+	console.log('REGISTER PROFILE STATE TO PROPS: '+JSON.stringify(state))
 	return {
 
 		profile: state.accountReducer.profile

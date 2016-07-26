@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import api from '../utils/api'
+import store from '../stores/store'
+import actions from '../actions/actions'
+import { connect } from 'react-redux'
 
 class RegisterPet extends Component {
+
+	componentDidMount(){
+		console.log('RegisterPet componentDidMount')
+
+	}
 
 	constructor(props, context){
 		super(props, context)
 		this.updatePet = this.updatePet.bind(this)
-		this.register = this.register.bind(this)
+		this.registerPet = this.registerPet.bind(this)
 		this.state = {
-			pet: {
+			newPet: {
 				name: '',
 				breed: '',
 				sex: ''
@@ -17,30 +25,25 @@ class RegisterPet extends Component {
 		}
 	}
 
-	componentDidMount(){
-		console.log('RegisterPet componentDidMount')
-
-	}
-
 	updatePet(event){
-		console.log('updatePet: '+event.target.id+' == '+event.target.value)
-		var updatedPet = Object.assign({}, this.state.pet)
+		// console.log('updatePet: '+event.target.id+' == '+event.target.value)
+		var updatedPet = Object.assign({}, this.state.newPet)
 		updatedPet[event.target.id] = event.target.value
 		this.setState({
-			pet: updatedPet
+			newPet: updatedPet
 		})
 	}
 
-	register(event){
+	registerPet(event){
 		event.preventDefault()
-		api.handlePost('/api/pet', this.state.pet, function(err, response){
+		api.handlePost('/api/pet', this.state.newPet, function(err, response){
 			if (err){
 				alert(err.message)
 				return
 			}
-			console.log(JSON.stringify(response))
-			window.location.ref = '/account'
-		})
+			console.log('REGISTER_PET POST RESPONSE: '+ JSON.stringify(response.result))
+			store.dispatch(actions.petCreated(response.result))
+			})
 	}
 
 	render(){
@@ -53,12 +56,17 @@ class RegisterPet extends Component {
    					<input type="text" onChange={this.updatePet} id="name" placeholder="Name" /><br />
 			   		<input type="text" onChange={this.updatePet} id="breed" placeholder="Breed" /><br />
 			   		<input type="text" onChange={this.updatePet} id="sex" placeholder="Sex" /><br />
-   					<button onClick={this.register}>Register</button>
+   					<button onClick={this.registerPet}>Register your Pet</button>
    				</form>
 			</div>
 		)
 	}
 }
 
+const stateToProps = function(state){
+	console.log('REGISTER PET STATE TO PROPS: '+JSON.stringify(state))
+	return {
+		newPet: state.petReducer.newPet	}
+}
 
-export default RegisterPet
+export default connect (stateToProps)(RegisterPet)

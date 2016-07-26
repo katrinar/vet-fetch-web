@@ -19,6 +19,11 @@ var ReactDOM = _interopRequire(require("react-dom"));
 
 var api = _interopRequire(require("../utils/api"));
 
+var store = _interopRequire(require("../stores/store"));
+
+var actions = _interopRequire(require("../actions/actions"));
+
+var connect = require("react-redux").connect;
 var Pets = (function (Component) {
 	function Pets(props, context) {
 		_classCallCheck(this, Pets);
@@ -31,23 +36,39 @@ var Pets = (function (Component) {
 
 	_prototypeProperties(Pets, null, {
 		componentDidMount: {
-			value: function componentDidMount() {},
+			value: function componentDidMount() {
+				var _this = this;
+				api.handleGet("/api/pet", null, function (err, results) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+
+					console.log("PETS GET RESPONSE: " + JSON.stringify(results.results));
+					store.dispatch(actions.petsReceived(results.results));
+					return;
+				});
+			},
 			writable: true,
 			configurable: true
 		},
 		render: {
 			value: function render() {
+				var petList = this.props.pets.map(function (pet, i) {
+					return React.createElement(
+						"li",
+						{ key: pet.id },
+						pet.name
+					);
+				});
+
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
 						"ol",
 						null,
-						React.createElement(
-							"li",
-							null,
-							" Pets "
-						)
+						petList
 					)
 				);
 			},
@@ -59,15 +80,13 @@ var Pets = (function (Component) {
 	return Pets;
 })(Component);
 
-module.exports = Pets;
-// var _this = this
-// api.handleGet('/api/pet', null, function(err, results){
-// 	if (err){
-// 		alert(err.message)
-// 		return
-// 	}
+var stateToProps = function (state) {
+	console.log("PETS STATE TO PROPS: " + JSON.stringify(state));
+	return {
+		pets: state.petReducer.petsArray
+	};
+};
 
-// 	console.log('Pets handleGet Response: '+JSON.stringify(results))
 
-// 	return
-// })
+
+module.exports = connect(stateToProps)(Pets);
