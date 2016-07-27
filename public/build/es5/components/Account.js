@@ -44,8 +44,7 @@ var Account = (function (Component) {
 	_prototypeProperties(Account, null, {
 		componentDidMount: {
 			value: function componentDidMount() {
-				console.log("ACCOUNT componentDidMount: ");
-
+				console.log("ACCOUNT componentDidMount: Page: " + this.props.page + ", Slug: " + this.props.slug);
 
 				var _this = this;
 				api.handleGet("/account/currentuser", null, function (err, result) {
@@ -58,7 +57,6 @@ var Account = (function (Component) {
 
 					store.dispatch(actions.currentUserReceived(result.user));
 					_this.fetchPets();
-
 					return;
 				});
 			},
@@ -70,9 +68,8 @@ var Account = (function (Component) {
 				if (this.props.user.id == null) {
 					return;
 				}
-
 				var endpoint = "/api/pet?ownerId=" + this.props.user.id;
-				console.log("FETCH PETS ENDPOINT: " + JSON.stringify(endpoint));
+
 				api.handleGet(endpoint, null, function (err, results) {
 					if (err) {
 						alert(err.message);
@@ -105,10 +102,6 @@ var Account = (function (Component) {
 		},
 		render: {
 			value: function render() {
-				// var endpoint = '/api/pet?ownerId='+this.props.user.id
-				// console.log('Account Render Component Current User: '+JSON.stringify(endpoint))
-
-
 				return React.createElement(
 					"div",
 					null,

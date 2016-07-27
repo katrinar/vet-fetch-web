@@ -20,8 +20,7 @@ class Account extends Component {
 	}
 
 	componentDidMount(){
-	console.log('ACCOUNT componentDidMount: ')
-
+		console.log('ACCOUNT componentDidMount: Page: '+this.props.page+", Slug: " + this.props.slug)
 
 		var _this = this
 		api.handleGet('/account/currentuser', null, function(err, result){
@@ -34,7 +33,6 @@ class Account extends Component {
 
 			store.dispatch(actions.currentUserReceived(result.user))
 			_this.fetchPets()
-
 			return
 		})
 
@@ -44,10 +42,9 @@ class Account extends Component {
 
 		if (this.props.user.id == null){
 			return
-		}
-			
+		}	
 		var endpoint = '/api/pet?ownerId='+this.props.user.id
-		console.log('FETCH PETS ENDPOINT: '+JSON.stringify(endpoint))
+	
 		api.handleGet(endpoint, null, function(err, results){
 			if (err){
 				alert(err.message)
@@ -74,10 +71,6 @@ class Account extends Component {
 	}
 
 	render(){
-
-		// var endpoint = '/api/pet?ownerId='+this.props.user.id
-		// console.log('Account Render Component Current User: '+JSON.stringify(endpoint))
-
 
 		return(
 			<div>

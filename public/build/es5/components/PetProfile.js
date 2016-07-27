@@ -13,52 +13,35 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
+var ReactDOM = _interopRequire(require("react-dom"));
+
 var api = _interopRequire(require("../utils/api"));
 
-var Register = _interopRequire(require("../components/Register"));
-
-var Account = _interopRequire(require("../components/Account"));
-
-var PetProfile = _interopRequire(require("../components/PetProfile"));
-
-var Main = (function (Component) {
-	function Main() {
-		_classCallCheck(this, Main);
+var PetProfile = (function (Component) {
+	function PetProfile() {
+		_classCallCheck(this, PetProfile);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(Main, Component);
+	_inherits(PetProfile, Component);
 
-	_prototypeProperties(Main, null, {
+	_prototypeProperties(PetProfile, null, {
 		componentDidMount: {
 			value: function componentDidMount() {
-				console.log("Main componentDidMount: Page: " + this.props.page + ", Slug: " + this.props.slug);
+				console.log("SLUG == " + this.props.slug);
 			},
 			writable: true,
 			configurable: true
 		},
 		render: {
 			value: function render() {
-				var content = null;
-				var page = this.props.page;
-
-
-				if (page == "home") content = React.createElement(Register, null);
-
-				if (page == "account") content = React.createElement(Account, null);
-
-				if (page == "pet") {
-					content = React.createElement(PetProfile, { slug: this.props.slug });
-					console.log("Page: " + this.props.page + ", Slug: " + this.props.slug);
-				}
-
 				return React.createElement(
 					"div",
 					null,
-					content
+					"Pet Profile goes here"
 				);
 			},
 			writable: true,
@@ -66,7 +49,7 @@ var Main = (function (Component) {
 		}
 	});
 
-	return Main;
+	return PetProfile;
 })(Component);
 
-module.exports = Main;
+module.exports = PetProfile;

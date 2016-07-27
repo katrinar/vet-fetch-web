@@ -21188,6 +21188,10 @@
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
+	var _PetProfile = __webpack_require__(215);
+	
+	var _PetProfile2 = _interopRequireDefault(_PetProfile);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21217,14 +21221,14 @@
 	
 				var content = null;
 				var page = this.props.page;
-				if (page == 'home') {
-					content = _react2.default.createElement(_Register2.default, null);
-					console.log(page);
-				}
 	
-				if (page == 'account') {
-					content = _react2.default.createElement(_Account2.default, null);
-					console.log(page);
+				if (page == 'home') content = _react2.default.createElement(_Register2.default, null);
+	
+				if (page == 'account') content = _react2.default.createElement(_Account2.default, null);
+	
+				if (page == 'pet') {
+					content = _react2.default.createElement(_PetProfile2.default, { slug: this.props.slug });
+					console.log('Page: ' + this.props.page + ", Slug: " + this.props.slug);
 				}
 	
 				return _react2.default.createElement(
@@ -25126,7 +25130,7 @@
 		_createClass(Account, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				console.log('ACCOUNT componentDidMount: ');
+				console.log('ACCOUNT componentDidMount: Page: ' + this.props.page + ", Slug: " + this.props.slug);
 	
 				var _this = this;
 				_api2.default.handleGet('/account/currentuser', null, function (err, result) {
@@ -25139,7 +25143,6 @@
 	
 					_store2.default.dispatch(_actions2.default.currentUserReceived(result.user));
 					_this.fetchPets();
-	
 					return;
 				});
 			}
@@ -25150,9 +25153,8 @@
 				if (this.props.user.id == null) {
 					return;
 				}
-	
 				var endpoint = '/api/pet?ownerId=' + this.props.user.id;
-				console.log('FETCH PETS ENDPOINT: ' + JSON.stringify(endpoint));
+	
 				_api2.default.handleGet(endpoint, null, function (err, results) {
 					if (err) {
 						alert(err.message);
@@ -25181,9 +25183,6 @@
 		}, {
 			key: 'render',
 			value: function render() {
-	
-				// var endpoint = '/api/pet?ownerId='+this.props.user.id
-				// console.log('Account Render Component Current User: '+JSON.stringify(endpoint))
 	
 				return _react2.default.createElement(
 					'div',
@@ -25291,7 +25290,14 @@
 					return _react2.default.createElement(
 						'li',
 						{ key: pet.id },
-						pet.name
+						' ',
+						_react2.default.createElement(
+							'a',
+							{ href: '/pet/' + pet.slug },
+							' ',
+							pet.name,
+							' '
+						)
 					);
 				});
 	
@@ -25313,8 +25319,7 @@
 	var stateToProps = function stateToProps(state) {
 		console.log('PETS STATE TO PROPS: ' + JSON.stringify(state));
 		return {
-			pets: state.petReducer.petsArray,
-			user: state.accountReducer.currentUser
+			pets: state.petReducer.petsArray
 		};
 	};
 	
@@ -25458,6 +25463,68 @@
 	};
 	
 	exports.default = (0, _reactRedux.connect)(stateToProps)(RegisterPet);
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(33);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PetProfile = function (_Component) {
+		_inherits(PetProfile, _Component);
+	
+		function PetProfile() {
+			_classCallCheck(this, PetProfile);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).apply(this, arguments));
+		}
+	
+		_createClass(PetProfile, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log('SLUG == ' + this.props.slug);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					'Pet Profile goes here'
+				);
+			}
+		}]);
+	
+		return PetProfile;
+	}(_react.Component);
+	
+	exports.default = PetProfile;
 
 /***/ }
 /******/ ]);

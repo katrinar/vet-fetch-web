@@ -50,7 +50,14 @@ var Pets = (function (Component) {
 					return React.createElement(
 						"li",
 						{ key: pet.id },
-						pet.name
+						" ",
+						React.createElement(
+							"a",
+							{ href: "/pet/" + pet.slug },
+							" ",
+							pet.name,
+							" "
+						)
 					);
 				});
 
@@ -75,8 +82,7 @@ var Pets = (function (Component) {
 var stateToProps = function (state) {
 	console.log("PETS STATE TO PROPS: " + JSON.stringify(state));
 	return {
-		pets: state.petReducer.petsArray,
-		user: state.accountReducer.currentUser
+		pets: state.petReducer.petsArray
 	};
 };
 

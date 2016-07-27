@@ -17,6 +17,7 @@ var PetSchema = new mongoose.Schema({
 
 PetSchema.methods.summary = function(){
 	var summary = {
+		slug: this.slug,
 		ownerId: this.ownerId,
 		name: this.name,
 		breed: this.breed,

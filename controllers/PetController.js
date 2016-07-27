@@ -57,6 +57,18 @@ module.exports = {
 	},
 
 	post: function(params, callback){
+
+		var parts = params.name.split(' ')
+		var slug = ''
+		for (var i=0; i<parts.length; i++){
+			var word = parts[i]
+			if (i != parts.length-1)
+				slug += '-'
+		}
+
+		slug = slug.replace('?', '')
+		params['slug'] = slug
+
 		Pet.create(params, function(err, pet){
 			if(err){
 				if (callback != null)

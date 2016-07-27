@@ -25,7 +25,7 @@ class Pets extends Component {
 	render() {
 		
 		var petList = this.props.pets.map(function(pet, i){
-			return <li key={pet.id}>{pet.name}</li>
+			return <li key={pet.id}> <a href={'/pet/'+pet.slug}> {pet.name} </a></li>
 		})
 
 		return (
@@ -45,8 +45,7 @@ class Pets extends Component {
 const stateToProps = function(state){
 	console.log('PETS STATE TO PROPS: '+JSON.stringify(state))
 	return {
-		pets: state.petReducer.petsArray,
-		user: state.accountReducer.currentUser
+		pets: state.petReducer.petsArray
 	}
 }
 
