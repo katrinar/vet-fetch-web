@@ -33,6 +33,7 @@ var RegisterPet = (function (Component) {
 		this.registerPet = this.registerPet.bind(this);
 		this.state = {
 			newPet: {
+				ownerId: null,
 				name: "",
 				breed: "",
 				sex: ""
@@ -55,6 +56,7 @@ var RegisterPet = (function (Component) {
 				// console.log('updatePet: '+event.target.id+' == '+event.target.value)
 				var updatedPet = Object.assign({}, this.state.newPet);
 				updatedPet[event.target.id] = event.target.value;
+				updatedPet.ownerId = this.props.user.id;
 				this.setState({
 					newPet: updatedPet
 				});
@@ -115,7 +117,10 @@ var RegisterPet = (function (Component) {
 var stateToProps = function (state) {
 	console.log("REGISTER PET STATE TO PROPS: " + JSON.stringify(state));
 	return {
-		newPet: state.petReducer.newPet };
+		newPet: state.petReducer.newPet,
+		user: state.accountReducer.currentUser
+
+	};
 };
 
 module.exports = connect(stateToProps)(RegisterPet);

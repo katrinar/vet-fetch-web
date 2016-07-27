@@ -3,6 +3,7 @@
 var initialState = {
 	newPet: {
 		id: null,
+		ownerId: null,
 		name: '',
 		breed: '',
 		sex: ''

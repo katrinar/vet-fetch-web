@@ -21279,6 +21279,21 @@
 			});
 		},
 	
+		handleGetById: function handleGetById(endpoint, params, completion) {
+			_superagent2.default.get(endpoint).query(params).set('Accept', 'application/json').end(function (err, res) {
+				if (err) {
+					if (completion != null) completion(err, null);
+					return;
+				}
+	
+				if (completion != null) {
+	
+					completion(null, res.body);
+					return;
+				}
+			});
+		},
+	
 		handlePost: function handlePost(endpoint, body, completion) {
 			_superagent2.default.post(endpoint).send(body).set('Accept', 'application/json').end(function (err, res) {
 				if (err) {
@@ -24108,6 +24123,7 @@
 	var initialState = {
 		newPet: {
 			id: null,
+			ownerId: null,
 			name: '',
 			breed: '',
 			sex: ''
@@ -25101,6 +25117,8 @@
 			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Account).call(this, props, context));
 	
 			_this2.logout = _this2.logout.bind(_this2);
+			_this2.fetchPets = _this2.fetchPets.bind(_this2);
+	
 			_this2.state = {};
 			return _this2;
 		}
@@ -25108,6 +25126,7 @@
 		_createClass(Account, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				console.log('ACCOUNT componentDidMount: ');
 	
 				var _this = this;
 				_api2.default.handleGet('/account/currentuser', null, function (err, result) {
@@ -25119,28 +25138,52 @@
 					console.log('Account Get Current User: ' + JSON.stringify(result.user));
 	
 					_store2.default.dispatch(_actions2.default.currentUserReceived(result.user));
+					_this.fetchPets();
+	
 					return;
+				});
+			}
+		}, {
+			key: 'fetchPets',
+			value: function fetchPets() {
+	
+				if (this.props.user.id == null) {
+					return;
+				}
+	
+				var endpoint = '/api/pet?ownerId=' + this.props.user.id;
+				console.log('FETCH PETS ENDPOINT: ' + JSON.stringify(endpoint));
+				_api2.default.handleGet(endpoint, null, function (err, results) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log('FETCH PETS: ' + JSON.stringify(results.results));
+					_store2.default.dispatch(_actions2.default.petsReceived(results.results));
 				});
 			}
 		}, {
 			key: 'logout',
 			value: function logout(event) {
 				event.preventDefault();
-				_api2.default.handleGet('/account/logout', null, function (err, result) {
+				_api2.default.handleGet('/account/logout', null, function (err, results) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
 	
 					console.log('Account logout Response: ' + JSON.stringify(result));
-					_store2.default.dispatch(_actions2.default.currentUserLogout(result.user));
+					_store2.default.dispatch(_actions2.default.currentUserLogout(results.user));
 					return;
 				});
-				window.location.href = '/home';
+				window.location.href = '/index';
 			}
 		}, {
 			key: 'render',
 			value: function render() {
+	
+				// var endpoint = '/api/pet?ownerId='+this.props.user.id
+				// console.log('Account Render Component Current User: '+JSON.stringify(endpoint))
 	
 				return _react2.default.createElement(
 					'div',
@@ -25155,6 +25198,7 @@
 					_react2.default.createElement(_RegisterPet2.default, null),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement(_Pets2.default, null),
+					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'a',
 						{ onClick: this.logout, href: '/' },
@@ -25168,7 +25212,7 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('STATE TO PROPS: ' + JSON.stringify(state));
+		console.log('ACCOUNT STATE TO PROPS: ' + JSON.stringify(state));
 		return {
 			user: state.accountReducer.currentUser
 	
@@ -25234,17 +25278,10 @@
 		_createClass(Pets, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var _this = this;
-				_api2.default.handleGet('/api/pet', null, function (err, results) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
 	
-					console.log('PETS GET RESPONSE: ' + JSON.stringify(results.results));
-					_store2.default.dispatch(_actions2.default.petsReceived(results.results));
-					return;
-				});
+				var _this = this;
+	
+				console.log('Pets componentDidMount:');
 			}
 		}, {
 			key: 'render',
@@ -25276,7 +25313,8 @@
 	var stateToProps = function stateToProps(state) {
 		console.log('PETS STATE TO PROPS: ' + JSON.stringify(state));
 		return {
-			pets: state.petReducer.petsArray
+			pets: state.petReducer.petsArray,
+			user: state.accountReducer.currentUser
 		};
 	};
 	
@@ -25343,6 +25381,7 @@
 			_this.registerPet = _this.registerPet.bind(_this);
 			_this.state = {
 				newPet: {
+					ownerId: null,
 					name: '',
 					breed: '',
 					sex: ''
@@ -25357,6 +25396,7 @@
 				// console.log('updatePet: '+event.target.id+' == '+event.target.value)
 				var updatedPet = Object.assign({}, this.state.newPet);
 				updatedPet[event.target.id] = event.target.value;
+				updatedPet['ownerId'] = this.props.user.id;
 				this.setState({
 					newPet: updatedPet
 				});
@@ -25411,7 +25451,10 @@
 	var stateToProps = function stateToProps(state) {
 		console.log('REGISTER PET STATE TO PROPS: ' + JSON.stringify(state));
 		return {
-			newPet: state.petReducer.newPet };
+			newPet: state.petReducer.newPet,
+			user: state.accountReducer.currentUser
+	
+		};
 	};
 	
 	exports.default = (0, _reactRedux.connect)(stateToProps)(RegisterPet);

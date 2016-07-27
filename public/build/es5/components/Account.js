@@ -34,6 +34,8 @@ var Account = (function (Component) {
 
 		_get(Object.getPrototypeOf(Account.prototype), "constructor", this).call(this, props, context);
 		this.logout = this.logout.bind(this);
+		this.fetchPets = this.fetchPets.bind(this);
+
 		this.state = {};
 	}
 
@@ -42,6 +44,9 @@ var Account = (function (Component) {
 	_prototypeProperties(Account, null, {
 		componentDidMount: {
 			value: function componentDidMount() {
+				console.log("ACCOUNT componentDidMount: ");
+
+
 				var _this = this;
 				api.handleGet("/account/currentuser", null, function (err, result) {
 					if (err) {
@@ -52,7 +57,29 @@ var Account = (function (Component) {
 					console.log("Account Get Current User: " + JSON.stringify(result.user));
 
 					store.dispatch(actions.currentUserReceived(result.user));
+					_this.fetchPets();
+
 					return;
+				});
+			},
+			writable: true,
+			configurable: true
+		},
+		fetchPets: {
+			value: function fetchPets() {
+				if (this.props.user.id == null) {
+					return;
+				}
+
+				var endpoint = "/api/pet?ownerId=" + this.props.user.id;
+				console.log("FETCH PETS ENDPOINT: " + JSON.stringify(endpoint));
+				api.handleGet(endpoint, null, function (err, results) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log("FETCH PETS: " + JSON.stringify(results.results));
+					store.dispatch(actions.petsReceived(results.results));
 				});
 			},
 			writable: true,
@@ -61,23 +88,27 @@ var Account = (function (Component) {
 		logout: {
 			value: function logout(event) {
 				event.preventDefault();
-				api.handleGet("/account/logout", null, function (err, result) {
+				api.handleGet("/account/logout", null, function (err, results) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
 
 					console.log("Account logout Response: " + JSON.stringify(result));
-					store.dispatch(actions.currentUserLogout(result.user));
+					store.dispatch(actions.currentUserLogout(results.user));
 					return;
 				});
-				window.location.href = "/home";
+				window.location.href = "/index";
 			},
 			writable: true,
 			configurable: true
 		},
 		render: {
 			value: function render() {
+				// var endpoint = '/api/pet?ownerId='+this.props.user.id
+				// console.log('Account Render Component Current User: '+JSON.stringify(endpoint))
+
+
 				return React.createElement(
 					"div",
 					null,
@@ -91,6 +122,7 @@ var Account = (function (Component) {
 					React.createElement(RegisterPet, null),
 					React.createElement("br", null),
 					React.createElement(Pets, null),
+					React.createElement("br", null),
 					React.createElement(
 						"a",
 						{ onClick: this.logout, href: "/" },
@@ -107,7 +139,7 @@ var Account = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("STATE TO PROPS: " + JSON.stringify(state));
+	console.log("ACCOUNT STATE TO PROPS: " + JSON.stringify(state));
 	return {
 		user: state.accountReducer.currentUser
 

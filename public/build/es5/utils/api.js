@@ -26,6 +26,20 @@ module.exports = {
 		});
 	},
 
+	handleGetById: function (endpoint, params, completion) {
+		superagent.get(endpoint).query(params).set("Accept", "application/json").end(function (err, res) {
+			if (err) {
+				if (completion != null) completion(err, null);
+				return;
+			}
+
+			if (completion != null) {
+				completion(null, res.body);
+				return;
+			}
+		});
+	},
+
 	handlePost: function (endpoint, body, completion) {
 		superagent.post(endpoint).send(body).set("Accept", "application/json").end(function (err, res) {
 			if (err) {

@@ -7,6 +7,7 @@ var constants = _interopRequire(require("../constants/constants"));
 var initialState = {
 	newPet: {
 		id: null,
+		ownerId: null,
 		name: "",
 		breed: "",
 		sex: ""

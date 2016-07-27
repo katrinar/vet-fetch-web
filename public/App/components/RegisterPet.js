@@ -18,6 +18,7 @@ class RegisterPet extends Component {
 		this.registerPet = this.registerPet.bind(this)
 		this.state = {
 			newPet: {
+				ownerId: null,
 				name: '',
 				breed: '',
 				sex: ''
@@ -29,6 +30,7 @@ class RegisterPet extends Component {
 		// console.log('updatePet: '+event.target.id+' == '+event.target.value)
 		var updatedPet = Object.assign({}, this.state.newPet)
 		updatedPet[event.target.id] = event.target.value
+		updatedPet['ownerId'] = this.props.user.id 
 		this.setState({
 			newPet: updatedPet
 		})
@@ -66,7 +68,10 @@ class RegisterPet extends Component {
 const stateToProps = function(state){
 	console.log('REGISTER PET STATE TO PROPS: '+JSON.stringify(state))
 	return {
-		newPet: state.petReducer.newPet	}
+		newPet: state.petReducer.newPet,
+		user: state.accountReducer.currentUser
+
+	}
 }
 
 export default connect (stateToProps)(RegisterPet)

@@ -50,7 +50,7 @@ router.get('/:resource/:id', function(req, res, next){
 		return
 	}
 
-	controller.get({id:id}, false, function(err, result){
+	controller.getById(id, false, function(err, result){
 		if(err){
 			res.json({
 				confirmation: 'Fail',

@@ -38,16 +38,8 @@ var Pets = (function (Component) {
 		componentDidMount: {
 			value: function componentDidMount() {
 				var _this = this;
-				api.handleGet("/api/pet", null, function (err, results) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
 
-					console.log("PETS GET RESPONSE: " + JSON.stringify(results.results));
-					store.dispatch(actions.petsReceived(results.results));
-					return;
-				});
+				console.log("Pets componentDidMount:");
 			},
 			writable: true,
 			configurable: true
@@ -83,7 +75,8 @@ var Pets = (function (Component) {
 var stateToProps = function (state) {
 	console.log("PETS STATE TO PROPS: " + JSON.stringify(state));
 	return {
-		pets: state.petReducer.petsArray
+		pets: state.petReducer.petsArray,
+		user: state.accountReducer.currentUser
 	};
 };
 

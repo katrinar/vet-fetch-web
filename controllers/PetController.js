@@ -3,19 +3,48 @@ var Pet = require('../models/Pet')
 module.exports = {
 
 	get: function(params, isRaw, callback){
+
+		if (params.id != null){
+			Pet.findById(params.id, function(err, pet){
+				if (err){
+					callback(err, null)
+					return
+				}
+
+				if (pet == null){
+					callback(err, null)
+				}
+
+				callback(null, pet.summary())
+			})
+			return
+		}
+
 		Pet.find(params, function(err, pets){
 			if(err){
 				if (callback != null)
 					callback(err, null)
 				return
 			}
-			if (callback != null)
-				callback(null, pets)
+			if (callback != null){
+				if (isRaw == true){
+					callback(null, pets)
+					return
+				}
+
+				var summaries = []
+				for (var i=0; i<pets.length; i++){
+					var pet = pets[i]
+					summaries.push(pet.summary())
+				}
+				callback(null, summaries)
+			}
+				
 		})
 	},
 
 	getById: function(id, isRaw, callback){
-		Pet.findById(id, function(err, pet){
+		Pet.findById({id:id}, function(err, pet){
 			if(err){
 				if(callback != null)
 					callback({message: 'Pet Not Found'}, null)
@@ -23,7 +52,7 @@ module.exports = {
 			}
 
 			if(callback != null)
-				callback(null, pet)
+				callback(null, pet.summary())
 		})
 	},
 
@@ -35,7 +64,7 @@ module.exports = {
 				return
 			}
 			if(callback != null)
-				callback(null, pet)
+				callback(null, pet.summary())
 		})
 	},
 
@@ -48,7 +77,7 @@ module.exports = {
 			}
 
 			if (callback != null)
-				callback(null, pet)
+				callback(null, pet.summary())
 		})
 	}
 }

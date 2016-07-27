@@ -15,21 +15,15 @@ class Pets extends Component {
 	}
 
 	componentDidMount(){
-		var _this = this
-		api.handleGet('/api/pet', null, function(err, results){
-			if (err){
-				alert(err.message)
-				return
-			}
 
-			console.log('PETS GET RESPONSE: '+JSON.stringify(results.results))
-			store.dispatch(actions.petsReceived(results.results))
-			return
-		})
+		var _this = this
+		
+		console.log('Pets componentDidMount:')
+
 	}
 
 	render() {
-
+		
 		var petList = this.props.pets.map(function(pet, i){
 			return <li key={pet.id}>{pet.name}</li>
 		})
@@ -51,7 +45,8 @@ class Pets extends Component {
 const stateToProps = function(state){
 	console.log('PETS STATE TO PROPS: '+JSON.stringify(state))
 	return {
-		pets: state.petReducer.petsArray
+		pets: state.petReducer.petsArray,
+		user: state.accountReducer.currentUser
 	}
 }
 
