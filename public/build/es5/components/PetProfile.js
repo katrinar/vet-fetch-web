@@ -32,6 +32,14 @@ var PetProfile = (function (Component) {
 		componentDidMount: {
 			value: function componentDidMount() {
 				console.log("SLUG == " + this.props.slug);
+
+				api.handleGet(endpoint, null, function (err, results) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log("FETCH PET PROFILE: " + JSON.stringify(results));
+				});
 			},
 			writable: true,
 			configurable: true

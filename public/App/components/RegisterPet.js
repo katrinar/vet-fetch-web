@@ -19,6 +19,7 @@ class RegisterPet extends Component {
 		this.state = {
 			newPet: {
 				ownerId: null,
+				slug: null,
 				name: '',
 				breed: '',
 				sex: ''

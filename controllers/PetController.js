@@ -58,10 +58,12 @@ module.exports = {
 
 	post: function(params, callback){
 
-		var parts = params.name.split(' ')
+		var name = params['name']
+		var parts = name.split(' ')
 		var slug = ''
 		for (var i=0; i<parts.length; i++){
 			var word = parts[i]
+			slug += word
 			if (i != parts.length-1)
 				slug += '-'
 		}
