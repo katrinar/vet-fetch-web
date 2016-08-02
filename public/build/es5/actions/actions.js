@@ -4,40 +4,29 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 
 var constants = _interopRequire(require("../constants/constants"));
 
+var store = _interopRequire(require("../stores/store"));
+
 module.exports = {
 
-	currentUserReceived: function (user) {
+	receivedCurrentUser: function (user) {
 		return {
-			type: constants.CURRENT_USER_RECEIVED,
-			user: user
+			type: constants.RECEIVED_CURRENT_USER,
+			currentUser: user
 		};
 	},
 
-	profileReceived: function (profile) {
+	registerPet: function (pet) {
 		return {
-			type: constants.PROFILE_RECEIVED,
-			profile: profile
+			type: constants.REGISTER_PET,
+			pets: pet
 		};
 	},
 
-	currentUserLogout: function (user) {
+	receivedPets: function (pets) {
 		return {
-			type: constants.CURRENT_USER_LOGOUT,
-			user: user
-		};
-	},
-
-	petCreated: function (pet) {
-		return {
-			type: constants.PET_CREATED,
-			pet: pet
-		};
-	},
-
-	petsReceived: function (pets) {
-		return {
-			type: constants.PETS_RECEIVED,
+			type: constants.RECEIVED_PETS,
 			pets: pets
 		};
 	}
+
 };

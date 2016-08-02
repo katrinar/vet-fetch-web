@@ -15,29 +15,26 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var ReactDOM = _interopRequire(require("react-dom"));
-
 var api = _interopRequire(require("../utils/api"));
 
 var store = _interopRequire(require("../stores/store"));
 
+var connect = require("react-redux").connect;
 var actions = _interopRequire(require("../actions/actions"));
 
-var connect = require("react-redux").connect;
 var RegisterPet = (function (Component) {
 	function RegisterPet(props, context) {
 		_classCallCheck(this, RegisterPet);
 
 		_get(Object.getPrototypeOf(RegisterPet.prototype), "constructor", this).call(this, props, context);
-		this.updatePet = this.updatePet.bind(this);
+		this.submitPet = this.submitPet.bind(this);
 		this.registerPet = this.registerPet.bind(this);
 		this.state = {
-			newPet: {
-				ownerId: null,
-				slug: null,
+			registerPet: {
 				name: "",
 				breed: "",
-				sex: ""
+				ownerId: null,
+				slug: null
 			}
 		};
 	}
@@ -45,21 +42,13 @@ var RegisterPet = (function (Component) {
 	_inherits(RegisterPet, Component);
 
 	_prototypeProperties(RegisterPet, null, {
-		componentDidMount: {
-			value: function componentDidMount() {
-				console.log("RegisterPet componentDidMount");
-			},
-			writable: true,
-			configurable: true
-		},
-		updatePet: {
-			value: function updatePet(event) {
-				// console.log('updatePet: '+event.target.id+' == '+event.target.value)
-				var updatedPet = Object.assign({}, this.state.newPet);
-				updatedPet[event.target.id] = event.target.value;
-				updatedPet.ownerId = this.props.user.id;
+		submitPet: {
+			value: function submitPet(event) {
+				var registerPet = Object.assign({}, this.state.registerPet);
+				registerPet[event.target.id] = event.target.value;
+				registerPet.ownerId = this.props.currentUser.id;
 				this.setState({
-					newPet: updatedPet
+					registerPet: registerPet
 				});
 			},
 			writable: true,
@@ -68,13 +57,13 @@ var RegisterPet = (function (Component) {
 		registerPet: {
 			value: function registerPet(event) {
 				event.preventDefault();
-				api.handlePost("/api/pet", this.state.newPet, function (err, response) {
+				api.handlePost("/api/pet", this.state.registerPet, function (err, response) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
-					console.log("REGISTER_PET POST RESPONSE: " + JSON.stringify(response.result));
-					store.dispatch(actions.petCreated(response.result));
+					console.log(JSON.stringify(response.result));
+					store.dispatch(actions.registerPet(response.result));
 				});
 			},
 			writable: true,
@@ -88,21 +77,19 @@ var RegisterPet = (function (Component) {
 					React.createElement(
 						"p",
 						null,
-						"Tell us About Your Pet"
+						"Register your Pet"
 					),
 					React.createElement(
 						"form",
 						{ action: "/api/pet", method: "post" },
-						React.createElement("input", { type: "text", onChange: this.updatePet, id: "name", placeholder: "Name" }),
+						React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updatePet, id: "breed", placeholder: "Breed" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updatePet, id: "sex", placeholder: "Sex" }),
+						React.createElement("input", { type: "text", onChange: this.submitPet, id: "breed", placeholder: "Breed" }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",
 							{ onClick: this.registerPet },
-							"Register your Pet"
+							"Register Pet"
 						)
 					)
 				);
@@ -116,11 +103,10 @@ var RegisterPet = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("REGISTER PET STATE TO PROPS: " + JSON.stringify(state));
+	console.log("STATE_TO_PROPS_REGISTER_PET: " + JSON.stringify(state));
 	return {
-		newPet: state.petReducer.newPet,
-		user: state.accountReducer.currentUser
-
+		currentUser: state.accountReducer.currentUser,
+		pets: state.petReducer.petsArray
 	};
 };
 

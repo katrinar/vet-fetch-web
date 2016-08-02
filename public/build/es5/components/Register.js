@@ -15,33 +15,23 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var ReactDOM = _interopRequire(require("react-dom"));
-
 var api = _interopRequire(require("../utils/api"));
 
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var connect = require("react-redux").connect;
 var Register = (function (Component) {
 	function Register(props, context) {
 		_classCallCheck(this, Register);
 
 		_get(Object.getPrototypeOf(Register.prototype), "constructor", this).call(this, props, context);
-		this.updateUser = this.updateUser.bind(this);
+		this.submitProfile = this.submitProfile.bind(this);
 		this.register = this.register.bind(this);
-		this.updateCredentials = this.updateCredentials.bind(this);
-		this.login = this.login.bind(this);
 		this.state = {
-			newUser: {
+			registerUser: {
 				firstName: "",
 				lastName: "",
-				email: "",
-				password: ""
-			},
-
-			credentials: {
 				email: "",
 				password: ""
 			}
@@ -53,18 +43,17 @@ var Register = (function (Component) {
 	_prototypeProperties(Register, null, {
 		componentDidMount: {
 			value: function componentDidMount() {
-				console.log("Register componentDidMount");
+				console.log("LOGIN COMPONENT: ");
 			},
 			writable: true,
 			configurable: true
 		},
-		updateUser: {
-			value: function updateUser(event) {
-				// console.log('updateUser: '+event.target.id+' == '+event.target.value)
-				var updatedUser = Object.assign({}, this.state.newUser);
-				updatedUser[event.target.id] = event.target.value;
+		submitProfile: {
+			value: function submitProfile(event) {
+				var registerUser = Object.assign({}, this.state.registerUser);
+				registerUser[event.target.id] = event.target.value;
 				this.setState({
-					newUser: updatedUser
+					registerUser: registerUser
 				});
 			},
 			writable: true,
@@ -73,43 +62,15 @@ var Register = (function (Component) {
 		register: {
 			value: function register(event) {
 				event.preventDefault();
-				api.handlePost("/api/profile", this.state.newUser, function (err, result) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					store.dispatch(actions.profileReceived(result));
-					console.log("REGISTER PROFILE POST RESPONSE: " + JSON.stringify(result));
 
-					window.location.href = "/account";
-				});
-			},
-			writable: true,
-			configurable: true
-		},
-		updateCredentials: {
-			value: function updateCredentials(event) {
-				var credentials = Object.assign({}, this.state.credentials);
-				credentials[event.target.id] = event.target.value;
-				this.setState({
-					credentials: credentials
-				});
-			},
-			writable: true,
-			configurable: true
-		},
-		login: {
-			value: function login(event) {
-				event.preventDefault();
-
-				api.handlePost("/account/login", this.state.credentials, function (err, response) {
+				api.handlePost("/api/profile", this.state.registerUser, function (err, response) {
 					if (err != null) {
 						alert(err.message);
 						return;
 					}
 
-					console.log(JSON.stringify(response));
-					window.location.href = "/account";
+					console.log(JSON.stringify(response.result));
+					store.dispatch(actions.receivedCurrentUser(response.result));
 				});
 			},
 			writable: true,
@@ -121,11 +82,6 @@ var Register = (function (Component) {
 					"div",
 					null,
 					React.createElement(
-						"h2",
-						null,
-						"New? Sign up to check out pet insurance options"
-					),
-					React.createElement(
 						"p",
 						null,
 						"Register"
@@ -133,36 +89,18 @@ var Register = (function (Component) {
 					React.createElement(
 						"form",
 						{ action: "/api/profile", method: "post" },
-						React.createElement("input", { type: "text", onChange: this.updateUser, id: "firstName", placeholder: "First Name" }),
+						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "firstName", placeholder: "First Name" }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updateUser, id: "lastName", placeholder: "Last Name" }),
+						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "lastName", placeholder: "Last Name" }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updateUser, id: "email", placeholder: "Email" }),
+						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "email", placeholder: "Email" }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updateUser, id: "password", placeholder: "Password" }),
+						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "password", placeholder: "password" }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",
 							{ onClick: this.register },
 							"Register"
-						)
-					),
-					React.createElement(
-						"p",
-						null,
-						"Login"
-					),
-					React.createElement(
-						"form",
-						{ action: "/account/login", method: "post" },
-						React.createElement("input", { type: "text", onChange: this.updateCredentials, id: "email", placeholder: "Email" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updateCredentials, id: "password", placeholder: "Password" }),
-						React.createElement("br", null),
-						React.createElement(
-							"button",
-							{ onClick: this.login },
-							"Login"
 						)
 					)
 				);
@@ -175,13 +113,4 @@ var Register = (function (Component) {
 	return Register;
 })(Component);
 
-var stateToProps = function (state) {
-	console.log("REGISTER PROFILE STATE TO PROPS: " + JSON.stringify(state));
-	return {
-
-		profile: state.accountReducer.profile
-	};
-
-};
-
-module.exports = connect(stateToProps)(Register);
+module.exports = Register;

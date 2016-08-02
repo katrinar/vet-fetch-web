@@ -15,26 +15,21 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var ReactDOM = _interopRequire(require("react-dom"));
-
 var api = _interopRequire(require("../utils/api"));
+
+var store = _interopRequire(require("../stores/store"));
+
+var actions = _interopRequire(require("../actions/actions"));
 
 var Login = (function (Component) {
 	function Login(props, context) {
 		_classCallCheck(this, Login);
 
 		_get(Object.getPrototypeOf(Login.prototype), "constructor", this).call(this, props, context);
-		this.updateCredentials = this.updateCredentials.bind(this);
+		this.submitUser = this.submitUser.bind(this);
 		this.login = this.login.bind(this);
 		this.state = {
-			user: {
-
-				firstName: "",
-				lastName: "",
-				email: "",
-				password: ""
-			},
-			credentials: {
+			loginUser: {
 				email: "",
 				password: ""
 			}
@@ -44,12 +39,19 @@ var Login = (function (Component) {
 	_inherits(Login, Component);
 
 	_prototypeProperties(Login, null, {
-		updateCredentials: {
-			value: function updateCredentials(event) {
-				var credentials = Object.assign({}, this.state.credentials);
-				credentials[event.target.id] = event.target.value;
+		componentDidMount: {
+			value: function componentDidMount() {
+				console.log("REGISTER COMPONENT: ");
+			},
+			writable: true,
+			configurable: true
+		},
+		submitUser: {
+			value: function submitUser(event) {
+				var loginUser = Object.assign({}, this.state.loginUser);
+				loginUser[event.target.id] = event.target.value;
 				this.setState({
-					credentials: credentials
+					loginUser: loginUser
 				});
 			},
 			writable: true,
@@ -59,14 +61,14 @@ var Login = (function (Component) {
 			value: function login(event) {
 				event.preventDefault();
 
-				api.handlePost("/account/login", this.state.credentials, function (err, response) {
+				api.handlePost("/account/login", this.state.loginUser, function (err, response) {
 					if (err != null) {
 						alert(err.message);
 						return;
 					}
 
-					console.log(JSON.stringify(response));
-					window.location.href = "/account";
+					console.log(JSON.stringify(response.currentUser));
+					store.dispatch(actions.receivedCurrentUser(response.currentUser));
 				});
 			},
 			writable: true,
@@ -78,11 +80,16 @@ var Login = (function (Component) {
 					"div",
 					null,
 					React.createElement(
+						"p",
+						null,
+						"Login"
+					),
+					React.createElement(
 						"form",
 						{ action: "/account/login", method: "post" },
-						React.createElement("input", { type: "text", onChange: this.updateCredentials, id: "email", placeholder: "Email" }),
+						React.createElement("input", { type: "text", onChange: this.submitUser, id: "email", placeholder: "Email" }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.updateCredentials, id: "password", placeholder: "Password" }),
+						React.createElement("input", { type: "text", onChange: this.submitUser, id: "password", placeholder: "password" }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",

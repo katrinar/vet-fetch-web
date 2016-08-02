@@ -1,118 +1,64 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import api from '../utils/api'
 import store from '../stores/store'
 import actions from '../actions/actions'
-import { connect } from 'react-redux'
 
 class Register extends Component {
-
-	componentDidMount(){
-		console.log('Register componentDidMount')
+	componentDidMount() {
+		console.log('LOGIN COMPONENT: ')
 	}
 
 	constructor(props, context){
 		super(props, context)
-		this.updateUser = this.updateUser.bind(this)
+		this.submitProfile = this.submitProfile.bind(this)
 		this.register = this.register.bind(this)
-		this.updateCredentials = this.updateCredentials.bind(this)
-		this.login = this.login.bind(this)
 		this.state = {
-			newUser: {
+			registerUser: {
 				firstName: '',
 				lastName: '',
-				email: '',
-				password: ''
-			},
-
-			credentials: {
 				email: '',
 				password: ''
 			}
 		}
 	}
 
-	updateUser(event){
-		// console.log('updateUser: '+event.target.id+' == '+event.target.value)
-		var updatedUser = Object.assign({}, this.state.newUser)
-		updatedUser[event.target.id] = event.target.value
+	submitProfile(event){
+		var registerUser = Object.assign({}, this.state.registerUser)
+		registerUser[event.target.id] = event.target.value
 		this.setState({
-			newUser: updatedUser
+			registerUser: registerUser
 		})
 	}
 
 	register(event){
 		event.preventDefault()
-		api.handlePost('/api/profile', this.state.newUser, function(err, result){
-			if (err){
-				alert(err.message)
-				return
-			}
-			store.dispatch(actions.profileReceived(result))
-			console.log('REGISTER PROFILE POST RESPONSE: '+ JSON.stringify(result))
 
-			window.location.href = '/account'
-
-		})
-	}
-
-	updateCredentials(event){
-		var credentials = Object.assign({}, this.state.credentials)
-		credentials[event.target.id] = event.target.value
-		this.setState({
-			credentials: credentials
-		})
-	}
-
-	login(event){
-		event.preventDefault()
-
-		api.handlePost('/account/login', this.state.credentials, function(err, response){
+		api.handlePost('/api/profile', this.state.registerUser, function(err, response){
 			if (err != null){
 				alert(err.message)
 				return
 			}
 
-			console.log(JSON.stringify(response))
-			window.location.href = '/account'
+			console.log(JSON.stringify(response.result))
+			store.dispatch(actions.receivedCurrentUser(response.result))
 		})
+
 	}
 
 	render(){
-
 		return(
-
 			<div>
-				<h2>New? Sign up to check out pet insurance options</h2>
 				<p>Register</p>
-				<form action="/api/profile" method="post">
-	   				<input type="text" onChange={this.updateUser} id="firstName" placeholder="First Name" /><br />
-	   				<input type="text" onChange={this.updateUser} id="lastName" placeholder="Last Name" /><br />
-	   				<input type="text" onChange={this.updateUser} id="email" placeholder="Email" /><br />
-	   				<input type="text" onChange={this.updateUser} id="password" placeholder="Password" /><br />
-	   				<button onClick={this.register}>Register</button>
-   				</form>
-
-   				<p>Login</p>
-   				<form action="/account/login" method="post">
-   					<input type="text" onChange={this.updateCredentials} id="email" placeholder="Email" /><br />
-   					<input type="text" onChange={this.updateCredentials} id="password" placeholder="Password" /><br />
-   					<button onClick={this.login}>Login</button>
-   				</form>
+				<form action = "/api/profile" method="post">
+					<input type="text" onChange={this.submitProfile} id="firstName" placeholder="First Name" /><br />
+					<input type="text" onChange={this.submitProfile} id="lastName" placeholder="Last Name" /><br />
+					<input type="text" onChange={this.submitProfile} id="email" placeholder="Email" /><br />
+					<input type="text" onChange={this.submitProfile} id="password" placeholder="password" /><br />
+					<button onClick={this.register}>Register</button>
+				</form> 			 
 			</div>
-
 		)
 	}
 }
 
-const stateToProps = function(state){
-	console.log('REGISTER PROFILE STATE TO PROPS: '+JSON.stringify(state))
-	return {
-
-		profile: state.accountReducer.profile
-	}
-	
-
-}
-
-export default connect (stateToProps)(Register)
+export default Register

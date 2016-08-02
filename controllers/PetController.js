@@ -5,9 +5,11 @@ module.exports = {
 	get: function(params, isRaw, callback){
 
 		if (params.id != null){
+
 			Pet.findById(params.id, function(err, pet){
 				if (err){
-					callback(err, null)
+					if (callback != null)
+						callback(err, null)
 					return
 				}
 
@@ -15,7 +17,7 @@ module.exports = {
 					callback(err, null)
 				}
 
-				callback(null, pet.summary())
+				callback(null, pet)
 			})
 			return
 		}
@@ -51,15 +53,21 @@ module.exports = {
 				return
 			}
 
-			if(callback != null)
-				callback(null, pet.summary())
+			if(callback != null){
+				if (isRaw == true){
+					callback(null, pet)
+					return
+				}
+			}
+
+			callback(null, pet.summary())
 		})
 	},
 
 	post: function(params, callback){
 
-		var name = params['name']
-		var parts = name.split(' ')
+		var name = params['name'].split(' ')
+		var parts = name
 		var slug = ''
 		for (var i=0; i<parts.length; i++){
 			var word = parts[i]
@@ -78,7 +86,7 @@ module.exports = {
 				return
 			}
 			if(callback != null)
-				callback(null, pet.summary())
+				callback(null, pet)
 		})
 	},
 

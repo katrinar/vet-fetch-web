@@ -64,7 +64,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _reactRedux = __webpack_require__(199);
+	var _reactRedux = __webpack_require__(201);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21180,17 +21180,27 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
-	var _Register = __webpack_require__(179);
+	var _Login = __webpack_require__(179);
 	
-	var _Register2 = _interopRequireDefault(_Register);
+	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Account = __webpack_require__(212);
+	var _Pets = __webpack_require__(199);
 	
-	var _Account2 = _interopRequireDefault(_Account);
+	var _Pets2 = _interopRequireDefault(_Pets);
 	
-	var _PetProfile = __webpack_require__(215);
+	var _SignInContainer = __webpack_require__(215);
 	
-	var _PetProfile2 = _interopRequireDefault(_PetProfile);
+	var _SignInContainer2 = _interopRequireDefault(_SignInContainer);
+	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(198);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _reactRedux = __webpack_require__(201);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21203,32 +21213,49 @@
 	var Main = function (_Component) {
 		_inherits(Main, _Component);
 	
-		function Main() {
+		function Main(props, context) {
 			_classCallCheck(this, Main);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props, context));
 		}
 	
 		_createClass(Main, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				var _this = this;
+				console.log('MAIN COMPONENT: ');
+				_api2.default.handleGet('/account/currentuser', null, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
 	
-				console.log('Main componentDidMount: Page: ' + this.props.page + ", Slug: " + this.props.slug);
+					console.log('FETCH_CURRENT_USER_MAIN: ' + JSON.stringify(response.user));
+	
+					if (response == null) {
+						return;
+					}
+	
+					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.user));
+					return;
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-	
 				var content = null;
-				var page = this.props.page;
+				var loggedIn = false;
 	
-				if (page == 'home') content = _react2.default.createElement(_Register2.default, null);
+				if (this.props.currentUser.id != null) {
+					loggedIn = true;
+				}
 	
-				if (page == 'account') content = _react2.default.createElement(_Account2.default, null);
+				if (loggedIn == true) {
+					content = _react2.default.createElement(_Pets2.default, null);
+				}
 	
-				if (page == 'pet') {
-					content = _react2.default.createElement(_PetProfile2.default, { slug: this.props.slug });
-					console.log('Page: ' + this.props.page + ", Slug: " + this.props.slug);
+				if (loggedIn == false) {
+					content = _react2.default.createElement(_SignInContainer2.default, null);
 				}
 	
 				return _react2.default.createElement(
@@ -21242,7 +21269,15 @@
 		return Main;
 	}(_react.Component);
 	
-	exports.default = Main;
+	var stateToProps = function stateToProps(state) {
+		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state));
+		return {
+			currentUser: state.accountReducer.currentUser,
+			pets: state.petReducer.petsArray
+		};
+	};
+	
+	exports.default = (0, _reactRedux.connect)(stateToProps)(Main);
 
 /***/ },
 /* 173 */
@@ -22910,10 +22945,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(33);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _api = __webpack_require__(173);
 	
 	var _api2 = _interopRequireDefault(_api);
@@ -22926,8 +22957,6 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(199);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22936,34 +22965,25 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Register = function (_Component) {
-		_inherits(Register, _Component);
+	var Login = function (_Component) {
+		_inherits(Login, _Component);
 	
-		_createClass(Register, [{
+		_createClass(Login, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				console.log('Register componentDidMount');
+				console.log('REGISTER COMPONENT: ');
 			}
 		}]);
 	
-		function Register(props, context) {
-			_classCallCheck(this, Register);
+		function Login(props, context) {
+			_classCallCheck(this, Login);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props, context));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props, context));
 	
-			_this.updateUser = _this.updateUser.bind(_this);
-			_this.register = _this.register.bind(_this);
-			_this.updateCredentials = _this.updateCredentials.bind(_this);
+			_this.submitUser = _this.submitUser.bind(_this);
 			_this.login = _this.login.bind(_this);
 			_this.state = {
-				newUser: {
-					firstName: '',
-					lastName: '',
-					email: '',
-					password: ''
-				},
-	
-				credentials: {
+				loginUser: {
 					email: '',
 					password: ''
 				}
@@ -22971,38 +22991,13 @@
 			return _this;
 		}
 	
-		_createClass(Register, [{
-			key: 'updateUser',
-			value: function updateUser(event) {
-				// console.log('updateUser: '+event.target.id+' == '+event.target.value)
-				var updatedUser = Object.assign({}, this.state.newUser);
-				updatedUser[event.target.id] = event.target.value;
+		_createClass(Login, [{
+			key: 'submitUser',
+			value: function submitUser(event) {
+				var loginUser = Object.assign({}, this.state.loginUser);
+				loginUser[event.target.id] = event.target.value;
 				this.setState({
-					newUser: updatedUser
-				});
-			}
-		}, {
-			key: 'register',
-			value: function register(event) {
-				event.preventDefault();
-				_api2.default.handlePost('/api/profile', this.state.newUser, function (err, result) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					_store2.default.dispatch(_actions2.default.profileReceived(result));
-					console.log('REGISTER PROFILE POST RESPONSE: ' + JSON.stringify(result));
-	
-					window.location.href = '/account';
-				});
-			}
-		}, {
-			key: 'updateCredentials',
-			value: function updateCredentials(event) {
-				var credentials = Object.assign({}, this.state.credentials);
-				credentials[event.target.id] = event.target.value;
-				this.setState({
-					credentials: credentials
+					loginUser: loginUser
 				});
 			}
 		}, {
@@ -23010,50 +23005,22 @@
 			value: function login(event) {
 				event.preventDefault();
 	
-				_api2.default.handlePost('/account/login', this.state.credentials, function (err, response) {
+				_api2.default.handlePost('/account/login', this.state.loginUser, function (err, response) {
 					if (err != null) {
 						alert(err.message);
 						return;
 					}
 	
-					console.log(JSON.stringify(response));
-					window.location.href = '/account';
+					console.log(JSON.stringify(response.currentUser));
+					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.currentUser));
 				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-	
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(
-						'h2',
-						null,
-						'New? Sign up to check out pet insurance options'
-					),
-					_react2.default.createElement(
-						'p',
-						null,
-						'Register'
-					),
-					_react2.default.createElement(
-						'form',
-						{ action: '/api/profile', method: 'post' },
-						_react2.default.createElement('input', { type: 'text', onChange: this.updateUser, id: 'firstName', placeholder: 'First Name' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.updateUser, id: 'lastName', placeholder: 'Last Name' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.updateUser, id: 'email', placeholder: 'Email' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.updateUser, id: 'password', placeholder: 'Password' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.register },
-							'Register'
-						)
-					),
 					_react2.default.createElement(
 						'p',
 						null,
@@ -23062,9 +23029,9 @@
 					_react2.default.createElement(
 						'form',
 						{ action: '/account/login', method: 'post' },
-						_react2.default.createElement('input', { type: 'text', onChange: this.updateCredentials, id: 'email', placeholder: 'Email' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitUser, id: 'email', placeholder: 'Email' }),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.updateCredentials, id: 'password', placeholder: 'Password' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitUser, id: 'password', placeholder: 'password' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'button',
@@ -23076,18 +23043,10 @@
 			}
 		}]);
 	
-		return Register;
+		return Login;
 	}(_react.Component);
 	
-	var stateToProps = function stateToProps(state) {
-		console.log('REGISTER PROFILE STATE TO PROPS: ' + JSON.stringify(state));
-		return {
-	
-			profile: state.accountReducer.profile
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(stateToProps)(Register);
+	exports.default = Login;
 
 /***/ },
 /* 180 */
@@ -24009,22 +23968,10 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _constants2.default.CURRENT_USER_RECEIVED:
-				console.log('CURRENT_USER_RECEIVED: ' + JSON.stringify(action.user));
+			case _constants2.default.RECEIVED_CURRENT_USER:
+				console.log('RECEIVED_CURRENT_USER: ' + JSON.stringify(action.currentUser));
 				var newState = Object.assign({}, state);
-				newState['currentUser'] = action.user;
-				return newState;
-	
-			case _constants2.default.PROFILE_RECEIVED:
-				console.log('PROFILE_RECEIVED: ' + JSON.stringify(action.profile));
-				var newState = Object.assign({}, state);
-				newState['profile'] = action.profile;
-				return newState;
-	
-			case _constants2.default.CURRENT_USER_LOGOUT:
-				console.log('CURRENT_USER_LOGOUT: ' + JSON.stringify(initialState.currentUser));
-				var newState = Object.assign({}, state);
-				newState['currentUser'] = initialState.currentUser;
+				newState['currentUser'] = action.currentUser;
 				return newState;
 	
 			default:
@@ -24046,14 +23993,6 @@
 			email: '',
 			pets: [],
 			password: ''
-		},
-	
-		profile: {
-			id: null,
-			firstName: '',
-			lastName: '',
-			email: '',
-			password: ''
 		}
 	};
 
@@ -24065,11 +24004,9 @@
 	
 	module.exports = {
 	
-		CURRENT_USER_RECEIVED: 'CURRENT_USER_RECEIVED',
-		PROFILE_RECEIVED: 'PROFILE_RECEIVED',
-		CURRENT_USER_LOGOUT: 'CURRENT_USER_LOGOUT',
-		PET_CREATED: 'PET_CREATED',
-		PETS_RECEIVED: 'PETS_RECEIVED'
+		RECEIVED_CURRENT_USER: 'RECEIVED_CURRENT_USER',
+		REGISTER_PET: 'REGISTER_PET',
+		RECEIVED_PETS: 'RECEIVED_PETS'
 	};
 
 /***/ },
@@ -24086,35 +24023,31 @@
 		var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 		var action = arguments[1];
 	
-	
 		switch (action.type) {
-	
-			case _constants2.default.PET_CREATED:
-				console.log('REDUCING PET_CREATED: ' + JSON.stringify(action.pet));
+			case _constants2.default.RECEIVED_PETS:
+				console.log('RECEIVED_PETS: ' + JSON.stringify(action.pets));
 				var newState = Object.assign({}, state);
 				var array = Object.assign([], state);
-				array.push(action.pet);
-				newState['petsArray'] = array;
-	
-				return newState;
-	
-			case _constants2.default.PETS_RECEIVED:
-				console.log('REDUCING PETS_RECEIVED: ' + JSON.stringify(action.pets));
-				var newState = Object.assign({}, state);
-				newState['pets'] = action.pets;
-	
-				var array = [];
 				for (var i = 0; i < action.pets.length; i++) {
 					var pet = action.pets[i];
 					array.push(pet);
 				}
+				newState['petsArray'] = array;
 	
+				return newState;
+	
+			case _constants2.default.REGISTER_PET:
+				console.log('RECEIVED_REGISTER_PET: ' + JSON.stringify(action.pets));
+				var newState = Object.assign({}, state);
+				var array = Object.assign([], state.petsArray);
+				array.push(action.pets);
 				newState['petsArray'] = array;
 	
 				return newState;
 	
 			default:
 				return state;
+	
 		}
 	};
 	
@@ -24125,17 +24058,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var initialState = {
-		newPet: {
-			id: null,
-			ownerId: null,
-			name: '',
-			breed: '',
-			sex: ''
-		},
-	
-		petsArray: [],
-	
-		pets: {}
+		petsArray: []
 	};
 
 /***/ },
@@ -24152,44 +24075,35 @@
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
 	
-		currentUserReceived: function currentUserReceived(user) {
+		receivedCurrentUser: function receivedCurrentUser(user) {
 			return {
-				type: _constants2.default.CURRENT_USER_RECEIVED,
-				user: user
+				type: _constants2.default.RECEIVED_CURRENT_USER,
+				currentUser: user
 			};
 		},
 	
-		profileReceived: function profileReceived(profile) {
+		registerPet: function registerPet(pet) {
 			return {
-				type: _constants2.default.PROFILE_RECEIVED,
-				profile: profile
+				type: _constants2.default.REGISTER_PET,
+				pets: pet
 			};
 		},
 	
-		currentUserLogout: function currentUserLogout(user) {
+		receivedPets: function receivedPets(pets) {
 			return {
-				type: _constants2.default.CURRENT_USER_LOGOUT,
-				user: user
-			};
-		},
-	
-		petCreated: function petCreated(pet) {
-			return {
-				type: _constants2.default.PET_CREATED,
-				pet: pet
-			};
-		},
-	
-		petsReceived: function petsReceived(pets) {
-			return {
-				type: _constants2.default.PETS_RECEIVED,
+				type: _constants2.default.RECEIVED_PETS,
 				pets: pets
 			};
 		}
+	
 	};
 
 /***/ },
@@ -24198,14 +24112,246 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	var _RegisterPet = __webpack_require__(200);
+	
+	var _RegisterPet2 = _interopRequireDefault(_RegisterPet);
+	
+	var _PetList = __webpack_require__(214);
+	
+	var _PetList2 = _interopRequireDefault(_PetList);
+	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(198);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _reactRedux = __webpack_require__(201);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Pets = function (_Component) {
+		_inherits(Pets, _Component);
+	
+		function Pets(props, context) {
+			_classCallCheck(this, Pets);
+	
+			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Pets).call(this, props, context));
+	
+			_this2.fetchPets = _this2.fetchPets.bind(_this2);
+			return _this2;
+		}
+	
+		_createClass(Pets, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this = this;
+				console.log('PETS COMPONENT: ');
+				_this.fetchPets();
+			}
+		}, {
+			key: 'fetchPets',
+			value: function fetchPets() {
+				var endpoint = '/api/pet?ownerId=' + this.props.currentUser.id;
+				_api2.default.handleGet(endpoint, null, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log('FETCH_PETS: ' + JSON.stringify(response.results));
+					_store2.default.dispatch(_actions2.default.receivedPets(response.results));
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						null,
+						'Welcome, ',
+						this.props.currentUser.firstName
+					),
+					_react2.default.createElement(_RegisterPet2.default, null),
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(_PetList2.default, null)
+				);
+			}
+		}]);
+	
+		return Pets;
+	}(_react.Component);
+	
+	var stateToProps = function stateToProps(state) {
+		return {
+			currentUser: state.accountReducer.currentUser,
+			pets: state.petReducer.petsArray
+		};
+	};
+	
+	exports.default = (0, _reactRedux.connect)(stateToProps)(Pets);
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _reactRedux = __webpack_require__(201);
+	
+	var _actions = __webpack_require__(198);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RegisterPet = function (_Component) {
+		_inherits(RegisterPet, _Component);
+	
+		function RegisterPet(props, context) {
+			_classCallCheck(this, RegisterPet);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterPet).call(this, props, context));
+	
+			_this.submitPet = _this.submitPet.bind(_this);
+			_this.registerPet = _this.registerPet.bind(_this);
+			_this.state = {
+				registerPet: {
+					name: '',
+					breed: '',
+					ownerId: null,
+					slug: null
+				}
+			};
+			return _this;
+		}
+	
+		_createClass(RegisterPet, [{
+			key: 'submitPet',
+			value: function submitPet(event) {
+				var registerPet = Object.assign({}, this.state.registerPet);
+				registerPet[event.target.id] = event.target.value;
+				registerPet['ownerId'] = this.props.currentUser.id;
+				this.setState({
+					registerPet: registerPet
+				});
+			}
+		}, {
+			key: 'registerPet',
+			value: function registerPet(event) {
+				event.preventDefault();
+				_api2.default.handlePost('/api/pet', this.state.registerPet, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log(JSON.stringify(response.result));
+					_store2.default.dispatch(_actions2.default.registerPet(response.result));
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						null,
+						'Register your Pet'
+					),
+					_react2.default.createElement(
+						'form',
+						{ action: '/api/pet', method: 'post' },
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'name', placeholder: 'Name' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'breed', placeholder: 'Breed' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.registerPet },
+							'Register Pet'
+						)
+					)
+				);
+			}
+		}]);
+	
+		return RegisterPet;
+	}(_react.Component);
+	
+	var stateToProps = function stateToProps(state) {
+		console.log('STATE_TO_PROPS_REGISTER_PET: ' + JSON.stringify(state));
+		return {
+			currentUser: state.accountReducer.currentUser,
+			pets: state.petReducer.petsArray
+		};
+	};
+	
+	exports.default = (0, _reactRedux.connect)(stateToProps)(RegisterPet);
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(200);
+	var _Provider = __webpack_require__(202);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connect = __webpack_require__(203);
+	var _connect = __webpack_require__(205);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -24215,7 +24361,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 200 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -24225,11 +24371,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(201);
+	var _storeShape = __webpack_require__(203);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _warning = __webpack_require__(202);
+	var _warning = __webpack_require__(204);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -24299,7 +24445,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 201 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24315,7 +24461,7 @@
 	});
 
 /***/ },
-/* 202 */
+/* 204 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24344,7 +24490,7 @@
 	}
 
 /***/ },
-/* 203 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -24356,31 +24502,31 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(201);
+	var _storeShape = __webpack_require__(203);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _shallowEqual = __webpack_require__(204);
+	var _shallowEqual = __webpack_require__(206);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _wrapActionCreators = __webpack_require__(205);
+	var _wrapActionCreators = __webpack_require__(207);
 	
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 	
-	var _warning = __webpack_require__(202);
+	var _warning = __webpack_require__(204);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(206);
+	var _isPlainObject = __webpack_require__(208);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(210);
+	var _hoistNonReactStatics = __webpack_require__(212);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(211);
+	var _invariant = __webpack_require__(213);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -24743,7 +24889,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 204 */
+/* 206 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24774,7 +24920,7 @@
 	}
 
 /***/ },
-/* 205 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24791,12 +24937,12 @@
 	}
 
 /***/ },
-/* 206 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(207),
-	    isHostObject = __webpack_require__(208),
-	    isObjectLike = __webpack_require__(209);
+	var getPrototype = __webpack_require__(209),
+	    isHostObject = __webpack_require__(210),
+	    isObjectLike = __webpack_require__(211);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -24867,7 +25013,7 @@
 
 
 /***/ },
-/* 207 */
+/* 209 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -24888,7 +25034,7 @@
 
 
 /***/ },
-/* 208 */
+/* 210 */
 /***/ function(module, exports) {
 
 	/**
@@ -24914,7 +25060,7 @@
 
 
 /***/ },
-/* 209 */
+/* 211 */
 /***/ function(module, exports) {
 
 	/**
@@ -24949,7 +25095,7 @@
 
 
 /***/ },
-/* 210 */
+/* 212 */
 /***/ function(module, exports) {
 
 	/**
@@ -25005,7 +25151,7 @@
 
 
 /***/ },
-/* 211 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25063,269 +25209,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(33);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _api = __webpack_require__(173);
-	
-	var _api2 = _interopRequireDefault(_api);
-	
-	var _store = __webpack_require__(180);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _actions = __webpack_require__(198);
-	
-	var _actions2 = _interopRequireDefault(_actions);
-	
-	var _reactRedux = __webpack_require__(199);
-	
-	var _Pets = __webpack_require__(213);
-	
-	var _Pets2 = _interopRequireDefault(_Pets);
-	
-	var _RegisterPet = __webpack_require__(214);
-	
-	var _RegisterPet2 = _interopRequireDefault(_RegisterPet);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Account = function (_Component) {
-		_inherits(Account, _Component);
-	
-		function Account(props, context) {
-			_classCallCheck(this, Account);
-	
-			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Account).call(this, props, context));
-	
-			_this2.logout = _this2.logout.bind(_this2);
-			_this2.fetchPets = _this2.fetchPets.bind(_this2);
-	
-			_this2.state = {};
-			return _this2;
-		}
-	
-		_createClass(Account, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				console.log('ACCOUNT componentDidMount: Page: ' + this.props.page + ", Slug: " + this.props.slug);
-	
-				var _this = this;
-				_api2.default.handleGet('/account/currentuser', null, function (err, result) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-	
-					console.log('Account Get Current User: ' + JSON.stringify(result.user));
-	
-					_store2.default.dispatch(_actions2.default.currentUserReceived(result.user));
-					_this.fetchPets();
-					return;
-				});
-			}
-		}, {
-			key: 'fetchPets',
-			value: function fetchPets() {
-	
-				if (this.props.user.id == null) {
-					return;
-				}
-				var endpoint = '/api/pet?ownerId=' + this.props.user.id;
-	
-				_api2.default.handleGet(endpoint, null, function (err, results) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					console.log('FETCH PETS: ' + JSON.stringify(results.results));
-					_store2.default.dispatch(_actions2.default.petsReceived(results.results));
-				});
-			}
-		}, {
-			key: 'logout',
-			value: function logout(event) {
-				event.preventDefault();
-				_api2.default.handleGet('/account/logout', null, function (err, results) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-	
-					console.log('Account logout Response: ' + JSON.stringify(result));
-					_store2.default.dispatch(_actions2.default.currentUserLogout(results.user));
-					return;
-				});
-				window.location.href = '/index';
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-	
-				return _react2.default.createElement(
-					'div',
-					null,
-					'This is your Account Home Page!',
-					_react2.default.createElement(
-						'h1',
-						null,
-						'Welcome, ',
-						this.props.user.firstName
-					),
-					_react2.default.createElement(_RegisterPet2.default, null),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement(_Pets2.default, null),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement(
-						'a',
-						{ onClick: this.logout, href: '/' },
-						'Logout'
-					)
-				);
-			}
-		}]);
-	
-		return Account;
-	}(_react.Component);
-	
-	var stateToProps = function stateToProps(state) {
-		console.log('ACCOUNT STATE TO PROPS: ' + JSON.stringify(state));
-		return {
-			user: state.accountReducer.currentUser
-	
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(stateToProps)(Account);
-
-/***/ },
-/* 213 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(33);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _api = __webpack_require__(173);
-	
-	var _api2 = _interopRequireDefault(_api);
-	
-	var _store = __webpack_require__(180);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _actions = __webpack_require__(198);
-	
-	var _actions2 = _interopRequireDefault(_actions);
-	
-	var _reactRedux = __webpack_require__(199);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Pets = function (_Component) {
-		_inherits(Pets, _Component);
-	
-		function Pets(props, context) {
-			_classCallCheck(this, Pets);
-	
-			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Pets).call(this, props, context));
-	
-			_this2.state = {};
-			return _this2;
-		}
-	
-		_createClass(Pets, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-	
-				var _this = this;
-	
-				console.log('Pets componentDidMount:');
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-	
-				var petList = this.props.pets.map(function (pet, i) {
-					return _react2.default.createElement(
-						'li',
-						{ key: pet.id },
-						' ',
-						_react2.default.createElement(
-							'a',
-							{ href: '/pet/' + pet.slug },
-							' ',
-							pet.name,
-							' '
-						)
-					);
-				});
-	
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'ol',
-						null,
-						petList
-					)
-				);
-			}
-		}]);
-	
-		return Pets;
-	}(_react.Component);
-	
-	var stateToProps = function stateToProps(state) {
-		console.log('PETS STATE TO PROPS: ' + JSON.stringify(state));
-		return {
-			pets: state.petReducer.petsArray
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(stateToProps)(Pets);
-
-/***/ },
 /* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25341,14 +25224,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(33);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _api = __webpack_require__(173);
-	
-	var _api2 = _interopRequireDefault(_api);
-	
 	var _store = __webpack_require__(180);
 	
 	var _store2 = _interopRequireDefault(_store);
@@ -25357,7 +25232,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(199);
+	var _reactRedux = __webpack_require__(201);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25367,103 +25242,45 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var RegisterPet = function (_Component) {
-		_inherits(RegisterPet, _Component);
+	var PetList = function (_Component) {
+		_inherits(PetList, _Component);
 	
-		_createClass(RegisterPet, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				console.log('RegisterPet componentDidMount');
-			}
-		}]);
+		function PetList() {
+			_classCallCheck(this, PetList);
 	
-		function RegisterPet(props, context) {
-			_classCallCheck(this, RegisterPet);
-	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterPet).call(this, props, context));
-	
-			_this.updatePet = _this.updatePet.bind(_this);
-			_this.registerPet = _this.registerPet.bind(_this);
-			_this.state = {
-				newPet: {
-					ownerId: null,
-					slug: null,
-					name: '',
-					breed: '',
-					sex: ''
-				}
-			};
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetList).apply(this, arguments));
 		}
 	
-		_createClass(RegisterPet, [{
-			key: 'updatePet',
-			value: function updatePet(event) {
-				// console.log('updatePet: '+event.target.id+' == '+event.target.value)
-				var updatedPet = Object.assign({}, this.state.newPet);
-				updatedPet[event.target.id] = event.target.value;
-				updatedPet['ownerId'] = this.props.user.id;
-				this.setState({
-					newPet: updatedPet
-				});
-			}
-		}, {
-			key: 'registerPet',
-			value: function registerPet(event) {
-				event.preventDefault();
-				_api2.default.handlePost('/api/pet', this.state.newPet, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					console.log('REGISTER_PET POST RESPONSE: ' + JSON.stringify(response.result));
-					_store2.default.dispatch(_actions2.default.petCreated(response.result));
-				});
-			}
-		}, {
+		_createClass(PetList, [{
 			key: 'render',
 			value: function render() {
-	
+				var petList = this.props.pets.map(function (pet, i) {
+					return _react2.default.createElement(
+						'li',
+						{ key: pet._id },
+						' ',
+						pet.name,
+						' '
+					);
+				});
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(
-						'p',
-						null,
-						'Tell us About Your Pet'
-					),
-					_react2.default.createElement(
-						'form',
-						{ action: '/api/pet', method: 'post' },
-						_react2.default.createElement('input', { type: 'text', onChange: this.updatePet, id: 'name', placeholder: 'Name' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.updatePet, id: 'breed', placeholder: 'Breed' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.updatePet, id: 'sex', placeholder: 'Sex' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.registerPet },
-							'Register your Pet'
-						)
-					)
+					petList
 				);
 			}
 		}]);
 	
-		return RegisterPet;
+		return PetList;
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('REGISTER PET STATE TO PROPS: ' + JSON.stringify(state));
 		return {
-			newPet: state.petReducer.newPet,
-			user: state.accountReducer.currentUser
-	
+			pets: state.petReducer.petsArray
 		};
 	};
 	
-	exports.default = (0, _reactRedux.connect)(stateToProps)(RegisterPet);
+	exports.default = (0, _reactRedux.connect)(stateToProps)(PetList);
 
 /***/ },
 /* 215 */
@@ -25481,9 +25298,64 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(33);
+	var _Register = __webpack_require__(216);
 	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _Register2 = _interopRequireDefault(_Register);
+	
+	var _Login = __webpack_require__(179);
+	
+	var _Login2 = _interopRequireDefault(_Login);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SignInContainer = function (_Component) {
+		_inherits(SignInContainer, _Component);
+	
+		function SignInContainer() {
+			_classCallCheck(this, SignInContainer);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(SignInContainer).apply(this, arguments));
+		}
+	
+		_createClass(SignInContainer, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_Register2.default, null),
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(_Login2.default, null)
+				);
+			}
+		}]);
+	
+		return SignInContainer;
+	}(_react.Component);
+	
+	exports.default = SignInContainer;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
 	
 	var _api = __webpack_require__(173);
 	
@@ -25497,29 +25369,56 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var PetProfile = function (_Component) {
-		_inherits(PetProfile, _Component);
+	var Register = function (_Component) {
+		_inherits(Register, _Component);
 	
-		function PetProfile() {
-			_classCallCheck(this, PetProfile);
-	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).apply(this, arguments));
-		}
-	
-		_createClass(PetProfile, [{
+		_createClass(Register, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				var _this = this;
-				console.log('SLUG == ' + this.props.slug);
+				console.log('LOGIN COMPONENT: ');
+			}
+		}]);
 	
-				var endpoint = '/api/pet?slug=' + this.props.slug;
+		function Register(props, context) {
+			_classCallCheck(this, Register);
 	
-				_api2.default.handleGet(endpoint, null, function (err, results) {
-					if (err) {
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props, context));
+	
+			_this.submitProfile = _this.submitProfile.bind(_this);
+			_this.register = _this.register.bind(_this);
+			_this.state = {
+				registerUser: {
+					firstName: '',
+					lastName: '',
+					email: '',
+					password: ''
+				}
+			};
+			return _this;
+		}
+	
+		_createClass(Register, [{
+			key: 'submitProfile',
+			value: function submitProfile(event) {
+				var registerUser = Object.assign({}, this.state.registerUser);
+				registerUser[event.target.id] = event.target.value;
+				this.setState({
+					registerUser: registerUser
+				});
+			}
+		}, {
+			key: 'register',
+			value: function register(event) {
+				event.preventDefault();
+	
+				_api2.default.handlePost('/api/profile', this.state.registerUser, function (err, response) {
+					if (err != null) {
 						alert(err.message);
 						return;
 					}
-					console.log('FETCH PET PROFILE: ' + JSON.stringify(results));
+	
+					console.log(JSON.stringify(response.result));
+					store.dispatch(actions.receivedCurrentUser(response.result));
 				});
 			}
 		}, {
@@ -25528,15 +25427,36 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					'Pet Profile goes here'
+					_react2.default.createElement(
+						'p',
+						null,
+						'Register'
+					),
+					_react2.default.createElement(
+						'form',
+						{ action: '/api/profile', method: 'post' },
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'firstName', placeholder: 'First Name' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'lastName', placeholder: 'Last Name' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'email', placeholder: 'Email' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'password', placeholder: 'password' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.register },
+							'Register'
+						)
+					)
 				);
 			}
 		}]);
 	
-		return PetProfile;
+		return Register;
 	}(_react.Component);
 	
-	exports.default = PetProfile;
+	exports.default = Register;
 
 /***/ }
 /******/ ]);

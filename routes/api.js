@@ -20,7 +20,7 @@ router.get('/:resource', function(req, res, next) {
 		})
 	}
 
-	controller.get(req.query, false, function(err, results){
+	controller.get(req.query, true, function(err, results){
 		if(err){
 			res.json({
 				confirmation: "Fail",
@@ -50,7 +50,7 @@ router.get('/:resource/:id', function(req, res, next){
 		return
 	}
 
-	controller.getById(id, false, function(err, result){
+	controller.getById(id, true, function(err, result){
 		if(err){
 			res.json({
 				confirmation: 'Fail',

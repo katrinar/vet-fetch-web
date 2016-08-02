@@ -13,43 +13,38 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var ReactDOM = _interopRequire(require("react-dom"));
+var store = _interopRequire(require("../stores/store"));
 
-var api = _interopRequire(require("../utils/api"));
+var actions = _interopRequire(require("../actions/actions"));
 
-var PetProfile = (function (Component) {
-	function PetProfile() {
-		_classCallCheck(this, PetProfile);
+var connect = require("react-redux").connect;
+var PetList = (function (Component) {
+	function PetList() {
+		_classCallCheck(this, PetList);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(PetProfile, Component);
+	_inherits(PetList, Component);
 
-	_prototypeProperties(PetProfile, null, {
-		componentDidMount: {
-			value: function componentDidMount() {
-				console.log("SLUG == " + this.props.slug);
-
-				api.handleGet(endpoint, null, function (err, results) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					console.log("FETCH PET PROFILE: " + JSON.stringify(results));
-				});
-			},
-			writable: true,
-			configurable: true
-		},
+	_prototypeProperties(PetList, null, {
 		render: {
 			value: function render() {
+				var petList = this.props.pets.map(function (pet, i) {
+					return React.createElement(
+						"li",
+						{ key: pet._id },
+						" ",
+						pet.name,
+						" "
+					);
+				});
 				return React.createElement(
 					"div",
 					null,
-					"Pet Profile goes here"
+					petList
 				);
 			},
 			writable: true,
@@ -57,7 +52,13 @@ var PetProfile = (function (Component) {
 		}
 	});
 
-	return PetProfile;
+	return PetList;
 })(Component);
 
-module.exports = PetProfile;
+var stateToProps = function (state) {
+	return {
+		pets: state.petReducer.petsArray
+	};
+};
+
+module.exports = connect(stateToProps)(PetList);

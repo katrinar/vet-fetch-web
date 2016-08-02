@@ -1,48 +1,34 @@
-	import constants from '../constants/constants'
+import constants from '../constants/constants'
 
 var initialState = {
-	newPet: {
-		id: null,
-		ownerId: null,
-		name: '',
-		breed: '',
-		sex: ''
-	},
-
-	petsArray: [],
-
-	pets: {}
+	petsArray: []
 }
 
 export default function(state = initialState, action){
-
-	switch (action.type){
-
-		case constants.PET_CREATED:
-			console.log('REDUCING PET_CREATED: ' +JSON.stringify(action.pet))
+	switch(action.type){
+		case constants.RECEIVED_PETS:
+			console.log('RECEIVED_PETS: '+JSON.stringify(action.pets))
 			var newState = Object.assign({}, state)
 			var array = Object.assign([], state)
-			array.push(action.pet)
-			newState['petsArray'] = array
-
-			return newState
-
-		case constants.PETS_RECEIVED:
-			console.log('REDUCING PETS_RECEIVED: '+ JSON.stringify(action.pets))
-			var newState = Object.assign({}, state)
-			newState['pets'] = action.pets
-
-			var array = []
 			for (var i=0; i<action.pets.length; i++){
 				var pet = action.pets[i]
 				array.push(pet)
 			}
-
 			newState['petsArray'] = array
 
-			return newState
-			
-		default:
+		return newState
+
+		case constants.REGISTER_PET:
+			console.log('RECEIVED_REGISTER_PET: '+JSON.stringify(action.pets))
+			var newState = Object.assign({}, state)
+			var array = Object.assign([], state.petsArray)
+			array.push(action.pets)
+			newState['petsArray'] = array
+
+		return newState
+
+		default: 
 			return state
+
 	}
 }

@@ -13,42 +13,30 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var ReactDOM = _interopRequire(require("react-dom"));
-
 var Register = _interopRequire(require("../components/Register"));
 
 var Login = _interopRequire(require("../components/Login"));
 
-var Welcome = (function (Component) {
-	function Welcome() {
-		_classCallCheck(this, Welcome);
+var SignInContainer = (function (Component) {
+	function SignInContainer() {
+		_classCallCheck(this, SignInContainer);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(Welcome, Component);
+	_inherits(SignInContainer, Component);
 
-	_prototypeProperties(Welcome, null, {
+	_prototypeProperties(SignInContainer, null, {
 		render: {
 			value: function render() {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(
-						"p",
-						null,
-						"New? Sign up to check out pet insurance options"
-					),
-					React.createElement(
-						"div",
-						null,
-						React.createElement(Register, null),
-						React.createElement("br", null),
-						React.createElement(Login, null),
-						React.createElement("br", null)
-					)
+					React.createElement(Register, null),
+					React.createElement("br", null),
+					React.createElement(Login, null)
 				);
 			},
 			writable: true,
@@ -56,7 +44,7 @@ var Welcome = (function (Component) {
 		}
 	});
 
-	return Welcome;
+	return SignInContainer;
 })(Component);
 
-module.exports = Welcome;
+module.exports = SignInContainer;

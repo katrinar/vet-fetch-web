@@ -15,9 +15,11 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var ReactDOM = _interopRequire(require("react-dom"));
-
 var api = _interopRequire(require("../utils/api"));
+
+var RegisterPet = _interopRequire(require("../components/RegisterPet"));
+
+var PetList = _interopRequire(require("../components/PetList"));
 
 var store = _interopRequire(require("../stores/store"));
 
@@ -29,7 +31,7 @@ var Pets = (function (Component) {
 		_classCallCheck(this, Pets);
 
 		_get(Object.getPrototypeOf(Pets.prototype), "constructor", this).call(this, props, context);
-		this.state = {};
+		this.fetchPets = this.fetchPets.bind(this);
 	}
 
 	_inherits(Pets, Component);
@@ -38,37 +40,41 @@ var Pets = (function (Component) {
 		componentDidMount: {
 			value: function componentDidMount() {
 				var _this = this;
-
-				console.log("Pets componentDidMount:");
+				console.log("PETS COMPONENT: ");
+				_this.fetchPets();
+			},
+			writable: true,
+			configurable: true
+		},
+		fetchPets: {
+			value: function fetchPets() {
+				var endpoint = "/api/pet?ownerId=" + this.props.currentUser.id;
+				api.handleGet(endpoint, null, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log("FETCH_PETS: " + JSON.stringify(response.results));
+					store.dispatch(actions.receivedPets(response.results));
+				});
 			},
 			writable: true,
 			configurable: true
 		},
 		render: {
 			value: function render() {
-				var petList = this.props.pets.map(function (pet, i) {
-					return React.createElement(
-						"li",
-						{ key: pet.id },
-						" ",
-						React.createElement(
-							"a",
-							{ href: "/pet/" + pet.slug },
-							" ",
-							pet.name,
-							" "
-						)
-					);
-				});
-
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
-						"ol",
+						"p",
 						null,
-						petList
-					)
+						"Welcome, ",
+						this.props.currentUser.firstName
+					),
+					React.createElement(RegisterPet, null),
+					React.createElement("br", null),
+					React.createElement(PetList, null)
 				);
 			},
 			writable: true,
@@ -80,12 +86,10 @@ var Pets = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("PETS STATE TO PROPS: " + JSON.stringify(state));
 	return {
+		currentUser: state.accountReducer.currentUser,
 		pets: state.petReducer.petsArray
 	};
 };
-
-
 
 module.exports = connect(stateToProps)(Pets);
