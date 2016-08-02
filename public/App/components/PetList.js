@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PetProfile from '../components/PetProfile'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
@@ -6,12 +7,14 @@ import { connect } from 'react-redux'
 class PetList extends Component {
 	render(){
 		var petList = this.props.pets.map(function(pet, i){
-			return <li key={pet._id}> {pet.name} </li>
+			return <li key={pet._id}><a href={'#'}>{pet.name}</a></li> 
 		})
-		return(
-			<div>{petList}</div>
 
-			)
+		return(
+			<div>
+				{petList}
+			</div>
+		)
 	}
 }
 

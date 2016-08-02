@@ -21188,7 +21188,7 @@
 	
 	var _Pets2 = _interopRequireDefault(_Pets);
 	
-	var _SignInContainer = __webpack_require__(215);
+	var _SignInContainer = __webpack_require__(216);
 	
 	var _SignInContainer2 = _interopRequireDefault(_SignInContainer);
 	
@@ -25224,6 +25224,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _PetProfile = __webpack_require__(215);
+	
+	var _PetProfile2 = _interopRequireDefault(_PetProfile);
+	
 	var _store = __webpack_require__(180);
 	
 	var _store2 = _interopRequireDefault(_store);
@@ -25258,11 +25262,14 @@
 					return _react2.default.createElement(
 						'li',
 						{ key: pet._id },
-						' ',
-						pet.name,
-						' '
+						_react2.default.createElement(
+							'a',
+							{ href: '#' },
+							pet.name
+						)
 					);
 				});
+	
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -25298,7 +25305,60 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Register = __webpack_require__(216);
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PetProfile = function (_Component) {
+		_inherits(PetProfile, _Component);
+	
+		function PetProfile() {
+			_classCallCheck(this, PetProfile);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).apply(this, arguments));
+		}
+	
+		_createClass(PetProfile, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					this.props.pet.name
+				);
+			}
+		}]);
+	
+		return PetProfile;
+	}(_react.Component);
+	
+	exports.default = PetProfile;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Register = __webpack_require__(217);
 	
 	var _Register2 = _interopRequireDefault(_Register);
 	
@@ -25342,7 +25402,7 @@
 	exports.default = SignInContainer;
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25360,6 +25420,14 @@
 	var _api = __webpack_require__(173);
 	
 	var _api2 = _interopRequireDefault(_api);
+	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(198);
+	
+	var _actions2 = _interopRequireDefault(_actions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25418,7 +25486,7 @@
 					}
 	
 					console.log(JSON.stringify(response.result));
-					store.dispatch(actions.receivedCurrentUser(response.result));
+					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.result));
 				});
 			}
 		}, {
