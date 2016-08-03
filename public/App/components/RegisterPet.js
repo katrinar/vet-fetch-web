@@ -59,10 +59,9 @@ class RegisterPet extends Component {
 }
 
 const stateToProps = function(state){
-	console.log('STATE_TO_PROPS_REGISTER_PET: '+JSON.stringify(state))
 	return {
 		currentUser: state.accountReducer.currentUser,
-		pets: state.petReducer.petsArray
+		petsArray: state.petReducer.petsArray
 	}
 }
 

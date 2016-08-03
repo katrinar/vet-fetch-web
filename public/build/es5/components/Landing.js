@@ -13,35 +13,30 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var PetRow = _interopRequire(require("../components/PetRow"));
+var Register = _interopRequire(require("../components/Register"));
 
-var store = _interopRequire(require("../stores/store"));
+var Login = _interopRequire(require("../components/Login"));
 
-var actions = _interopRequire(require("../actions/actions"));
-
-var connect = require("react-redux").connect;
-var PetList = (function (Component) {
-	function PetList() {
-		_classCallCheck(this, PetList);
+var Landing = (function (Component) {
+	function Landing() {
+		_classCallCheck(this, Landing);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(PetList, Component);
+	_inherits(Landing, Component);
 
-	_prototypeProperties(PetList, null, {
+	_prototypeProperties(Landing, null, {
 		render: {
 			value: function render() {
-				var petList = this.props.petsArray.map(function (pet, i) {
-					return React.createElement(PetRow, { key: pet._id, pet: pet });
-				});
-
 				return React.createElement(
 					"div",
 					null,
-					petList
+					React.createElement(Register, null),
+					React.createElement("br", null),
+					React.createElement(Login, null)
 				);
 			},
 			writable: true,
@@ -49,14 +44,7 @@ var PetList = (function (Component) {
 		}
 	});
 
-	return PetList;
+	return Landing;
 })(Component);
 
-var stateToProps = function (state) {
-	return {
-		petsArray: state.petReducer.petsArray,
-		currentUser: state.accountReducer.currentUser
-	};
-};
-
-module.exports = connect(stateToProps)(PetList);
+module.exports = Landing;

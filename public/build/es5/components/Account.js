@@ -15,56 +15,27 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var api = _interopRequire(require("../utils/api"));
+var Pets = _interopRequire(require("../components/Pets"));
 
 var store = _interopRequire(require("../stores/store"));
 
-var connect = require("react-redux").connect;
 var actions = _interopRequire(require("../actions/actions"));
 
-var RegisterPet = (function (Component) {
-	function RegisterPet(props, context) {
-		_classCallCheck(this, RegisterPet);
+var connect = require("react-redux").connect;
+var Account = (function (Component) {
+	function Account(props, context) {
+		_classCallCheck(this, Account);
 
-		_get(Object.getPrototypeOf(RegisterPet.prototype), "constructor", this).call(this, props, context);
-		this.submitPet = this.submitPet.bind(this);
-		this.registerPet = this.registerPet.bind(this);
-		this.state = {
-			registerPet: {
-				name: "",
-				breed: "",
-				ownerId: null,
-				slug: null
-			}
-		};
+		_get(Object.getPrototypeOf(Account.prototype), "constructor", this).call(this, props, context);
 	}
 
-	_inherits(RegisterPet, Component);
+	_inherits(Account, Component);
 
-	_prototypeProperties(RegisterPet, null, {
-		submitPet: {
-			value: function submitPet(event) {
-				var registerPet = Object.assign({}, this.state.registerPet);
-				registerPet[event.target.id] = event.target.value;
-				registerPet.ownerId = this.props.currentUser.id;
-				this.setState({
-					registerPet: registerPet
-				});
-			},
-			writable: true,
-			configurable: true
-		},
-		registerPet: {
-			value: function registerPet(event) {
-				event.preventDefault();
-				api.handlePost("/api/pet", this.state.registerPet, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					console.log(JSON.stringify(response.result));
-					store.dispatch(actions.registerPet(response.result));
-				});
+	_prototypeProperties(Account, null, {
+		componentDidMount: {
+			value: function componentDidMount() {
+				console.log("ACCOUNT COMPONENT DID MOUNT:");
+
 			},
 			writable: true,
 			configurable: true
@@ -75,22 +46,24 @@ var RegisterPet = (function (Component) {
 					"div",
 					null,
 					React.createElement(
-						"p",
+						"h2",
 						null,
-						"Register your Pet"
+						"Welcome, ",
+						this.props.currentUser.firstName
 					),
 					React.createElement(
-						"form",
-						{ action: "/api/pet", method: "post" },
-						React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitPet, id: "breed", placeholder: "Breed" }),
-						React.createElement("br", null),
+						"h3",
+						null,
 						React.createElement(
-							"button",
-							{ onClick: this.registerPet },
-							"Register Pet"
+							"a",
+							{ href: "/pets/" },
+							"Pets"
 						)
+					),
+					React.createElement(
+						"h3",
+						null,
+						"Appointments"
 					)
 				);
 			},
@@ -99,7 +72,7 @@ var RegisterPet = (function (Component) {
 		}
 	});
 
-	return RegisterPet;
+	return Account;
 })(Component);
 
 var stateToProps = function (state) {
@@ -109,4 +82,4 @@ var stateToProps = function (state) {
 	};
 };
 
-module.exports = connect(stateToProps)(RegisterPet);
+module.exports = connect(stateToProps)(Account);

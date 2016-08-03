@@ -59,6 +59,10 @@ router.get('/:resource/:id', function(req, res, next){
 			return
 		}
 
+		// var data = {confirmation: 'Success'}
+		// data[resource] = result
+		// res.json(data) 
+
 		res.json({
 			confirmation: "Success",
 			result: result

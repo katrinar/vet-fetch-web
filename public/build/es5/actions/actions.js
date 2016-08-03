@@ -18,7 +18,7 @@ module.exports = {
 	registerPet: function (pet) {
 		return {
 			type: constants.REGISTER_PET,
-			pets: pet
+			pet: pet
 		};
 	},
 
@@ -26,6 +26,13 @@ module.exports = {
 		return {
 			type: constants.RECEIVED_PETS,
 			pets: pets
+		};
+	},
+
+	receivedPetProfiles: function (petProfiles) {
+		return {
+			type: constants.RECEIVED_PET_PROFILES,
+			petProfiles: petProfiles
 		};
 	}
 

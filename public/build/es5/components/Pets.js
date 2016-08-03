@@ -21,6 +21,8 @@ var RegisterPet = _interopRequire(require("../components/RegisterPet"));
 
 var PetList = _interopRequire(require("../components/PetList"));
 
+var PetProfile = _interopRequire(require("../components/PetProfile"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -31,7 +33,6 @@ var Pets = (function (Component) {
 		_classCallCheck(this, Pets);
 
 		_get(Object.getPrototypeOf(Pets.prototype), "constructor", this).call(this, props, context);
-		this.fetchPets = this.fetchPets.bind(this);
 	}
 
 	_inherits(Pets, Component);
@@ -39,24 +40,7 @@ var Pets = (function (Component) {
 	_prototypeProperties(Pets, null, {
 		componentDidMount: {
 			value: function componentDidMount() {
-				var _this = this;
-				console.log("PETS COMPONENT: ");
-				_this.fetchPets();
-			},
-			writable: true,
-			configurable: true
-		},
-		fetchPets: {
-			value: function fetchPets() {
-				var endpoint = "/api/pet?ownerId=" + this.props.currentUser.id;
-				api.handleGet(endpoint, null, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					console.log("FETCH_PETS: " + JSON.stringify(response.results));
-					store.dispatch(actions.receivedPets(response.results));
-				});
+				console.log("PETS COMPONENT DID MOUNT:");
 			},
 			writable: true,
 			configurable: true
@@ -66,15 +50,10 @@ var Pets = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(
-						"p",
-						null,
-						"Welcome, ",
-						this.props.currentUser.firstName
-					),
 					React.createElement(RegisterPet, null),
 					React.createElement("br", null),
-					React.createElement(PetList, null)
+					React.createElement(PetList, null),
+					React.createElement("br", null)
 				);
 			},
 			writable: true,
@@ -86,9 +65,10 @@ var Pets = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
+	console.log("STATE_TO_PROPS_PETS: " + JSON.stringify(state));
 	return {
 		currentUser: state.accountReducer.currentUser,
-		pets: state.petReducer.petsArray
+		petsArray: state.petReducer.petsArray
 	};
 };
 
