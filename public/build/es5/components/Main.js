@@ -36,8 +36,6 @@ var Main = (function (Component) {
 
 		_get(Object.getPrototypeOf(Main.prototype), "constructor", this).call(this, props, context);
 		this.fetchPets = this.fetchPets.bind(this);
-
-		this.state = {};
 	}
 
 	_inherits(Main, Component);
@@ -47,6 +45,7 @@ var Main = (function (Component) {
 			value: function componentDidMount() {
 				var _this = this;
 				console.log("MAIN COMPONENT DID MOUNT: This.props.page = " + this.props.page + ", This.props.slug = " + this.props.slug);
+
 				api.handleGet("/account/currentuser", null, function (err, response) {
 					if (err) {
 						alert(err.message);
@@ -79,8 +78,9 @@ var Main = (function (Component) {
 		},
 		render: {
 			value: function render() {
-				var loggedIn = null;
 				var page = null;
+				var loggedInUser = this.props.currentUser || {};
+				console.log("MAIN: LOGGED IN USER = " + JSON.stringify(loggedInUser));
 
 				switch (this.props.page) {
 					case "home":
@@ -90,7 +90,7 @@ var Main = (function (Component) {
 					case "pets":
 						return page = React.createElement(Pets, null);
 					case "pet":
-						return page = React.createElement(PetProfile, { slug: this.props.slug });
+						return page = React.createElement(PetProfile, { loggedInUser: loggedInUser, slug: this.props.slug });
 					default:
 						return page = null;
 				}

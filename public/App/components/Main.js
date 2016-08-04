@@ -14,13 +14,12 @@ class Main extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.fetchPets = this.fetchPets.bind(this)
-
-		this.state = {}
 	}
 
 	componentDidMount() {
 		var _this = this
 		console.log('MAIN COMPONENT DID MOUNT: This.props.page = '+this.props.page+', This.props.slug = '+this.props.slug)
+
 		api.handleGet('/account/currentuser', null, function(err, response){
 			if (err){
 				alert(err.message)
@@ -47,8 +46,9 @@ class Main extends Component {
 	}
 
 	render() {
-		var loggedIn = null
 		var page = null
+		var loggedInUser = this.props.currentUser || {}
+		console.log('MAIN: LOGGED IN USER = '+JSON.stringify(loggedInUser))
 
 		switch(this.props.page){
 			case 'home':
@@ -58,7 +58,7 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets />
 			case 'pet':
-				return page = <PetProfile slug={this.props.slug} />
+				return page = <PetProfile loggedInUser = {loggedInUser} slug={this.props.slug} />
 			default: 
 				return page = null
 		}

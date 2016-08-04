@@ -27,15 +27,22 @@ var PetProfile = (function (Component) {
 		_classCallCheck(this, PetProfile);
 
 		_get(Object.getPrototypeOf(PetProfile.prototype), "constructor", this).call(this, props, context);
-		this.state = {};
 	}
 
 	_inherits(PetProfile, Component);
 
 	_prototypeProperties(PetProfile, null, {
+		componentWillMount: {
+			value: function componentWillMount() {
+				var currentUser = this.props.currentUser;
+				console.log("PET PROFILE WILL MOUNT: CURRENT USER PROPS =" + JSON.stringify(currentUser) + ", CURRENT USER STATE = " + JSON.stringify(this.state.currentUser));
+			},
+			writable: true,
+			configurable: true
+		},
 		componentDidMount: {
 			value: function componentDidMount() {
-				console.log("PET PROFILE DID MOUNT: SLUG = " + JSON.stringify(this.props.slug) + ", OWNER = " + JSON.stringify(this.props.currentUser));
+				console.log("PET PROFILE DID MOUNT: SLUG = " + JSON.stringify(this.props.slug) + ", CURRENT USER PROPS = " + JSON.stringify(this.props.currentUser) + "CURRENT USER STATE = " + JSON.stringify(this.state.currentUser));
 			},
 			writable: true,
 			configurable: true
@@ -44,7 +51,7 @@ var PetProfile = (function (Component) {
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-
+				console.log("PET PROFILE RENDER: CURRENT USER PROPS: " + JSON.stringify(this.props.currentUser));
 				return React.createElement(
 					"div",
 					null,
@@ -116,8 +123,20 @@ var stateToProps = function (state) {
 };
 
 module.exports = connect(stateToProps)(PetProfile);
+//TO DO: pass this.props.pets object to pet profile from Main and use for api request
 //TO DO: replace hardcoded li with iterated array li; api req/store dispatch to currentPet	
-// var endpoint = 'api/pet?slug='+this.props.slug
-// api.handleGet(endpoint, null, function (err, response){
 
+// var endpoint = '/api/pet?slug='+this.props.slug
+// api.handleGet(endpoint, null, function(err, response){
+// 	if (err){
+// 		alert(err.message)
+// 		return
+// 	}
+// 	var petResults = response.results
+// 	// for (var i=0; i<petResults.length; i++){
+// 	// 	if (petResults.ownerId == this.props.currentUser.id){
+// 	// }
+// 	// }
+
+// 	console.log('PET RESULTS: '+JSON.stringify(petResults)+', CURRENT OWNER ID: '+JSON.stringify(this.state.currentUser))
 // })

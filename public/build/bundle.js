@@ -21250,8 +21250,6 @@
 			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props, context));
 	
 			_this2.fetchPets = _this2.fetchPets.bind(_this2);
-	
-			_this2.state = {};
 			return _this2;
 		}
 	
@@ -21260,6 +21258,7 @@
 			value: function componentDidMount() {
 				var _this = this;
 				console.log('MAIN COMPONENT DID MOUNT: This.props.page = ' + this.props.page + ', This.props.slug = ' + this.props.slug);
+	
 				_api2.default.handleGet('/account/currentuser', null, function (err, response) {
 					if (err) {
 						alert(err.message);
@@ -21288,8 +21287,9 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var loggedIn = null;
 				var page = null;
+				var loggedInUser = this.props.currentUser || {};
+				console.log('MAIN: LOGGED IN USER = ' + JSON.stringify(loggedInUser));
 	
 				switch (this.props.page) {
 					case 'home':
@@ -21299,7 +21299,7 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, null);
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { slug: this.props.slug });
+						return page = _react2.default.createElement(_PetProfile2.default, { loggedInUser: loggedInUser, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -25419,18 +25419,48 @@
 	
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).call(this, props, context));
 	
-			_this.state = {};
+			_this.state = {
+				currentUser: _this.props.currentUser
+			};
 			return _this;
 		}
 	
+		// initialState(){
+		// 	return{
+		// 		currentUser: this.props.currentUser
+		// 	}
+		// }
+	
 		_createClass(PetProfile, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+	
+				var currentUser = this.props.currentUser;
+				console.log('PET PROFILE WILL MOUNT: CURRENT USER PROPS =' + JSON.stringify(currentUser) + ', CURRENT USER STATE = ' + JSON.stringify(this.state.currentUser));
+				// this.setState({
+				// 	currentUser: 
+				// })
+			}
+		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				console.log('PET PROFILE DID MOUNT: SLUG = ' + JSON.stringify(this.props.slug) + ', OWNER = ' + JSON.stringify(this.props.currentUser));
-				//TO DO: replace hardcoded li with iterated array li; api req/store dispatch to currentPet	
-				// var endpoint = 'api/pet?slug='+this.props.slug
-				// api.handleGet(endpoint, null, function (err, response){
+				console.log('PET PROFILE DID MOUNT: SLUG = ' + JSON.stringify(this.props.slug) + ', CURRENT USER PROPS = ' + JSON.stringify(this.props.currentUser) + 'CURRENT USER STATE = ' + JSON.stringify(this.state.currentUser));
 	
+				//TO DO: replace hardcoded li with iterated array li; api req/store dispatch to currentPet	
+	
+				// var endpoint = '/api/pet?slug='+this.props.slug
+				// api.handleGet(endpoint, null, function(err, response){
+				// 	if (err){
+				// 		alert(err.message)
+				// 		return
+				// 	}
+				// 	var petResults = response.results
+				// 	// for (var i=0; i<petResults.length; i++){
+				// 	// 	if (petResults.ownerId == this.props.currentUser.id){
+				// 	// }
+				// 	// }
+	
+				// 	console.log('PET RESULTS: '+JSON.stringify(petResults)+', CURRENT OWNER ID: '+JSON.stringify(this.state.currentUser))
 				// })
 			}
 		}, {
@@ -25438,7 +25468,7 @@
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-	
+				console.log('PET PROFILE RENDER: CURRENT USER PROPS: ' + JSON.stringify(this.props.currentUser));
 				return _react2.default.createElement(
 					'div',
 					null,
