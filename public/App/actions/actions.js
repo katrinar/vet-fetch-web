@@ -30,6 +30,13 @@ export default {
 			type: constants.RECEIVED_PET_PROFILES,
 			petProfiles: petProfiles
 		}
+	},
+
+	receivedCurrentPetProfile: function(currentPetProfile){
+		return{
+			type: constants.RECEIVED_CURRENT_PET_PROFILE,
+			currentPet: currentPetProfile
+		}
 	}
 
 }

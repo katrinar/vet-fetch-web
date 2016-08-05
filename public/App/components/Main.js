@@ -14,10 +14,18 @@ class Main extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.fetchPets = this.fetchPets.bind(this)
+		this.fetchPetProfiles = this.fetchPetProfiles.bind(this)
+		this.fetchCurrentPet = this.fetchCurrentPet.bind(this)
+	}
+
+	componentWillMount(){
+		var slug = this.props.slug
+		console.log('MAIN COMPONENT WILL MOUNT: This.props.page = '+this.props.page+', This.props.slug = '+slug)
 	}
 
 	componentDidMount() {
 		var _this = this
+
 		console.log('MAIN COMPONENT DID MOUNT: This.props.page = '+this.props.page+', This.props.slug = '+this.props.slug)
 
 		api.handleGet('/account/currentuser', null, function(err, response){
@@ -33,22 +41,43 @@ class Main extends Component {
 	}
 
 	fetchPets(){
+		var _this = this
+
 		var endpoint = '/api/pet?ownerId='+this.props.currentUser.id
 		api.handleGet(endpoint, null, function(err, response){
 			if (err){
 				alert(err.message)
 				return
 			}
-			// console.log('FETCH_PETS: '+JSON.stringify(response.results))
+
+			var petProfiles = response.results
+			var slug = _this.props.slug
+			var currentPet = petProfiles.slug
+
+			for (var i=0; i<petProfiles.length; i++){
+				var petProfile = petProfiles[i]
+
+				if (petProfile.slug == slug){
+					var currentPet = petProfile
+				}
+			}
+
 			store.dispatch(actions.receivedPets(response.results))
-			store.dispatch(actions.receivedPetProfiles(response.results))
+			_this.fetchPetProfiles(petProfiles)
+			_this.fetchCurrentPet(currentPet)
+			return
 		})
+	}
+	fetchPetProfiles(petProfiles){
+		store.dispatch(actions.receivedPetProfiles(petProfiles))
+	}
+
+	fetchCurrentPet(currentPet){
+		store.dispatch(actions.receivedCurrentPetProfile(currentPet))
 	}
 
 	render() {
 		var page = null
-		var loggedInUser = this.props.currentUser || {}
-		console.log('MAIN: LOGGED IN USER = '+JSON.stringify(loggedInUser))
 
 		switch(this.props.page){
 			case 'home':
@@ -58,7 +87,7 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets />
 			case 'pet':
-				return page = <PetProfile loggedInUser = {loggedInUser} slug={this.props.slug} />
+				return page = <PetProfile slug={this.props.slug} />
 			default: 
 				return page = null
 		}
@@ -75,7 +104,9 @@ const stateToProps = function(state) {
 	console.log('STATE_TO_PROPS_MAIN: '+JSON.stringify(state))
 	return {
 		currentUser: state.accountReducer.currentUser,
-		petsArray: state.petReducer.petsArray	
+		petsArray: state.petReducer.petsArray,
+		pets: state.petReducer.pets,
+		currentPet: state.petReducer.currentPet
 	}
 }
 

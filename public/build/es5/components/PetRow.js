@@ -27,11 +27,6 @@ var PetRow = (function (Component) {
 	_inherits(PetRow, Component);
 
 	_prototypeProperties(PetRow, null, {
-		componentDidMount: {
-			value: function componentDidMount() {},
-			writable: true,
-			configurable: true
-		},
 		render: {
 			value: function render() {
 				return React.createElement(

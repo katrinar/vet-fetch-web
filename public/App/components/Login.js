@@ -37,7 +37,6 @@ class Login extends Component {
 				return
 			}
 
-			// console.log(JSON.stringify(response.currentUser))
 			store.dispatch(actions.receivedCurrentUser(response.currentUser))
 			window.location.href = '/account'
 		})

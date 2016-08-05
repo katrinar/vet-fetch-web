@@ -21250,13 +21250,22 @@
 			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props, context));
 	
 			_this2.fetchPets = _this2.fetchPets.bind(_this2);
+			_this2.fetchPetProfiles = _this2.fetchPetProfiles.bind(_this2);
+			_this2.fetchCurrentPet = _this2.fetchCurrentPet.bind(_this2);
 			return _this2;
 		}
 	
 		_createClass(Main, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				var slug = this.props.slug;
+				console.log('MAIN COMPONENT WILL MOUNT: This.props.page = ' + this.props.page + ', This.props.slug = ' + slug);
+			}
+		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 				var _this = this;
+	
 				console.log('MAIN COMPONENT DID MOUNT: This.props.page = ' + this.props.page + ', This.props.slug = ' + this.props.slug);
 	
 				_api2.default.handleGet('/account/currentuser', null, function (err, response) {
@@ -21273,23 +21282,47 @@
 		}, {
 			key: 'fetchPets',
 			value: function fetchPets() {
+				var _this = this;
+	
 				var endpoint = '/api/pet?ownerId=' + this.props.currentUser.id;
 				_api2.default.handleGet(endpoint, null, function (err, response) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
-					// console.log('FETCH_PETS: '+JSON.stringify(response.results))
+	
+					var petProfiles = response.results;
+					var slug = _this.props.slug;
+					var currentPet = petProfiles.slug;
+	
+					for (var i = 0; i < petProfiles.length; i++) {
+						var petProfile = petProfiles[i];
+	
+						if (petProfile.slug == slug) {
+							var currentPet = petProfile;
+						}
+					}
+	
 					_store2.default.dispatch(_actions2.default.receivedPets(response.results));
-					_store2.default.dispatch(_actions2.default.receivedPetProfiles(response.results));
+					_this.fetchPetProfiles(petProfiles);
+					_this.fetchCurrentPet(currentPet);
+					return;
 				});
+			}
+		}, {
+			key: 'fetchPetProfiles',
+			value: function fetchPetProfiles(petProfiles) {
+				_store2.default.dispatch(_actions2.default.receivedPetProfiles(petProfiles));
+			}
+		}, {
+			key: 'fetchCurrentPet',
+			value: function fetchCurrentPet(currentPet) {
+				_store2.default.dispatch(_actions2.default.receivedCurrentPetProfile(currentPet));
 			}
 		}, {
 			key: 'render',
 			value: function render() {
 				var page = null;
-				var loggedInUser = this.props.currentUser || {};
-				console.log('MAIN: LOGGED IN USER = ' + JSON.stringify(loggedInUser));
 	
 				switch (this.props.page) {
 					case 'home':
@@ -21299,7 +21332,7 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, null);
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { loggedInUser: loggedInUser, slug: this.props.slug });
+						return page = _react2.default.createElement(_PetProfile2.default, { slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -21319,7 +21352,9 @@
 		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state));
 		return {
 			currentUser: state.accountReducer.currentUser,
-			petsArray: state.petReducer.petsArray
+			petsArray: state.petReducer.petsArray,
+			pets: state.petReducer.pets,
+			currentPet: state.petReducer.currentPet
 		};
 	};
 	
@@ -23023,11 +23058,6 @@
 		}
 	
 		_createClass(Account, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				console.log('ACCOUNT COMPONENT DID MOUNT:');
-			}
-		}, {
 			key: 'render',
 			value: function render() {
 	
@@ -24243,7 +24273,8 @@
 		RECEIVED_CURRENT_USER: 'RECEIVED_CURRENT_USER',
 		REGISTER_PET: 'REGISTER_PET',
 		RECEIVED_PETS: 'RECEIVED_PETS',
-		RECEIVED_PET_PROFILES: 'RECEIVED_PET_PROFILES'
+		RECEIVED_PET_PROFILES: 'RECEIVED_PET_PROFILES',
+		RECEIVED_CURRENT_PET_PROFILE: 'RECEIVED_CURRENT_PET_PROFILE'
 	};
 
 /***/ },
@@ -24263,7 +24294,7 @@
 	
 		switch (action.type) {
 			case _constants2.default.RECEIVED_PETS:
-				console.log('RECEIVED_PETS: ' + JSON.stringify(action.pets));
+				console.log('RECEIVED_PETS: ');
 				var newState = Object.assign({}, state);
 				var array = Object.assign([], state);
 				for (var i = 0; i < action.pets.length; i++) {
@@ -24275,7 +24306,7 @@
 				return newState;
 	
 			case _constants2.default.REGISTER_PET:
-				console.log('RECEIVED_REGISTER_PET: ' + JSON.stringify(action.pet));
+				console.log('RECEIVED_REGISTER_PET: ');
 				var newState = Object.assign({}, state);
 				var array = Object.assign([], state.petsArray);
 				array.push(action.pet);
@@ -24284,7 +24315,7 @@
 				return newState;
 	
 			case _constants2.default.RECEIVED_PET_PROFILES:
-				console.log('RECEIVED_PET_PROFILES: ' + JSON.stringify(action.petProfiles));
+				console.log('RECEIVED_PET_PROFILES: ');
 				var newState = Object.assign({}, state);
 				var petMap = Object.assign({}, newState.pets);
 	
@@ -24293,6 +24324,13 @@
 					petMap[petProfile.slug] = petProfile;
 				}
 				newState['pets'] = petMap;
+	
+				return newState;
+	
+			case _constants2.default.RECEIVED_CURRENT_PET_PROFILE:
+				console.log('RECEIVED_CURRENT_PET_PROFILE: ' + JSON.stringify(action.currentPet));
+				var newState = Object.assign({}, state);
+				newState['currentPet'] = action.currentPet;
 	
 				return newState;
 	
@@ -24309,8 +24347,8 @@
 	
 	var initialState = {
 		pets: {},
-	
-		petsArray: []
+		petsArray: [],
+		currentPet: {}
 	};
 
 /***/ },
@@ -25231,6 +25269,13 @@
 				type: _constants2.default.RECEIVED_PET_PROFILES,
 				petProfiles: petProfiles
 			};
+		},
+	
+		receivedCurrentPetProfile: function receivedCurrentPetProfile(currentPetProfile) {
+			return {
+				type: _constants2.default.RECEIVED_CURRENT_PET_PROFILE,
+				currentPet: currentPetProfile
+			};
 		}
 	
 	};
@@ -25347,9 +25392,6 @@
 		}
 	
 		_createClass(PetRow, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {}
-		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -25399,10 +25441,6 @@
 	
 	var _reactRedux = __webpack_require__(200);
 	
-	var _api = __webpack_require__(173);
-	
-	var _api2 = _interopRequireDefault(_api);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25414,112 +25452,34 @@
 	var PetProfile = function (_Component) {
 		_inherits(PetProfile, _Component);
 	
-		function PetProfile(props, context) {
+		function PetProfile() {
 			_classCallCheck(this, PetProfile);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).call(this, props, context));
-	
-			_this.state = {
-				currentUser: _this.props.currentUser
-			};
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).apply(this, arguments));
 		}
 	
-		// initialState(){
-		// 	return{
-		// 		currentUser: this.props.currentUser
-		// 	}
-		// }
-	
 		_createClass(PetProfile, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-	
-				var currentUser = this.props.currentUser;
-				console.log('PET PROFILE WILL MOUNT: CURRENT USER PROPS =' + JSON.stringify(currentUser) + ', CURRENT USER STATE = ' + JSON.stringify(this.state.currentUser));
-				// this.setState({
-				// 	currentUser: 
-				// })
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				console.log('PET PROFILE DID MOUNT: SLUG = ' + JSON.stringify(this.props.slug) + ', CURRENT USER PROPS = ' + JSON.stringify(this.props.currentUser) + 'CURRENT USER STATE = ' + JSON.stringify(this.state.currentUser));
-	
-				//TO DO: replace hardcoded li with iterated array li; api req/store dispatch to currentPet	
-	
-				// var endpoint = '/api/pet?slug='+this.props.slug
-				// api.handleGet(endpoint, null, function(err, response){
-				// 	if (err){
-				// 		alert(err.message)
-				// 		return
-				// 	}
-				// 	var petResults = response.results
-				// 	// for (var i=0; i<petResults.length; i++){
-				// 	// 	if (petResults.ownerId == this.props.currentUser.id){
-				// 	// }
-				// 	// }
-	
-				// 	console.log('PET RESULTS: '+JSON.stringify(petResults)+', CURRENT OWNER ID: '+JSON.stringify(this.state.currentUser))
-				// })
-			}
-		}, {
 			key: 'render',
 			value: function render() {
-				var petSlug = this.props.slug;
-				var petProfile = this.props.pets[petSlug] || {};
-				console.log('PET PROFILE RENDER: CURRENT USER PROPS: ' + JSON.stringify(this.props.currentUser));
+				var profile = this.props.currentPet;
+				var profileTest = this.props.pets[this.props.slug];
+				console.log('PET PROFILE = ' + JSON.stringify(profileTest));
+	
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(
-						'div',
+						'ul',
 						null,
-						_react2.default.createElement(
-							'ul',
-							null,
-							_react2.default.createElement(
+						profileTest && Object.keys(profileTest).map(function (key) {
+							return _react2.default.createElement(
 								'li',
-								null,
-								'Name: ',
-								petProfile.name
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Breed: ',
-								petProfile.breed
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Sex: ',
-								petProfile.sex
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Birthday: ',
-								petProfile.birthday
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Allergies: ',
-								petProfile.allergies
-							),
-							_react2.default.createElement(
-								'li',
-								null,
-								'Medication: ',
-								petProfile.medications
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement('ul', null)
+								{ key: key },
+								key,
+								': ',
+								profileTest[key]
+							);
+						}.bind(this))
 					)
 				);
 			}
@@ -25531,8 +25491,8 @@
 	var stateToProps = function stateToProps(state) {
 		console.log('STATE_TO_PROPS_PET_PROFILE: ' + JSON.stringify(state));
 		return {
-			pets: state.petReducer.pets,
-			currentUser: state.accountReducer.currentUser
+			currentPet: state.petReducer.currentPet,
+			pets: state.petReducer.pets
 		};
 	};
 	
@@ -25804,7 +25764,6 @@
 						return;
 					}
 	
-					// console.log(JSON.stringify(response.currentUser))
 					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.currentUser));
 					window.location.href = '/account';
 				});

@@ -3,9 +3,6 @@ import api from '../utils/api'
 
 class PetRow extends Component {
 
-	componentDidMount(){
-	}
-
 	render(){
 		return(
 			<div>

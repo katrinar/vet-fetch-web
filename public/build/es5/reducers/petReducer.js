@@ -6,8 +6,8 @@ var constants = _interopRequire(require("../constants/constants"));
 
 var initialState = {
 	pets: {},
-
-	petsArray: []
+	petsArray: [],
+	currentPet: {}
 };
 
 module.exports = function (_x, action) {
@@ -16,7 +16,7 @@ module.exports = function (_x, action) {
 
 	switch (action.type) {
 		case constants.RECEIVED_PETS:
-			console.log("RECEIVED_PETS: " + JSON.stringify(action.pets));
+			console.log("RECEIVED_PETS: ");
 			var newState = Object.assign({}, state);
 			var array = Object.assign([], state);
 			for (var i = 0; i < action.pets.length; i++) {
@@ -28,7 +28,7 @@ module.exports = function (_x, action) {
 			return newState;
 
 		case constants.REGISTER_PET:
-			console.log("RECEIVED_REGISTER_PET: " + JSON.stringify(action.pet));
+			console.log("RECEIVED_REGISTER_PET: ");
 			var newState = Object.assign({}, state);
 			var array = Object.assign([], state.petsArray);
 			array.push(action.pet);
@@ -37,7 +37,7 @@ module.exports = function (_x, action) {
 			return newState;
 
 		case constants.RECEIVED_PET_PROFILES:
-			console.log("RECEIVED_PET_PROFILES: " + JSON.stringify(action.petProfiles));
+			console.log("RECEIVED_PET_PROFILES: ");
 			var newState = Object.assign({}, state);
 			var petMap = Object.assign({}, newState.pets);
 
@@ -46,6 +46,13 @@ module.exports = function (_x, action) {
 				petMap[petProfile.slug] = petProfile;
 			}
 			newState.pets = petMap;
+
+			return newState;
+
+		case constants.RECEIVED_CURRENT_PET_PROFILE:
+			console.log("RECEIVED_CURRENT_PET_PROFILE: " + JSON.stringify(action.currentPet));
+			var newState = Object.assign({}, state);
+			newState.currentPet = action.currentPet;
 
 			return newState;
 

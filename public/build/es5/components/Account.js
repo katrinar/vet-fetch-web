@@ -32,14 +32,6 @@ var Account = (function (Component) {
 	_inherits(Account, Component);
 
 	_prototypeProperties(Account, null, {
-		componentDidMount: {
-			value: function componentDidMount() {
-				console.log("ACCOUNT COMPONENT DID MOUNT:");
-
-			},
-			writable: true,
-			configurable: true
-		},
 		render: {
 			value: function render() {
 				return React.createElement(

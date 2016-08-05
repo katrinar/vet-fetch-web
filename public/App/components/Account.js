@@ -11,12 +11,6 @@ class Account extends Component {
 		super(props, context)
 	}
 
-	componentDidMount(){
-		console.log('ACCOUNT COMPONENT DID MOUNT:')
-
-	
-	}
-
 	render(){
 		
 		return(
