@@ -66,8 +66,9 @@ var Login = (function (Component) {
 						alert(err.message);
 						return;
 					}
+					console.log(JSON.stringify(response.result));
 
-					store.dispatch(actions.receivedCurrentUser(response.currentUser));
+					// store.dispatch(actions.receivedCurrentUser(response.currentUser))
 					window.location.href = "/account";
 				});
 			},

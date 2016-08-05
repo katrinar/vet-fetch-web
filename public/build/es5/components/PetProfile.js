@@ -18,6 +18,8 @@ var store = _interopRequire(require("../stores/store"));
 var actions = _interopRequire(require("../actions/actions"));
 
 var connect = require("react-redux").connect;
+var navigation = _interopRequire(require("../utils/navigation"));
+
 var PetProfile = (function (Component) {
 	function PetProfile() {
 		_classCallCheck(this, PetProfile);
@@ -51,6 +53,11 @@ var PetProfile = (function (Component) {
 								profileTest[key]
 							);
 						}).bind(this))
+					),
+					React.createElement(
+						"button",
+						{ onClick: navigation.petsPage },
+						"Back to Pets"
 					)
 				);
 			},

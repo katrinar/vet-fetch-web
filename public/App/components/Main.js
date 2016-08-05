@@ -19,8 +19,7 @@ class Main extends Component {
 	}
 
 	componentWillMount(){
-		var slug = this.props.slug
-		console.log('MAIN COMPONENT WILL MOUNT: This.props.page = '+this.props.page+', This.props.slug = '+slug)
+		console.log('MAIN COMPONENT WILL MOUNT: This.props.page = '+this.props.page+', This.props.slug = '+this.props.slug)
 	}
 
 	componentDidMount() {
@@ -33,7 +32,7 @@ class Main extends Component {
 				alert(err.message)
 				return
 			}
-	
+
 			store.dispatch(actions.receivedCurrentUser(response.user))
 			_this.fetchPets()
 			return

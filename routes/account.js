@@ -8,8 +8,8 @@ router.get('/:action', function(req, res, next){
 
 	if (action == 'logout'){
 
-		// var userId = req.session.user
-		profileController.get({id: req.session.user}, true, function(err, result){
+		var userId = req.session.user
+		profileController.get({id: userId}, null, function(err, result){
 
 			if (err){
 				res.json({
@@ -23,8 +23,7 @@ router.get('/:action', function(req, res, next){
 			req.session.reset()
 			res.json({
 				confirmation: 'Success',
-				message: 'Logged out. Goodbye!',
-				user: result
+				message: 'Logged out. Goodbye!'
 			})
 			return
 		})
@@ -51,8 +50,8 @@ router.get('/:action', function(req, res, next){
 
 		}
 
-		// var userId = req.session.user
-		profileController.get({id: req.session.user}, true, function(err, result){
+		var userId = req.session.user
+		profileController.get({id: userId}, null, function(err, result){
 
 			if (err){
 				res.json({
@@ -107,8 +106,9 @@ router.post('/:action', function(req, res, next){
 				return
 			}
 
+			// install cookie to track current user
 			var profileSummary = profile.summary()
-			req.session.user = profileSummary.id // install cookie to track current user
+			req.session.user = profileSummary.id
 
 			res.json({
 				confirmation: 'Success',

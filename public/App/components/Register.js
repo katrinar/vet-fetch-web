@@ -38,8 +38,8 @@ class Register extends Component {
 				alert(err.message)
 				return
 			}
-			// console.log(JSON.stringify(response.result))
-			store.dispatch(actions.receivedCurrentUser(response.result))
+			console.log(JSON.stringify(response.result))
+			// store.dispatch(actions.receivedCurrentUser(response.result))
 			window.location.href = '/account'
 		})
 	}

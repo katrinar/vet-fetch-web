@@ -45,8 +45,7 @@ var Main = (function (Component) {
 	_prototypeProperties(Main, null, {
 		componentWillMount: {
 			value: function componentWillMount() {
-				var slug = this.props.slug;
-				console.log("MAIN COMPONENT WILL MOUNT: This.props.page = " + this.props.page + ", This.props.slug = " + slug);
+				console.log("MAIN COMPONENT WILL MOUNT: This.props.page = " + this.props.page + ", This.props.slug = " + this.props.slug);
 			},
 			writable: true,
 			configurable: true

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
+import navigation from '../utils/navigation'
 
 class PetProfile extends Component {
 
@@ -17,6 +18,7 @@ class PetProfile extends Component {
             return <li key={key}>{key}: {profileTest[key]}</li>;
         }.bind(this))}
 				</ul>
+				<button onClick={navigation.petsPage}>Back to Pets</button>
 			</div>
 		)
 	}

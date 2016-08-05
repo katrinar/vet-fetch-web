@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
+import navigation from '../utils/navigation'
 import RegisterPet from '../components/RegisterPet'
 import PetList from '../components/PetList'
 import PetProfile from '../components/PetProfile' 
@@ -23,6 +24,7 @@ class Pets extends Component {
 			<div>
 				{<RegisterPet />}<br />
 				{< PetList /> }<br />
+				<button onClick={navigation.accountPage}>Back to Home</button>
 
 			</div>
 		)

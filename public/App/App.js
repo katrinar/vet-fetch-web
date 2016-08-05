@@ -34,29 +34,28 @@ class App extends Component {
 				slug = parts[1]
 		}
 
-		var address = window.location.href // http://localhost:3000/courses?type=online
-		var params = null
-		if (address.indexOf('?') != -1){
-			params = {}
-			var parts = address.split('?')
-			var paramsString = parts[1] // key=value&key=value
-			var keyValuePairs = paramsString.split('&')
-			for (var i=0; i<keyValuePairs.length; i++){
-				var keyValue = keyValuePairs[i]
-				if (keyValue.indexOf('=') == -1)
-					continue
+		// var address = window.location.href // http://localhost:3000/courses?type=online
+		// var params = null
+		// if (address.indexOf('?') != -1){
+		// 	params = {}
+		// 	var parts = address.split('?')
+		// 	var paramsString = parts[1] // key=value&key=value
+		// 	var keyValuePairs = paramsString.split('&')
+		// 	for (var i=0; i<keyValuePairs.length; i++){
+		// 		var keyValue = keyValuePairs[i]
+		// 		if (keyValue.indexOf('=') == -1)
+		// 			continue
 
-				var pieces = keyValue.split('=');
-				var key = pieces[0]
-				var value = pieces[1]
-				params[key] = value
-			}
-		}
+		// 		var pieces = keyValue.split('=');
+		// 		var key = pieces[0]
+		// 		var value = pieces[1]
+		// 		params[key] = value
+		// 	}
+		// }
 
 		this.setState({
 			page: page,
-			slug: slug,
-			params: params
+			slug: slug
 		})
 	}
 

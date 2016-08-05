@@ -14,9 +14,18 @@ module.exports = {
 
 				if (profile == null){
 					callback(err, null)
+					return
 				}
 
-				callback(null, profile.summary())
+				if(callback != null){
+					if(isRaw == true){
+						callback(null, profile)
+						return
+					}
+
+					callback(null, profile.summary())
+				}
+				
 			})
 			return
 		}

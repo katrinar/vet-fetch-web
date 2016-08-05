@@ -17,6 +17,8 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
+var navigation = _interopRequire(require("../utils/navigation"));
+
 var RegisterPet = _interopRequire(require("../components/RegisterPet"));
 
 var PetList = _interopRequire(require("../components/PetList"));
@@ -53,7 +55,12 @@ var Pets = (function (Component) {
 					React.createElement(RegisterPet, null),
 					React.createElement("br", null),
 					React.createElement(PetList, null),
-					React.createElement("br", null)
+					React.createElement("br", null),
+					React.createElement(
+						"button",
+						{ onClick: navigation.accountPage },
+						"Back to Home"
+					)
 				);
 			},
 			writable: true,

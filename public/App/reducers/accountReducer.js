@@ -6,7 +6,6 @@ var initialState = {
 		firstName: '',
 		lastName: '',
 		email: '',
-		pets: [],
 		password: ''
 	},
 }

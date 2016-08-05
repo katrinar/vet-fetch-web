@@ -22,16 +22,36 @@ var store = _interopRequire(require("../stores/store"));
 var actions = _interopRequire(require("../actions/actions"));
 
 var connect = require("react-redux").connect;
+var api = _interopRequire(require("../utils/api"));
+
 var Account = (function (Component) {
 	function Account(props, context) {
 		_classCallCheck(this, Account);
 
 		_get(Object.getPrototypeOf(Account.prototype), "constructor", this).call(this, props, context);
+		this.logout = this.logout.bind(this);
 	}
 
 	_inherits(Account, Component);
 
 	_prototypeProperties(Account, null, {
+		logout: {
+			value: function logout(event) {
+				event.preventDefault();
+
+				api.handleGet("account/logout", null, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+
+					console.log("LOGOUT: currentUser = " + JSON.stringify(response));
+					window.location.href = "/";
+				});
+			},
+			writable: true,
+			configurable: true
+		},
 		render: {
 			value: function render() {
 				return React.createElement(
@@ -56,6 +76,11 @@ var Account = (function (Component) {
 						"h3",
 						null,
 						"Appointments"
+					),
+					React.createElement(
+						"button",
+						{ onClick: this.logout },
+						"Logout"
 					)
 				);
 			},

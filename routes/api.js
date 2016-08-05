@@ -20,7 +20,7 @@ router.get('/:resource', function(req, res, next) {
 		})
 	}
 
-	controller.get(req.query, true, function(err, results){
+	controller.get(req.query, null, function(err, results){
 		if(err){
 			res.json({
 				confirmation: "Fail",
@@ -92,14 +92,14 @@ router.post('/:resource', function(req, res, next){
 			return
 		}
 
-		if (resource == 'profile'){ //install cookie
+		if (resource == 'profile') //install cookie
 			req.session.user = result.id
-		}
 
-		res.json({
+			res.json({
 			confirmation: 'Success',
 			result: result
-		})
+			})
+
 		return
 	})
 })
