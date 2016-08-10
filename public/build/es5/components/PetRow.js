@@ -13,8 +13,6 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var api = _interopRequire(require("../utils/api"));
-
 var PetRow = (function (Component) {
 	function PetRow() {
 		_classCallCheck(this, PetRow);

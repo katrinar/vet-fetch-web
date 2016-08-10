@@ -40,13 +40,6 @@ var Pets = (function (Component) {
 	_inherits(Pets, Component);
 
 	_prototypeProperties(Pets, null, {
-		componentDidMount: {
-			value: function componentDidMount() {
-				console.log("PETS COMPONENT DID MOUNT:");
-			},
-			writable: true,
-			configurable: true
-		},
 		render: {
 			value: function render() {
 				return React.createElement(
@@ -54,7 +47,7 @@ var Pets = (function (Component) {
 					null,
 					React.createElement(RegisterPet, null),
 					React.createElement("br", null),
-					React.createElement(PetList, null),
+					React.createElement(PetList, { petsArray: this.props.petsArray }),
 					React.createElement("br", null),
 					React.createElement(
 						"button",
@@ -74,7 +67,6 @@ var Pets = (function (Component) {
 var stateToProps = function (state) {
 	console.log("STATE_TO_PROPS_PETS: " + JSON.stringify(state));
 	return {
-		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray
 	};
 };

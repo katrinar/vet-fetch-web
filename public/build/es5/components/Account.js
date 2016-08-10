@@ -17,11 +17,6 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var Pets = _interopRequire(require("../components/Pets"));
 
-var store = _interopRequire(require("../stores/store"));
-
-var actions = _interopRequire(require("../actions/actions"));
-
-var connect = require("react-redux").connect;
 var api = _interopRequire(require("../utils/api"));
 
 var Account = (function (Component) {
@@ -44,8 +39,6 @@ var Account = (function (Component) {
 						alert(err.message);
 						return;
 					}
-
-					console.log("LOGOUT: currentUser = " + JSON.stringify(response));
 					window.location.href = "/";
 				});
 			},
@@ -92,11 +85,4 @@ var Account = (function (Component) {
 	return Account;
 })(Component);
 
-var stateToProps = function (state) {
-	return {
-		currentUser: state.accountReducer.currentUser,
-		petsArray: state.petReducer.petsArray
-	};
-};
-
-module.exports = connect(stateToProps)(Account);
+module.exports = Account;

@@ -14,16 +14,12 @@ class Pets extends Component {
 		super(props, context)
 	}
 
-	componentDidMount() {
-		console.log('PETS COMPONENT DID MOUNT:')
-	}
-
 	render(){
 
 		return(
 			<div>
 				{<RegisterPet />}<br />
-				{< PetList /> }<br />
+				{< PetList petsArray={this.props.petsArray}/> }<br />
 				<button onClick={navigation.accountPage}>Back to Home</button>
 
 			</div>
@@ -31,10 +27,9 @@ class Pets extends Component {
 	}
 }
 
-const stateToProps = function(state){
+const stateToProps = function(state) {
 	console.log('STATE_TO_PROPS_PETS: '+JSON.stringify(state))
-	return{
-		currentUser: state.accountReducer.currentUser,
+	return {
 		petsArray: state.petReducer.petsArray
 	}
 }

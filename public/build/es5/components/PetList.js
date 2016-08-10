@@ -15,11 +15,6 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var PetRow = _interopRequire(require("../components/PetRow"));
 
-var store = _interopRequire(require("../stores/store"));
-
-var actions = _interopRequire(require("../actions/actions"));
-
-var connect = require("react-redux").connect;
 var PetList = (function (Component) {
 	function PetList() {
 		_classCallCheck(this, PetList);
@@ -35,7 +30,7 @@ var PetList = (function (Component) {
 		render: {
 			value: function render() {
 				var petList = this.props.petsArray.map(function (pet, i) {
-					return React.createElement(PetRow, { key: pet._id, pet: pet });
+					return React.createElement(PetRow, { key: i, pet: pet });
 				});
 
 				return React.createElement(
@@ -52,11 +47,4 @@ var PetList = (function (Component) {
 	return PetList;
 })(Component);
 
-var stateToProps = function (state) {
-	return {
-		petsArray: state.petReducer.petsArray,
-		currentUser: state.accountReducer.currentUser
-	};
-};
-
-module.exports = connect(stateToProps)(PetList);
+module.exports = PetList;

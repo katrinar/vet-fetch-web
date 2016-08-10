@@ -17,6 +17,8 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
+var navigation = _interopRequire(require("../utils/navigation"));
+
 var Account = _interopRequire(require("../components/Account"));
 
 var Landing = _interopRequire(require("../components/Landing"));
@@ -36,8 +38,6 @@ var Main = (function (Component) {
 
 		_get(Object.getPrototypeOf(Main.prototype), "constructor", this).call(this, props, context);
 		this.fetchPets = this.fetchPets.bind(this);
-		this.fetchPetProfiles = this.fetchPetProfiles.bind(this);
-		this.fetchCurrentPet = this.fetchCurrentPet.bind(this);
 	}
 
 	_inherits(Main, Component);
@@ -45,7 +45,8 @@ var Main = (function (Component) {
 	_prototypeProperties(Main, null, {
 		componentWillMount: {
 			value: function componentWillMount() {
-				console.log("MAIN COMPONENT WILL MOUNT: This.props.page = " + this.props.page + ", This.props.slug = " + this.props.slug);
+				var storeState = store.getState();
+				console.log("MAIN COMPONENT WILL MOUNT: " + JSON.stringify(storeState));
 			},
 			writable: true,
 			configurable: true
@@ -54,7 +55,9 @@ var Main = (function (Component) {
 			value: function componentDidMount() {
 				var _this = this;
 
-				console.log("MAIN COMPONENT DID MOUNT: This.props.page = " + this.props.page + ", This.props.slug = " + this.props.slug);
+
+				var storeState = store.getState();
+				console.log("MAIN: " + JSON.stringify(storeState));
 
 				api.handleGet("/account/currentuser", null, function (err, response) {
 					if (err) {
@@ -63,8 +66,8 @@ var Main = (function (Component) {
 					}
 
 					store.dispatch(actions.receivedCurrentUser(response.user));
+
 					_this.fetchPets();
-					return;
 				});
 			},
 			writable: true,
@@ -74,6 +77,7 @@ var Main = (function (Component) {
 			value: function fetchPets() {
 				var _this = this;
 
+
 				var endpoint = "/api/pet?ownerId=" + this.props.currentUser.id;
 				api.handleGet(endpoint, null, function (err, response) {
 					if (err) {
@@ -81,37 +85,10 @@ var Main = (function (Component) {
 						return;
 					}
 
-					var petProfiles = response.results;
-					var slug = _this.props.slug;
-					var currentPet = petProfiles.slug;
-
-					for (var i = 0; i < petProfiles.length; i++) {
-						var petProfile = petProfiles[i];
-
-						if (petProfile.slug == slug) {
-							var currentPet = petProfile;
-						}
-					}
-
 					store.dispatch(actions.receivedPets(response.results));
-					_this.fetchPetProfiles(petProfiles);
-					_this.fetchCurrentPet(currentPet);
+
 					return;
 				});
-			},
-			writable: true,
-			configurable: true
-		},
-		fetchPetProfiles: {
-			value: function fetchPetProfiles(petProfiles) {
-				store.dispatch(actions.receivedPetProfiles(petProfiles));
-			},
-			writable: true,
-			configurable: true
-		},
-		fetchCurrentPet: {
-			value: function fetchCurrentPet(currentPet) {
-				store.dispatch(actions.receivedCurrentPetProfile(currentPet));
 			},
 			writable: true,
 			configurable: true
@@ -120,15 +97,32 @@ var Main = (function (Component) {
 			value: function render() {
 				var page = null;
 
+				// switch(this.props.page){
+				// 	case 'home':
+				// 		return page = <Landing />
+				// 	case 'account':
+				// 		return page = <Account currentUser={this.props.currentUser}/>
+				// 	case 'pets':
+				// 		return page = <Pets />
+				// 	case 'pet':
+				// 		return page = <PetProfile slug={this.props.slug} pets={this.props.pets} />
+				// 	default:
+				// 		return page = null
+				// }
+
 				switch (this.props.page) {
 					case "home":
+						if (this.props.currentUser.id != null) {
+							return page = React.createElement(Account, { currentUser: this.props.currentUser });
+						}
+
 						return page = React.createElement(Landing, null);
 					case "account":
-						return page = React.createElement(Account, null);
+						return page = React.createElement(Account, { currentUser: this.props.currentUser });
 					case "pets":
 						return page = React.createElement(Pets, null);
 					case "pet":
-						return page = React.createElement(PetProfile, { slug: this.props.slug });
+						return page = React.createElement(PetProfile, { slug: this.props.slug, pets: this.props.pets });
 					default:
 						return page = null;
 				}
@@ -152,9 +146,7 @@ var stateToProps = function (state) {
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
-		pets: state.petReducer.pets,
-		currentPet: state.petReducer.currentPet
-	};
+		pets: state.petReducer.pets };
 };
 
 module.exports = connect(stateToProps)(Main);

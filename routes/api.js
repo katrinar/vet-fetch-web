@@ -20,6 +20,23 @@ router.get('/:resource', function(req, res, next) {
 		})
 	}
 
+	// if (resource == 'pet'){
+	// 	controller.get(req.query, true, function(err, results){
+	// 		if(err){
+	// 			res.json({
+	// 				confirmation: "Fail",
+	// 				message: err
+	// 			})
+	// 			return
+	// 		}
+	// 		res.json({
+	// 			confirmation: 'Success',
+	// 			results: results
+	// 		})
+	// 		return
+	// 	})
+	// }
+
 	controller.get(req.query, null, function(err, results){
 		if(err){
 			res.json({
@@ -58,10 +75,6 @@ router.get('/:resource/:id', function(req, res, next){
 			})
 			return
 		}
-
-		// var data = {confirmation: 'Success'}
-		// data[resource] = result
-		// res.json(data) 
 
 		res.json({
 			confirmation: "Success",

@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import Pets from '../components/Pets'
-import store from '../stores/store'
-import actions from '../actions/actions'
-import { connect } from 'react-redux'
 import api from '../utils/api'
-
 
 class Account extends Component {
 
@@ -21,8 +17,6 @@ class Account extends Component {
 				alert(err.message)
 				return
 			}
-
-			console.log('LOGOUT: currentUser = '+JSON.stringify(response))
 			window.location.href = '/'
 		})
 
@@ -43,11 +37,5 @@ class Account extends Component {
 	}
 }
 
-const stateToProps = function(state){
-	return {
-		currentUser: state.accountReducer.currentUser,
-		petsArray: state.petReducer.petsArray
-	}
-}
 
-export default connect (stateToProps)(Account)
+export default Account

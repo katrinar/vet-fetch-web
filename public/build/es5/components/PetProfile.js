@@ -34,23 +34,20 @@ var PetProfile = (function (Component) {
 	_prototypeProperties(PetProfile, null, {
 		render: {
 			value: function render() {
-				var profile = this.props.currentPet;
-				var profileTest = this.props.pets[this.props.slug];
-				console.log("PET PROFILE = " + JSON.stringify(profileTest));
-
+				var profile = this.props.pets[this.props.slug];
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
 						"ul",
 						null,
-						profileTest && Object.keys(profileTest).map((function (key) {
+						profile && Object.keys(profile).map((function (key) {
 							return React.createElement(
 								"li",
 								{ key: key },
 								key,
 								": ",
-								profileTest[key]
+								profile[key]
 							);
 						}).bind(this))
 					),
@@ -69,12 +66,11 @@ var PetProfile = (function (Component) {
 	return PetProfile;
 })(Component);
 
-var stateToProps = function (state) {
-	console.log("STATE_TO_PROPS_PET_PROFILE: " + JSON.stringify(state));
-	return {
-		currentPet: state.petReducer.currentPet,
-		pets: state.petReducer.pets
-	};
-};
+// const stateToProps = function(state){
+// 	console.log('STATE_TO_PROPS_PET_PROFILE: '+JSON.stringify(state))
+// 	return {
+// 		pets: state.petReducer.pets
+// 	}
+// }
 
-module.exports = connect(stateToProps)(PetProfile);
+module.exports = PetProfile;

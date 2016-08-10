@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import PetRow from '../components/PetRow'
-import store from '../stores/store'
-import actions from '../actions/actions'
-import { connect } from 'react-redux'
 
 class PetList extends Component {
 	render(){
 		var petList = this.props.petsArray.map(function(pet, i){
-			return <PetRow key={pet._id} pet={pet} />
+			return <PetRow key={i} pet={pet} />
 		})
 
 		return(
@@ -18,11 +15,4 @@ class PetList extends Component {
 	}
 }
 
-const stateToProps  = function(state){
-	return{
-		petsArray: state.petReducer.petsArray,
-		currentUser: state.accountReducer.currentUser
-	}
-}
-
-export default connect (stateToProps)(PetList)
+export default PetList
