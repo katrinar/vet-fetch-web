@@ -4,9 +4,6 @@ import store from '../stores/store'
 import actions from '../actions/actions'
 
 class Register extends Component {
-	componentDidMount() {
-		console.log('LOGIN COMPONENT: ')
-	}
 
 	constructor(props, context){
 		super(props, context)

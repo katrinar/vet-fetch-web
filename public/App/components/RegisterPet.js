@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
 import store from '../stores/store'
-import { connect } from 'react-redux'
 import actions from '../actions/actions'
 
 class RegisterPet extends Component {
@@ -58,11 +57,4 @@ class RegisterPet extends Component {
 	}
 }
 
-const stateToProps = function(state){
-	return {
-		currentUser: state.accountReducer.currentUser,
-		petsArray: state.petReducer.petsArray
-	}
-}
-
-export default connect (stateToProps)(RegisterPet)
+export default RegisterPet

@@ -19,7 +19,6 @@ var api = _interopRequire(require("../utils/api"));
 
 var store = _interopRequire(require("../stores/store"));
 
-var connect = require("react-redux").connect;
 var actions = _interopRequire(require("../actions/actions"));
 
 var RegisterPet = (function (Component) {
@@ -102,11 +101,4 @@ var RegisterPet = (function (Component) {
 	return RegisterPet;
 })(Component);
 
-var stateToProps = function (state) {
-	return {
-		currentUser: state.accountReducer.currentUser,
-		petsArray: state.petReducer.petsArray
-	};
-};
-
-module.exports = connect(stateToProps)(RegisterPet);
+module.exports = RegisterPet;

@@ -13,6 +13,8 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
+var text = _interopRequire(require("../utils/text"));
+
 var PetRow = (function (Component) {
 	function PetRow() {
 		_classCallCheck(this, PetRow);
@@ -34,11 +36,11 @@ var PetRow = (function (Component) {
 						"a",
 						{ href: "/pet/" + this.props.pet.slug },
 						" ",
-						this.props.pet.name,
+						text.capitalize(this.props.pet.name),
 						","
 					),
 					" ",
-					this.props.pet.breed
+					text.capitalize(this.props.pet.breed)
 				);
 			},
 			writable: true,

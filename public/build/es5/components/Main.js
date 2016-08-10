@@ -43,21 +43,9 @@ var Main = (function (Component) {
 	_inherits(Main, Component);
 
 	_prototypeProperties(Main, null, {
-		componentWillMount: {
-			value: function componentWillMount() {
-				var storeState = store.getState();
-				console.log("MAIN COMPONENT WILL MOUNT: " + JSON.stringify(storeState));
-			},
-			writable: true,
-			configurable: true
-		},
 		componentDidMount: {
 			value: function componentDidMount() {
 				var _this = this;
-
-
-				var storeState = store.getState();
-				console.log("MAIN: " + JSON.stringify(storeState));
 
 				api.handleGet("/account/currentuser", null, function (err, response) {
 					if (err) {
@@ -65,9 +53,14 @@ var Main = (function (Component) {
 						return;
 					}
 
-					store.dispatch(actions.receivedCurrentUser(response.user));
+					if (response.confirmation == "Fail") {
+						return;
+					}
 
-					_this.fetchPets();
+					if (response.confirmation == "Success") {
+						store.dispatch(actions.receivedCurrentUser(response.user));
+						_this.fetchPets();
+					}
 				});
 			},
 			writable: true,
@@ -75,20 +68,24 @@ var Main = (function (Component) {
 		},
 		fetchPets: {
 			value: function fetchPets() {
-				var _this = this;
+				var user = this.props.currentUser || {};
+				//  var storeState = store.getState()
+				// var user = storeState.accountReducer.currentUser || {}
 
+				if (user.id != null) {
+					var endpoint = "/api/pet?ownerId=" + user.id;
+					api.handleGet(endpoint, null, function (err, response) {
+						if (err) {
+							alert(err.message);
+							return;
+						}
+						console.log("fetch pets: " + JSON.stringify(response.results));
 
-				var endpoint = "/api/pet?ownerId=" + this.props.currentUser.id;
-				api.handleGet(endpoint, null, function (err, response) {
-					if (err) {
-						alert(err.message);
+						store.dispatch(actions.receivedPets(response.results));
+
 						return;
-					}
-
-					store.dispatch(actions.receivedPets(response.results));
-
-					return;
-				});
+					});
+				}
 			},
 			writable: true,
 			configurable: true
@@ -96,23 +93,11 @@ var Main = (function (Component) {
 		render: {
 			value: function render() {
 				var page = null;
-
-				// switch(this.props.page){
-				// 	case 'home':
-				// 		return page = <Landing />
-				// 	case 'account':
-				// 		return page = <Account currentUser={this.props.currentUser}/>
-				// 	case 'pets':
-				// 		return page = <Pets />
-				// 	case 'pet':
-				// 		return page = <PetProfile slug={this.props.slug} pets={this.props.pets} />
-				// 	default:
-				// 		return page = null
-				// }
+				var currentUser = this.props.currentUser || {};
 
 				switch (this.props.page) {
 					case "home":
-						if (this.props.currentUser.id != null) {
+						if (currentUser.id != null) {
 							return page = React.createElement(Account, { currentUser: this.props.currentUser });
 						}
 
@@ -120,9 +105,9 @@ var Main = (function (Component) {
 					case "account":
 						return page = React.createElement(Account, { currentUser: this.props.currentUser });
 					case "pets":
-						return page = React.createElement(Pets, null);
+						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case "pet":
-						return page = React.createElement(PetProfile, { slug: this.props.slug, pets: this.props.pets });
+						return page = React.createElement(PetProfile, { slug: this.props.slug });
 					default:
 						return page = null;
 				}

@@ -20,6 +20,8 @@ var actions = _interopRequire(require("../actions/actions"));
 var connect = require("react-redux").connect;
 var navigation = _interopRequire(require("../utils/navigation"));
 
+var text = _interopRequire(require("../utils/text"));
+
 var PetProfile = (function (Component) {
 	function PetProfile() {
 		_classCallCheck(this, PetProfile);
@@ -33,28 +35,82 @@ var PetProfile = (function (Component) {
 
 	_prototypeProperties(PetProfile, null, {
 		render: {
+
+			// render(){
+			// 	var profile = this.props.pets[this.props.slug]	
+			// 	return(
+			// 		<div>
+			// 			<ul>
+			// 			{profile && Object.keys(profile).map(function(key) {
+			//            return <li key={key}>{text.capitalize(key)}: {profile[key]}</li>;
+			//        }.bind(this))}
+			// 			</ul>
+			// 			<button onClick={navigation.petsPage}>Back to Pets</button>
+			// 		</div>
+			// 	)
+			// }
+
 			value: function render() {
-				var profile = this.props.pets[this.props.slug];
+				var petSlug = this.props.slug;
+				var petProfile = this.props.pets[petSlug] || {};
+
+				console.log(" var petProfile = " + JSON.stringify(petProfile));
+
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
 						"ul",
 						null,
-						profile && Object.keys(profile).map((function (key) {
-							return React.createElement(
-								"li",
-								{ key: key },
-								key,
-								": ",
-								profile[key]
-							);
-						}).bind(this))
-					),
-					React.createElement(
-						"button",
-						{ onClick: navigation.petsPage },
-						"Back to Pets"
+						React.createElement(
+							"li",
+							null,
+							"Name: ",
+							petProfile.name,
+							" "
+						),
+						React.createElement(
+							"li",
+							null,
+							"DoB: ",
+							petProfile.birthday,
+							" "
+						),
+						React.createElement(
+							"li",
+							null,
+							"Sex: ",
+							petProfile.sex,
+							" "
+						),
+						React.createElement(
+							"li",
+							null,
+							"Species: ",
+							petProfile.species,
+							" "
+						),
+						React.createElement(
+							"li",
+							null,
+							"Breed: ",
+							petProfile.breed,
+							" "
+						),
+						React.createElement(
+							"li",
+							null,
+							"Allergies: ",
+							petProfile.allergies,
+							" "
+						),
+						React.createElement(
+							"li",
+							null,
+							"Medications: ",
+							petProfile.medications,
+							" "
+						)
 					)
 				);
 			},
@@ -66,11 +122,10 @@ var PetProfile = (function (Component) {
 	return PetProfile;
 })(Component);
 
-// const stateToProps = function(state){
-// 	console.log('STATE_TO_PROPS_PET_PROFILE: '+JSON.stringify(state))
-// 	return {
-// 		pets: state.petReducer.pets
-// 	}
-// }
+var stateToProps = function (state) {
+	return {
+		pets: state.petReducer.pets
+	};
+};
 
-module.exports = PetProfile;
+module.exports = connect(stateToProps)(PetProfile);

@@ -39,13 +39,6 @@ var Login = (function (Component) {
 	_inherits(Login, Component);
 
 	_prototypeProperties(Login, null, {
-		componentDidMount: {
-			value: function componentDidMount() {
-				console.log("REGISTER COMPONENT: ");
-			},
-			writable: true,
-			configurable: true
-		},
 		submitUser: {
 			value: function submitUser(event) {
 				var loginUser = Object.assign({}, this.state.loginUser);

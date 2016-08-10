@@ -15,9 +15,18 @@ module.exports = {
 
 				if (pet == null){
 					callback(err, null)
+					return
 				}
 
-				callback(null, pet)
+				if(callback != null){
+					if(isRaw == true){
+						callback(null, pet)
+						return
+					}
+					callback(null, pet.summary())
+				}
+
+				
 			})
 			return
 		}

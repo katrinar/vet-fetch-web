@@ -19,6 +19,8 @@ var Pets = _interopRequire(require("../components/Pets"));
 
 var api = _interopRequire(require("../utils/api"));
 
+var store = _interopRequire(require("../stores/store"));
+
 var Account = (function (Component) {
 	function Account(props, context) {
 		_classCallCheck(this, Account);
@@ -31,6 +33,13 @@ var Account = (function (Component) {
 
 	_prototypeProperties(Account, null, {
 		logout: {
+
+			// componentDidMount(){
+			// 	 var storeState = store.getState()
+			// 	var user = storeState.accountReducer.currentUser || {}
+			// 	console.log('ACCOUNT componentDidMount: '+JSON.stringify(user))
+			// }
+
 			value: function logout(event) {
 				event.preventDefault();
 

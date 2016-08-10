@@ -15,6 +15,10 @@ class App extends Component {
 	}
 
 	initialState(){
+
+		var storeState = store.getState()
+		var user = storeState.accountReducer.currentUser || {}
+
 		return{
 			page: null,
 			slug: null

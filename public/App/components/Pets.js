@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import api from '../utils/api'
 import navigation from '../utils/navigation'
 import RegisterPet from '../components/RegisterPet'
 import PetList from '../components/PetList'
 import PetProfile from '../components/PetProfile' 
-import store from '../stores/store'
-import actions from '../actions/actions'
-import { connect } from 'react-redux'
 
 class Pets extends Component {
 
@@ -18,7 +14,7 @@ class Pets extends Component {
 
 		return(
 			<div>
-				{<RegisterPet />}<br />
+				{<RegisterPet currentUser={this.props.currentUser}/>}<br />
 				{< PetList petsArray={this.props.petsArray}/> }<br />
 				<button onClick={navigation.accountPage}>Back to Home</button>
 
@@ -27,11 +23,4 @@ class Pets extends Component {
 	}
 }
 
-const stateToProps = function(state) {
-	console.log('STATE_TO_PROPS_PETS: '+JSON.stringify(state))
-	return {
-		petsArray: state.petReducer.petsArray
-	}
-}
-
-export default connect (stateToProps)(Pets)
+export default Pets

@@ -17,18 +17,8 @@ class Main extends Component {
 		this.fetchPets = this.fetchPets.bind(this)
 	}
 
-	componentWillMount(){
-
-		var storeState = store.getState()
-		console.log("MAIN COMPONENT WILL MOUNT: "+JSON.stringify(storeState))
-	}
-
 	componentDidMount() {
 		var _this = this
-
-
-		var storeState = store.getState()
-		console.log("MAIN: "+JSON.stringify(storeState))
 
 		api.handleGet('/account/currentuser', null, function(err, response){
 			if (err){
@@ -36,49 +26,46 @@ class Main extends Component {
 				return
 			}
 
-			store.dispatch(actions.receivedCurrentUser(response.user))
+			if (response.confirmation == "Fail"){
+				return
+			}
 
-			_this.fetchPets()
+			if (response.confirmation == "Success"){
+				store.dispatch(actions.receivedCurrentUser(response.user))
+				_this.fetchPets()
+			}
 		})
-
 	}
 
 	fetchPets(){
-		var _this = this
 
+		 var user = this.props.currentUser || {}
+		//  var storeState = store.getState()
+		// var user = storeState.accountReducer.currentUser || {}
 
-		var endpoint = '/api/pet?ownerId='+this.props.currentUser.id
-		api.handleGet(endpoint, null, function(err, response){
+		if (user.id != null){
+			var endpoint = '/api/pet?ownerId='+user.id
+			api.handleGet(endpoint, null, function(err, response){
 			if (err){
 				alert(err.message)
 				return
 			}
+			console.log('fetch pets: '+JSON.stringify(response.results))
 
 			store.dispatch(actions.receivedPets(response.results))
 			
 			return
-		})
+			})	
+		}
 	}
 
 	render() {
 		var page = null
-
-		// switch(this.props.page){
-		// 	case 'home':
-		// 		return page = <Landing />
-		// 	case 'account':
-		// 		return page = <Account currentUser={this.props.currentUser}/>
-		// 	case 'pets':
-		// 		return page = <Pets />
-		// 	case 'pet':
-		// 		return page = <PetProfile slug={this.props.slug} pets={this.props.pets} />
-		// 	default: 
-		// 		return page = null
-		// }
+		var currentUser = this.props.currentUser || {}
 
 		switch(this.props.page){
 			case 'home':
-				if (this.props.currentUser.id != null){
+				if (currentUser.id != null){
 					return page = <Account currentUser={this.props.currentUser} /> 
 				}
 					
@@ -86,9 +73,9 @@ class Main extends Component {
 			case 'account':
 				return page = <Account currentUser={this.props.currentUser}/>
 			case 'pets':
-				return page = <Pets />
+				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray}/>
 			case 'pet':
-				return page = <PetProfile slug={this.props.slug} pets={this.props.pets} />
+				return page = <PetProfile slug={this.props.slug}  />
 			default: 
 				return page = null
 		}

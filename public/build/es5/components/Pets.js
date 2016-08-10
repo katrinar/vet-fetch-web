@@ -15,8 +15,6 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var api = _interopRequire(require("../utils/api"));
-
 var navigation = _interopRequire(require("../utils/navigation"));
 
 var RegisterPet = _interopRequire(require("../components/RegisterPet"));
@@ -25,11 +23,6 @@ var PetList = _interopRequire(require("../components/PetList"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
 
-var store = _interopRequire(require("../stores/store"));
-
-var actions = _interopRequire(require("../actions/actions"));
-
-var connect = require("react-redux").connect;
 var Pets = (function (Component) {
 	function Pets(props, context) {
 		_classCallCheck(this, Pets);
@@ -45,7 +38,7 @@ var Pets = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(RegisterPet, null),
+					React.createElement(RegisterPet, { currentUser: this.props.currentUser }),
 					React.createElement("br", null),
 					React.createElement(PetList, { petsArray: this.props.petsArray }),
 					React.createElement("br", null),
@@ -64,11 +57,4 @@ var Pets = (function (Component) {
 	return Pets;
 })(Component);
 
-var stateToProps = function (state) {
-	console.log("STATE_TO_PROPS_PETS: " + JSON.stringify(state));
-	return {
-		petsArray: state.petReducer.petsArray
-	};
-};
-
-module.exports = connect(stateToProps)(Pets);
+module.exports = Pets;

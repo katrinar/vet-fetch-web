@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Pets from '../components/Pets'
 import api from '../utils/api'
+import store from '../stores/store'
 
 class Account extends Component {
 
@@ -8,6 +9,12 @@ class Account extends Component {
 		super(props, context)
 		this.logout = this.logout.bind(this)
 	}
+
+	// componentDidMount(){
+	// 	 var storeState = store.getState()
+	// 	var user = storeState.accountReducer.currentUser || {}
+	// 	console.log('ACCOUNT componentDidMount: '+JSON.stringify(user))
+	// }
 
 	logout(event){
 		event.preventDefault()
@@ -36,6 +43,5 @@ class Account extends Component {
 		)
 	}
 }
-
 
 export default Account
