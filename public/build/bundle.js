@@ -21200,7 +21200,7 @@
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
-	var _Landing = __webpack_require__(219);
+	var _Landing = __webpack_require__(220);
 	
 	var _Landing2 = _interopRequireDefault(_Landing);
 	
@@ -21304,7 +21304,7 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { slug: this.props.slug });
+						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -24539,6 +24539,10 @@
 	
 	var _text2 = _interopRequireDefault(_text);
 	
+	var _EditPet = __webpack_require__(219);
+	
+	var _EditPet2 = _interopRequireDefault(_EditPet);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24550,35 +24554,34 @@
 	var PetProfile = function (_Component) {
 		_inherits(PetProfile, _Component);
 	
-		function PetProfile() {
+		function PetProfile(props, context) {
 			_classCallCheck(this, PetProfile);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).call(this, props, context));
+	
+			_this.sendToEdit = _this.sendToEdit.bind(_this);
+			_this.state = {
+				showEdit: false
+			};
+			return _this;
 		}
 	
 		_createClass(PetProfile, [{
+			key: 'sendToEdit',
+			value: function sendToEdit(event) {
+				console.log('sendToEdit: ');
+				this.setState({ showEdit: true });
+			}
+		}, {
 			key: 'render',
-	
-	
-			// render(){
-			// 	var profile = this.props.pets[this.props.slug]	
-			// 	return(
-			// 		<div>
-			// 			<ul>
-			// 			{profile && Object.keys(profile).map(function(key) {
-			//            return <li key={key}>{text.capitalize(key)}: {profile[key]}</li>;
-			//        }.bind(this))}
-			// 			</ul>
-			// 			<button onClick={navigation.petsPage}>Back to Pets</button>
-			// 		</div>
-			// 	)
-			// }
-	
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
+				var editPet = null;
 	
-				console.log(' var petProfile = ' + JSON.stringify(petProfile));
+				if (this.state.showEdit == true) {
+					editPet = _react2.default.createElement(_EditPet2.default, { pets: this.props.pets, slug: this.props.slug });
+				}
 	
 				return _react2.default.createElement(
 					'div',
@@ -24635,6 +24638,23 @@
 							petProfile.medications,
 							' '
 						)
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: _navigation2.default.petsPage },
+						'Back to Pets'
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.sendToEdit },
+						'Edit Pet'
+					),
+					' ',
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(
+						'div',
+						null,
+						editPet
 					)
 				);
 			}
@@ -24643,13 +24663,7 @@
 		return PetProfile;
 	}(_react.Component);
 	
-	var stateToProps = function stateToProps(state) {
-		return {
-			pets: state.petReducer.pets
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(stateToProps)(PetProfile);
+	exports.default = PetProfile;
 
 /***/ },
 /* 206 */
@@ -25537,11 +25551,154 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Register = __webpack_require__(220);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EditPet = function (_Component) {
+		_inherits(EditPet, _Component);
+	
+		function EditPet(props, context) {
+			_classCallCheck(this, EditPet);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EditPet).call(this, props, context));
+	
+			_this.submitEdit = _this.submitEdit.bind(_this);
+			_this.submitPetEdit = _this.submitPetEdit.bind(_this);
+			_this.state = {
+				editPet: {
+					name: '',
+					birthday: '',
+					sex: '',
+					species: '',
+					breed: '',
+					allergies: '',
+					medications: ''
+				}
+			};
+			return _this;
+		}
+	
+		_createClass(EditPet, [{
+			key: 'submitEdit',
+			value: function submitEdit(event) {
+				var petSlug = this.props.slug;
+	
+				var editPet = Object.assign({}, this.props.pets[petSlug]);
+				editPet[event.target.id] = event.target.value;
+				this.setState({
+					editPet: editPet
+				});
+			}
+		}, {
+			key: 'submitPetEdit',
+			value: function submitPetEdit(event) {
+				event.preventDefault();
+	
+				console.log('submitPetEdit: editPet = ' + JSON.stringify(this.state.editPet));
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				console.log('EDIT PET: this.state.editPet = ' + JSON.stringify(this.state.editPet));
+				var petSlug = this.props.slug;
+				var petProfile = this.props.pets[petSlug] || {};
+	
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'form',
+						null,
+						_react2.default.createElement(
+							'label',
+							null,
+							'Name'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name', value: petProfile.name, placeholder: 'Name' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Birthday'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday', value: petProfile.birthday, placeholder: 'Birthday' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Sex'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex', value: petProfile.sex }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Species'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species', value: petProfile.species }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Breed'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed', value: petProfile.breed }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Allergies'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergies', value: petProfile.allergies }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Medications'
+						),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medications', value: petProfile.medications }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.submitPetEdit },
+							'Save Edits'
+						)
+					)
+				);
+			}
+		}]);
+	
+		return EditPet;
+	}(_react.Component);
+	
+	exports.default = EditPet;
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Register = __webpack_require__(221);
 	
 	var _Register2 = _interopRequireDefault(_Register);
 	
-	var _Login = __webpack_require__(221);
+	var _Login = __webpack_require__(222);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -25581,7 +25738,7 @@
 	exports.default = Landing;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25699,7 +25856,7 @@
 	exports.default = Register;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

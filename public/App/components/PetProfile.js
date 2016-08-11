@@ -4,28 +4,31 @@ import actions from '../actions/actions'
 import { connect } from 'react-redux'
 import navigation from '../utils/navigation'
 import text from '../utils/text'
+import EditPet from '../components/EditPet'
 
 class PetProfile extends Component {
-	
-	// render(){
-	// 	var profile = this.props.pets[this.props.slug]	
-	// 	return(
-	// 		<div>
-	// 			<ul>
-	// 			{profile && Object.keys(profile).map(function(key) {
- //            return <li key={key}>{text.capitalize(key)}: {profile[key]}</li>;
- //        }.bind(this))}
-	// 			</ul>
-	// 			<button onClick={navigation.petsPage}>Back to Pets</button>
-	// 		</div>
-	// 	)
-	// }
+
+	constructor(props, context){
+		super(props, context)
+		this.sendToEdit = this.sendToEdit.bind(this)
+		this.state = {
+			showEdit: false
+		}
+	}
+
+	sendToEdit(event){
+		console.log('sendToEdit: ')
+		this.setState({showEdit: true})
+	}
 
 	render(){
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
+		var editPet = null
 
-		console.log(' var petProfile = '+JSON.stringify(petProfile))
+		if (this.state.showEdit == true){
+			editPet = <EditPet pets={this.props.pets} slug={this.props.slug}/> 
+		}
 
 		return(
 			<div>
@@ -38,16 +41,12 @@ class PetProfile extends Component {
 					<li>Allergies: {petProfile.allergies} </li>
 					<li>Medications: {petProfile.medications} </li>
 				</ul>
-				
+				<button onClick={navigation.petsPage}>Back to Pets</button>
+				<button onClick={this.sendToEdit}>Edit Pet</button> <br />
+				<div>{editPet}</div>
 			</div>
 		)
 	}
 }
 
-const stateToProps = function(state){
-	return{
-		pets: state.petReducer.pets
-	}
-}
-
-export default connect (stateToProps)(PetProfile)
+export default PetProfile

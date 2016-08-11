@@ -107,7 +107,7 @@ var Main = (function (Component) {
 					case "pets":
 						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case "pet":
-						return page = React.createElement(PetProfile, { slug: this.props.slug });
+						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug });
 					default:
 						return page = null;
 				}

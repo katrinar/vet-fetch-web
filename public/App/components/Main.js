@@ -75,7 +75,7 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray}/>
 			case 'pet':
-				return page = <PetProfile slug={this.props.slug}  />
+				return page = <PetProfile pets={this.props.pets} slug={this.props.slug}  />
 			default: 
 				return page = null
 		}
