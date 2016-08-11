@@ -70,7 +70,7 @@ module.exports = {
 				if (res.body.confirmation == "Success") {
 					completion(null, res.body);
 				} else {
-					completion({ message: res.body.message }, null);
+					completion(err, null);
 				}
 			}
 		});

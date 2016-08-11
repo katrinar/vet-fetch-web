@@ -1,68 +1,75 @@
 import React, { Component } from 'react'
+import api from '../utils/api'
+import text from '../utils/text'
+import store from '../stores/store'
+import actions from '../actions/actions'
 
 class EditPet extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.submitEdit = this.submitEdit.bind(this)
 		this.submitPetEdit = this.submitPetEdit.bind(this)
-		this.state = {
-			editPet: {
-				name: '',
-				birthday: '',
-				sex: '',
-				species: '',
-				breed: '',
-				allergies: '',
-				medications: ''
-			}
-		}
 	}
-
+	
 	submitEdit(event){
-		const petSlug = this.props.slug
+		event.preventDefault()
 
-		var editPet = Object.assign({}, this.props.pets[petSlug])
+		var editPet = Object.assign({}, this.props.pets[this.props.slug])
 		editPet[event.target.id] = event.target.value
-		this.setState({
-			editPet: editPet
-		})
+		store.dispatch(actions.receivedPetEdit(editPet))
 
 	}
 
 	submitPetEdit(event){
 		event.preventDefault()
+		
+		var petId = this.props.pets[this.props.slug].id
+		var editedPet = Object.assign({}, this.props.pets[this.props.slug]) || {}
 
-		console.log('submitPetEdit: editPet = '+JSON.stringify(this.state.editPet))
+		editedPet['allergies'] = text.stringToArray(editedPet.allergies, ',')
+		editedPet['medications'] = text.stringToArray(editedPet.medications, ',')
+
+		var endpoint = '/api/pet/'+petId
+
+		api.handlePut(endpoint, editedPet, function(err, response){
+			if (err){
+				alert(err.message)
+				return
+			}
+
+			console.log('submitPetEdit: response = '+JSON.stringify(response))
+
+			store.dispatch(actions.receivedPetEdit(response.result))
+		} )
 	}
 
 	render(){
-		console.log('EDIT PET: this.state.editPet = '+JSON.stringify(this.state.editPet))
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
 		
 		return (
 			<div>
-				<form >
-					<label>Name</label>
-					<input type="text" onChange={this.submitEdit} id="name" value={petProfile.name} placeholder="Name"/><br />
+				<form action="" method="">
+					<label>Name</label><br />
+					<input type="text" onChange={this.submitEdit} id="name" /><br />
 
-					<label>Birthday</label>
-					<input type="text" onChange={this.submitEdit} id="birthday" value={petProfile.birthday} placeholder="Birthday"/><br />
+					<label>Birthday</label><br />
+					<input type="text" onChange={this.submitEdit} id="birthday" /><br />
 
-					<label>Sex</label>
-					<input type="text" onChange={this.submitEdit} id="sex" value={petProfile.sex} /><br />
+					<label>Sex</label><br />
+					<input type="text" onChange={this.submitEdit} id="sex" /><br />
 
-					<label>Species</label>
-					<input type="text" onChange={this.submitEdit} id="species" value={petProfile.species} /><br />
+					<label>Species</label><br />
+					<input type="text" onChange={this.submitEdit} id="species" /><br />
 
-					<label>Breed</label>
-					<input type="text" onChange={this.submitEdit} id="breed" value={petProfile.breed} /><br />
+					<label>Breed</label><br />
+					<input type="text" onChange={this.submitEdit} id="breed" /><br />
 
-					<label>Allergies</label>
-					<input type="text" onChange={this.submitEdit} id="allergies" value={petProfile.allergies}/><br />
+					<label>Allergies</label><br />
+					<input type="text" onChange={this.submitEdit} id="allergies" /><br />
 
-					<label>Medications</label>
-					<input type="text" onChange={this.submitEdit} id="medications" value={petProfile.medications} /><br />
+					<label>Medications</label><br />
+					<input type="text" onChange={this.submitEdit} id="medications" /><br />
 
 					<button onClick={this.submitPetEdit}>Save Edits</button>
 				</form> 

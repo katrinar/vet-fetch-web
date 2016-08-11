@@ -60,8 +60,14 @@ module.exports = {
 					callback({message: 'Profile Not Found'}, null)
 				return
 			}
-			if (callback != null)
+			
+			if (callback != null){
+				if(isRaw == true){
+					callback(null, profile)
+					return
+				}
 				callback(null, profile.summary())
+			}	
 		})
 	},
 

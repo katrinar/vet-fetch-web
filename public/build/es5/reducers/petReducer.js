@@ -49,6 +49,17 @@ module.exports = function (_x, action) {
 
 			return newState;
 
+		case constants.RECEIVED_PET_EDIT:
+			console.log("RECEIVED_PET_EDIT: " + JSON.stringify(action.editedPet));
+			var newState = Object.assign({}, state);
+			var petMap = Object.assign({}, newState.pets);
+			var editedPet = action.editedPet;
+			petMap[editedPet.slug] = editedPet;
+
+			newState.pets = petMap;
+
+			return newState;
+
 		default:
 			return state;
 	}

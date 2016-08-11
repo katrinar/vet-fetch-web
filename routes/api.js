@@ -100,5 +100,35 @@ router.post('/:resource', function(req, res, next){
 	})
 })
 
+	router.put('/:resource/:id', function(req, res, next){
+		var resource = req.params.resource
+		var resourceId = req.params.id
+
+		var controller = controllers[resource]
+		if (controller == null){
+			res.json({
+				confirmation: 'Fail',
+				message: 'Invalid Resource'
+			})
+			return
+		}
+
+		controller.put(resourceId, req.body, function(err, result){
+			if (err){
+				res.json({
+					confirmation: 'Fail',
+					message: err.message
+				})
+				return
+			}
+
+			res.json({
+				confirmation: 'Success',
+				result: result
+			})
+			return
+		})
+	})
+
 
 module.exports = router

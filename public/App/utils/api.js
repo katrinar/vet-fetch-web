@@ -91,7 +91,7 @@ export default {
 		    		completion(null, res.body)
 				}
 				else {
-		    		completion({message:res.body.message}, null)
+		    		completion(err, null)
 				}
 			}
 		});

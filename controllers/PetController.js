@@ -55,7 +55,7 @@ module.exports = {
 	},
 
 	getById: function(id, isRaw, callback){
-		Pet.findById({id:id}, function(err, pet){
+		Pet.findById(id, function(err, pet){
 			if(err){
 				if(callback != null)
 					callback({message: 'Pet Not Found'}, null)
@@ -67,9 +67,8 @@ module.exports = {
 					callback(null, pet)
 					return
 				}
+				callback(null, pet.summary())
 			}
-
-			callback(null, pet.summary())
 		})
 	},
 
@@ -95,20 +94,42 @@ module.exports = {
 				return
 			}
 			if(callback != null)
-				callback(null, pet)
+				callback(null, pet.summary())
 		})
 	},
 
 	put: function(id, params, callback){
-		Pet.findByIdAndUpdate(id, params, {new: true}, function(err, result){
+
+		if (params.name != null){
+				var name = params['name'].split(' ')
+				var parts = name
+				var slug = ''
+				for (var i=0; i<parts.length; i++){
+					var word = parts[i]
+					slug += word
+					if (i != parts.length-1)
+						slug += '-'
+				}
+
+				slug = slug.replace('?', '')
+				params['slug'] = slug
+			}
+
+		Pet.findByIdAndUpdate(id, params, {new: true}, function(err, pet){
 			if(err){
 				if (callback != null)
 					callback(err, null)
 				return
 			}
 
+			if (pet == null){
+				callback(err, null)
+				return
+			}
+
 			if (callback != null)
 				callback(null, pet.summary())
+			return
 		})
 	}
 }

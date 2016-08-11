@@ -27,6 +27,13 @@ module.exports = {
 			type: constants.RECEIVED_PETS,
 			pets: pets
 		};
+	},
+
+	receivedPetEdit: function (editedPet) {
+		return {
+			type: constants.RECEIVED_PET_EDIT,
+			editedPet: editedPet
+		};
 	}
 
 };

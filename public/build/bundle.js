@@ -21413,7 +21413,7 @@
 					if (res.body.confirmation == 'Success') {
 						completion(null, res.body);
 					} else {
-						completion({ message: res.body.message }, null);
+						completion(err, null);
 					}
 				}
 			});
@@ -24252,7 +24252,8 @@
 	
 		RECEIVED_CURRENT_USER: 'RECEIVED_CURRENT_USER',
 		REGISTER_PET: 'REGISTER_PET',
-		RECEIVED_PETS: 'RECEIVED_PETS'
+		RECEIVED_PETS: 'RECEIVED_PETS',
+		RECEIVED_PET_EDIT: 'RECEIVED_PET_EDIT'
 	};
 
 /***/ },
@@ -24301,6 +24302,17 @@
 				var petMap = Object.assign({}, newState.pets);
 				var pet = action.pet;
 				petMap[pet.slug] = pet;
+	
+				newState['pets'] = petMap;
+	
+				return newState;
+	
+			case _constants2.default.RECEIVED_PET_EDIT:
+				console.log('RECEIVED_PET_EDIT: ' + JSON.stringify(action.editedPet));
+				var newState = Object.assign({}, state);
+				var petMap = Object.assign({}, newState.pets);
+				var editedPet = action.editedPet;
+				petMap[editedPet.slug] = editedPet;
 	
 				newState['pets'] = petMap;
 	
@@ -24362,6 +24374,13 @@
 			return {
 				type: _constants2.default.RECEIVED_PETS,
 				pets: pets
+			};
+		},
+	
+		receivedPetEdit: function receivedPetEdit(editedPet) {
+			return {
+				type: _constants2.default.RECEIVED_PET_EDIT,
+				editedPet: editedPet
 			};
 		}
 	
@@ -24501,8 +24520,20 @@
 	
 			var firstLetter = string.substring(0, 1);
 			return firstLetter.toUpperCase() + string.substring(1);
-		}
+		},
 	
+		stringToArray: function stringToArray(str, separator) {
+			var t = str.split(separator);
+			var array = [];
+			for (var i = 0; i < t.length; i++) {
+				var tag = t[i];
+				if (tag.length == 0) continue;
+	
+				array.push(tag.trim());
+			}
+	
+			return array;
+		}
 	};
 
 /***/ },
@@ -25551,6 +25582,22 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	var _text = __webpack_require__(204);
+	
+	var _text2 = _interopRequireDefault(_text);
+	
+	var _store = __webpack_require__(183);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(201);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25569,42 +25616,45 @@
 	
 			_this.submitEdit = _this.submitEdit.bind(_this);
 			_this.submitPetEdit = _this.submitPetEdit.bind(_this);
-			_this.state = {
-				editPet: {
-					name: '',
-					birthday: '',
-					sex: '',
-					species: '',
-					breed: '',
-					allergies: '',
-					medications: ''
-				}
-			};
 			return _this;
 		}
 	
 		_createClass(EditPet, [{
 			key: 'submitEdit',
 			value: function submitEdit(event) {
-				var petSlug = this.props.slug;
+				event.preventDefault();
 	
-				var editPet = Object.assign({}, this.props.pets[petSlug]);
+				var editPet = Object.assign({}, this.props.pets[this.props.slug]);
 				editPet[event.target.id] = event.target.value;
-				this.setState({
-					editPet: editPet
-				});
+				_store2.default.dispatch(_actions2.default.receivedPetEdit(editPet));
 			}
 		}, {
 			key: 'submitPetEdit',
 			value: function submitPetEdit(event) {
 				event.preventDefault();
 	
-				console.log('submitPetEdit: editPet = ' + JSON.stringify(this.state.editPet));
+				var petId = this.props.pets[this.props.slug].id;
+				var editedPet = Object.assign({}, this.props.pets[this.props.slug]) || {};
+	
+				editedPet['allergies'] = _text2.default.stringToArray(editedPet.allergies, ',');
+				editedPet['medications'] = _text2.default.stringToArray(editedPet.medications, ',');
+	
+				var endpoint = '/api/pet/' + petId;
+	
+				_api2.default.handlePut(endpoint, editedPet, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+	
+					console.log('submitPetEdit: response = ' + JSON.stringify(response));
+	
+					_store2.default.dispatch(_actions2.default.receivedPetEdit(response.result));
+				});
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				console.log('EDIT PET: this.state.editPet = ' + JSON.stringify(this.state.editPet));
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 	
@@ -25613,55 +25663,62 @@
 					null,
 					_react2.default.createElement(
 						'form',
-						null,
+						{ action: '', method: '' },
 						_react2.default.createElement(
 							'label',
 							null,
 							'Name'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name', value: petProfile.name, placeholder: 'Name' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
 							null,
 							'Birthday'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday', value: petProfile.birthday, placeholder: 'Birthday' }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
 							null,
 							'Sex'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex', value: petProfile.sex }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
 							null,
 							'Species'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species', value: petProfile.species }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
 							null,
 							'Breed'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed', value: petProfile.breed }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
 							null,
 							'Allergies'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergies', value: petProfile.allergies }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergies' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
 							null,
 							'Medications'
 						),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medications', value: petProfile.medications }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medications' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'button',

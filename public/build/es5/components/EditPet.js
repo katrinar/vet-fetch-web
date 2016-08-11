@@ -15,6 +15,14 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
+var api = _interopRequire(require("../utils/api"));
+
+var text = _interopRequire(require("../utils/text"));
+
+var store = _interopRequire(require("../stores/store"));
+
+var actions = _interopRequire(require("../actions/actions"));
+
 var EditPet = (function (Component) {
 	function EditPet(props, context) {
 		_classCallCheck(this, EditPet);
@@ -22,17 +30,6 @@ var EditPet = (function (Component) {
 		_get(Object.getPrototypeOf(EditPet.prototype), "constructor", this).call(this, props, context);
 		this.submitEdit = this.submitEdit.bind(this);
 		this.submitPetEdit = this.submitPetEdit.bind(this);
-		this.state = {
-			editPet: {
-				name: "",
-				birthday: "",
-				sex: "",
-				species: "",
-				breed: "",
-				allergies: "",
-				medications: ""
-			}
-		};
 	}
 
 	_inherits(EditPet, Component);
@@ -40,13 +37,11 @@ var EditPet = (function (Component) {
 	_prototypeProperties(EditPet, null, {
 		submitEdit: {
 			value: function submitEdit(event) {
-				var petSlug = this.props.slug;
+				event.preventDefault();
 
-				var editPet = Object.assign({}, this.props.pets[petSlug]);
+				var editPet = Object.assign({}, this.props.pets[this.props.slug]);
 				editPet[event.target.id] = event.target.value;
-				this.setState({
-					editPet: editPet
-				});
+				store.dispatch(actions.receivedPetEdit(editPet));
 			},
 			writable: true,
 			configurable: true
@@ -55,14 +50,30 @@ var EditPet = (function (Component) {
 			value: function submitPetEdit(event) {
 				event.preventDefault();
 
-				console.log("submitPetEdit: editPet = " + JSON.stringify(this.state.editPet));
+				var petId = this.props.pets[this.props.slug].id;
+				var editedPet = Object.assign({}, this.props.pets[this.props.slug]) || {};
+
+				editedPet.allergies = text.stringToArray(editedPet.allergies, ",");
+				editedPet.medications = text.stringToArray(editedPet.medications, ",");
+
+				var endpoint = "/api/pet/" + petId;
+
+				api.handlePut(endpoint, editedPet, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+
+					console.log("submitPetEdit: response = " + JSON.stringify(response));
+
+					store.dispatch(actions.receivedPetEdit(response.result));
+				});
 			},
 			writable: true,
 			configurable: true
 		},
 		render: {
 			value: function render() {
-				console.log("EDIT PET: this.state.editPet = " + JSON.stringify(this.state.editPet));
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 
@@ -71,55 +82,62 @@ var EditPet = (function (Component) {
 					null,
 					React.createElement(
 						"form",
-						null,
+						{ action: "", method: "" },
 						React.createElement(
 							"label",
 							null,
 							"Name"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "name", value: petProfile.name, placeholder: "Name" }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "name" }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
 							null,
 							"Birthday"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "birthday", value: petProfile.birthday, placeholder: "Birthday" }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "birthday" }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
 							null,
 							"Sex"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "sex", value: petProfile.sex }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "sex" }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
 							null,
 							"Species"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "species", value: petProfile.species }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "species" }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
 							null,
 							"Breed"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed", value: petProfile.breed }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed" }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
 							null,
 							"Allergies"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergies", value: petProfile.allergies }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergies" }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
 							null,
 							"Medications"
 						),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medications", value: petProfile.medications }),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medications" }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",
