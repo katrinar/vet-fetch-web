@@ -2,7 +2,21 @@ import constants from '../constants/constants'
 
 var initialState = {
 	pets: {},
-	petsArray: []
+	petsArray: [],
+	currentPet: {
+		id: '',
+		slug: '',
+		ownerId: '',
+		name: '',
+		birthday: '',
+		sex: '',
+		species: '',
+		breed: '',
+		allergies: [],
+		medications: [],
+		allergiesString: '',
+		medicationsString: ''
+	}
 }
 
 export default function(state = initialState, action){
@@ -44,13 +58,12 @@ export default function(state = initialState, action){
 			return newState
 
 		case constants.RECEIVED_PET_EDIT:
-		console.log('RECEIVED_PET_EDIT: '+JSON.stringify(action.editedPet))
-		var newState = Object.assign({}, state)
-		var petMap = Object.assign({}, newState.pets)
-		var editedPet = action.editedPet
-		petMap[editedPet.slug] = editedPet
+		console.log('RECEIVED_PET_EDIT: action.editedPet = '+JSON.stringify(action.editedPet))
 
-		newState['pets'] = petMap
+		var newState = Object.assign({}, state)
+		var editedPet = action.editedPet
+
+		newState['currentPet'] = editedPet
 
 		return newState
 

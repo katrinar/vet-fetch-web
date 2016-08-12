@@ -11,7 +11,8 @@ var initialState = {
 		lastName: "",
 		email: "",
 		password: ""
-	} };
+	}
+};
 
 module.exports = function (_x, action) {
 	var state = arguments[0] === undefined ? initialState : arguments[0];

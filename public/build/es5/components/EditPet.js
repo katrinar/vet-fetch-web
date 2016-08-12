@@ -38,10 +38,15 @@ var EditPet = (function (Component) {
 		submitEdit: {
 			value: function submitEdit(event) {
 				event.preventDefault();
+				var curentPetProfile = this.props.pets[this.props.slug];
 
-				var editPet = Object.assign({}, this.props.pets[this.props.slug]);
-				editPet[event.target.id] = event.target.value;
-				store.dispatch(actions.receivedPetEdit(editPet));
+				var editedPet = Object.assign({}, this.props.currentPet);
+				editedPet.name = curentPetProfile.name;
+				editedPet.species = curentPetProfile.species;
+
+				editedPet[event.target.id] = event.target.value;
+
+				store.dispatch(actions.receivedPetEdit(editedPet));
 			},
 			writable: true,
 			configurable: true
@@ -49,25 +54,25 @@ var EditPet = (function (Component) {
 		submitPetEdit: {
 			value: function submitPetEdit(event) {
 				event.preventDefault();
+				var curentPetProfile = this.props.pets[this.props.slug];
 
-				var petId = this.props.pets[this.props.slug].id;
-				var editedPet = Object.assign({}, this.props.pets[this.props.slug]) || {};
+				var editedPet = Object.assign({}, this.props.currentPet);
 
-				editedPet.allergies = text.stringToArray(editedPet.allergies, ",");
-				editedPet.medications = text.stringToArray(editedPet.medications, ",");
+				editedPet.id = curentPetProfile.id;
+				editedPet.ownerId = curentPetProfile.ownerId;
 
-				var endpoint = "/api/pet/" + petId;
+				var allergiesString = editedPet.allergiesString;
+				var medicationsString = editedPet.medicationsString;
 
-				api.handlePut(endpoint, editedPet, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
+				editedPet.allergies = text.stringToArray(allergiesString, ",");
 
-					console.log("submitPetEdit: response = " + JSON.stringify(response));
+				editedPet.medications = text.stringToArray(medicationsString, ",");
 
-					store.dispatch(actions.receivedPetEdit(response.result));
-				});
+				console.log("submitPetEdit: editedPet = " + JSON.stringify(editedPet));
+
+				store.dispatch(actions.receivedPetEdit(editedPet));
+
+				text.sendPetEdit(editedPet);
 			},
 			writable: true,
 			configurable: true
@@ -76,6 +81,7 @@ var EditPet = (function (Component) {
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
+				var currentPet = this.props.currentPet || {};
 
 				return React.createElement(
 					"div",
@@ -129,7 +135,7 @@ var EditPet = (function (Component) {
 							"Allergies"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergies" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergiesString", placeholder: "advil,wheat,etc..." }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -137,7 +143,7 @@ var EditPet = (function (Component) {
 							"Medications"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medications" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medicationsString", placeholder: "heartworm,vitamins,etc..." }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",

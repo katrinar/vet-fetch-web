@@ -12,7 +12,7 @@ class RegisterPet extends Component {
 		this.state = {
 			registerPet: {
 				name: '',
-				breed: '',
+				species: '',
 				ownerId: null,
 				slug: null
 			}
@@ -48,7 +48,7 @@ class RegisterPet extends Component {
 				<p>Register your Pet</p>
 				<form action = "/api/pet" method="post">
 					<input type="text" onChange={this.submitPet} id="name" placeholder="Name" /><br />
-					<input type="text" onChange={this.submitPet} id="breed" placeholder="Breed" /><br />
+					<input type="text" onChange={this.submitPet} id="species" placeholder="Species" /><br />
 					<button onClick={this.registerPet}>Register Pet</button>
 				</form> 			 
 			</div>

@@ -31,7 +31,7 @@ var RegisterPet = (function (Component) {
 		this.state = {
 			registerPet: {
 				name: "",
-				breed: "",
+				species: "",
 				ownerId: null,
 				slug: null
 			}
@@ -83,7 +83,7 @@ var RegisterPet = (function (Component) {
 						{ action: "/api/pet", method: "post" },
 						React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitPet, id: "breed", placeholder: "Breed" }),
+						React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",

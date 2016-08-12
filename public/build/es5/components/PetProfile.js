@@ -55,7 +55,7 @@ var PetProfile = (function (Component) {
 				var editPet = null;
 
 				if (this.state.showEdit == true) {
-					editPet = React.createElement(EditPet, { pets: this.props.pets, slug: this.props.slug });
+					editPet = React.createElement(EditPet, { currentPet: this.props.currentPet, pets: this.props.pets, slug: this.props.slug });
 				}
 
 				return React.createElement(

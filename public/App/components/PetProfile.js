@@ -27,7 +27,7 @@ class PetProfile extends Component {
 		var editPet = null
 
 		if (this.state.showEdit == true){
-			editPet = <EditPet pets={this.props.pets} slug={this.props.slug}/> 
+			editPet = <EditPet currentPet={this.props.currentPet} pets={this.props.pets} slug={this.props.slug}/> 
 		}
 
 		return(

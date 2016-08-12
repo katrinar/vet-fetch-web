@@ -7,7 +7,7 @@ var initialState = {
 		lastName: '',
 		email: '',
 		password: ''
-	},
+	}
 }
 
 export default function(state = initialState, action){

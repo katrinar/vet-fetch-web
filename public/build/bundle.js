@@ -21304,7 +21304,7 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug });
+						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, currentPet: this.props.currentPet, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -21325,7 +21325,9 @@
 		return {
 			currentUser: state.accountReducer.currentUser,
 			petsArray: state.petReducer.petsArray,
-			pets: state.petReducer.pets };
+			pets: state.petReducer.pets,
+			currentPet: state.petReducer.currentPet
+		};
 	};
 	
 	exports.default = (0, _reactRedux.connect)(stateToProps)(Main);
@@ -23231,7 +23233,7 @@
 			_this.state = {
 				registerPet: {
 					name: '',
-					breed: '',
+					species: '',
 					ownerId: null,
 					slug: null
 				}
@@ -23278,7 +23280,7 @@
 						{ action: '/api/pet', method: 'post' },
 						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'name', placeholder: 'Name' }),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'breed', placeholder: 'Breed' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'species', placeholder: 'Species' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'button',
@@ -24308,13 +24310,12 @@
 				return newState;
 	
 			case _constants2.default.RECEIVED_PET_EDIT:
-				console.log('RECEIVED_PET_EDIT: ' + JSON.stringify(action.editedPet));
-				var newState = Object.assign({}, state);
-				var petMap = Object.assign({}, newState.pets);
-				var editedPet = action.editedPet;
-				petMap[editedPet.slug] = editedPet;
+				console.log('RECEIVED_PET_EDIT: action.editedPet = ' + JSON.stringify(action.editedPet));
 	
-				newState['pets'] = petMap;
+				var newState = Object.assign({}, state);
+				var editedPet = action.editedPet;
+	
+				newState['currentPet'] = editedPet;
 	
 				return newState;
 	
@@ -24331,7 +24332,21 @@
 	
 	var initialState = {
 		pets: {},
-		petsArray: []
+		petsArray: [],
+		currentPet: {
+			id: '',
+			slug: '',
+			ownerId: '',
+			name: '',
+			birthday: '',
+			sex: '',
+			species: '',
+			breed: '',
+			allergies: [],
+			medications: [],
+			allergiesString: '',
+			medicationsString: ''
+		}
 	};
 
 /***/ },
@@ -24506,13 +24521,20 @@
 
 /***/ },
 /* 204 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	exports.default = {
 	
 		capitalize: function capitalize(string) {
@@ -24527,12 +24549,31 @@
 			var array = [];
 			for (var i = 0; i < t.length; i++) {
 				var tag = t[i];
-				if (tag.length == 0) continue;
 	
+				if (tag.length == 0) continue;
 				array.push(tag.trim());
 			}
 	
 			return array;
+		},
+	
+		sendPetEdit: function sendPetEdit(petSubmit) {
+	
+			delete petSubmit.allergiesString;
+			delete petSubmit.medicationsString;
+	
+			console.log('sendPetEdit: petSubmit = ' + JSON.stringify(petSubmit));
+	
+			var endpoint = '/api/pet/' + petSubmit.id;
+	
+			_api2.default.handlePut(endpoint, petSubmit, function (err, response) {
+				if (err) {
+					alert(err.message);
+					return;
+				}
+				console.log('sendPetEdit: PUT RESPONSE = ' + JSON.stringify(response));
+				// store.dispatch(actions.receivedPetEdit(response.result))
+			});
 		}
 	};
 
@@ -24611,7 +24652,7 @@
 				var editPet = null;
 	
 				if (this.state.showEdit == true) {
-					editPet = _react2.default.createElement(_EditPet2.default, { pets: this.props.pets, slug: this.props.slug });
+					editPet = _react2.default.createElement(_EditPet2.default, { currentPet: this.props.currentPet, pets: this.props.pets, slug: this.props.slug });
 				}
 	
 				return _react2.default.createElement(
@@ -25623,40 +25664,46 @@
 			key: 'submitEdit',
 			value: function submitEdit(event) {
 				event.preventDefault();
+				var curentPetProfile = this.props.pets[this.props.slug];
 	
-				var editPet = Object.assign({}, this.props.pets[this.props.slug]);
-				editPet[event.target.id] = event.target.value;
-				_store2.default.dispatch(_actions2.default.receivedPetEdit(editPet));
+				var editedPet = Object.assign({}, this.props.currentPet);
+				editedPet.name = curentPetProfile.name;
+				editedPet.species = curentPetProfile.species;
+	
+				editedPet[event.target.id] = event.target.value;
+	
+				_store2.default.dispatch(_actions2.default.receivedPetEdit(editedPet));
 			}
 		}, {
 			key: 'submitPetEdit',
 			value: function submitPetEdit(event) {
 				event.preventDefault();
+				var curentPetProfile = this.props.pets[this.props.slug];
 	
-				var petId = this.props.pets[this.props.slug].id;
-				var editedPet = Object.assign({}, this.props.pets[this.props.slug]) || {};
+				var editedPet = Object.assign({}, this.props.currentPet);
 	
-				editedPet['allergies'] = _text2.default.stringToArray(editedPet.allergies, ',');
-				editedPet['medications'] = _text2.default.stringToArray(editedPet.medications, ',');
+				editedPet['id'] = curentPetProfile.id;
+				editedPet['ownerId'] = curentPetProfile.ownerId;
 	
-				var endpoint = '/api/pet/' + petId;
+				var allergiesString = editedPet['allergiesString'];
+				var medicationsString = editedPet['medicationsString'];
 	
-				_api2.default.handlePut(endpoint, editedPet, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
+				editedPet['allergies'] = _text2.default.stringToArray(allergiesString, ',');
 	
-					console.log('submitPetEdit: response = ' + JSON.stringify(response));
+				editedPet['medications'] = _text2.default.stringToArray(medicationsString, ',');
 	
-					_store2.default.dispatch(_actions2.default.receivedPetEdit(response.result));
-				});
+				console.log('submitPetEdit: editedPet = ' + JSON.stringify(editedPet));
+	
+				_store2.default.dispatch(_actions2.default.receivedPetEdit(editedPet));
+	
+				_text2.default.sendPetEdit(editedPet);
 			}
 		}, {
 			key: 'render',
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
+				var currentPet = this.props.currentPet || {};
 	
 				return _react2.default.createElement(
 					'div',
@@ -25710,7 +25757,7 @@
 							'Allergies'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergies' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergiesString', placeholder: 'advil,wheat,etc...' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25718,7 +25765,7 @@
 							'Medications'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medications' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medicationsString', placeholder: 'heartworm,vitamins,etc...' }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'button',

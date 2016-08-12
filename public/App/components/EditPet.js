@@ -13,39 +13,44 @@ class EditPet extends Component {
 	
 	submitEdit(event){
 		event.preventDefault()
+		const curentPetProfile = this.props.pets[this.props.slug]
+		
+		var editedPet = Object.assign({}, this.props.currentPet)
+		editedPet.name = curentPetProfile.name
+		editedPet.species = curentPetProfile.species
 
-		var editPet = Object.assign({}, this.props.pets[this.props.slug])
-		editPet[event.target.id] = event.target.value
-		store.dispatch(actions.receivedPetEdit(editPet))
+		editedPet[event.target.id] = event.target.value
 
+		store.dispatch(actions.receivedPetEdit(editedPet))
 	}
 
 	submitPetEdit(event){
 		event.preventDefault()
+		const curentPetProfile = this.props.pets[this.props.slug]
 		
-		var petId = this.props.pets[this.props.slug].id
-		var editedPet = Object.assign({}, this.props.pets[this.props.slug]) || {}
+		var editedPet = Object.assign({}, this.props.currentPet)
 
-		editedPet['allergies'] = text.stringToArray(editedPet.allergies, ',')
-		editedPet['medications'] = text.stringToArray(editedPet.medications, ',')
+		editedPet['id'] = curentPetProfile.id
+		editedPet['ownerId'] = curentPetProfile.ownerId
 
-		var endpoint = '/api/pet/'+petId
+		var allergiesString = editedPet['allergiesString']
+		var medicationsString = editedPet['medicationsString']
 
-		api.handlePut(endpoint, editedPet, function(err, response){
-			if (err){
-				alert(err.message)
-				return
-			}
+		editedPet['allergies'] = text.stringToArray(allergiesString, ',')
+		
+		editedPet['medications'] = text.stringToArray(medicationsString, ',')
+			
+		console.log('submitPetEdit: editedPet = '+JSON.stringify(editedPet))
 
-			console.log('submitPetEdit: response = '+JSON.stringify(response))
+		store.dispatch(actions.receivedPetEdit(editedPet))
 
-			store.dispatch(actions.receivedPetEdit(response.result))
-		} )
+		text.sendPetEdit(editedPet)
 	}
 
 	render(){
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
+		const currentPet = this.props.currentPet || {}
 		
 		return (
 			<div>
@@ -54,7 +59,7 @@ class EditPet extends Component {
 					<input type="text" onChange={this.submitEdit} id="name" /><br />
 
 					<label>Birthday</label><br />
-					<input type="text" onChange={this.submitEdit} id="birthday" /><br />
+					<input type="text" onChange={this.submitEdit} id="birthday"  /><br />
 
 					<label>Sex</label><br />
 					<input type="text" onChange={this.submitEdit} id="sex" /><br />
@@ -66,10 +71,10 @@ class EditPet extends Component {
 					<input type="text" onChange={this.submitEdit} id="breed" /><br />
 
 					<label>Allergies</label><br />
-					<input type="text" onChange={this.submitEdit} id="allergies" /><br />
+					<input type="text" onChange={this.submitEdit} id="allergiesString" placeholder={'advil,wheat,etc...'} /><br />
 
 					<label>Medications</label><br />
-					<input type="text" onChange={this.submitEdit} id="medications" /><br />
+					<input type="text" onChange={this.submitEdit} id="medicationsString" placeholder={'heartworm,vitamins,etc...'}/><br />
 
 					<button onClick={this.submitPetEdit}>Save Edits</button>
 				</form> 
