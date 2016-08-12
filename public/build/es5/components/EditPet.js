@@ -19,6 +19,8 @@ var api = _interopRequire(require("../utils/api"));
 
 var text = _interopRequire(require("../utils/text"));
 
+var petManager = _interopRequire(require("../utils/petManager"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -38,11 +40,9 @@ var EditPet = (function (Component) {
 		submitEdit: {
 			value: function submitEdit(event) {
 				event.preventDefault();
-				var curentPetProfile = this.props.pets[this.props.slug];
+				var currentPetProfile = this.props.pets[this.props.slug];
 
-				var editedPet = Object.assign({}, this.props.currentPet);
-				editedPet.name = curentPetProfile.name;
-				editedPet.species = curentPetProfile.species;
+				var editedPet = Object.assign({}, currentPetProfile);
 
 				editedPet[event.target.id] = event.target.value;
 
@@ -54,12 +54,9 @@ var EditPet = (function (Component) {
 		submitPetEdit: {
 			value: function submitPetEdit(event) {
 				event.preventDefault();
-				var curentPetProfile = this.props.pets[this.props.slug];
-
-				var editedPet = Object.assign({}, this.props.currentPet);
-
-				editedPet.id = curentPetProfile.id;
-				editedPet.ownerId = curentPetProfile.ownerId;
+				var currentPetProfile = this.props.pets[this.props.slug];
+				var editedPet = Object.assign({}, currentPetProfile);
+				// var editedPet = Object.assign({}, this.props.currentPet)
 
 				var allergiesString = editedPet.allergiesString;
 				var medicationsString = editedPet.medicationsString;
@@ -68,11 +65,12 @@ var EditPet = (function (Component) {
 
 				editedPet.medications = text.stringToArray(medicationsString, ",");
 
+
 				console.log("submitPetEdit: editedPet = " + JSON.stringify(editedPet));
 
 				store.dispatch(actions.receivedPetEdit(editedPet));
 
-				text.sendPetEdit(editedPet);
+				petManager.sendPetEdit(editedPet);
 			},
 			writable: true,
 			configurable: true

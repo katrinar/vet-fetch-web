@@ -21200,7 +21200,7 @@
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
-	var _Landing = __webpack_require__(220);
+	var _Landing = __webpack_require__(221);
 	
 	var _Landing2 = _interopRequireDefault(_Landing);
 	
@@ -21304,7 +21304,7 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, currentPet: this.props.currentPet, slug: this.props.slug });
+						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -21325,8 +21325,7 @@
 		return {
 			currentUser: state.accountReducer.currentUser,
 			petsArray: state.petReducer.petsArray,
-			pets: state.petReducer.pets,
-			currentPet: state.petReducer.currentPet
+			pets: state.petReducer.pets
 		};
 	};
 	
@@ -24255,7 +24254,9 @@
 		RECEIVED_CURRENT_USER: 'RECEIVED_CURRENT_USER',
 		REGISTER_PET: 'REGISTER_PET',
 		RECEIVED_PETS: 'RECEIVED_PETS',
-		RECEIVED_PET_EDIT: 'RECEIVED_PET_EDIT'
+		RECEIVED_PET_EDIT: 'RECEIVED_PET_EDIT',
+		CREATED_CURRENT_PET: 'CREATED_CURRENT_PET',
+		UPDATE_PETS: 'UPDATE_PETS'
 	};
 
 /***/ },
@@ -24314,8 +24315,62 @@
 	
 				var newState = Object.assign({}, state);
 				var editedPet = action.editedPet;
+				var updatedPets = Object.assign({}, state.pets);
 	
-				newState['currentPet'] = editedPet;
+				updatedPets[editedPet.slug] = editedPet;
+	
+				newState['pets'] = updatedPets;
+	
+				return newState;
+	
+			case _constants2.default.UPDATE_PETS:
+				console.log('UPDATE_PETS: action.updatedPet = ' + JSON.stringify(action.updatedPet));
+	
+				var newState = Object.assign({}, state);
+				var updatedPet = action.updatedPet;
+				var updatedPets = Object.assign({}, state.pets);
+	
+				var allergiesArray = updatedPet.allergies;
+				var allergiesString = '';
+				for (var i = 0; i < allergiesArray.length; i++) {
+					var allergy = allergiesArray[i];
+					if (allergy.length == 0) continue;
+	
+					allergiesString = allergiesString + allergy;
+					if (i == allergiesArray.length - 1) continue;
+	
+					allergiesString = allergiesString + ',';
+				}
+				updatedPet['allergiesString'] = allergiesString;
+	
+				var medicationArray = updatedPet.medications;
+				var medicationsString = '';
+				for (var i = 0; i < medicationArray.length; i++) {
+					var medication = medicationArray[i];
+					if (medication.length == 0) continue;
+					medicationsString = medicationsString + medication;
+					if (i == medicationArray.length - 1) continue;
+					medicationsString = medicationsString + ',';
+				}
+				updatedPet['medicationsString'] = medicationsString;
+	
+				updatedPets[updatedPet.slug] = updatedPet;
+	
+				newState['pets'] = updatedPets;
+	
+				var petsArray = Object.assign([], state.petsArray);
+				var array = Object.assign([], state);
+	
+				for (var i = 0; i < petsArray.length; i++) {
+					var pet = petsArray[i];
+	
+					if (updatedPet.id == pet.id) {
+						pet = updatedPet;
+					}
+					array.push(pet);
+				}
+	
+				newState['petsArray'] = array;
 	
 				return newState;
 	
@@ -24332,21 +24387,21 @@
 	
 	var initialState = {
 		pets: {},
-		petsArray: [],
-		currentPet: {
-			id: '',
-			slug: '',
-			ownerId: '',
-			name: '',
-			birthday: '',
-			sex: '',
-			species: '',
-			breed: '',
-			allergies: [],
-			medications: [],
-			allergiesString: '',
-			medicationsString: ''
-		}
+		petsArray: []
+		// currentPet: {
+		// 	id: '',
+		// 	slug: '',
+		// 	ownerId: '',
+		// 	name: '',
+		// 	birthday: '',
+		// 	sex: '',
+		// 	species: '',
+		// 	breed: '',
+		// 	allergies: [],
+		// 	medications: [],
+		// 	allergiesString: '',
+		// 	medicationsString: ''
+		// }
 	};
 
 /***/ },
@@ -24396,6 +24451,20 @@
 			return {
 				type: _constants2.default.RECEIVED_PET_EDIT,
 				editedPet: editedPet
+			};
+		},
+	
+		createdCurrentPet: function createdCurrentPet(currentPet) {
+			return {
+				type: _constants2.default.CREATED_CURRENT_PET,
+				currentPet: currentPet
+			};
+		},
+	
+		updatePets: function updatePets(updatedPet) {
+			return {
+				type: _constants2.default.UPDATE_PETS,
+				updatedPet: updatedPet
 			};
 		}
 	
@@ -24555,25 +24624,6 @@
 			}
 	
 			return array;
-		},
-	
-		sendPetEdit: function sendPetEdit(petSubmit) {
-	
-			delete petSubmit.allergiesString;
-			delete petSubmit.medicationsString;
-	
-			console.log('sendPetEdit: petSubmit = ' + JSON.stringify(petSubmit));
-	
-			var endpoint = '/api/pet/' + petSubmit.id;
-	
-			_api2.default.handlePut(endpoint, petSubmit, function (err, response) {
-				if (err) {
-					alert(err.message);
-					return;
-				}
-				console.log('sendPetEdit: PUT RESPONSE = ' + JSON.stringify(response));
-				// store.dispatch(actions.receivedPetEdit(response.result))
-			});
 		}
 	};
 
@@ -24652,7 +24702,7 @@
 				var editPet = null;
 	
 				if (this.state.showEdit == true) {
-					editPet = _react2.default.createElement(_EditPet2.default, { currentPet: this.props.currentPet, pets: this.props.pets, slug: this.props.slug });
+					editPet = _react2.default.createElement(_EditPet2.default, { pets: this.props.pets, slug: this.props.slug });
 				}
 	
 				return _react2.default.createElement(
@@ -24700,14 +24750,14 @@
 							'li',
 							null,
 							'Allergies: ',
-							petProfile.allergies,
+							petProfile.allergiesString,
 							' '
 						),
 						_react2.default.createElement(
 							'li',
 							null,
 							'Medications: ',
-							petProfile.medications,
+							petProfile.medicationsString,
 							' '
 						)
 					),
@@ -25631,6 +25681,10 @@
 	
 	var _text2 = _interopRequireDefault(_text);
 	
+	var _petManager = __webpack_require__(220);
+	
+	var _petManager2 = _interopRequireDefault(_petManager);
+	
 	var _store = __webpack_require__(183);
 	
 	var _store2 = _interopRequireDefault(_store);
@@ -25664,11 +25718,9 @@
 			key: 'submitEdit',
 			value: function submitEdit(event) {
 				event.preventDefault();
-				var curentPetProfile = this.props.pets[this.props.slug];
+				var currentPetProfile = this.props.pets[this.props.slug];
 	
-				var editedPet = Object.assign({}, this.props.currentPet);
-				editedPet.name = curentPetProfile.name;
-				editedPet.species = curentPetProfile.species;
+				var editedPet = Object.assign({}, currentPetProfile);
 	
 				editedPet[event.target.id] = event.target.value;
 	
@@ -25678,12 +25730,9 @@
 			key: 'submitPetEdit',
 			value: function submitPetEdit(event) {
 				event.preventDefault();
-				var curentPetProfile = this.props.pets[this.props.slug];
-	
-				var editedPet = Object.assign({}, this.props.currentPet);
-	
-				editedPet['id'] = curentPetProfile.id;
-				editedPet['ownerId'] = curentPetProfile.ownerId;
+				var currentPetProfile = this.props.pets[this.props.slug];
+				var editedPet = Object.assign({}, currentPetProfile);
+				// var editedPet = Object.assign({}, this.props.currentPet)
 	
 				var allergiesString = editedPet['allergiesString'];
 				var medicationsString = editedPet['medicationsString'];
@@ -25696,7 +25745,7 @@
 	
 				_store2.default.dispatch(_actions2.default.receivedPetEdit(editedPet));
 	
-				_text2.default.sendPetEdit(editedPet);
+				_petManager2.default.sendPetEdit(editedPet);
 			}
 		}, {
 			key: 'render',
@@ -25792,17 +25841,60 @@
 		value: true
 	});
 	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	var _store = __webpack_require__(183);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(201);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	
+		sendPetEdit: function sendPetEdit(petSubmit) {
+	
+			console.log('sendPetEdit: petSubmit = ' + JSON.stringify(petSubmit));
+	
+			var endpoint = '/api/pet/' + petSubmit.id;
+	
+			_api2.default.handlePut(endpoint, petSubmit, function (err, response) {
+				if (err) {
+					alert(err.message);
+					return;
+				}
+				console.log('sendPetEdit: PUT RESPONSE = ' + JSON.stringify(response.result));
+				_store2.default.dispatch(_actions2.default.updatePets(response.result));
+			});
+		}
+	};
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Register = __webpack_require__(221);
+	var _Register = __webpack_require__(222);
 	
 	var _Register2 = _interopRequireDefault(_Register);
 	
-	var _Login = __webpack_require__(222);
+	var _Login = __webpack_require__(223);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -25842,7 +25934,7 @@
 	exports.default = Landing;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25960,7 +26052,7 @@
 	exports.default = Register;
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

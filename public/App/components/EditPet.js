@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
 import text from '../utils/text'
+import petManager from '../utils/petManager'
 import store from '../stores/store'
 import actions from '../actions/actions'
 
@@ -10,28 +11,23 @@ class EditPet extends Component {
 		this.submitEdit = this.submitEdit.bind(this)
 		this.submitPetEdit = this.submitPetEdit.bind(this)
 	}
-	
+
 	submitEdit(event){
 		event.preventDefault()
-		const curentPetProfile = this.props.pets[this.props.slug]
+		const currentPetProfile = this.props.pets[this.props.slug]
 		
-		var editedPet = Object.assign({}, this.props.currentPet)
-		editedPet.name = curentPetProfile.name
-		editedPet.species = curentPetProfile.species
+		var editedPet = Object.assign({}, currentPetProfile)
 
 		editedPet[event.target.id] = event.target.value
 
 		store.dispatch(actions.receivedPetEdit(editedPet))
 	}
-
+	
 	submitPetEdit(event){
 		event.preventDefault()
-		const curentPetProfile = this.props.pets[this.props.slug]
-		
-		var editedPet = Object.assign({}, this.props.currentPet)
-
-		editedPet['id'] = curentPetProfile.id
-		editedPet['ownerId'] = curentPetProfile.ownerId
+		const currentPetProfile = this.props.pets[this.props.slug]
+		var editedPet = Object.assign({}, currentPetProfile)
+		// var editedPet = Object.assign({}, this.props.currentPet)
 
 		var allergiesString = editedPet['allergiesString']
 		var medicationsString = editedPet['medicationsString']
@@ -39,12 +35,13 @@ class EditPet extends Component {
 		editedPet['allergies'] = text.stringToArray(allergiesString, ',')
 		
 		editedPet['medications'] = text.stringToArray(medicationsString, ',')
+
 			
 		console.log('submitPetEdit: editedPet = '+JSON.stringify(editedPet))
 
 		store.dispatch(actions.receivedPetEdit(editedPet))
 
-		text.sendPetEdit(editedPet)
+		petManager.sendPetEdit(editedPet)
 	}
 
 	render(){

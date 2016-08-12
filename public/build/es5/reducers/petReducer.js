@@ -6,21 +6,21 @@ var constants = _interopRequire(require("../constants/constants"));
 
 var initialState = {
 	pets: {},
-	petsArray: [],
-	currentPet: {
-		id: "",
-		slug: "",
-		ownerId: "",
-		name: "",
-		birthday: "",
-		sex: "",
-		species: "",
-		breed: "",
-		allergies: [],
-		medications: [],
-		allergiesString: "",
-		medicationsString: ""
-	}
+	petsArray: []
+	// currentPet: {
+	// 	id: '',
+	// 	slug: '',
+	// 	ownerId: '',
+	// 	name: '',
+	// 	birthday: '',
+	// 	sex: '',
+	// 	species: '',
+	// 	breed: '',
+	// 	allergies: [],
+	// 	medications: [],
+	// 	allergiesString: '',
+	// 	medicationsString: ''
+	// }
 };
 
 module.exports = function (_x, action) {
@@ -68,8 +68,62 @@ module.exports = function (_x, action) {
 
 			var newState = Object.assign({}, state);
 			var editedPet = action.editedPet;
+			var updatedPets = Object.assign({}, state.pets);
 
-			newState.currentPet = editedPet;
+			updatedPets[editedPet.slug] = editedPet;
+
+			newState.pets = updatedPets;
+
+			return newState;
+
+		case constants.UPDATE_PETS:
+			console.log("UPDATE_PETS: action.updatedPet = " + JSON.stringify(action.updatedPet));
+
+			var newState = Object.assign({}, state);
+			var updatedPet = action.updatedPet;
+			var updatedPets = Object.assign({}, state.pets);
+
+			var allergiesArray = updatedPet.allergies;
+			var allergiesString = "";
+			for (var i = 0; i < allergiesArray.length; i++) {
+				var allergy = allergiesArray[i];
+				if (allergy.length == 0) continue;
+
+				allergiesString = allergiesString + allergy;
+				if (i == allergiesArray.length - 1) continue;
+
+				allergiesString = allergiesString + ",";
+			}
+			updatedPet.allergiesString = allergiesString;
+
+			var medicationArray = updatedPet.medications;
+			var medicationsString = "";
+			for (var i = 0; i < medicationArray.length; i++) {
+				var medication = medicationArray[i];
+				if (medication.length == 0) continue;
+				medicationsString = medicationsString + medication;
+				if (i == medicationArray.length - 1) continue;
+				medicationsString = medicationsString + ",";
+			}
+			updatedPet.medicationsString = medicationsString;
+
+			updatedPets[updatedPet.slug] = updatedPet;
+
+			newState.pets = updatedPets;
+
+			var petsArray = Object.assign([], state.petsArray);
+			var array = Object.assign([], state);
+
+			for (var i = 0; i < petsArray.length; i++) {
+				var pet = petsArray[i];
+
+				if (updatedPet.id == pet.id) {
+					pet = updatedPet;
+				}
+				array.push(pet);
+			}
+
+			newState.petsArray = array;
 
 			return newState;
 

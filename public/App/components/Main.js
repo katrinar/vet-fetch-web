@@ -75,7 +75,7 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray}/>
 			case 'pet':
-				return page = <PetProfile pets={this.props.pets} currentPet={this.props.currentPet} slug={this.props.slug}  />
+				return page = <PetProfile pets={this.props.pets} slug={this.props.slug}  />
 			default: 
 				return page = null
 		}
@@ -93,8 +93,7 @@ const stateToProps = function(state) {
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
-		pets: state.petReducer.pets,
-		currentPet: state.petReducer.currentPet	
+		pets: state.petReducer.pets
 	}
 }
 

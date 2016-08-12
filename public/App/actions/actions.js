@@ -30,6 +30,20 @@ export default {
 			type: constants.RECEIVED_PET_EDIT,
 			editedPet: editedPet
 		}
+	},
+
+	createdCurrentPet: function(currentPet){
+		return{
+			type: constants.CREATED_CURRENT_PET,
+			currentPet: currentPet
+		}
+	},
+
+	updatePets: function(updatedPet){
+		return{
+			type: constants.UPDATE_PETS,
+			updatedPet: updatedPet
+		}
 	}
 
 }

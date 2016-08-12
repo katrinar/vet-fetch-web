@@ -27,7 +27,7 @@ class PetProfile extends Component {
 		var editPet = null
 
 		if (this.state.showEdit == true){
-			editPet = <EditPet currentPet={this.props.currentPet} pets={this.props.pets} slug={this.props.slug}/> 
+			editPet = <EditPet pets={this.props.pets} slug={this.props.slug}/> 
 		}
 
 		return(
@@ -38,8 +38,8 @@ class PetProfile extends Component {
 					<li>Sex: {petProfile.sex} </li>
 					<li>Species: {petProfile.species} </li>
 					<li>Breed: {petProfile.breed} </li>
-					<li>Allergies: {petProfile.allergies} </li>
-					<li>Medications: {petProfile.medications} </li>
+					<li>Allergies: {petProfile.allergiesString} </li>
+					<li>Medications: {petProfile.medicationsString} </li>
 				</ul>
 				<button onClick={navigation.petsPage}>Back to Pets</button>
 				<button onClick={this.sendToEdit}>Edit Pet</button> <br />
