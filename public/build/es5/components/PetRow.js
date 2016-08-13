@@ -40,7 +40,7 @@ var PetRow = (function (Component) {
 						","
 					),
 					" ",
-					text.capitalize(this.props.pet.breed)
+					text.capitalize(this.props.pet.species)
 				);
 			},
 			writable: true,

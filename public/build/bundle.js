@@ -24629,7 +24629,7 @@
 						','
 					),
 					' ',
-					_text2.default.capitalize(this.props.pet.breed)
+					_text2.default.capitalize(this.props.pet.species)
 				);
 			}
 		}]);
@@ -25702,10 +25702,16 @@
 	
 			_this.submitEdit = _this.submitEdit.bind(_this);
 			_this.submitPetEdit = _this.submitPetEdit.bind(_this);
+			_this.cancel = _this.cancel.bind(_this);
 			return _this;
 		}
 	
 		_createClass(EditPet, [{
+			key: 'cancel',
+			value: function cancel(event) {
+				_navigation2.default.petProfilePage(this.props.slug);
+			}
+		}, {
 			key: 'submitEdit',
 			value: function submitEdit(event) {
 				event.preventDefault();
@@ -25741,7 +25747,6 @@
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-				var currentPet = this.props.currentPet || {};
 	
 				return _react2.default.createElement(
 					'div',
@@ -25755,7 +25760,7 @@
 							'Name'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name', placeholder: 'Name', value: petProfile.name }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25763,7 +25768,7 @@
 							'Birthday'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday', placeholder: 'DD/MM/YYYY', value: petProfile.birthday }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25771,7 +25776,7 @@
 							'Sex'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex', placeholder: 'Sex', value: petProfile.sex }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25779,7 +25784,7 @@
 							'Species'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species', placeholder: 'Species', value: petProfile.species }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25787,7 +25792,7 @@
 							'Breed'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed', placeholder: 'Breed', value: petProfile.breed }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25795,7 +25800,7 @@
 							'Allergies'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergiesString', placeholder: 'advil,wheat,etc...' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergiesString', placeholder: 'advil,wheat,etc...', value: petProfile.allergiesString }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -25803,12 +25808,17 @@
 							'Medications'
 						),
 						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medicationsString', placeholder: 'heartworm,vitamins,etc...' }),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medicationsString', placeholder: 'heartworm,vitamins,etc...', value: petProfile.medicationsString }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'button',
 							{ onClick: this.submitPetEdit },
 							'Save Edits'
+						),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.cancel },
+							'Cancel'
 						)
 					)
 				);

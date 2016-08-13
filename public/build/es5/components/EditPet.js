@@ -34,11 +34,19 @@ var EditPet = (function (Component) {
 		_get(Object.getPrototypeOf(EditPet.prototype), "constructor", this).call(this, props, context);
 		this.submitEdit = this.submitEdit.bind(this);
 		this.submitPetEdit = this.submitPetEdit.bind(this);
+		this.cancel = this.cancel.bind(this);
 	}
 
 	_inherits(EditPet, Component);
 
 	_prototypeProperties(EditPet, null, {
+		cancel: {
+			value: function cancel(event) {
+				navigation.petProfilePage(this.props.slug);
+			},
+			writable: true,
+			configurable: true
+		},
 		submitEdit: {
 			value: function submitEdit(event) {
 				event.preventDefault();
@@ -78,7 +86,6 @@ var EditPet = (function (Component) {
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-				var currentPet = this.props.currentPet || {};
 
 				return React.createElement(
 					"div",
@@ -92,7 +99,7 @@ var EditPet = (function (Component) {
 							"Name"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "name" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "name", placeholder: "Name", value: petProfile.name }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -100,7 +107,7 @@ var EditPet = (function (Component) {
 							"Birthday"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "birthday" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "birthday", placeholder: "DD/MM/YYYY", value: petProfile.birthday }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -108,7 +115,7 @@ var EditPet = (function (Component) {
 							"Sex"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "sex" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "sex", placeholder: "Sex", value: petProfile.sex }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -116,7 +123,7 @@ var EditPet = (function (Component) {
 							"Species"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "species" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "species", placeholder: "Species", value: petProfile.species }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -124,7 +131,7 @@ var EditPet = (function (Component) {
 							"Breed"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed", placeholder: "Breed", value: petProfile.breed }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -132,7 +139,7 @@ var EditPet = (function (Component) {
 							"Allergies"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergiesString", placeholder: "advil,wheat,etc..." }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergiesString", placeholder: "advil,wheat,etc...", value: petProfile.allergiesString }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",
@@ -140,12 +147,17 @@ var EditPet = (function (Component) {
 							"Medications"
 						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medicationsString", placeholder: "heartworm,vitamins,etc..." }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medicationsString", placeholder: "heartworm,vitamins,etc...", value: petProfile.medicationsString }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",
 							{ onClick: this.submitPetEdit },
 							"Save Edits"
+						),
+						React.createElement(
+							"button",
+							{ onClick: this.cancel },
+							"Cancel"
 						)
 					)
 				);

@@ -6,7 +6,7 @@ class PetRow extends Component {
 	render(){
 		return(
 			<div>
-				<a href={'/pet/'+this.props.pet.slug}> {text.capitalize(this.props.pet.name)},</a> {text.capitalize(this.props.pet.breed)}
+				<a href={'/pet/'+this.props.pet.slug}> {text.capitalize(this.props.pet.name)},</a> {text.capitalize(this.props.pet.species)}
 			</div>
 		)
 	}
