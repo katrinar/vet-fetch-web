@@ -7,5 +7,9 @@ export default {
 
 	petsPage: function(){
 		window.location.href = '/pets'
+	},
+
+	petProfilePage: function(slug){
+		window.location.href = '/pet/'+slug
 	}
 }

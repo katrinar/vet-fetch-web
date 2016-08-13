@@ -5,46 +5,38 @@ import { connect } from 'react-redux'
 import navigation from '../utils/navigation'
 import text from '../utils/text'
 import EditPet from '../components/EditPet'
+import PetProfileInfo from '../components/PetProfileInfo'
 
 class PetProfile extends Component {
 
 	constructor(props, context){
 		super(props, context)
-		this.sendToEdit = this.sendToEdit.bind(this)
-		this.state = {
-			showEdit: false
-		}
 	}
 
-	sendToEdit(event){
-		console.log('sendToEdit: ')
-		this.setState({showEdit: true})
-	}
+	// sendToEdit(event){
+	// 	console.log('sendToEdit: displayContent props = '+JSON.stringify(this.props.displayContent))
+	// }
 
 	render(){
+		console.log('RENDER showEdit props = '+JSON.stringify(this.props.displayContent))
+
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
-		var editPet = null
+		var petProfileContent = null
+		var displayContent = this.props.displayContent
+		
+		switch(displayContent){
+			case false:
+				return petProfileContent = <PetProfileInfo pets={this.props.pets} slug={this.props.slug} isplayContent={displayContent}/> 
+			case true:
+				return petProfileContent = <EditPet pets={this.props.pets} slug={this.props.slug} displayContent={displayContent}/> 
 
-		if (this.state.showEdit == true){
-			editPet = <EditPet pets={this.props.pets} slug={this.props.slug}/> 
+			default:
+				return petProfileContent = null
 		}
 
 		return(
-			<div>
-				<ul>
-					<li>Name: {petProfile.name} </li>
-					<li>DoB: {petProfile.birthday} </li>
-					<li>Sex: {petProfile.sex} </li>
-					<li>Species: {petProfile.species} </li>
-					<li>Breed: {petProfile.breed} </li>
-					<li>Allergies: {petProfile.allergiesString} </li>
-					<li>Medications: {petProfile.medicationsString} </li>
-				</ul>
-				<button onClick={navigation.petsPage}>Back to Pets</button>
-				<button onClick={this.sendToEdit}>Edit Pet</button> <br />
-				<div>{editPet}</div>
-			</div>
+			<div>{petProfileContent}</div>
 		)
 	}
 }

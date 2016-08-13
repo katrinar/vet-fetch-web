@@ -94,6 +94,7 @@ var Main = (function (Component) {
 			value: function render() {
 				var page = null;
 				var currentUser = this.props.currentUser || {};
+				var displayContent = this.props.displayContent || false;
 
 				switch (this.props.page) {
 					case "home":
@@ -107,7 +108,7 @@ var Main = (function (Component) {
 					case "pets":
 						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case "pet":
-						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug });
+						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayContent: this.props.displayContent });
 					default:
 						return page = null;
 				}
@@ -131,7 +132,8 @@ var stateToProps = function (state) {
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
-		pets: state.petReducer.pets
+		pets: state.petReducer.pets,
+		displayContent: state.displayReducer.displayContent
 	};
 };
 

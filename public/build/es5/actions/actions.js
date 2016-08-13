@@ -48,6 +48,12 @@ module.exports = {
 			type: constants.UPDATE_PETS,
 			updatedPet: updatedPet
 		};
-	}
+	},
 
+	toggleDisplay: function (displayContent) {
+		return {
+			type: constants.TOGGLE_DISPLAY,
+			displayContent: displayContent
+		};
+	}
 };

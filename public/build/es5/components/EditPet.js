@@ -19,6 +19,8 @@ var api = _interopRequire(require("../utils/api"));
 
 var text = _interopRequire(require("../utils/text"));
 
+var navigation = _interopRequire(require("../utils/navigation"));
+
 var petManager = _interopRequire(require("../utils/petManager"));
 
 var store = _interopRequire(require("../stores/store"));
@@ -56,7 +58,6 @@ var EditPet = (function (Component) {
 				event.preventDefault();
 				var currentPetProfile = this.props.pets[this.props.slug];
 				var editedPet = Object.assign({}, currentPetProfile);
-				// var editedPet = Object.assign({}, this.props.currentPet)
 
 				var allergiesString = editedPet.allergiesString;
 				var medicationsString = editedPet.medicationsString;
@@ -65,12 +66,10 @@ var EditPet = (function (Component) {
 
 				editedPet.medications = text.stringToArray(medicationsString, ",");
 
-
-				console.log("submitPetEdit: editedPet = " + JSON.stringify(editedPet));
-
 				store.dispatch(actions.receivedPetEdit(editedPet));
 
 				petManager.sendPetEdit(editedPet);
+				navigation.petProfilePage(this.props.slug);
 			},
 			writable: true,
 			configurable: true

@@ -64,7 +64,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _reactRedux = __webpack_require__(206);
+	var _reactRedux = __webpack_require__(207);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21200,7 +21200,7 @@
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
-	var _Landing = __webpack_require__(221);
+	var _Landing = __webpack_require__(223);
 	
 	var _Landing2 = _interopRequireDefault(_Landing);
 	
@@ -21208,7 +21208,7 @@
 	
 	var _Pets2 = _interopRequireDefault(_Pets);
 	
-	var _PetProfile = __webpack_require__(205);
+	var _PetProfile = __webpack_require__(206);
 	
 	var _PetProfile2 = _interopRequireDefault(_PetProfile);
 	
@@ -21216,11 +21216,11 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(206);
+	var _reactRedux = __webpack_require__(207);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21291,6 +21291,7 @@
 			value: function render() {
 				var page = null;
 				var currentUser = this.props.currentUser || {};
+				var displayContent = this.props.displayContent || false;
 	
 				switch (this.props.page) {
 					case 'home':
@@ -21304,7 +21305,7 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug });
+						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug, displayContent: this.props.displayContent });
 					default:
 						return page = null;
 				}
@@ -21325,7 +21326,8 @@
 		return {
 			currentUser: state.accountReducer.currentUser,
 			petsArray: state.petReducer.petsArray,
-			pets: state.petReducer.pets
+			pets: state.petReducer.pets,
+			displayContent: state.displayReducer.displayContent
 		};
 	};
 	
@@ -22998,6 +23000,10 @@
 	
 		petsPage: function petsPage() {
 			window.location.href = '/pets';
+		},
+	
+		petProfilePage: function petProfilePage(slug) {
+			window.location.href = '/pet/' + slug;
 		}
 	};
 
@@ -23133,11 +23139,11 @@
 	
 	var _RegisterPet2 = _interopRequireDefault(_RegisterPet);
 	
-	var _PetList = __webpack_require__(202);
+	var _PetList = __webpack_require__(203);
 	
 	var _PetList2 = _interopRequireDefault(_PetList);
 	
-	var _PetProfile = __webpack_require__(205);
+	var _PetProfile = __webpack_require__(206);
 	
 	var _PetProfile2 = _interopRequireDefault(_PetProfile);
 	
@@ -23207,7 +23213,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -23303,7 +23309,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	
 	var _redux = __webpack_require__(184);
@@ -23320,12 +23326,17 @@
 	
 	var _petReducer2 = _interopRequireDefault(_petReducer);
 	
+	var _displayReducer = __webpack_require__(201);
+	
+	var _displayReducer2 = _interopRequireDefault(_displayReducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// Combine reducers
 	var reducers = (0, _redux.combineReducers)({
-			accountReducer: _accountReducer2.default,
-			petReducer: _petReducer2.default
+		accountReducer: _accountReducer2.default,
+		petReducer: _petReducer2.default,
+		displayReducer: _displayReducer2.default
 	});
 	
 	// Create createStore
@@ -24256,7 +24267,9 @@
 		RECEIVED_PETS: 'RECEIVED_PETS',
 		RECEIVED_PET_EDIT: 'RECEIVED_PET_EDIT',
 		CREATED_CURRENT_PET: 'CREATED_CURRENT_PET',
-		UPDATE_PETS: 'UPDATE_PETS'
+		UPDATE_PETS: 'UPDATE_PETS',
+		TOGGLE_DISPLAY: 'TOGGLE_DISPLAY',
+		TOGGLE_OFF: 'TOGGLE_OFF'
 	};
 
 /***/ },
@@ -24296,7 +24309,6 @@
 				return newState;
 	
 			case _constants2.default.REGISTER_PET:
-				console.log('RECEIVED_REGISTER_PET: ');
 				var newState = Object.assign({}, state);
 				var array = Object.assign([], state.petsArray);
 				array.push(action.pet);
@@ -24311,8 +24323,6 @@
 				return newState;
 	
 			case _constants2.default.RECEIVED_PET_EDIT:
-				console.log('RECEIVED_PET_EDIT: action.editedPet = ' + JSON.stringify(action.editedPet));
-	
 				var newState = Object.assign({}, state);
 				var editedPet = action.editedPet;
 				var updatedPets = Object.assign({}, state.pets);
@@ -24324,8 +24334,6 @@
 				return newState;
 	
 			case _constants2.default.UPDATE_PETS:
-				console.log('UPDATE_PETS: action.updatedPet = ' + JSON.stringify(action.updatedPet));
-	
 				var newState = Object.assign({}, state);
 				var updatedPet = action.updatedPet;
 				var updatedPets = Object.assign({}, state.pets);
@@ -24414,6 +24422,43 @@
 		value: true
 	});
 	
+	exports.default = function () {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _constants2.default.TOGGLE_DISPLAY:
+				console.log('TOGGLE_DISPLAY: ' + JSON.stringify(action.displayContent));
+				var newState = Object.assign({}, state);
+				var displayContent = Object.assign({}, action.displayContent);
+				newState['displayContent'] = action.displayContent;
+				return newState;
+	
+			default:
+				return state;
+		}
+	};
+	
+	var _constants = __webpack_require__(199);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var initialState = {
+		displayContent: false
+	};
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
 	var _constants = __webpack_require__(199);
 	
 	var _constants2 = _interopRequireDefault(_constants);
@@ -24466,12 +24511,18 @@
 				type: _constants2.default.UPDATE_PETS,
 				updatedPet: updatedPet
 			};
-		}
+		},
 	
+		toggleDisplay: function toggleDisplay(displayContent) {
+			return {
+				type: _constants2.default.TOGGLE_DISPLAY,
+				displayContent: displayContent
+			};
+		}
 	};
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24486,7 +24537,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PetRow = __webpack_require__(203);
+	var _PetRow = __webpack_require__(204);
 	
 	var _PetRow2 = _interopRequireDefault(_PetRow);
 	
@@ -24528,7 +24579,7 @@
 	exports.default = PetList;
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24543,7 +24594,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _text = __webpack_require__(204);
+	var _text = __webpack_require__(205);
 	
 	var _text2 = _interopRequireDefault(_text);
 	
@@ -24589,7 +24640,7 @@
 	exports.default = PetRow;
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24628,7 +24679,7 @@
 	};
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24647,23 +24698,27 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(206);
+	var _reactRedux = __webpack_require__(207);
 	
 	var _navigation = __webpack_require__(179);
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _text = __webpack_require__(204);
+	var _text = __webpack_require__(205);
 	
 	var _text2 = _interopRequireDefault(_text);
 	
-	var _EditPet = __webpack_require__(219);
+	var _EditPet = __webpack_require__(220);
 	
 	var _EditPet2 = _interopRequireDefault(_EditPet);
+	
+	var _PetProfileInfo = __webpack_require__(222);
+	
+	var _PetProfileInfo2 = _interopRequireDefault(_PetProfileInfo);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24679,105 +24734,37 @@
 		function PetProfile(props, context) {
 			_classCallCheck(this, PetProfile);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).call(this, props, context));
-	
-			_this.sendToEdit = _this.sendToEdit.bind(_this);
-			_this.state = {
-				showEdit: false
-			};
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfile).call(this, props, context));
 		}
 	
+		// sendToEdit(event){
+		// 	console.log('sendToEdit: displayContent props = '+JSON.stringify(this.props.displayContent))
+		// }
+	
 		_createClass(PetProfile, [{
-			key: 'sendToEdit',
-			value: function sendToEdit(event) {
-				console.log('sendToEdit: ');
-				this.setState({ showEdit: true });
-			}
-		}, {
 			key: 'render',
 			value: function render() {
+				console.log('RENDER showEdit props = ' + JSON.stringify(this.props.displayContent));
+	
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-				var editPet = null;
+				var petProfileContent = null;
+				var displayContent = this.props.displayContent;
 	
-				if (this.state.showEdit == true) {
-					editPet = _react2.default.createElement(_EditPet2.default, { pets: this.props.pets, slug: this.props.slug });
+				switch (displayContent) {
+					case false:
+						return petProfileContent = _react2.default.createElement(_PetProfileInfo2.default, { pets: this.props.pets, slug: this.props.slug, isplayContent: displayContent });
+					case true:
+						return petProfileContent = _react2.default.createElement(_EditPet2.default, { pets: this.props.pets, slug: this.props.slug, displayContent: displayContent });
+	
+					default:
+						return petProfileContent = null;
 				}
 	
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(
-						'ul',
-						null,
-						_react2.default.createElement(
-							'li',
-							null,
-							'Name: ',
-							petProfile.name,
-							' '
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'DoB: ',
-							petProfile.birthday,
-							' '
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'Sex: ',
-							petProfile.sex,
-							' '
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'Species: ',
-							petProfile.species,
-							' '
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'Breed: ',
-							petProfile.breed,
-							' '
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'Allergies: ',
-							petProfile.allergiesString,
-							' '
-						),
-						_react2.default.createElement(
-							'li',
-							null,
-							'Medications: ',
-							petProfile.medicationsString,
-							' '
-						)
-					),
-					_react2.default.createElement(
-						'button',
-						{ onClick: _navigation2.default.petsPage },
-						'Back to Pets'
-					),
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.sendToEdit },
-						'Edit Pet'
-					),
-					' ',
-					_react2.default.createElement('br', null),
-					_react2.default.createElement(
-						'div',
-						null,
-						editPet
-					)
+					petProfileContent
 				);
 			}
 		}]);
@@ -24788,7 +24775,7 @@
 	exports.default = PetProfile;
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24796,11 +24783,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(207);
+	var _Provider = __webpack_require__(208);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connect = __webpack_require__(210);
+	var _connect = __webpack_require__(211);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -24810,7 +24797,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -24820,11 +24807,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(208);
+	var _storeShape = __webpack_require__(209);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _warning = __webpack_require__(209);
+	var _warning = __webpack_require__(210);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -24894,7 +24881,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24910,7 +24897,7 @@
 	});
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24939,7 +24926,7 @@
 	}
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -24951,31 +24938,31 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(208);
+	var _storeShape = __webpack_require__(209);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _shallowEqual = __webpack_require__(211);
+	var _shallowEqual = __webpack_require__(212);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _wrapActionCreators = __webpack_require__(212);
+	var _wrapActionCreators = __webpack_require__(213);
 	
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 	
-	var _warning = __webpack_require__(209);
+	var _warning = __webpack_require__(210);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(213);
+	var _isPlainObject = __webpack_require__(214);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(217);
+	var _hoistNonReactStatics = __webpack_require__(218);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(218);
+	var _invariant = __webpack_require__(219);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -25338,7 +25325,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -25369,7 +25356,7 @@
 	}
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25386,12 +25373,12 @@
 	}
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(214),
-	    isHostObject = __webpack_require__(215),
-	    isObjectLike = __webpack_require__(216);
+	var getPrototype = __webpack_require__(215),
+	    isHostObject = __webpack_require__(216),
+	    isObjectLike = __webpack_require__(217);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -25462,7 +25449,7 @@
 
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -25483,7 +25470,7 @@
 
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports) {
 
 	/**
@@ -25509,7 +25496,7 @@
 
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports) {
 
 	/**
@@ -25544,7 +25531,7 @@
 
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports) {
 
 	/**
@@ -25600,7 +25587,7 @@
 
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25658,7 +25645,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25677,11 +25664,15 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
-	var _text = __webpack_require__(204);
+	var _text = __webpack_require__(205);
 	
 	var _text2 = _interopRequireDefault(_text);
 	
-	var _petManager = __webpack_require__(220);
+	var _navigation = __webpack_require__(179);
+	
+	var _navigation2 = _interopRequireDefault(_navigation);
+	
+	var _petManager = __webpack_require__(221);
 	
 	var _petManager2 = _interopRequireDefault(_petManager);
 	
@@ -25689,7 +25680,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -25732,7 +25723,6 @@
 				event.preventDefault();
 				var currentPetProfile = this.props.pets[this.props.slug];
 				var editedPet = Object.assign({}, currentPetProfile);
-				// var editedPet = Object.assign({}, this.props.currentPet)
 	
 				var allergiesString = editedPet['allergiesString'];
 				var medicationsString = editedPet['medicationsString'];
@@ -25741,11 +25731,10 @@
 	
 				editedPet['medications'] = _text2.default.stringToArray(medicationsString, ',');
 	
-				console.log('submitPetEdit: editedPet = ' + JSON.stringify(editedPet));
-	
 				_store2.default.dispatch(_actions2.default.receivedPetEdit(editedPet));
 	
 				_petManager2.default.sendPetEdit(editedPet);
+				_navigation2.default.petProfilePage(this.props.slug);
 			}
 		}, {
 			key: 'render',
@@ -25832,7 +25821,7 @@
 	exports.default = EditPet;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25849,7 +25838,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -25875,7 +25864,7 @@
 	};
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25890,11 +25879,156 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Register = __webpack_require__(222);
+	var _navigation = __webpack_require__(179);
+	
+	var _navigation2 = _interopRequireDefault(_navigation);
+	
+	var _store = __webpack_require__(183);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(202);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PetProfileInfo = function (_Component) {
+		_inherits(PetProfileInfo, _Component);
+	
+		function PetProfileInfo(props, context) {
+			_classCallCheck(this, PetProfileInfo);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PetProfileInfo).call(this, props, context));
+	
+			_this.sendToEdit = _this.sendToEdit.bind(_this);
+			return _this;
+		}
+	
+		_createClass(PetProfileInfo, [{
+			key: 'sendToEdit',
+			value: function sendToEdit(event) {
+				var changeDisplay = Object.assign({}, this.props.displayContent);
+				changeDisplay = true;
+				console.log('sendToEdit: displayContent props = ' + JSON.stringify(this.props.displayContent) + ', changeDisplay = ' + JSON.stringify(changeDisplay));
+				_store2.default.dispatch(_actions2.default.toggleDisplay(changeDisplay));
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var petSlug = this.props.slug;
+				var petProfile = this.props.pets[petSlug] || {};
+	
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'button',
+							{ onClick: _navigation2.default.petsPage },
+							'Back to Pets'
+						),
+						' ',
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.sendToEdit },
+							'Edit Pet'
+						),
+						' ',
+						_react2.default.createElement('br', null)
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						_react2.default.createElement(
+							'li',
+							null,
+							'Name: ',
+							petProfile.name,
+							' '
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'DoB: ',
+							petProfile.birthday,
+							' '
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Sex: ',
+							petProfile.sex,
+							' '
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Species: ',
+							petProfile.species,
+							' '
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Breed: ',
+							petProfile.breed,
+							' '
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Allergies: ',
+							petProfile.allergiesString,
+							' '
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Medications: ',
+							petProfile.medicationsString,
+							' '
+						)
+					)
+				);
+			}
+		}]);
+	
+		return PetProfileInfo;
+	}(_react.Component);
+	
+	exports.default = PetProfileInfo;
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Register = __webpack_require__(224);
 	
 	var _Register2 = _interopRequireDefault(_Register);
 	
-	var _Login = __webpack_require__(223);
+	var _Login = __webpack_require__(225);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -25934,7 +26068,7 @@
 	exports.default = Landing;
 
 /***/ },
-/* 222 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25957,7 +26091,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -26052,7 +26186,7 @@
 	exports.default = Register;
 
 /***/ },
-/* 223 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26075,7 +26209,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(201);
+	var _actions = __webpack_require__(202);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	

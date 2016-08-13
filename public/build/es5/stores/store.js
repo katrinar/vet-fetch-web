@@ -13,10 +13,13 @@ var accountReducer = _interopRequire(require("../reducers/accountReducer"));
 
 var petReducer = _interopRequire(require("../reducers/petReducer"));
 
+var displayReducer = _interopRequire(require("../reducers/displayReducer"));
+
 // Combine reducers
 var reducers = combineReducers({
-		accountReducer: accountReducer,
-		petReducer: petReducer
+	accountReducer: accountReducer,
+	petReducer: petReducer,
+	displayReducer: displayReducer
 });
 
 // Create createStore

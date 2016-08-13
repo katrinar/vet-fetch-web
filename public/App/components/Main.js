@@ -62,6 +62,7 @@ class Main extends Component {
 	render() {
 		var page = null
 		var currentUser = this.props.currentUser || {}
+		var displayContent = this.props.displayContent || false
 
 		switch(this.props.page){
 			case 'home':
@@ -75,7 +76,7 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray}/>
 			case 'pet':
-				return page = <PetProfile pets={this.props.pets} slug={this.props.slug}  />
+				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayContent={this.props.displayContent}/>
 			default: 
 				return page = null
 		}
@@ -93,7 +94,8 @@ const stateToProps = function(state) {
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
-		pets: state.petReducer.pets
+		pets: state.petReducer.pets,
+		displayContent: state.displayReducer.displayContent
 	}
 }
 

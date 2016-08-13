@@ -26,111 +26,46 @@ var text = _interopRequire(require("../utils/text"));
 
 var EditPet = _interopRequire(require("../components/EditPet"));
 
+var PetProfileInfo = _interopRequire(require("../components/PetProfileInfo"));
+
 var PetProfile = (function (Component) {
 	function PetProfile(props, context) {
 		_classCallCheck(this, PetProfile);
 
 		_get(Object.getPrototypeOf(PetProfile.prototype), "constructor", this).call(this, props, context);
-		this.sendToEdit = this.sendToEdit.bind(this);
-		this.state = {
-			showEdit: false
-		};
 	}
 
 	_inherits(PetProfile, Component);
 
 	_prototypeProperties(PetProfile, null, {
-		sendToEdit: {
-			value: function sendToEdit(event) {
-				console.log("sendToEdit: ");
-				this.setState({ showEdit: true });
-			},
-			writable: true,
-			configurable: true
-		},
 		render: {
+
+			// sendToEdit(event){
+			// 	console.log('sendToEdit: displayContent props = '+JSON.stringify(this.props.displayContent))
+			// }
+
 			value: function render() {
+				console.log("RENDER showEdit props = " + JSON.stringify(this.props.displayContent));
+
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-				var editPet = null;
+				var petProfileContent = null;
+				var displayContent = this.props.displayContent;
 
-				if (this.state.showEdit == true) {
-					editPet = React.createElement(EditPet, { pets: this.props.pets, slug: this.props.slug });
+				switch (displayContent) {
+					case false:
+						return petProfileContent = React.createElement(PetProfileInfo, { pets: this.props.pets, slug: this.props.slug, isplayContent: displayContent });
+					case true:
+						return petProfileContent = React.createElement(EditPet, { pets: this.props.pets, slug: this.props.slug, displayContent: displayContent });
+
+					default:
+						return petProfileContent = null;
 				}
 
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(
-						"ul",
-						null,
-						React.createElement(
-							"li",
-							null,
-							"Name: ",
-							petProfile.name,
-							" "
-						),
-						React.createElement(
-							"li",
-							null,
-							"DoB: ",
-							petProfile.birthday,
-							" "
-						),
-						React.createElement(
-							"li",
-							null,
-							"Sex: ",
-							petProfile.sex,
-							" "
-						),
-						React.createElement(
-							"li",
-							null,
-							"Species: ",
-							petProfile.species,
-							" "
-						),
-						React.createElement(
-							"li",
-							null,
-							"Breed: ",
-							petProfile.breed,
-							" "
-						),
-						React.createElement(
-							"li",
-							null,
-							"Allergies: ",
-							petProfile.allergiesString,
-							" "
-						),
-						React.createElement(
-							"li",
-							null,
-							"Medications: ",
-							petProfile.medicationsString,
-							" "
-						)
-					),
-					React.createElement(
-						"button",
-						{ onClick: navigation.petsPage },
-						"Back to Pets"
-					),
-					React.createElement(
-						"button",
-						{ onClick: this.sendToEdit },
-						"Edit Pet"
-					),
-					" ",
-					React.createElement("br", null),
-					React.createElement(
-						"div",
-						null,
-						editPet
-					)
+					petProfileContent
 				);
 			},
 			writable: true,

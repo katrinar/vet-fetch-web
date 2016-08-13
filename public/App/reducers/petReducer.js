@@ -43,7 +43,6 @@ export default function(state = initialState, action){
 			return newState
 
 		case constants.REGISTER_PET:
-			console.log('RECEIVED_REGISTER_PET: ')
 			var newState = Object.assign({}, state)
 			var array = Object.assign([], state.petsArray)
 			array.push(action.pet)
@@ -58,8 +57,6 @@ export default function(state = initialState, action){
 			return newState
 			
 		case constants.RECEIVED_PET_EDIT:
-		console.log('RECEIVED_PET_EDIT: action.editedPet = '+JSON.stringify(action.editedPet))
-
 		var newState = Object.assign({}, state)
 		var editedPet = action.editedPet
 		var updatedPets = Object.assign({}, state.pets)
@@ -68,11 +65,9 @@ export default function(state = initialState, action){
 
 		newState['pets'] = updatedPets
 
-		return newState
+			return newState
 
 		case constants.UPDATE_PETS:
-		console.log('UPDATE_PETS: action.updatedPet = '+JSON.stringify(action.updatedPet))
-
 		var newState = Object.assign({}, state)
 		var updatedPet = action.updatedPet
 		var updatedPets = Object.assign({}, state.pets)
