@@ -26,7 +26,7 @@ var text = _interopRequire(require("../utils/text"));
 
 var EditPet = _interopRequire(require("../components/EditPet"));
 
-var PetProfileInfo = _interopRequire(require("../components/PetProfileInfo"));
+var PetProfileContent = _interopRequire(require("../components/PetProfileContent"));
 
 var PetProfile = (function (Component) {
 	function PetProfile(props, context) {
@@ -39,14 +39,7 @@ var PetProfile = (function (Component) {
 
 	_prototypeProperties(PetProfile, null, {
 		render: {
-
-			// sendToEdit(event){
-			// 	console.log('sendToEdit: displayContent props = '+JSON.stringify(this.props.displayContent))
-			// }
-
 			value: function render() {
-				console.log("RENDER showEdit props = " + JSON.stringify(this.props.displayContent));
-
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 				var petProfileContent = null;
@@ -54,7 +47,7 @@ var PetProfile = (function (Component) {
 
 				switch (displayContent) {
 					case false:
-						return petProfileContent = React.createElement(PetProfileInfo, { pets: this.props.pets, slug: this.props.slug, isplayContent: displayContent });
+						return petProfileContent = React.createElement(PetProfileContent, { pets: this.props.pets, slug: this.props.slug, displayContent: displayContent });
 					case true:
 						return petProfileContent = React.createElement(EditPet, { pets: this.props.pets, slug: this.props.slug, displayContent: displayContent });
 

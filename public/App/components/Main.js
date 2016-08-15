@@ -5,6 +5,7 @@ import Account from '../components/Account'
 import Landing from '../components/Landing'
 import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
+import Appointments from '../components/Appointments'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
@@ -77,6 +78,8 @@ class Main extends Component {
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray}/>
 			case 'pet':
 				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayContent={this.props.displayContent}/>
+			case 'appointments':
+				return page = <Appointments />
 			default: 
 				return page = null
 		}

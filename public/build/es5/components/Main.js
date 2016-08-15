@@ -27,6 +27,8 @@ var Pets = _interopRequire(require("../components/Pets"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
 
+var Appointments = _interopRequire(require("../components/Appointments"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -109,6 +111,8 @@ var Main = (function (Component) {
 						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 					case "pet":
 						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayContent: this.props.displayContent });
+					case "appointments":
+						return page = React.createElement(Appointments, null);
 					default:
 						return page = null;
 				}

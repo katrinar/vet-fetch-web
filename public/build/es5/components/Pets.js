@@ -41,6 +41,7 @@ var Pets = (function (Component) {
 					React.createElement(RegisterPet, { currentUser: this.props.currentUser }),
 					React.createElement("br", null),
 					React.createElement(PetList, { petsArray: this.props.petsArray }),
+					" ",
 					React.createElement("br", null),
 					React.createElement(
 						"button",

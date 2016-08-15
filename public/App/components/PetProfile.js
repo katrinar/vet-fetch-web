@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import navigation from '../utils/navigation'
 import text from '../utils/text'
 import EditPet from '../components/EditPet'
-import PetProfileInfo from '../components/PetProfileInfo'
+import PetProfileContent from '../components/PetProfileContent'
 
 class PetProfile extends Component {
 
@@ -13,12 +13,7 @@ class PetProfile extends Component {
 		super(props, context)
 	}
 
-	// sendToEdit(event){
-	// 	console.log('sendToEdit: displayContent props = '+JSON.stringify(this.props.displayContent))
-	// }
-
 	render(){
-		console.log('RENDER showEdit props = '+JSON.stringify(this.props.displayContent))
 
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
@@ -27,7 +22,7 @@ class PetProfile extends Component {
 		
 		switch(displayContent){
 			case false:
-				return petProfileContent = <PetProfileInfo pets={this.props.pets} slug={this.props.slug} isplayContent={displayContent}/> 
+				return petProfileContent = <PetProfileContent pets={this.props.pets} slug={this.props.slug} displayContent={displayContent}/> 
 			case true:
 				return petProfileContent = <EditPet pets={this.props.pets} slug={this.props.slug} displayContent={displayContent}/> 
 

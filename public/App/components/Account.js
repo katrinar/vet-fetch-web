@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Pets from '../components/Pets'
 import api from '../utils/api'
+import text from '../utils/text'
 import store from '../stores/store'
 
 class Account extends Component {
@@ -9,12 +9,6 @@ class Account extends Component {
 		super(props, context)
 		this.logout = this.logout.bind(this)
 	}
-
-	// componentDidMount(){
-	// 	 var storeState = store.getState()
-	// 	var user = storeState.accountReducer.currentUser || {}
-	// 	console.log('ACCOUNT componentDidMount: '+JSON.stringify(user))
-	// }
 
 	logout(event){
 		event.preventDefault()
@@ -34,10 +28,10 @@ class Account extends Component {
 		return(
 			<div>
 				<h2>
-					Welcome, {this.props.currentUser.firstName}
+					Welcome, {text.capitalize(this.props.currentUser.firstName)}
 				</h2>
 				<h3><a href={'/pets/'}>Pets</a></h3>
-				<h3>Appointments</h3>
+				<h3><a href={'/appointments/'}>Appointments</a></h3>
 				<button onClick={this.logout}>Logout</button>
 			</div>
 		)

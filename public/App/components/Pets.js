@@ -14,8 +14,8 @@ class Pets extends Component {
 
 		return(
 			<div>
-				{<RegisterPet currentUser={this.props.currentUser}/>}<br />
-				{< PetList petsArray={this.props.petsArray}/> }<br />
+				<RegisterPet currentUser={this.props.currentUser}/><br />
+				<PetList petsArray={this.props.petsArray}/> <br />
 				<button onClick={navigation.accountPage}>Back to Home</button>
 
 			</div>

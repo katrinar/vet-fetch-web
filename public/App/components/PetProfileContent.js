@@ -2,42 +2,41 @@ import React, { Component } from 'react'
 import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
+import PetHealthRecord from '../components/PetHealthRecord'
+import PetStats from '../components/PetStats'
+
 
 class PetProfileInfo extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.sendToEdit = this.sendToEdit.bind(this)
+
 	}
 
 	sendToEdit(event){
 		var changeDisplay = Object.assign({}, this.props.displayContent) 
 		changeDisplay = true
-		console.log('sendToEdit: displayContent props = '+JSON.stringify(this.props.displayContent)+', changeDisplay = '+JSON.stringify(changeDisplay))
+		
 		store.dispatch(actions.toggleDisplay(changeDisplay))
 	}
-
 
 	render(){
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
+		var displayContent = this.props.displayContent
 
+		console.log('RENDER showEdit props = '+JSON.stringify(this.props.displayContent))
 		return(
 			<div>
 				<div>
-					<button onClick={navigation.petsPage}>Back to Pets</button> <br />
-					<button onClick={this.sendToEdit}>Edit Pet
-					</button> <br />
+					<button onClick={navigation.petsPage}>Back to Pets</button>
+					<button onClick={this.sendToEdit}>Edit Pet</button>
+					<button onClick={this.showHealthRecord}>Health Record</button>
 				</div>
 
-				<ul>
-					<li>Name: {petProfile.name} </li>
-					<li>DoB: {petProfile.birthday} </li>
-					<li>Sex: {petProfile.sex} </li>
-					<li>Species: {petProfile.species} </li>
-					<li>Breed: {petProfile.breed} </li>
-					<li>Allergies: {petProfile.allergiesString} </li>
-					<li>Medications: {petProfile.medicationsString} </li>
-				</ul>
+				
+				<div><PetStats pets={this.props.pets} slug={this.props.slug}/></div>
+				<div><PetHealthRecord pets={this.props.pets} slug={this.props.slug} /></div>
 			</div>
 		)
 	}

@@ -15,9 +15,9 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var Pets = _interopRequire(require("../components/Pets"));
-
 var api = _interopRequire(require("../utils/api"));
+
+var text = _interopRequire(require("../utils/text"));
 
 var store = _interopRequire(require("../stores/store"));
 
@@ -33,13 +33,6 @@ var Account = (function (Component) {
 
 	_prototypeProperties(Account, null, {
 		logout: {
-
-			// componentDidMount(){
-			// 	 var storeState = store.getState()
-			// 	var user = storeState.accountReducer.currentUser || {}
-			// 	console.log('ACCOUNT componentDidMount: '+JSON.stringify(user))
-			// }
-
 			value: function logout(event) {
 				event.preventDefault();
 
@@ -63,7 +56,7 @@ var Account = (function (Component) {
 						"h2",
 						null,
 						"Welcome, ",
-						this.props.currentUser.firstName
+						text.capitalize(this.props.currentUser.firstName)
 					),
 					React.createElement(
 						"h3",
@@ -77,7 +70,11 @@ var Account = (function (Component) {
 					React.createElement(
 						"h3",
 						null,
-						"Appointments"
+						React.createElement(
+							"a",
+							{ href: "/appointments/" },
+							"Appointments"
+						)
 					),
 					React.createElement(
 						"button",

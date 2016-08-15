@@ -15,33 +15,22 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var navigation = _interopRequire(require("../utils/navigation"));
+var PetStats = (function (Component) {
+	function PetStats(props, context) {
+		_classCallCheck(this, PetStats);
 
-var store = _interopRequire(require("../stores/store"));
-
-var actions = _interopRequire(require("../actions/actions"));
-
-var PetHealthRecord = _interopRequire(require("../components/PetHealthRecord"));
-
-var PetStats = _interopRequire(require("../components/PetStats"));
-
-var PetProfileInfo = (function (Component) {
-	function PetProfileInfo(props, context) {
-		_classCallCheck(this, PetProfileInfo);
-
-		_get(Object.getPrototypeOf(PetProfileInfo.prototype), "constructor", this).call(this, props, context);
-		this.sendToEdit = this.sendToEdit.bind(this);
+		_get(Object.getPrototypeOf(PetStats.prototype), "constructor", this).call(this, props, context);
+		this.showHealthRecord = this.showHealthRecord.bind(this);
 	}
 
-	_inherits(PetProfileInfo, Component);
+	_inherits(PetStats, Component);
 
-	_prototypeProperties(PetProfileInfo, null, {
-		sendToEdit: {
-			value: function sendToEdit(event) {
+	_prototypeProperties(PetStats, null, {
+		showHealthRecord: {
+			value: function showHealthRecord(event) {
 				var changeDisplay = Object.assign({}, this.props.displayContent);
 				changeDisplay = true;
-
-				store.dispatch(actions.toggleDisplay(changeDisplay));
+				console.log("showHealthRecord: displayContent props = " + JSON.stringify(changeDisplay));
 			},
 			writable: true,
 			configurable: true
@@ -50,40 +39,47 @@ var PetProfileInfo = (function (Component) {
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
-				var displayContent = this.props.displayContent;
 
-				console.log("RENDER showEdit props = " + JSON.stringify(this.props.displayContent));
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
 						"div",
-						null,
+						{ id: "profileContent" },
 						React.createElement(
-							"button",
-							{ onClick: navigation.petsPage },
-							"Back to Pets"
+							"div",
+							{ id: "profileHeader" },
+							React.createElement(
+								"h2",
+								null,
+								petProfile.name
+							),
+							React.createElement(
+								"h4",
+								null,
+								petProfile.species
+							),
+							React.createElement(
+								"h4",
+								null,
+								petProfile.breed
+							)
 						),
 						React.createElement(
-							"button",
-							{ onClick: this.sendToEdit },
-							"Edit Pet"
-						),
-						React.createElement(
-							"button",
-							{ onClick: this.showHealthRecord },
-							"Health Record"
+							"div",
+							{ id: "profileStats" },
+							React.createElement(
+								"h4",
+								null,
+								petProfile.sex
+							),
+							React.createElement(
+								"h4",
+								null,
+								"DoB: ",
+								petProfile.birthday
+							)
 						)
-					),
-					React.createElement(
-						"div",
-						null,
-						React.createElement(PetStats, { pets: this.props.pets, slug: this.props.slug })
-					),
-					React.createElement(
-						"div",
-						null,
-						React.createElement(PetHealthRecord, { pets: this.props.pets, slug: this.props.slug })
 					)
 				);
 			},
@@ -92,7 +88,7 @@ var PetProfileInfo = (function (Component) {
 		}
 	});
 
-	return PetProfileInfo;
+	return PetStats;
 })(Component);
 
-module.exports = PetProfileInfo;
+module.exports = PetStats;
