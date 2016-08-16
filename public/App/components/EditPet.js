@@ -11,11 +11,6 @@ class EditPet extends Component {
 		super(props, context)
 		this.submitEdit = this.submitEdit.bind(this)
 		this.submitPetEdit = this.submitPetEdit.bind(this)
-		this.cancel = this.cancel.bind(this)
-	}
-
-	cancel(event){
-		navigation.petProfilePage(this.props.slug)
 	}
 
 	submitEdit(event){
@@ -45,7 +40,6 @@ class EditPet extends Component {
 
 		petManager.sendPetEdit(editedPet)
 		navigation.petProfilePage(this.props.slug)
-
 	}
 
 	render(){
@@ -77,7 +71,7 @@ class EditPet extends Component {
 						<input type="text" onChange={this.submitEdit} id="medicationsString" placeholder={'heartworm,vitamins,etc...'} value={petProfile.medicationsString} /><br />
 
 					<button onClick={this.submitPetEdit}>Save Edits</button>
-					<button onClick={this.cancel}>Cancel</button>
+					<button onClick={navigation.dismissEditPet}>Cancel</button>
 				</form> 
 			</div>
 		)

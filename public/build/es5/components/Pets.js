@@ -35,19 +35,18 @@ var Pets = (function (Component) {
 	_prototypeProperties(Pets, null, {
 		render: {
 			value: function render() {
+				var content = null;
+				switch (this.props.showRegisterPet) {
+					case false:
+						return content = React.createElement(PetList, { petsArray: this.props.petsArray });
+					case true:
+						return content = React.createElement(RegisterPet, { currentUser: this.props.currentUser });
+				}
+
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(RegisterPet, { currentUser: this.props.currentUser }),
-					React.createElement("br", null),
-					React.createElement(PetList, { petsArray: this.props.petsArray }),
-					" ",
-					React.createElement("br", null),
-					React.createElement(
-						"button",
-						{ onClick: navigation.accountPage },
-						"Back to Home"
-					)
+					content
 				);
 			},
 			writable: true,

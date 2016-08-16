@@ -13,49 +13,35 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var PetRow = _interopRequire(require("../components/PetRow"));
-
 var navigation = _interopRequire(require("../utils/navigation"));
 
-var HomeButton = _interopRequire(require("../components/HomeButton"));
-
-var PetList = (function (Component) {
-	function PetList() {
-		_classCallCheck(this, PetList);
+var PetNavigationToggle = (function (Component) {
+	function PetNavigationToggle() {
+		_classCallCheck(this, PetNavigationToggle);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(PetList, Component);
+	_inherits(PetNavigationToggle, Component);
 
-	_prototypeProperties(PetList, null, {
+	_prototypeProperties(PetNavigationToggle, null, {
 		render: {
 			value: function render() {
-				var petList = this.props.petsArray.map(function (pet, i) {
-					return React.createElement(PetRow, { key: i, pet: pet });
-				});
-
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
-						"div",
-						null,
-						React.createElement(
-							"button",
-							{ onClick: navigation.registerPet },
-							"Add a Pet"
-						),
-						React.createElement(HomeButton, null)
+						"button",
+						{ onClick: navigation.dismissHealthRecord },
+						"Stats"
 					),
 					React.createElement(
-						"h4",
-						null,
-						"Pets"
-					),
-					petList
+						"button",
+						{ onClick: navigation.healthRecord },
+						"Health Record"
+					)
 				);
 			},
 			writable: true,
@@ -63,7 +49,7 @@ var PetList = (function (Component) {
 		}
 	});
 
-	return PetList;
+	return PetNavigationToggle;
 })(Component);
 
-module.exports = PetList;
+module.exports = PetNavigationToggle;

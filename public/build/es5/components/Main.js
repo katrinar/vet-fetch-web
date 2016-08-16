@@ -27,8 +27,6 @@ var Pets = _interopRequire(require("../components/Pets"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
 
-var Appointments = _interopRequire(require("../components/Appointments"));
-
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -96,7 +94,7 @@ var Main = (function (Component) {
 			value: function render() {
 				var page = null;
 				var currentUser = this.props.currentUser || {};
-				var displayContent = this.props.displayContent || false;
+				var displayEditPet = this.props.displayEditPet || false;
 
 				switch (this.props.page) {
 					case "home":
@@ -108,11 +106,9 @@ var Main = (function (Component) {
 					case "account":
 						return page = React.createElement(Account, { currentUser: this.props.currentUser });
 					case "pets":
-						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
+						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray, showRegisterPet: this.props.showRegisterPet });
 					case "pet":
-						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayContent: this.props.displayContent });
-					case "appointments":
-						return page = React.createElement(Appointments, null);
+						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					default:
 						return page = null;
 				}
@@ -137,7 +133,9 @@ var stateToProps = function (state) {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
 		pets: state.petReducer.pets,
-		displayContent: state.displayReducer.displayContent
+		displayEditPet: state.displayReducer.displayEditPet,
+		showHealthRecord: state.displayReducer.showHealthRecord,
+		showRegisterPet: state.displayReducer.showRegisterPet
 	};
 };
 

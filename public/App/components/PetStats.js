@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
+import navigation from '../utils/navigation'
+import store from '../stores/store'
+import actions from '../actions/actions'
+import PetNavigation from '../components/PetNavigation'
+import PetNavigationToggle from '../components/PetNavigationToggle'
+
 
 class PetStats extends Component {
 	constructor(props, context){
 		super(props, context)
-		this.showHealthRecord = this.showHealthRecord.bind(this)
-	}
-
-	showHealthRecord(event){
-		var changeDisplay = Object.assign({}, this.props.displayContent) 
-		changeDisplay = true
-		console.log('showHealthRecord: displayContent props = '+JSON.stringify(changeDisplay))
 	}
 
 	render(){
@@ -20,17 +19,21 @@ class PetStats extends Component {
 			
 
 			<div>
+				<div><PetNavigation /></div>
+
 				<div id='profileContent'>
 					<div id='profileHeader'>
-						<h2>{petProfile.name}</h2>
-						<h4>{petProfile.species}</h4> 
-						<h4>{petProfile.breed}</h4>
+						<h2>{petProfile.name} | Stats</h2>
 					</div>
 
 					<div id='profileStats'>
+						<h4>{petProfile.species}</h4> 
+						<h4>{petProfile.breed}</h4>
 						<h4>{petProfile.sex}</h4>
 						<h4>DoB: {petProfile.birthday}</h4>
-					</div>	
+					</div>
+
+					<div><PetNavigationToggle /></div>
 				</div>
 
 			</div>

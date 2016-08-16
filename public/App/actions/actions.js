@@ -46,10 +46,24 @@ export default {
 		}
 	},
 
-	toggleDisplay: function(displayContent){
+	displayEditPet: function(displayContent){
 		return{
-			type: constants.TOGGLE_DISPLAY,
+			type: constants.DISPLAY_EDIT_PET,
 			displayContent: displayContent
+		}
+	},
+
+	showHealthRecord: function(showContent){
+		return{
+			type: constants.SHOW_HEALTH_RECORD,
+			showContent: showContent
+		}
+	},
+
+	showRegisterPet: function(showContent){
+		return{
+			type: constants.SHOW_REGISTER_PET,
+			showContent: showContent
 		}
 	}
 }

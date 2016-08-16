@@ -13,49 +13,30 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var PetRow = _interopRequire(require("../components/PetRow"));
-
 var navigation = _interopRequire(require("../utils/navigation"));
 
-var HomeButton = _interopRequire(require("../components/HomeButton"));
-
-var PetList = (function (Component) {
-	function PetList() {
-		_classCallCheck(this, PetList);
+var HomeButton = (function (Component) {
+	function HomeButton() {
+		_classCallCheck(this, HomeButton);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(PetList, Component);
+	_inherits(HomeButton, Component);
 
-	_prototypeProperties(PetList, null, {
+	_prototypeProperties(HomeButton, null, {
 		render: {
 			value: function render() {
-				var petList = this.props.petsArray.map(function (pet, i) {
-					return React.createElement(PetRow, { key: i, pet: pet });
-				});
-
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
-						"div",
+						"button",
 						null,
-						React.createElement(
-							"button",
-							{ onClick: navigation.registerPet },
-							"Add a Pet"
-						),
-						React.createElement(HomeButton, null)
-					),
-					React.createElement(
-						"h4",
-						null,
-						"Pets"
-					),
-					petList
+						"Home"
+					)
 				);
 			},
 			writable: true,
@@ -63,7 +44,7 @@ var PetList = (function (Component) {
 		}
 	});
 
-	return PetList;
+	return HomeButton;
 })(Component);
 
-module.exports = PetList;
+module.exports = HomeButton;

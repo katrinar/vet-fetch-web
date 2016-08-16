@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
+import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
+
 
 class RegisterPet extends Component {
 
@@ -37,6 +39,7 @@ class RegisterPet extends Component {
 			}
 			console.log(JSON.stringify(response.result))
 			store.dispatch(actions.registerPet(response.result))
+			navigation.dismissRegisterPet()
 		})
 
 	}
@@ -50,6 +53,7 @@ class RegisterPet extends Component {
 					<input type="text" onChange={this.submitPet} id="name" placeholder="Name" /><br />
 					<input type="text" onChange={this.submitPet} id="species" placeholder="Species" /><br />
 					<button onClick={this.registerPet}>Register Pet</button>
+					<button onClick={navigation.dismissRegisterPet}>Cancel</button>
 				</form> 			 
 			</div>
 

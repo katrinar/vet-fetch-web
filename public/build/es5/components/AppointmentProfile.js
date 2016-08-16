@@ -17,50 +17,22 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var navigation = _interopRequire(require("../utils/navigation"));
 
-var store = _interopRequire(require("../stores/store"));
+var AppointmentProfile = (function (Component) {
+	function AppointmentProfile(props, context) {
+		_classCallCheck(this, AppointmentProfile);
 
-var actions = _interopRequire(require("../actions/actions"));
-
-var PetHealthRecord = _interopRequire(require("../components/PetHealthRecord"));
-
-var PetStats = _interopRequire(require("../components/PetStats"));
-
-var PetProfileInfo = (function (Component) {
-	function PetProfileInfo(props, context) {
-		_classCallCheck(this, PetProfileInfo);
-
-		_get(Object.getPrototypeOf(PetProfileInfo.prototype), "constructor", this).call(this, props, context);
+		_get(Object.getPrototypeOf(AppointmentProfile.prototype), "constructor", this).call(this, props, context);
 	}
 
-	_inherits(PetProfileInfo, Component);
+	_inherits(AppointmentProfile, Component);
 
-	_prototypeProperties(PetProfileInfo, null, {
+	_prototypeProperties(AppointmentProfile, null, {
 		render: {
 			value: function render() {
-				var petSlug = this.props.slug;
-				var petProfile = this.props.pets[petSlug] || {};
-
-				var display = this.props.showHealthRecord;
-				var content = null;
-
-				switch (display) {
-					case false:
-						return content = React.createElement(PetStats, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord });
-					case true:
-						return content = React.createElement(PetHealthRecord, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord });
-
-					default:
-						return content = null;
-				}
-
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(
-						"div",
-						null,
-						content
-					)
+					"Appointment Details"
 				);
 			},
 			writable: true,
@@ -68,7 +40,7 @@ var PetProfileInfo = (function (Component) {
 		}
 	});
 
-	return PetProfileInfo;
+	return AppointmentProfile;
 })(Component);
 
-module.exports = PetProfileInfo;
+module.exports = AppointmentProfile;

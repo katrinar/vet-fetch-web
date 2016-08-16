@@ -19,7 +19,6 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var connect = require("react-redux").connect;
 var navigation = _interopRequire(require("../utils/navigation"));
 
 var text = _interopRequire(require("../utils/text"));
@@ -43,13 +42,13 @@ var PetProfile = (function (Component) {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 				var petProfileContent = null;
-				var displayContent = this.props.displayContent;
+				var displayEditPet = this.props.displayEditPet;
 
-				switch (displayContent) {
+				switch (displayEditPet) {
 					case false:
-						return petProfileContent = React.createElement(PetProfileContent, { pets: this.props.pets, slug: this.props.slug, displayContent: displayContent });
+						return petProfileContent = React.createElement(PetProfileContent, { pets: this.props.pets, slug: this.props.slug, displayEditPet: displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					case true:
-						return petProfileContent = React.createElement(EditPet, { pets: this.props.pets, slug: this.props.slug, displayContent: displayContent });
+						return petProfileContent = React.createElement(EditPet, { pets: this.props.pets, slug: this.props.slug, displayEditPet: displayEditPet });
 
 					default:
 						return petProfileContent = null;

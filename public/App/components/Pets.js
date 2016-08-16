@@ -12,12 +12,17 @@ class Pets extends Component {
 
 	render(){
 
+		var content = null
+		switch(this.props.showRegisterPet){
+			case false: 
+				return content = <PetList petsArray={this.props.petsArray}/> 
+			case true: 
+				return content = <RegisterPet currentUser={this.props.currentUser}/>
+		}
+
 		return(
 			<div>
-				<RegisterPet currentUser={this.props.currentUser}/><br />
-				<PetList petsArray={this.props.petsArray}/> <br />
-				<button onClick={navigation.accountPage}>Back to Home</button>
-
+				{content}
 			</div>
 		)
 	}

@@ -34,19 +34,11 @@ var EditPet = (function (Component) {
 		_get(Object.getPrototypeOf(EditPet.prototype), "constructor", this).call(this, props, context);
 		this.submitEdit = this.submitEdit.bind(this);
 		this.submitPetEdit = this.submitPetEdit.bind(this);
-		this.cancel = this.cancel.bind(this);
 	}
 
 	_inherits(EditPet, Component);
 
 	_prototypeProperties(EditPet, null, {
-		cancel: {
-			value: function cancel(event) {
-				navigation.petProfilePage(this.props.slug);
-			},
-			writable: true,
-			configurable: true
-		},
 		submitEdit: {
 			value: function submitEdit(event) {
 				event.preventDefault();
@@ -156,7 +148,7 @@ var EditPet = (function (Component) {
 						),
 						React.createElement(
 							"button",
-							{ onClick: this.cancel },
+							{ onClick: navigation.dismissEditPet },
 							"Cancel"
 						)
 					)

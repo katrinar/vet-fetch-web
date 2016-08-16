@@ -15,26 +15,26 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
+var navigation = _interopRequire(require("../utils/navigation"));
+
+var store = _interopRequire(require("../stores/store"));
+
+var actions = _interopRequire(require("../actions/actions"));
+
+var PetNavigation = _interopRequire(require("../components/PetNavigation"));
+
+var PetNavigationToggle = _interopRequire(require("../components/PetNavigationToggle"));
+
 var PetStats = (function (Component) {
 	function PetStats(props, context) {
 		_classCallCheck(this, PetStats);
 
 		_get(Object.getPrototypeOf(PetStats.prototype), "constructor", this).call(this, props, context);
-		this.showHealthRecord = this.showHealthRecord.bind(this);
 	}
 
 	_inherits(PetStats, Component);
 
 	_prototypeProperties(PetStats, null, {
-		showHealthRecord: {
-			value: function showHealthRecord(event) {
-				var changeDisplay = Object.assign({}, this.props.displayContent);
-				changeDisplay = true;
-				console.log("showHealthRecord: displayContent props = " + JSON.stringify(changeDisplay));
-			},
-			writable: true,
-			configurable: true
-		},
 		render: {
 			value: function render() {
 				var petSlug = this.props.slug;
@@ -45,6 +45,11 @@ var PetStats = (function (Component) {
 					null,
 					React.createElement(
 						"div",
+						null,
+						React.createElement(PetNavigation, null)
+					),
+					React.createElement(
+						"div",
 						{ id: "profileContent" },
 						React.createElement(
 							"div",
@@ -52,8 +57,13 @@ var PetStats = (function (Component) {
 							React.createElement(
 								"h2",
 								null,
-								petProfile.name
-							),
+								petProfile.name,
+								" | Stats"
+							)
+						),
+						React.createElement(
+							"div",
+							{ id: "profileStats" },
 							React.createElement(
 								"h4",
 								null,
@@ -63,11 +73,7 @@ var PetStats = (function (Component) {
 								"h4",
 								null,
 								petProfile.breed
-							)
-						),
-						React.createElement(
-							"div",
-							{ id: "profileStats" },
+							),
 							React.createElement(
 								"h4",
 								null,
@@ -79,6 +85,11 @@ var PetStats = (function (Component) {
 								"DoB: ",
 								petProfile.birthday
 							)
+						),
+						React.createElement(
+							"div",
+							null,
+							React.createElement(PetNavigationToggle, null)
 						)
 					)
 				);

@@ -17,6 +17,8 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
+var navigation = _interopRequire(require("../utils/navigation"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -63,6 +65,7 @@ var RegisterPet = (function (Component) {
 					}
 					console.log(JSON.stringify(response.result));
 					store.dispatch(actions.registerPet(response.result));
+					navigation.dismissRegisterPet();
 				});
 			},
 			writable: true,
@@ -89,6 +92,11 @@ var RegisterPet = (function (Component) {
 							"button",
 							{ onClick: this.registerPet },
 							"Register Pet"
+						),
+						React.createElement(
+							"button",
+							{ onClick: navigation.dismissRegisterPet },
+							"Cancel"
 						)
 					)
 				);

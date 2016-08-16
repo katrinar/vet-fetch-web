@@ -5,7 +5,6 @@ import Account from '../components/Account'
 import Landing from '../components/Landing'
 import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
-import Appointments from '../components/Appointments'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
@@ -63,7 +62,7 @@ class Main extends Component {
 	render() {
 		var page = null
 		var currentUser = this.props.currentUser || {}
-		var displayContent = this.props.displayContent || false
+		var displayEditPet = this.props.displayEditPet || false
 
 		switch(this.props.page){
 			case 'home':
@@ -75,11 +74,9 @@ class Main extends Component {
 			case 'account':
 				return page = <Account currentUser={this.props.currentUser}/>
 			case 'pets':
-				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray}/>
+				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray} showRegisterPet={this.props.showRegisterPet}/>
 			case 'pet':
-				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayContent={this.props.displayContent}/>
-			case 'appointments':
-				return page = <Appointments />
+				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet} showHealthRecord={this.props.showHealthRecord}/>
 			default: 
 				return page = null
 		}
@@ -98,7 +95,9 @@ const stateToProps = function(state) {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
 		pets: state.petReducer.pets,
-		displayContent: state.displayReducer.displayContent
+		displayEditPet: state.displayReducer.displayEditPet,
+		showHealthRecord: state.displayReducer.showHealthRecord,
+		showRegisterPet: state.displayReducer.showRegisterPet
 	}
 }
 
