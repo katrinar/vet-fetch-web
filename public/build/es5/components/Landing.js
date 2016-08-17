@@ -34,9 +34,9 @@ var Landing = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(Register, null),
+					React.createElement(Register, { currentUser: this.props.currentUser }),
 					React.createElement("br", null),
-					React.createElement(Login, null)
+					React.createElement(Login, { currentUser: this.props.currentUser })
 				);
 			},
 			writable: true,

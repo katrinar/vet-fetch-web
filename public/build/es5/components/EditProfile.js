@@ -17,41 +17,52 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
+var text = _interopRequire(require("../utils/text"));
+
+var navigation = _interopRequire(require("../utils/navigation"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var Register = (function (Component) {
-	function Register(props, context) {
-		_classCallCheck(this, Register);
+var EditProfile = (function (Component) {
+	function EditProfile(props, context) {
+		_classCallCheck(this, EditProfile);
 
-		_get(Object.getPrototypeOf(Register.prototype), "constructor", this).call(this, props, context);
-		this.submitProfile = this.submitProfile.bind(this);
-		this.register = this.register.bind(this);
+		_get(Object.getPrototypeOf(EditProfile.prototype), "constructor", this).call(this, props, context);
+		this.submitEdit = this.submitEdit.bind(this);
+		this.submitProfileEdit = this.submitProfileEdit.bind(this);
 	}
 
-	_inherits(Register, Component);
+	_inherits(EditProfile, Component);
 
-	_prototypeProperties(Register, null, {
-		submitProfile: {
-			value: function submitProfile(event) {
-				var registerUser = Object.assign({}, this.props.currentUser);
-				registerUser[event.target.id] = event.target.value;
-				store.dispatch(actions.receivedCurrentUser(registerUser));
+	_prototypeProperties(EditProfile, null, {
+		submitEdit: {
+			value: function submitEdit(event) {
+				event.preventDefault();
+				var currentProfile = this.props.currentUser;
+				var editedProfile = Object.assign({}, currentProfile);
+
+				editedProfile[event.target.id] = event.target.value;
+				store.dispatch(actions.receivedCurrentUser(editedProfile));
 			},
 			writable: true,
 			configurable: true
 		},
-		register: {
-			value: function register(event) {
+		submitProfileEdit: {
+			value: function submitProfileEdit(event) {
 				event.preventDefault();
+				var currentProfile = this.props.currentUser;
+				var editedProfile = Object.assign({}, currentProfile);
+				var endpoint = "/api/profile/" + editedProfile.id;
 
-				api.handlePost("/api/profile", this.props.currentUser, function (err, response) {
-					if (err != null) {
+				api.handlePut(endpoint, editedProfile, function (err, response) {
+					if (err) {
 						alert(err.message);
 						return;
 					}
 					store.dispatch(actions.receivedCurrentUser(response.result));
+					navigation.dismissEditProfile();
 				});
 			},
 			writable: true,
@@ -59,29 +70,47 @@ var Register = (function (Component) {
 		},
 		render: {
 			value: function render() {
+				var profile = this.props.currentUser || {};
+
 				return React.createElement(
 					"div",
 					null,
 					React.createElement(
-						"p",
-						null,
-						"Register"
-					),
-					React.createElement(
 						"form",
 						{ action: "", method: "" },
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "firstName", placeholder: "First Name" }),
+						React.createElement(
+							"label",
+							null,
+							"First Name"
+						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "lastName", placeholder: "Last Name" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "firstName", placeholder: "First Name", value: profile.firstName }),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "email", placeholder: "Email" }),
+						React.createElement(
+							"label",
+							null,
+							"Last Name"
+						),
 						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "password", placeholder: "password" }),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "lastName", placeholder: "Last Name", value: profile.lastName }),
+						React.createElement("br", null),
+						React.createElement(
+							"label",
+							null,
+							"Email"
+						),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "email", placeholder: "Email", value: profile.email }),
 						React.createElement("br", null),
 						React.createElement(
 							"button",
-							{ onClick: this.register },
-							"Register"
+							{ onClick: this.submitProfileEdit },
+							"Save Edits"
+						),
+						React.createElement(
+							"button",
+							null,
+							"Cancel"
 						)
 					)
 				);
@@ -91,7 +120,7 @@ var Register = (function (Component) {
 		}
 	});
 
-	return Register;
+	return EditProfile;
 })(Component);
 
-module.exports = Register;
+module.exports = EditProfile;

@@ -41,7 +41,6 @@ class RegisterPet extends Component {
 			store.dispatch(actions.registerPet(response.result))
 			navigation.dismissRegisterPet()
 		})
-
 	}
 
 	render(){

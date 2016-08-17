@@ -19,35 +19,66 @@ var text = _interopRequire(require("../utils/text"));
 
 var EditProfile = _interopRequire(require("../components/EditProfile"));
 
-var AccountContent = _interopRequire(require("../components/AccountContent"));
+var navigation = _interopRequire(require("../utils/navigation"));
 
-var Account = (function (Component) {
-	function Account() {
-		_classCallCheck(this, Account);
+var AccountContent = (function (Component) {
+	function AccountContent() {
+		_classCallCheck(this, AccountContent);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(Account, Component);
+	_inherits(AccountContent, Component);
 
-	_prototypeProperties(Account, null, {
+	_prototypeProperties(AccountContent, null, {
 		render: {
 			value: function render() {
-				var content = null;
-
-				switch (this.props.showEditProfile) {
-					case false:
-						return content = React.createElement(AccountContent, { showEditProfile: this.props.showEditProfile, currentUser: this.props.currentUser });
-					case true:
-						return content = React.createElement(EditProfile, { showEditProfile: this.props.showEditProfile, currentUser: this.props.currentUser });
-				}
-
 				return React.createElement(
 					"div",
 					null,
-					content
+					React.createElement(HomeButton, null),
+					React.createElement(
+						"button",
+						{ onClick: navigation.editProfile },
+						"Edit Profile"
+					),
+					React.createElement(
+						"div",
+						{ id: "profileInfo" },
+						React.createElement(
+							"h4",
+							null,
+							"Name"
+						),
+						React.createElement(
+							"ul",
+							null,
+							React.createElement(
+								"li",
+								null,
+								text.capitalize(this.props.currentUser.firstName),
+								" ",
+								text.capitalize(this.props.currentUser.lastName)
+							)
+						),
+						React.createElement(
+							"h4",
+							null,
+							"Email"
+						),
+						React.createElement(
+							"ul",
+							null,
+							React.createElement(
+								"li",
+								null,
+								this.props.currentUser.email,
+								" "
+							)
+						)
+					)
 				);
 			},
 			writable: true,
@@ -55,7 +86,7 @@ var Account = (function (Component) {
 		}
 	});
 
-	return Account;
+	return AccountContent;
 })(Component);
 
-module.exports = Account;
+module.exports = AccountContent;

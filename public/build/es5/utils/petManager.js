@@ -11,8 +11,6 @@ var actions = _interopRequire(require("../actions/actions"));
 module.exports = {
 
 	sendPetEdit: function (petSubmit) {
-		console.log("sendPetEdit: petSubmit = " + JSON.stringify(petSubmit));
-
 		var endpoint = "/api/pet/" + petSubmit.id;
 
 		api.handlePut(endpoint, petSubmit, function (err, response) {

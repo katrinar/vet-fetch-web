@@ -28,12 +28,6 @@ var Login = (function (Component) {
 		_get(Object.getPrototypeOf(Login.prototype), "constructor", this).call(this, props, context);
 		this.submitUser = this.submitUser.bind(this);
 		this.login = this.login.bind(this);
-		this.state = {
-			loginUser: {
-				email: "",
-				password: ""
-			}
-		};
 	}
 
 	_inherits(Login, Component);
@@ -41,11 +35,9 @@ var Login = (function (Component) {
 	_prototypeProperties(Login, null, {
 		submitUser: {
 			value: function submitUser(event) {
-				var loginUser = Object.assign({}, this.state.loginUser);
+				var loginUser = Object.assign({}, this.props.currentUser);
 				loginUser[event.target.id] = event.target.value;
-				this.setState({
-					loginUser: loginUser
-				});
+				store.dispatch(actions.receivedCurrentUser(loginUser));
 			},
 			writable: true,
 			configurable: true
@@ -53,8 +45,9 @@ var Login = (function (Component) {
 		login: {
 			value: function login(event) {
 				event.preventDefault();
+				console.log("login = " + JSON.stringify(this.props.currentUser));
 
-				api.handlePost("/account/login", this.state.loginUser, function (err, response) {
+				api.handlePost("/account/login", this.props.currentUser, function (err, response) {
 					if (err != null) {
 						alert(err.message);
 						return;
@@ -62,7 +55,6 @@ var Login = (function (Component) {
 					console.log("login post: " + JSON.stringify(response.currentUser));
 
 					store.dispatch(actions.receivedCurrentUser(response.currentUser));
-					store.dispatch(actions.showLogin(true));
 				});
 			},
 			writable: true,
@@ -80,7 +72,7 @@ var Login = (function (Component) {
 					),
 					React.createElement(
 						"form",
-						{ action: "/account/login", method: "post" },
+						null,
 						React.createElement("input", { type: "text", onChange: this.submitUser, id: "email", placeholder: "Email" }),
 						React.createElement("br", null),
 						React.createElement("input", { type: "text", onChange: this.submitUser, id: "password", placeholder: "password" }),

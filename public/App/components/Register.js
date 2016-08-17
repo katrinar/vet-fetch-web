@@ -9,33 +9,22 @@ class Register extends Component {
 		super(props, context)
 		this.submitProfile = this.submitProfile.bind(this)
 		this.register = this.register.bind(this)
-		this.state = {
-			registerUser: {
-				firstName: '',
-				lastName: '',
-				email: '',
-				password: ''
-			}
-		}
 	}
 
 	submitProfile(event){
-		var registerUser = Object.assign({}, this.state.registerUser)
+		var registerUser = Object.assign({}, this.props.currentUser)
 		registerUser[event.target.id] = event.target.value
-		this.setState({
-			registerUser: registerUser
-		})
+		store.dispatch(actions.receivedCurrentUser(registerUser))
 	}
 
 	register(event){
 		event.preventDefault()
 
-		api.handlePost('/api/profile', this.state.registerUser, function(err, response){
+		api.handlePost('/api/profile', this.props.currentUser, function(err, response){
 			if (err != null){
 				alert(err.message)
 				return
 			}
-			console.log('register user ='+JSON.stringify(response.result))
 			store.dispatch(actions.receivedCurrentUser(response.result))
 		})
 	}
@@ -44,7 +33,7 @@ class Register extends Component {
 		return(
 			<div>
 				<p>Register</p>
-				<form action = "/api/profile" method="post">
+				<form action = "" method="">
 					<input type="text" onChange={this.submitProfile} id="firstName" placeholder="First Name" /><br />
 					<input type="text" onChange={this.submitProfile} id="lastName" placeholder="Last Name" /><br />
 					<input type="text" onChange={this.submitProfile} id="email" placeholder="Email" /><br />

@@ -89,10 +89,15 @@ module.exports = {
 	},
 
 	put: function(id, params, callback){
-		Pet.findByIdAndUpdate(id, params, {new: true}, function(err, result){
+		Profile.findByIdAndUpdate(id, params, {new: true}, function(err, profile){
 			if(err){
 				if (callback != null)
 					callback(err, null)
+				return
+			}
+
+			if (profile == null){
+				callback(err, null)
 				return
 			}
 

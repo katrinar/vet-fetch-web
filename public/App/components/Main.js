@@ -51,7 +51,6 @@ class Main extends Component {
 				alert(err.message)
 				return
 			}
-			console.log('fetch pets: '+JSON.stringify(response.results))
 
 			store.dispatch(actions.receivedPets(response.results))
 			
@@ -70,9 +69,9 @@ class Main extends Component {
 					return page = <HomeContainer currentUser={this.props.currentUser} /> 
 				}
 					
-				return page = <Landing />
+				return page = <Landing currentUser={this.props.currentUser} />
 			case 'account':
-				return page = <Account currentUser={this.props.currentUser}/>
+				return page = <Account currentUser={this.props.currentUser} showEditProfile={this.props.showEditProfile}/>
 			case 'pets':
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray} showRegisterPet={this.props.showRegisterPet}/>
 			case 'pet':
@@ -98,7 +97,7 @@ const stateToProps = function(state) {
 		displayEditPet: state.displayReducer.displayEditPet,
 		showHealthRecord: state.displayReducer.showHealthRecord,
 		showRegisterPet: state.displayReducer.showRegisterPet,
-		showLogin: state.displayReducer.showLogin
+		showEditProfile: state.displayReducer.showEditProfile
 	}
 }
 

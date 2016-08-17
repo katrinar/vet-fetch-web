@@ -3,20 +3,6 @@ import constants from '../constants/constants'
 var initialState = {
 	pets: {},
 	petsArray: []
-	// currentPet: {
-	// 	id: '',
-	// 	slug: '',
-	// 	ownerId: '',
-	// 	name: '',
-	// 	birthday: '',
-	// 	sex: '',
-	// 	species: '',
-	// 	breed: '',
-	// 	allergies: [],
-	// 	medications: [],
-	// 	allergiesString: '',
-	// 	medicationsString: ''
-	// }
 }
 
 export default function(state = initialState, action){

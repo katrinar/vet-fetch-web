@@ -7,20 +7,6 @@ var constants = _interopRequire(require("../constants/constants"));
 var initialState = {
 	pets: {},
 	petsArray: []
-	// currentPet: {
-	// 	id: '',
-	// 	slug: '',
-	// 	ownerId: '',
-	// 	name: '',
-	// 	birthday: '',
-	// 	sex: '',
-	// 	species: '',
-	// 	breed: '',
-	// 	allergies: [],
-	// 	medications: [],
-	// 	allergiesString: '',
-	// 	medicationsString: ''
-	// }
 };
 
 module.exports = function (_x, action) {

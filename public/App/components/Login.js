@@ -9,26 +9,19 @@ class Login extends Component {
 		super(props, context)
 		this.submitUser = this.submitUser.bind(this)
 		this.login = this.login.bind(this)
-		this.state = {
-			loginUser: {
-				email: '',
-				password: ''
-			}
-		}
 	}
 
 	submitUser(event){
-		var loginUser = Object.assign({}, this.state.loginUser)
+		var loginUser = Object.assign({}, this.props.currentUser)
 		loginUser[event.target.id] = event.target.value
-		this.setState({
-			loginUser: loginUser 
-		})
+		store.dispatch(actions.receivedCurrentUser(loginUser))
 	}
 
 	login(event){
 		event.preventDefault()
+		console.log('login = '+JSON.stringify(this.props.currentUser))
 
-		api.handlePost('/account/login', this.state.loginUser, function(err, response){
+		api.handlePost('/account/login', this.props.currentUser, function(err, response){
 			if (err != null){
 				alert(err.message)
 				return
@@ -36,7 +29,6 @@ class Login extends Component {
 			console.log('login post: '+JSON.stringify(response.currentUser))
 			
 			store.dispatch(actions.receivedCurrentUser(response.currentUser))
-			store.dispatch(actions.showLogin(true))
 		})
 	}
 
@@ -44,7 +36,7 @@ class Login extends Component {
 		return(
 			<div>
 				<p>Login</p>
-				<form action = "/account/login" method="post">
+				<form >
 					<input type="text" onChange={this.submitUser} id="email" placeholder="Email" /><br />
 					<input type="text" onChange={this.submitUser} id="password" placeholder="password" /><br />
 					<button onClick={this.login}>Login</button>

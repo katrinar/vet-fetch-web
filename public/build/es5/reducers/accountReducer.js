@@ -18,7 +18,8 @@ module.exports = function (_x, action) {
 	var state = arguments[0] === undefined ? initialState : arguments[0];
 	switch (action.type) {
 		case constants.RECEIVED_CURRENT_USER:
-			// console.log('RECEIVED CURRENT USER: '+JSON.stringify(action.currentUser))
+
+
 			var newState = Object.assign({}, state);
 			newState.currentUser = action.currentUser;
 			return newState;

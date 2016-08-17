@@ -67,10 +67,10 @@ export default {
 		}
 	},
 
-	showLogin: function(loggedIn){
+	showEditProfile: function(showContent){
 		return{
-			type: constants.SHOW_LOGIN,
-			loggedIn: loggedIn
+			type: constants.SHOW_EDIT_PROFILE,
+			showContent: showContent
 		}
 	}
 }

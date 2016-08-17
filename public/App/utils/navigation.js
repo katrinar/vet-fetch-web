@@ -51,6 +51,18 @@ export default {
 	dismissRegisterPet: function(){
 		var changeDisplay = false
 		store.dispatch(actions.showRegisterPet(changeDisplay))
+	},
+
+	editProfile: function(){
+		var changeDisplay = true
+		console.log('editPet: changeDisplay = '+JSON.stringify(changeDisplay))
+
+		store.dispatch(actions.showEditProfile(changeDisplay))
+	},
+
+	dismissEditProfile: function(){
+		var changeDisplay = false
+		store.dispatch(actions.showEditProfile(changeDisplay))
 	}
 	
 }

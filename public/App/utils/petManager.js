@@ -6,8 +6,6 @@ export default {
 
 	sendPetEdit: function(petSubmit){
 
-		console.log('sendPetEdit: petSubmit = '+JSON.stringify(petSubmit))
-
 		var endpoint = '/api/pet/'+petSubmit.id
 
 		api.handlePut(endpoint, petSubmit, function(err, response){

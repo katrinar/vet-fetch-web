@@ -8,7 +8,7 @@ var initialState = {
 	displayEditPet: false,
 	showHealthRecord: false,
 	showRegisterPet: false,
-	showLogin: null
+	showEditProfile: false
 };
 
 module.exports = function (_x, action) {
@@ -32,10 +32,10 @@ module.exports = function (_x, action) {
 			newState.showRegisterPet = action.showContent;
 			return newState;
 
-		case constants.SHOW_LOGIN:
-			console.log("SHOW_LOGIN: " + JSON.stringify(action.loggedIn));
+		case constants.SHOW_EDIT_PROFILE:
+			console.log("SHOW_EDIT_PROFILE: " + JSON.stringify(action.showContent));
 			var newState = Object.assign({}, state);
-			newState.showLogin = action.loggedIn;
+			newState.showEditProfile = action.showContent;
 			return newState;
 
 		default:

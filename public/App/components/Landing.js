@@ -6,8 +6,8 @@ class Landing extends Component {
 	render(){
 		return(
 			<div>
-				{<Register />}<br />
-				{<Login />}
+				{<Register currentUser={this.props.currentUser} />}<br />
+				{<Login currentUser={this.props.currentUser} />}
 			</div>
 		)
 	}

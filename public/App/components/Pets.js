@@ -17,7 +17,7 @@ class Pets extends Component {
 			case false: 
 				return content = <PetList petsArray={this.props.petsArray}/> 
 			case true: 
-				return content = <RegisterPet currentUser={this.props.currentUser}/>
+				return content = <RegisterPet currentUser={this.props.currentUser} />
 		}
 
 		return(
