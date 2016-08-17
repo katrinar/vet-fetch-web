@@ -11,7 +11,7 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 var account = require('./routes/account');
 
-var mongoUrl = MONGODB_URI || 'mongodb://localhost/vet-app' 
+var mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost/vet-app' 
 mongoose.connect(mongoUrl, function(err, res){
   if(err){
     console.log('DB Connection Failed:'+err)
