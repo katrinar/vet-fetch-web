@@ -3,6 +3,7 @@ import api from '../utils/api'
 import navigation from '../utils/navigation'
 import Account from '../components/Account'
 import Landing from '../components/Landing'
+import HomeContainer from '../components/HomeContainer'
 import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
 import store from '../stores/store'
@@ -62,12 +63,11 @@ class Main extends Component {
 	render() {
 		var page = null
 		var currentUser = this.props.currentUser || {}
-		var displayEditPet = this.props.displayEditPet || false
 
 		switch(this.props.page){
 			case 'home':
 				if (currentUser.id != null){
-					return page = <Account currentUser={this.props.currentUser} /> 
+					return page = <HomeContainer currentUser={this.props.currentUser} /> 
 				}
 					
 				return page = <Landing />
@@ -97,7 +97,8 @@ const stateToProps = function(state) {
 		pets: state.petReducer.pets,
 		displayEditPet: state.displayReducer.displayEditPet,
 		showHealthRecord: state.displayReducer.showHealthRecord,
-		showRegisterPet: state.displayReducer.showRegisterPet
+		showRegisterPet: state.displayReducer.showRegisterPet,
+		showLogin: state.displayReducer.showLogin
 	}
 }
 

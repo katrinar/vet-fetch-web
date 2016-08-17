@@ -49,7 +49,7 @@ class RegisterPet extends Component {
 
 			<div>
 				<p>Register your Pet</p>
-				<form action = "/api/pet" method="post">
+				<form >
 					<input type="text" onChange={this.submitPet} id="name" placeholder="Name" /><br />
 					<input type="text" onChange={this.submitPet} id="species" placeholder="Species" /><br />
 					<button onClick={this.registerPet}>Register Pet</button>

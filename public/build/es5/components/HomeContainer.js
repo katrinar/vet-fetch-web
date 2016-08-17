@@ -17,52 +17,31 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
+var text = _interopRequire(require("../utils/text"));
+
 var store = _interopRequire(require("../stores/store"));
 
-var actions = _interopRequire(require("../actions/actions"));
+var HomeContainer = (function (Component) {
+	function HomeContainer(props, context) {
+		_classCallCheck(this, HomeContainer);
 
-var Register = (function (Component) {
-	function Register(props, context) {
-		_classCallCheck(this, Register);
-
-		_get(Object.getPrototypeOf(Register.prototype), "constructor", this).call(this, props, context);
-		this.submitProfile = this.submitProfile.bind(this);
-		this.register = this.register.bind(this);
-		this.state = {
-			registerUser: {
-				firstName: "",
-				lastName: "",
-				email: "",
-				password: ""
-			}
-		};
+		_get(Object.getPrototypeOf(HomeContainer.prototype), "constructor", this).call(this, props, context);
+		this.logout = this.logout.bind(this);
 	}
 
-	_inherits(Register, Component);
+	_inherits(HomeContainer, Component);
 
-	_prototypeProperties(Register, null, {
-		submitProfile: {
-			value: function submitProfile(event) {
-				var registerUser = Object.assign({}, this.state.registerUser);
-				registerUser[event.target.id] = event.target.value;
-				this.setState({
-					registerUser: registerUser
-				});
-			},
-			writable: true,
-			configurable: true
-		},
-		register: {
-			value: function register(event) {
+	_prototypeProperties(HomeContainer, null, {
+		logout: {
+			value: function logout(event) {
 				event.preventDefault();
 
-				api.handlePost("/api/profile", this.state.registerUser, function (err, response) {
-					if (err != null) {
+				api.handleGet("account/logout", null, function (err, response) {
+					if (err) {
 						alert(err.message);
 						return;
 					}
-					console.log("register user =" + JSON.stringify(response.result));
-					store.dispatch(actions.receivedCurrentUser(response.result));
+					window.location.href = "/";
 				});
 			},
 			writable: true,
@@ -74,26 +53,51 @@ var Register = (function (Component) {
 					"div",
 					null,
 					React.createElement(
-						"p",
+						"h2",
 						null,
-						"Register"
+						"Welcome, ",
+						text.capitalize(this.props.currentUser.firstName)
 					),
 					React.createElement(
-						"form",
-						{ action: "/api/profile", method: "post" },
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "firstName", placeholder: "First Name" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "lastName", placeholder: "Last Name" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "email", placeholder: "Email" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitProfile, id: "password", placeholder: "password" }),
-						React.createElement("br", null),
+						"h3",
+						null,
 						React.createElement(
-							"button",
-							{ onClick: this.register },
-							"Register"
+							"a",
+							{ href: "/pets/" },
+							"Pets"
 						)
+					),
+					React.createElement(
+						"h3",
+						null,
+						React.createElement(
+							"a",
+							{ href: "/" },
+							"Vet"
+						)
+					),
+					React.createElement(
+						"h3",
+						null,
+						React.createElement(
+							"a",
+							{ href: "/" },
+							"Insurance"
+						)
+					),
+					React.createElement(
+						"h3",
+						null,
+						React.createElement(
+							"a",
+							{ href: "/account" },
+							"Account"
+						)
+					),
+					React.createElement(
+						"button",
+						{ onClick: this.logout },
+						"Logout"
 					)
 				);
 			},
@@ -102,7 +106,7 @@ var Register = (function (Component) {
 		}
 	});
 
-	return Register;
+	return HomeContainer;
 })(Component);
 
-module.exports = Register;
+module.exports = HomeContainer;

@@ -33,10 +33,10 @@ class Login extends Component {
 				alert(err.message)
 				return
 			}
-			console.log(JSON.stringify(response.result))
-		
-			// store.dispatch(actions.receivedCurrentUser(response.currentUser))
-			window.location.href = '/account'
+			console.log('login post: '+JSON.stringify(response.currentUser))
+			
+			store.dispatch(actions.receivedCurrentUser(response.currentUser))
+			store.dispatch(actions.showLogin(true))
 		})
 	}
 

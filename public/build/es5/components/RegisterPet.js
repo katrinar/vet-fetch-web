@@ -83,7 +83,7 @@ var RegisterPet = (function (Component) {
 					),
 					React.createElement(
 						"form",
-						{ action: "/api/pet", method: "post" },
+						null,
 						React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
 						React.createElement("br", null),
 						React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),

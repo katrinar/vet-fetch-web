@@ -31,7 +31,7 @@ var HomeButton = (function (Component) {
 			value: function render() {
 				return React.createElement(
 					"button",
-					{ onClick: navigation.accountPage },
+					{ onClick: navigation.homePage },
 					"Home"
 				);
 			},

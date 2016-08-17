@@ -23,6 +23,8 @@ var Account = _interopRequire(require("../components/Account"));
 
 var Landing = _interopRequire(require("../components/Landing"));
 
+var HomeContainer = _interopRequire(require("../components/HomeContainer"));
+
 var Pets = _interopRequire(require("../components/Pets"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
@@ -94,12 +96,11 @@ var Main = (function (Component) {
 			value: function render() {
 				var page = null;
 				var currentUser = this.props.currentUser || {};
-				var displayEditPet = this.props.displayEditPet || false;
 
 				switch (this.props.page) {
 					case "home":
 						if (currentUser.id != null) {
-							return page = React.createElement(Account, { currentUser: this.props.currentUser });
+							return page = React.createElement(HomeContainer, { currentUser: this.props.currentUser });
 						}
 
 						return page = React.createElement(Landing, null);
@@ -135,7 +136,8 @@ var stateToProps = function (state) {
 		pets: state.petReducer.pets,
 		displayEditPet: state.displayReducer.displayEditPet,
 		showHealthRecord: state.displayReducer.showHealthRecord,
-		showRegisterPet: state.displayReducer.showRegisterPet
+		showRegisterPet: state.displayReducer.showRegisterPet,
+		showLogin: state.displayReducer.showLogin
 	};
 };
 

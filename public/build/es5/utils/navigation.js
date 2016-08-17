@@ -12,6 +12,10 @@ module.exports = {
 		window.location.href = "/account";
 	},
 
+	homePage: function () {
+		window.location.href = "/";
+	},
+
 	petsPage: function () {
 		window.location.href = "/pets";
 	},

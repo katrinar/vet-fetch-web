@@ -59,10 +59,10 @@ var Login = (function (Component) {
 						alert(err.message);
 						return;
 					}
-					console.log(JSON.stringify(response.result));
+					console.log("login post: " + JSON.stringify(response.currentUser));
 
-					// store.dispatch(actions.receivedCurrentUser(response.currentUser))
-					window.location.href = "/account";
+					store.dispatch(actions.receivedCurrentUser(response.currentUser));
+					store.dispatch(actions.showLogin(true));
 				});
 			},
 			writable: true,

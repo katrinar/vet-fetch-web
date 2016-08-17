@@ -69,5 +69,12 @@ module.exports = {
 			type: constants.SHOW_REGISTER_PET,
 			showContent: showContent
 		};
+	},
+
+	showLogin: function (loggedIn) {
+		return {
+			type: constants.SHOW_LOGIN,
+			loggedIn: loggedIn
+		};
 	}
 };

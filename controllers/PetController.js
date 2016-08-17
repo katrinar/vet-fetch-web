@@ -74,18 +74,21 @@ module.exports = {
 
 	post: function(params, callback){
 
-		var name = params['name'].split(' ')
-		var parts = name
-		var slug = ''
-		for (var i=0; i<parts.length; i++){
-			var word = parts[i]
-			slug += word
-			if (i != parts.length-1)
-				slug += '-'
-		}
+		if (params['name'] != null){
+			var name = params['name'].split(' ')
+			var parts = name
+			var slug = ''
+			for (var i=0; i<parts.length; i++){
+				var word = parts[i]
+				slug += word
+				if (i != parts.length-1)
+					slug += '-'
+			}
 
-		slug = slug.replace('?', '')
-		params['slug'] = slug
+			slug = slug.replace('?', '')
+			params['slug'] = slug
+		}
+		
 
 		Pet.create(params, function(err, pet){
 			if(err){
