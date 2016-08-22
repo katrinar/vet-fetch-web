@@ -2,13 +2,10 @@ var express = require('express');
 var router = express.Router();
 var petController = require('../controllers/PetController');
 var profileController = require('../controllers/ProfileController');
-var appointmentController = require('../controllers/AppointmentController');
-
 
 var controllers = {
 	pet: petController,
-	profile: profileController,
-	appointment: appointmentController
+	profile: profileController
 }
 
 
