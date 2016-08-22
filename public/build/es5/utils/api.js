@@ -74,6 +74,10 @@ module.exports = {
 				}
 			}
 		});
+	},
+
+	upload: function (file, completion) {
+		var _file = file;
 	}
 
 };

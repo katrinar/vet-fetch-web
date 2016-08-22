@@ -5,12 +5,18 @@ import navigation from '../utils/navigation'
 import petManager from '../utils/petManager'
 import store from '../stores/store'
 import actions from '../actions/actions'
+import Dropzone from 'react-dropzone'
 
 class EditPet extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.submitEdit = this.submitEdit.bind(this)
 		this.submitPetEdit = this.submitPetEdit.bind(this)
+		this.uploadProfileImage = this.uploadProfileImage.bind(this)
+	}
+
+	uploadProfileImage(){
+		console.log('uploadProfileImage = ')
 	}
 
 	submitEdit(event){
@@ -69,6 +75,13 @@ class EditPet extends Component {
 
 					<label>Medications</label><br />
 						<input type="text" onChange={this.submitEdit} id="medicationsString" placeholder={'heartworm,vitamins,etc...'} value={petProfile.medicationsString} /><br />
+						<br />
+
+					 <Dropzone style={{width:100+'%', marginBottom:24, background:'#fff', border:'1px solid #ddd'}} onDrop={this.uploadProfileImage}>
+							<div style={{padding:24}}>
+								Click to upload an image or drag image here.		           
+							</div>
+					 </Dropzone>
 
 					<button onClick={this.submitPetEdit}>Save Edits</button>
 					<button onClick={navigation.dismissEditPet}>Cancel</button>

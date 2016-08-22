@@ -25,8 +25,6 @@ module.exports = {
 					}
 					callback(null, pet.summary())
 				}
-
-				
 			})
 			return
 		}
@@ -88,7 +86,24 @@ module.exports = {
 			slug = slug.replace('?', '')
 			params['slug'] = slug
 		}
-		
+
+		if(params['ownerId[]'] != null)
+			params['ownerId'] = params['ownerId[]']
+
+		var imageInfo = {}
+		var processImage = false
+		if(params['image[thumb]'] != null){
+			processImage = true
+			imageInfo['thumb'] = params['image[thumb]']
+		}
+
+    	if(params['image[original]'] != null){
+    		processImage = true
+    		imageInfo['original'] = params['image[original]']
+    	}
+
+    	if(processImage == true)
+    	params['image'] = imageInfo		
 
 		Pet.create(params, function(err, pet){
 			if(err){
@@ -116,7 +131,26 @@ module.exports = {
 
 				slug = slug.replace('?', '')
 				params['slug'] = slug
-			}
+		}
+
+		if(params['ownerId[]'] != null)
+			params['ownerId'] = params['ownerId[]']
+
+		var imageInfo = {}
+		var processImage = false
+		if(params['image[thumb]'] != null){
+			processImage = true
+			imageInfo['thumb'] = params['image[thumb]']
+		}
+
+    	if(params['image[original]'] != null){
+    		processImage = true
+    		imageInfo['original'] = params['image[original]']
+    	}
+
+    	if(processImage == true)
+    	params['image'] = imageInfo
+
 
 		Pet.findByIdAndUpdate(id, params, {new: true}, function(err, pet){
 			if(err){

@@ -27,6 +27,8 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
+var Dropzone = _interopRequire(require("react-dropzone"));
+
 var EditPet = (function (Component) {
 	function EditPet(props, context) {
 		_classCallCheck(this, EditPet);
@@ -34,11 +36,19 @@ var EditPet = (function (Component) {
 		_get(Object.getPrototypeOf(EditPet.prototype), "constructor", this).call(this, props, context);
 		this.submitEdit = this.submitEdit.bind(this);
 		this.submitPetEdit = this.submitPetEdit.bind(this);
+		this.uploadProfileImage = this.uploadProfileImage.bind(this);
 	}
 
 	_inherits(EditPet, Component);
 
 	_prototypeProperties(EditPet, null, {
+		uploadProfileImage: {
+			value: function uploadProfileImage() {
+				console.log("uploadProfileImage = ");
+			},
+			writable: true,
+			configurable: true
+		},
 		submitEdit: {
 			value: function submitEdit(event) {
 				event.preventDefault();
@@ -141,6 +151,16 @@ var EditPet = (function (Component) {
 						React.createElement("br", null),
 						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medicationsString", placeholder: "heartworm,vitamins,etc...", value: petProfile.medicationsString }),
 						React.createElement("br", null),
+						React.createElement("br", null),
+						React.createElement(
+							Dropzone,
+							{ style: { width: 100 + "%", marginBottom: 24, background: "#fff", border: "1px solid #ddd" }, onDrop: this.uploadProfileImage },
+							React.createElement(
+								"div",
+								{ style: { padding: 24 } },
+								"Click to upload an image or drag image here."
+							)
+						),
 						React.createElement(
 							"button",
 							{ onClick: this.submitPetEdit },

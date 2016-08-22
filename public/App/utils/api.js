@@ -95,6 +95,11 @@ export default {
 				}
 			}
 		});
+	},
+
+	upload: function(file, completion){
+		var _file = file
+		
 	}
 
 }
