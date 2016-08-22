@@ -25726,6 +25726,7 @@
 						_react2.default.createElement('br', null),
 						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medicationsString', placeholder: 'heartworm,vitamins,etc...', value: petProfile.medicationsString }),
 						_react2.default.createElement('br', null),
+						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							_reactDropzone2.default,
 							{ style: { width: 100 + '%', marginBottom: 24, background: '#fff', border: '1px solid #ddd' }, onDrop: this.uploadProfileImage },
