@@ -32,15 +32,12 @@ export default {
 
 	editPet: function(){
 		var changeDisplay = true
-		console.log('editPet: changeDisplay = '+JSON.stringify(changeDisplay))
-
 		store.dispatch(actions.displayEditPet(changeDisplay))
 	},
 
 	dismissEditPet: function(){
 		var changeDisplay = false
 		store.dispatch(actions.displayEditPet(changeDisplay))
-
 	},
 
 	registerPet: function(){

@@ -21427,8 +21427,17 @@
 			});
 		},
 	
-		upload: function upload(file, completion) {
-			var _file = file;
+		upload: function upload(file) {
+			var uploadFile = file;
+			// var imageFile = file[0]
+			console.log('imageFileSent = ' + JSON.stringify(uploadFile));
+			this.handlePost('/api/pet', uploadFile, function (err, response) {
+				if (err) {
+					alert(err.message);
+					return;
+				}
+				console.log('upload post response: ' + JSON.stringify(response));
+			});
 		}
 	
 	};
@@ -23043,8 +23052,6 @@
 	
 		editPet: function editPet() {
 			var changeDisplay = true;
-			console.log('editPet: changeDisplay = ' + JSON.stringify(changeDisplay));
-	
 			_store2.default.dispatch(_actions2.default.displayEditPet(changeDisplay));
 		},
 	
@@ -24113,6 +24120,19 @@
 				var newState = Object.assign({}, state);
 				var updatedPet = action.updatedPet;
 				var updatedPets = Object.assign({}, state.pets);
+	
+				var vaccinesArray = updatedPet.vaccines;
+				var vaccinesString = '';
+				for (var i = 0; i < vaccinesArray.length; i++) {
+					var vaccine = vaccinesArray[i];
+					if (vaccine.length == 0) continue;
+	
+					vaccinesString = vaccinesString + vaccine;
+					if (i == vaccinesArray.length - 1) continue;
+	
+					vaccinesString = vaccinesString + ',';
+				}
+				updatedPet['vaccinesString'] = vaccinesString;
 	
 				var allergiesArray = updatedPet.allergies;
 				var allergiesString = '';
@@ -25624,9 +25644,35 @@
 	
 		_createClass(EditPet, [{
 			key: 'uploadProfileImage',
-			value: function uploadProfileImage() {
-				console.log('uploadProfileImage = ');
+			value: function uploadProfileImage(files) {
+				var file = files;
+				var fileUrl = file[0];
+				var currentPetProfile = this.props.pets[this.props.slug];
+				var fileObj = Object.assign({}, currentPetProfile);
+				fileObj['imagePreview'] = fileUrl.preview;
+	
+				console.log('uploadProfileImage fileObj = ' + JSON.stringify(fileObj));
+	
+				_api2.default.upload(fileObj);
 			}
+	
+			// uploadProfileImage(files){
+			// 	var file = files
+			// 	var fileUrl = file[0].preview
+	
+			// 	console.log('uploadProfileImage var uploadFile = '+JSON.stringify(fileUrl))
+	
+			// 	cloudinary.config({
+			// 	  cloud_name: 'mtech',
+			// 	  api_key: '289663892411772',
+			// 	  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
+			// 	})
+	
+			// 	cloudinary.uploader.upload(fileUrl, function(result) { 
+			//  			console.log('cloudinary uploader result = '+JSON.stringify(result)) 
+			// 	})
+			// }
+	
 		}, {
 			key: 'submitEdit',
 			value: function submitEdit(event) {
@@ -25646,8 +25692,11 @@
 				var currentPetProfile = this.props.pets[this.props.slug];
 				var editedPet = Object.assign({}, currentPetProfile);
 	
+				var vaccinesString = editedPet['vaccinesString'];
 				var allergiesString = editedPet['allergiesString'];
 				var medicationsString = editedPet['medicationsString'];
+	
+				editedPet['vaccines'] = _text2.default.stringToArray(vaccinesString, ',');
 	
 				editedPet['allergies'] = _text2.default.stringToArray(allergiesString, ',');
 	
@@ -25709,6 +25758,14 @@
 						),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed', placeholder: 'Breed', value: petProfile.breed }),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Vaccines'
+						),
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'vaccinesString', placeholder: 'rabies...', value: petProfile.vaccinesString }),
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							'label',
@@ -26381,7 +26438,8 @@
 									_react2.default.createElement(
 										'li',
 										null,
-										'Vaccines: '
+										'Vaccines: ',
+										petProfile.vaccinesString
 									)
 								),
 								_react2.default.createElement(

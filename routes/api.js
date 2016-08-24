@@ -92,43 +92,68 @@ router.post('/:resource', function(req, res, next){
 			req.session.user = result.id
 
 			res.json({
-			confirmation: 'Success',
-			result: result
+				confirmation: 'Success',
+				result: result
 			})
 
 		return
 	})
 })
 
-	router.put('/:resource/:id', function(req, res, next){
-		var resource = req.params.resource
-		var resourceId = req.params.id
+// router.post('/upload', function(req, res){
+// 	var resource = req.params.resource
+// 	var controller = controllers[resource]
 
-		var controller = controllers[resource]
-		if (controller == null){
+// 	var imageStream = fs.createReadStream(req.files.image.path, { encoding: 'binary' }), cloudStream = cloudinary.uploader.upload_stream(function() { res.redirect('/'); });
+
+//   imageStream.on('data', cloudStream.write).on('end', cloudStream.end);
+
+//   	petController.post(req.body, function(err, result){
+// 		if(err){
+// 			res.json({
+// 				confirmation: 'Fail',
+// 				message: err.message
+// 			})
+// 			return
+// 		}
+
+// 		res.json({
+// 			confirmation: 'Success',
+// 			result: result
+// 		})
+// 		return
+// 	})
+// })
+
+router.put('/:resource/:id', function(req, res, next){
+	var resource = req.params.resource
+	var resourceId = req.params.id
+
+	var controller = controllers[resource]
+	if (controller == null){
+		res.json({
+			confirmation: 'Fail',
+			message: 'Invalid Resource'
+		})
+		return
+	}
+
+	controller.put(resourceId, req.body, function(err, result){
+		if (err){
 			res.json({
 				confirmation: 'Fail',
-				message: 'Invalid Resource'
+				message: err.message
 			})
 			return
 		}
 
-		controller.put(resourceId, req.body, function(err, result){
-			if (err){
-				res.json({
-					confirmation: 'Fail',
-					message: err.message
-				})
-				return
-			}
-
-			res.json({
-				confirmation: 'Success',
-				result: result
-			})
-			return
+		res.json({
+			confirmation: 'Success',
+			result: result
 		})
+			return
 	})
+})
 
 
 module.exports = router

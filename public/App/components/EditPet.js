@@ -15,9 +15,34 @@ class EditPet extends Component {
 		this.uploadProfileImage = this.uploadProfileImage.bind(this)
 	}
 
-	uploadProfileImage(){
-		console.log('uploadProfileImage = ')
+	uploadProfileImage(files){
+		var file = files
+		var fileUrl = file[0]
+		const currentPetProfile = this.props.pets[this.props.slug]
+		var fileObj = Object.assign({}, currentPetProfile)
+		fileObj['imagePreview'] = fileUrl.preview
+
+		console.log('uploadProfileImage fileObj = '+JSON.stringify(fileObj))
+
+		api.upload(fileObj)
 	}
+
+	// uploadProfileImage(files){
+	// 	var file = files
+	// 	var fileUrl = file[0].preview
+		
+	// 	console.log('uploadProfileImage var uploadFile = '+JSON.stringify(fileUrl))
+
+	// 	cloudinary.config({
+	// 	  cloud_name: 'mtech',
+	// 	  api_key: '289663892411772',
+	// 	  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
+	// 	})
+	
+	// 	cloudinary.uploader.upload(fileUrl, function(result) { 
+ //  			console.log('cloudinary uploader result = '+JSON.stringify(result)) 
+	// 	})
+	// }
 
 	submitEdit(event){
 		event.preventDefault()
@@ -35,8 +60,11 @@ class EditPet extends Component {
 		const currentPetProfile = this.props.pets[this.props.slug]
 		var editedPet = Object.assign({}, currentPetProfile)
 
+		var vaccinesString = editedPet['vaccinesString']
 		var allergiesString = editedPet['allergiesString']
 		var medicationsString = editedPet['medicationsString']
+
+		editedPet['vaccines'] = text.stringToArray(vaccinesString, ',')
 
 		editedPet['allergies'] = text.stringToArray(allergiesString, ',')
 		
@@ -69,6 +97,9 @@ class EditPet extends Component {
 
 					<label>Breed</label><br />
 					<input type="text" onChange={this.submitEdit} id="breed" placeholder={'Breed'} value={petProfile.breed}/><br />
+
+					<label>Vaccines</label><br />
+					<input type="text" onChange={this.submitEdit} id="vaccinesString" placeholder={'rabies...'} value={petProfile.vaccinesString} /><br />
 
 					<label>Allergies</label><br />
 					<input type="text" onChange={this.submitEdit} id="allergiesString" placeholder={'advil,wheat,etc...'} value={petProfile.allergiesString} /><br />

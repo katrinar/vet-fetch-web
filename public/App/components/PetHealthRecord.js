@@ -28,7 +28,7 @@ class PetHealthRecord extends Component {
 						<div id='healthRecStats'>
 							<h4>Vaccines</h4>
 								<ul>
-									<li>Vaccines: </li>
+									<li>Vaccines: {petProfile.vaccinesString}</li>
 								</ul>
 							<h4>Medication</h4>
 								<ul>

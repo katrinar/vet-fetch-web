@@ -43,13 +43,39 @@ var EditPet = (function (Component) {
 
 	_prototypeProperties(EditPet, null, {
 		uploadProfileImage: {
-			value: function uploadProfileImage() {
-				console.log("uploadProfileImage = ");
+			value: function uploadProfileImage(files) {
+				var file = files;
+				var fileUrl = file[0];
+				var currentPetProfile = this.props.pets[this.props.slug];
+				var fileObj = Object.assign({}, currentPetProfile);
+				fileObj.imagePreview = fileUrl.preview;
+
+				console.log("uploadProfileImage fileObj = " + JSON.stringify(fileObj));
+
+				api.upload(fileObj);
 			},
 			writable: true,
 			configurable: true
 		},
 		submitEdit: {
+
+			// uploadProfileImage(files){
+			// 	var file = files
+			// 	var fileUrl = file[0].preview
+
+			// 	console.log('uploadProfileImage var uploadFile = '+JSON.stringify(fileUrl))
+
+			// 	cloudinary.config({
+			// 	  cloud_name: 'mtech',
+			// 	  api_key: '289663892411772',
+			// 	  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
+			// 	})
+
+			// 	cloudinary.uploader.upload(fileUrl, function(result) {
+			//  			console.log('cloudinary uploader result = '+JSON.stringify(result))
+			// 	})
+			// }
+
 			value: function submitEdit(event) {
 				event.preventDefault();
 				var currentPetProfile = this.props.pets[this.props.slug];
@@ -69,8 +95,11 @@ var EditPet = (function (Component) {
 				var currentPetProfile = this.props.pets[this.props.slug];
 				var editedPet = Object.assign({}, currentPetProfile);
 
+				var vaccinesString = editedPet.vaccinesString;
 				var allergiesString = editedPet.allergiesString;
 				var medicationsString = editedPet.medicationsString;
+
+				editedPet.vaccines = text.stringToArray(vaccinesString, ",");
 
 				editedPet.allergies = text.stringToArray(allergiesString, ",");
 
@@ -134,6 +163,14 @@ var EditPet = (function (Component) {
 						),
 						React.createElement("br", null),
 						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed", placeholder: "Breed", value: petProfile.breed }),
+						React.createElement("br", null),
+						React.createElement(
+							"label",
+							null,
+							"Vaccines"
+						),
+						React.createElement("br", null),
+						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "vaccinesString", placeholder: "rabies...", value: petProfile.vaccinesString }),
 						React.createElement("br", null),
 						React.createElement(
 							"label",

@@ -78,7 +78,8 @@ var PetHealthRecord = (function (Component) {
 									React.createElement(
 										"li",
 										null,
-										"Vaccines: "
+										"Vaccines: ",
+										petProfile.vaccinesString
 									)
 								),
 								React.createElement(

@@ -58,6 +58,21 @@ export default function(state = initialState, action){
 		var updatedPet = action.updatedPet
 		var updatedPets = Object.assign({}, state.pets)
 
+		var vaccinesArray = updatedPet.vaccines
+		var vaccinesString = ''
+			for (var i=0; i<vaccinesArray.length; i++){
+				var vaccine = vaccinesArray[i]
+				if (vaccine.length == 0)
+					continue
+
+				vaccinesString = vaccinesString+vaccine
+				if (i==vaccinesArray.length-1)
+					continue
+
+				vaccinesString = vaccinesString+','
+			}
+		updatedPet['vaccinesString'] = vaccinesString
+
 		var allergiesArray = updatedPet.allergies
 		var allergiesString = ''
 			for (var i=0; i<allergiesArray.length; i++){

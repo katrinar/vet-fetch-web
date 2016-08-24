@@ -36,10 +36,6 @@ router.get('/:page/:slug', function(req, res, next){
 
 	var html = ReactDOMServer.renderToString(React.createElement(ServerApp, {page: page, slug: slug}));
 	res.render(page, {react:html});
-
-
-
-	
 });
 
 module.exports = router;

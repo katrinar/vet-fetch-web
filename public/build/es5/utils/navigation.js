@@ -37,8 +37,6 @@ module.exports = {
 
 	editPet: function () {
 		var changeDisplay = true;
-		console.log("editPet: changeDisplay = " + JSON.stringify(changeDisplay));
-
 		store.dispatch(actions.displayEditPet(changeDisplay));
 	},
 
