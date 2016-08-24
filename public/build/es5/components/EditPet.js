@@ -29,6 +29,11 @@ var actions = _interopRequire(require("../actions/actions"));
 
 var Dropzone = _interopRequire(require("react-dropzone"));
 
+var request = _interopRequire(require("superagent"));
+
+var CLOUDINARY_UPLOAD_PRESET = "lpqeur5v";
+var CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/hsypls36a/image/upload";
+
 var EditPet = (function (Component) {
 	function EditPet(props, context) {
 		_classCallCheck(this, EditPet);
@@ -36,46 +41,51 @@ var EditPet = (function (Component) {
 		_get(Object.getPrototypeOf(EditPet.prototype), "constructor", this).call(this, props, context);
 		this.submitEdit = this.submitEdit.bind(this);
 		this.submitPetEdit = this.submitPetEdit.bind(this);
-		this.uploadProfileImage = this.uploadProfileImage.bind(this);
+		this.onImageDrop = this.onImageDrop.bind(this);
+		this.handleImageUpload = this.handleImageUpload.bind(this);
+		this.state = {
+			uploadedFileCloudinaryUrl: ""
+		};
 	}
 
 	_inherits(EditPet, Component);
 
 	_prototypeProperties(EditPet, null, {
-		uploadProfileImage: {
-			value: function uploadProfileImage(files) {
-				var file = files;
-				var fileUrl = file[0];
-				var currentPetProfile = this.props.pets[this.props.slug];
-				var fileObj = Object.assign({}, currentPetProfile);
-				fileObj.imagePreview = fileUrl.preview;
+		onImageDrop: {
+			value: function onImageDrop(files) {
+				this.setState({
+					uploadedFile: files[0]
+				});
 
-				console.log("uploadProfileImage fileObj = " + JSON.stringify(fileObj));
+				this.handleImageUpload(files[0]);
+			},
+			writable: true,
+			configurable: true
+		},
+		handleImageUpload: {
+			value: function handleImageUpload(file) {
+				var _this = this;
+				var upload = request.post(CLOUDINARY_UPLOAD_URL).field("upload_preset", CLOUDINARY_UPLOAD_PRESET).field("file", file);
 
-				api.upload(fileObj);
+				upload.end(function (err, response) {
+					if (err) {
+						console.error(err);
+					}
+
+					if (response.body.secure_url !== "") {
+						_this.setState({
+							uploadedFileCloudinaryUrl: response.body.secure_url
+						});
+						var currentPetProfile = _this.props.pets[_this.props.slug];
+						console.log("handleImageUpload url = " + JSON.stringify(_this.state.uploadedFileCloudinaryUrl) + " petId = " + JSON.stringify(currentPetProfile.id));
+						petManager.sendPetImage(_this.state.uploadedFileCloudinaryUrl, currentPetProfile.id);
+					}
+				});
 			},
 			writable: true,
 			configurable: true
 		},
 		submitEdit: {
-
-			// uploadProfileImage(files){
-			// 	var file = files
-			// 	var fileUrl = file[0].preview
-
-			// 	console.log('uploadProfileImage var uploadFile = '+JSON.stringify(fileUrl))
-
-			// 	cloudinary.config({
-			// 	  cloud_name: 'mtech',
-			// 	  api_key: '289663892411772',
-			// 	  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
-			// 	})
-
-			// 	cloudinary.uploader.upload(fileUrl, function(result) {
-			//  			console.log('cloudinary uploader result = '+JSON.stringify(result))
-			// 	})
-			// }
-
 			value: function submitEdit(event) {
 				event.preventDefault();
 				var currentPetProfile = this.props.pets[this.props.slug];
@@ -191,11 +201,25 @@ var EditPet = (function (Component) {
 						React.createElement("br", null),
 						React.createElement(
 							Dropzone,
-							{ style: { width: 100 + "%", marginBottom: 24, background: "#fff", border: "1px solid #ddd" }, onDrop: this.uploadProfileImage },
+							{ multiple: false, accept: "image/*", style: { width: 100 + "%", marginBottom: 24, background: "#fff", border: "1px solid #ddd" }, onDrop: this.onImageDrop },
 							React.createElement(
 								"div",
 								{ style: { padding: 24 } },
 								"Click to upload an image or drag image here."
+							)
+						),
+						React.createElement(
+							"div",
+							null,
+							this.state.uploadedFileCloudinaryUrl === "" ? null : React.createElement(
+								"div",
+								null,
+								React.createElement(
+									"p",
+									null,
+									this.state.uploadedFile.name
+								),
+								React.createElement("img", { src: this.state.uploadedFileCloudinaryUrl })
 							)
 						),
 						React.createElement(

@@ -1,6 +1,4 @@
 var Pet = require('../models/Pet')
-var cloudinary = require('cloudinary')
-
 
 module.exports = {
 
@@ -73,7 +71,6 @@ module.exports = {
 	},
 
 	post: function(params, callback){
-		console.log('POST params = '+JSON.stringify(params))
 		if (params['name'] != null){
 			var name = params['name'].split(' ')
 			var parts = name
@@ -87,39 +84,6 @@ module.exports = {
 
 			slug = slug.replace('?', '')
 			params['slug'] = slug
-		}
-
-		// if(params['preview'] != null){
-		// 	var imgPreview = params['preview']
-		// 	// var imgPreview = params.imagePreview
-		// 	console.log('POST params[preview] = '+JSON.stringify(imgPreview))
-
-		// 	cloudinary.config({
-		// 	  cloud_name: 'mtech',
-		// 	  api_key: '289663892411772',
-		// 	  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
-		// 	})
-
-		// 	cloudinary.uploader.upload(imgPreview, function(result) { 
-  // 			console.log('CLOUDINARY uploader result = '+JSON.stringify(result)) 
-  // 			})
-		// }
-
-		if(params['imagePreview'] != null){
-			var imgPreview = params['imagePreview']
-			// var imgPreview = params.imagePreview
-			
-
-			cloudinary.config({
-			  cloud_name: 'mtech',
-			  api_key: '289663892411772',
-			  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
-			})
-
-			cloudinary.uploader.upload(imgPreview, function(result) { 
-			console.log('POST params[imagePreview] = '+JSON.stringify(imgPreview))
-  			console.log('CLOUDINARY uploader result = '+JSON.stringify(result)) 
-  			})
 		}
 
 		if(params['ownerId[]'] != null)
@@ -152,6 +116,7 @@ module.exports = {
 	},
 
 	put: function(id, params, callback){
+		console.log('PUT params = '+JSON.stringify(params))
 
 		if (params.name != null){
 				var name = params['name'].split(' ')

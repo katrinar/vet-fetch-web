@@ -21430,14 +21430,14 @@
 		upload: function upload(file) {
 			var uploadFile = file;
 			// var imageFile = file[0]
-			console.log('imageFileSent = ' + JSON.stringify(uploadFile));
-			this.handlePost('/api/pet', uploadFile, function (err, response) {
-				if (err) {
-					alert(err.message);
-					return;
-				}
-				console.log('upload post response: ' + JSON.stringify(response));
-			});
+			console.log('imageFileSent: uploadFile =  ' + JSON.stringify(uploadFile) + 'file preview = ' + JSON.stringify(uploadFile['imagePreview']));
+			// this.handlePost('/api/pet', uploadFile, function(err, response){
+			// 	if (err){
+			// 		alert(err.message)
+			// 		return
+			// 	}
+			// 	console.log('upload post response: '+JSON.stringify(response))
+			// })
 		}
 	
 	};
@@ -25620,6 +25620,10 @@
 	
 	var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
 	
+	var _superagent = __webpack_require__(174);
+	
+	var _superagent2 = _interopRequireDefault(_superagent);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25627,6 +25631,9 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+	var CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hsypls36a/image/upload';
 	
 	var EditPet = function (_Component) {
 		_inherits(EditPet, _Component);
@@ -25638,41 +25645,45 @@
 	
 			_this.submitEdit = _this.submitEdit.bind(_this);
 			_this.submitPetEdit = _this.submitPetEdit.bind(_this);
-			_this.uploadProfileImage = _this.uploadProfileImage.bind(_this);
+			_this.onImageDrop = _this.onImageDrop.bind(_this);
+			_this.handleImageUpload = _this.handleImageUpload.bind(_this);
+			_this.state = {
+				uploadedFileCloudinaryUrl: ''
+			};
 			return _this;
 		}
 	
 		_createClass(EditPet, [{
-			key: 'uploadProfileImage',
-			value: function uploadProfileImage(files) {
-				var file = files;
-				var fileUrl = file[0];
-				var currentPetProfile = this.props.pets[this.props.slug];
-				var fileObj = Object.assign({}, currentPetProfile);
-				fileObj['imagePreview'] = fileUrl.preview;
+			key: 'onImageDrop',
+			value: function onImageDrop(files) {
+				this.setState({
+					uploadedFile: files[0]
+				});
 	
-				console.log('uploadProfileImage fileObj = ' + JSON.stringify(fileObj));
-	
-				_api2.default.upload(fileObj);
+				this.handleImageUpload(files[0]);
 			}
+		}, {
+			key: 'handleImageUpload',
+			value: function handleImageUpload(file) {
+				var _this2 = this;
 	
-			// uploadProfileImage(files){
-			// 	var file = files
-			// 	var fileUrl = file[0].preview
+				var upload = _superagent2.default.post(CLOUDINARY_UPLOAD_URL).field('upload_preset', CLOUDINARY_UPLOAD_PRESET).field('file', file);
 	
-			// 	console.log('uploadProfileImage var uploadFile = '+JSON.stringify(fileUrl))
+				upload.end(function (err, response) {
+					if (err) {
+						console.error(err);
+					}
 	
-			// 	cloudinary.config({
-			// 	  cloud_name: 'mtech',
-			// 	  api_key: '289663892411772',
-			// 	  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
-			// 	})
-	
-			// 	cloudinary.uploader.upload(fileUrl, function(result) { 
-			//  			console.log('cloudinary uploader result = '+JSON.stringify(result)) 
-			// 	})
-			// }
-	
+					if (response.body.secure_url !== '') {
+						_this2.setState({
+							uploadedFileCloudinaryUrl: response.body.secure_url
+						});
+						var currentPetProfile = _this2.props.pets[_this2.props.slug];
+						console.log('handleImageUpload url = ' + JSON.stringify(_this2.state.uploadedFileCloudinaryUrl) + ' petId = ' + JSON.stringify(currentPetProfile.id));
+						_petManager2.default.sendPetImage(_this2.state.uploadedFileCloudinaryUrl, currentPetProfile.id);
+					}
+				});
+			}
 		}, {
 			key: 'submitEdit',
 			value: function submitEdit(event) {
@@ -25786,11 +25797,25 @@
 						_react2.default.createElement('br', null),
 						_react2.default.createElement(
 							_reactDropzone2.default,
-							{ style: { width: 100 + '%', marginBottom: 24, background: '#fff', border: '1px solid #ddd' }, onDrop: this.uploadProfileImage },
+							{ multiple: false, accept: 'image/*', style: { width: 100 + '%', marginBottom: 24, background: '#fff', border: '1px solid #ddd' }, onDrop: this.onImageDrop },
 							_react2.default.createElement(
 								'div',
 								{ style: { padding: 24 } },
 								'Click to upload an image or drag image here.'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							this.state.uploadedFileCloudinaryUrl === '' ? null : _react2.default.createElement(
+								'div',
+								null,
+								_react2.default.createElement(
+									'p',
+									null,
+									this.state.uploadedFile.name
+								),
+								_react2.default.createElement('img', { src: this.state.uploadedFileCloudinaryUrl })
 							)
 						),
 						_react2.default.createElement(
@@ -25851,6 +25876,21 @@
 				console.log('sendPetEdit: PUT RESPONSE = ' + JSON.stringify(response.result));
 				_store2.default.dispatch(_actions2.default.updatePets(response.result));
 			});
+		},
+	
+		sendPetImage: function sendPetImage(petImg, petId) {
+			var petId = petId;
+			var endpoint = '/api/pet/' + petId;
+			console.log('sendPetEdit: petImg = ' + JSON.stringify(petImg) + ', petId = ' + JSON.stringify(petId));
+	
+			// api.handlePut(endpoint, petImg, function(err, response){
+			// 	if (err){
+			// 		alert(err.message)
+			// 		return
+			// 	}
+			// 	console.log('sendPetEdit: PUT RESPONSE = '+JSON.stringify(response.result))
+			// 	store.dispatch(actions.updatePets(response.result))
+			// })
 		}
 	};
 

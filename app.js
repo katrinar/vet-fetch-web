@@ -28,14 +28,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
-cloudinary.config({
-  cloud_name: 'mtech',
-  api_key: '289663892411772',
-  api_secret: 'wqCHR14jkti89DZSy0cXRnDlKkg'
-})
+// cloudinary.config({
+//   cloud_name: 'hsypls36a',
+//   api_key: '463172637736439',
+//   api_secret: 'gcU_bezRE4eFtMyMPuha0cri77I'
+// })
 
-app.locals.api_key = cloudinary.config().api_key;  
-app.locals.cloud_name = cloudinary.config().cloud_name;  
+// app.locals.api_key = cloudinary.config().api_key;  
+// app.locals.cloud_name = cloudinary.config().cloud_name;  
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
