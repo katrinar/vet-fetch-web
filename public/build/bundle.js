@@ -21425,21 +21425,7 @@
 					}
 				}
 			});
-		},
-	
-		upload: function upload(file) {
-			var uploadFile = file;
-			// var imageFile = file[0]
-			console.log('imageFileSent: uploadFile =  ' + JSON.stringify(uploadFile) + 'file preview = ' + JSON.stringify(uploadFile['imagePreview']));
-			// this.handlePost('/api/pet', uploadFile, function(err, response){
-			// 	if (err){
-			// 		alert(err.message)
-			// 		return
-			// 	}
-			// 	console.log('upload post response: '+JSON.stringify(response))
-			// })
 		}
-	
 	};
 
 /***/ },
@@ -24048,6 +24034,7 @@
 		REGISTER_PET: 'REGISTER_PET',
 		RECEIVED_PETS: 'RECEIVED_PETS',
 		RECEIVED_PET_EDIT: 'RECEIVED_PET_EDIT',
+		RECEIVED_PET_IMAGE: 'RECEIVED_PET_IMAGE',
 		UPDATE_PETS: 'UPDATE_PETS',
 		DISPLAY_EDIT_PET: 'DISPLAY_EDIT_PET',
 		SHOW_HEALTH_RECORD: 'SHOW_HEALTH_RECORD',
@@ -24111,6 +24098,20 @@
 				var updatedPets = Object.assign({}, state.pets);
 	
 				updatedPets[editedPet.slug] = editedPet;
+	
+				newState['pets'] = updatedPets;
+	
+				return newState;
+	
+			case _constants2.default.RECEIVED_PET_IMAGE:
+				console.log('RECEIVED_PET_IMAGE: action.petImg = ' + JSON.stringify(action.petImg) + ', action.petSlug = ' + JSON.stringify(action.petSlug));
+	
+				var newState = Object.assign({}, state);
+				var petImageUrl = action.petImg;
+				var updatedPets = Object.assign({}, state.pets);
+	
+				var pet = updatedPets[action.petSlug];
+				pet.image['thumb'] = petImageUrl;
 	
 				newState['pets'] = updatedPets;
 	
@@ -24298,6 +24299,14 @@
 			return {
 				type: _constants2.default.RECEIVED_PET_EDIT,
 				editedPet: editedPet
+			};
+		},
+	
+		receivedPetImage: function receivedPetImage(petImg, petSlug) {
+			return {
+				type: _constants2.default.RECEIVED_PET_IMAGE,
+				petImg: petImg,
+				petSlug: petSlug
 			};
 		},
 	
@@ -25646,6 +25655,7 @@
 			_this.submitEdit = _this.submitEdit.bind(_this);
 			_this.submitPetEdit = _this.submitPetEdit.bind(_this);
 			_this.onImageDrop = _this.onImageDrop.bind(_this);
+			// this.sendPetImg = this.sendPetImg.bind(this)
 			_this.handleImageUpload = _this.handleImageUpload.bind(_this);
 			_this.state = {
 				uploadedFileCloudinaryUrl: ''
@@ -25675,12 +25685,16 @@
 					}
 	
 					if (response.body.secure_url !== '') {
+	
 						_this2.setState({
 							uploadedFileCloudinaryUrl: response.body.secure_url
 						});
-						var currentPetProfile = _this2.props.pets[_this2.props.slug];
-						console.log('handleImageUpload url = ' + JSON.stringify(_this2.state.uploadedFileCloudinaryUrl) + ' petId = ' + JSON.stringify(currentPetProfile.id));
-						_petManager2.default.sendPetImage(_this2.state.uploadedFileCloudinaryUrl, currentPetProfile.id);
+	
+						_store2.default.dispatch(_actions2.default.receivedPetImage(_this2.state.uploadedFileCloudinaryUrl, _this2.props.slug));
+	
+						var updatedPet = Object.assign({}, _this2.props.pets[_this2.props.slug]);
+	
+						_petManager2.default.sendPetEdit(updatedPet);
 					}
 				});
 			}
@@ -25865,6 +25879,7 @@
 	exports.default = {
 	
 		sendPetEdit: function sendPetEdit(petSubmit) {
+			console.log('sendPetEdit pet = ' + JSON.stringify(petSubmit));
 	
 			var endpoint = '/api/pet/' + petSubmit.id;
 	
@@ -25876,21 +25891,6 @@
 				console.log('sendPetEdit: PUT RESPONSE = ' + JSON.stringify(response.result));
 				_store2.default.dispatch(_actions2.default.updatePets(response.result));
 			});
-		},
-	
-		sendPetImage: function sendPetImage(petImg, petId) {
-			var petId = petId;
-			var endpoint = '/api/pet/' + petId;
-			console.log('sendPetEdit: petImg = ' + JSON.stringify(petImg) + ', petId = ' + JSON.stringify(petId));
-	
-			// api.handlePut(endpoint, petImg, function(err, response){
-			// 	if (err){
-			// 		alert(err.message)
-			// 		return
-			// 	}
-			// 	console.log('sendPetEdit: PUT RESPONSE = '+JSON.stringify(response.result))
-			// 	store.dispatch(actions.updatePets(response.result))
-			// })
 		}
 	};
 
@@ -26718,6 +26718,8 @@
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
+				var petProfileImg = petProfile.image || {};
+				console.log('petStats = ' + JSON.stringify(petProfileImg['thumb']));
 	
 				return _react2.default.createElement(
 					'div',
@@ -26738,6 +26740,15 @@
 								null,
 								petProfile.name,
 								' | Stats'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
+								'div',
+								null,
+								_react2.default.createElement('img', { src: petProfileImg['thumb'] })
 							)
 						),
 						_react2.default.createElement(

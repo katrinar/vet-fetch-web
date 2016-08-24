@@ -36,6 +36,14 @@ module.exports = {
 		};
 	},
 
+	receivedPetImage: function (petImg, petSlug) {
+		return {
+			type: constants.RECEIVED_PET_IMAGE,
+			petImg: petImg,
+			petSlug: petSlug
+		};
+	},
+
 	createdCurrentPet: function (currentPet) {
 		return {
 			type: constants.CREATED_CURRENT_PET,

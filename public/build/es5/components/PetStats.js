@@ -39,6 +39,8 @@ var PetStats = (function (Component) {
 			value: function render() {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
+				var petProfileImg = petProfile.image || {};
+				console.log("petStats = " + JSON.stringify(petProfileImg.thumb));
 
 				return React.createElement(
 					"div",
@@ -59,6 +61,15 @@ var PetStats = (function (Component) {
 								null,
 								petProfile.name,
 								" | Stats"
+							)
+						),
+						React.createElement(
+							"div",
+							null,
+							petProfileImg.thumb === "" ? null : React.createElement(
+								"div",
+								null,
+								React.createElement("img", { src: petProfileImg.thumb })
 							)
 						),
 						React.createElement(

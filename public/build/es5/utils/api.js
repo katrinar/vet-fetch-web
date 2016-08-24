@@ -74,19 +74,5 @@ module.exports = {
 				}
 			}
 		});
-	},
-
-	upload: function (file) {
-		var uploadFile = file;
-		// var imageFile = file[0]
-		console.log("imageFileSent: uploadFile =  " + JSON.stringify(uploadFile) + "file preview = " + JSON.stringify(uploadFile.imagePreview));
 	}
-
 };
-// this.handlePost('/api/pet', uploadFile, function(err, response){
-// 	if (err){
-// 		alert(err.message)
-// 		return
-// 	}
-// 	console.log('upload post response: '+JSON.stringify(response))
-// })

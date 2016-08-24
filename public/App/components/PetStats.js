@@ -14,6 +14,8 @@ class PetStats extends Component {
 	render(){
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
+		const petProfileImg = petProfile.image || {}
+		console.log('petStats = '+JSON.stringify(petProfileImg['thumb']))
 
 		return(
 			
@@ -25,6 +27,14 @@ class PetStats extends Component {
 					<div id='profileHeader'>
 						<h2>{petProfile.name} | Stats</h2>
 					</div>
+
+					   <div>
+	        				{petProfileImg['thumb'] === '' ? null :
+					        <div>
+					          
+					          <img src={petProfileImg['thumb']} />
+					        </div>}
+      					</div>
 
 					<div id='profileStats'>
 						<h4>{petProfile.species}</h4> 

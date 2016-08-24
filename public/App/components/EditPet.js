@@ -17,6 +17,7 @@ class EditPet extends Component {
 		this.submitEdit = this.submitEdit.bind(this)
 		this.submitPetEdit = this.submitPetEdit.bind(this)
 		this.onImageDrop = this.onImageDrop.bind(this)
+		// this.sendPetImg = this.sendPetImg.bind(this)
 		this.handleImageUpload = this.handleImageUpload.bind(this)
 		this.state = {
 			uploadedFileCloudinaryUrl: ''
@@ -42,12 +43,16 @@ class EditPet extends Component {
 	      }
 
 	      if (response.body.secure_url !== '') {
+
 	        this.setState({
 	          uploadedFileCloudinaryUrl: response.body.secure_url
 	        })
-	        const currentPetProfile = this.props.pets[this.props.slug]
-	        console.log('handleImageUpload url = '+JSON.stringify(this.state.uploadedFileCloudinaryUrl)+' petId = '+JSON.stringify(currentPetProfile.id))
-	        petManager.sendPetImage(this.state.uploadedFileCloudinaryUrl, currentPetProfile.id)
+
+	        store.dispatch(actions.receivedPetImage(this.state.uploadedFileCloudinaryUrl, this.props.slug))
+
+	        var updatedPet = Object.assign({}, this.props.pets[this.props.slug])
+
+	        petManager.sendPetEdit(updatedPet)
 	      }
 	    })
   	}

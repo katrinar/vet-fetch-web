@@ -16,7 +16,6 @@ var PetSchema = new mongoose.Schema({
 	allergiesString:{type:String, trim:true, lowercase: true, default: ''},
 	medicationsString:{type:String, trim:true, lowercase: true, default: ''},
 	image: {type: mongoose.Schema.Types.Mixed, default:{}},
-	imagePreview: {type:String, default:''},
 	timestamp:{type: String, default: Date.now}
 })
 
@@ -37,8 +36,7 @@ PetSchema.methods.summary = function(){
 		vaccinesString: this.vaccinesString,
 		allergiesString: this.allergiesString,
 		medicationsString: this.medicationsString,
-		image: this.image,
-		imagePreview: this.imagePreview
+		image: this.image
 	}
 
 	return summary

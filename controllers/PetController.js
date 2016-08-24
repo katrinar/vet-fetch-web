@@ -116,7 +116,6 @@ module.exports = {
 	},
 
 	put: function(id, params, callback){
-		console.log('PUT params = '+JSON.stringify(params))
 
 		if (params.name != null){
 				var name = params['name'].split(' ')

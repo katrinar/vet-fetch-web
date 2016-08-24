@@ -53,6 +53,20 @@ export default function(state = initialState, action){
 
 			return newState
 
+		case constants.RECEIVED_PET_IMAGE:
+			console.log('RECEIVED_PET_IMAGE: action.petImg = '+JSON.stringify(action.petImg) + ', action.petSlug = '+JSON.stringify(action.petSlug))
+	
+			var newState = Object.assign({}, state)
+			var petImageUrl = action.petImg
+			var updatedPets = Object.assign({}, state.pets)
+			
+			var pet = updatedPets[action.petSlug]
+			pet.image['thumb'] = petImageUrl
+
+			newState['pets'] = updatedPets
+
+			return newState
+
 		case constants.UPDATE_PETS:
 		var newState = Object.assign({}, state)
 		var updatedPet = action.updatedPet
