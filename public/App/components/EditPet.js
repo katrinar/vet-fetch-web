@@ -8,7 +8,8 @@ import actions from '../actions/actions'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
 
-const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+// const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+const CLOUDINARY_UPLOAD_PRESET = 'vxd4nrmq';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hsypls36a/image/upload';
 
 class EditPet extends Component {

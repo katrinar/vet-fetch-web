@@ -32,7 +32,7 @@ class PetStats extends Component {
 	        				{petProfileImg['thumb'] === '' ? null :
 					        <div>
 					          
-					          <img src={petProfileImg['thumb']} />
+					          <img src={petProfileImg['original']} />
 					        </div>}
       					</div>
 

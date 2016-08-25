@@ -24104,14 +24104,17 @@
 				return newState;
 	
 			case _constants2.default.RECEIVED_PET_IMAGE:
-				console.log('RECEIVED_PET_IMAGE: action.petImg = ' + JSON.stringify(action.petImg) + ', action.petSlug = ' + JSON.stringify(action.petSlug));
 	
 				var newState = Object.assign({}, state);
 				var petImageUrl = action.petImg;
+				var petImageUrlThumb = action.petImg;
+				petImageUrlThumb.replace("upload/", "upload/w_300,h_300/");
+				console.log('RECEIVED_PET_IMAGE: thumb = ' + JSON.stringify(petImageUrlThumb));
 				var updatedPets = Object.assign({}, state.pets);
 	
 				var pet = updatedPets[action.petSlug];
-				pet.image['thumb'] = petImageUrl;
+				pet.image['original'] = petImageUrl;
+				pet.image['thumb'] = petImageUrlThumb;
 	
 				newState['pets'] = updatedPets;
 	
@@ -25641,7 +25644,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+	// const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+	var CLOUDINARY_UPLOAD_PRESET = 'vxd4nrmq';
 	var CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hsypls36a/image/upload';
 	
 	var EditPet = function (_Component) {
@@ -26748,7 +26752,7 @@
 							petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
 								'div',
 								null,
-								_react2.default.createElement('img', { src: petProfileImg['thumb'] })
+								_react2.default.createElement('img', { src: petProfileImg['original'] })
 							)
 						),
 						_react2.default.createElement(

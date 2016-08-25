@@ -31,7 +31,8 @@ var Dropzone = _interopRequire(require("react-dropzone"));
 
 var request = _interopRequire(require("superagent"));
 
-var CLOUDINARY_UPLOAD_PRESET = "lpqeur5v";
+// const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+var CLOUDINARY_UPLOAD_PRESET = "vxd4nrmq";
 var CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/hsypls36a/image/upload";
 
 var EditPet = (function (Component) {

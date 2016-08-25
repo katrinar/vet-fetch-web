@@ -69,7 +69,7 @@ var PetStats = (function (Component) {
 							petProfileImg.thumb === "" ? null : React.createElement(
 								"div",
 								null,
-								React.createElement("img", { src: petProfileImg.thumb })
+								React.createElement("img", { src: petProfileImg.original })
 							)
 						),
 						React.createElement(
