@@ -117,6 +117,7 @@ module.exports = {
 
 	put: function(id, params, callback){
 
+		//handle params for react
 		if (params.name != null){
 				var name = params['name'].split(' ')
 				var parts = name
@@ -131,10 +132,16 @@ module.exports = {
 				slug = slug.replace('?', '')
 				params['slug'] = slug
 		}
+		
+		if(params.image['original'] != null){
+			var originalUrl = params.image['original']
+			params.image['thumb'] = originalUrl.replace("upload/", "upload/w_300,h_300/")
+    	}
 
+    	//handle params for iOS
 		if(params['ownerId[]'] != null)
 			params['ownerId'] = params['ownerId[]']
-
+		
 		var imageInfo = {}
 		var processImage = false
 		if(params['image[thumb]'] != null){

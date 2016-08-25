@@ -15,7 +15,7 @@ class PetStats extends Component {
 		const petSlug = this.props.slug
 		const petProfile = this.props.pets[petSlug] || {}
 		const petProfileImg = petProfile.image || {}
-		console.log('petStats = '+JSON.stringify(petProfileImg['thumb']))
+		console.log('petStats image[thumb] = '+JSON.stringify(petProfileImg['thumb']))
 
 		return(
 			

@@ -24107,14 +24107,10 @@
 	
 				var newState = Object.assign({}, state);
 				var petImageUrl = action.petImg;
-				var petImageUrlThumb = action.petImg;
-				petImageUrlThumb.replace("upload/", "upload/w_300,h_300/");
-				console.log('RECEIVED_PET_IMAGE: thumb = ' + JSON.stringify(petImageUrlThumb));
 				var updatedPets = Object.assign({}, state.pets);
 	
 				var pet = updatedPets[action.petSlug];
 				pet.image['original'] = petImageUrl;
-				pet.image['thumb'] = petImageUrlThumb;
 	
 				newState['pets'] = updatedPets;
 	
@@ -26723,7 +26719,7 @@
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 				var petProfileImg = petProfile.image || {};
-				console.log('petStats = ' + JSON.stringify(petProfileImg['thumb']));
+				console.log('petStats image[thumb] = ' + JSON.stringify(petProfileImg['thumb']));
 	
 				return _react2.default.createElement(
 					'div',
