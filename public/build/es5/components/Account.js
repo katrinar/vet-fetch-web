@@ -13,8 +13,6 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var HomeButton = _interopRequire(require("../components/HomeButton"));
-
 var text = _interopRequire(require("../utils/text"));
 
 var EditProfile = _interopRequire(require("../components/EditProfile"));

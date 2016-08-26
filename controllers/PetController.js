@@ -133,10 +133,10 @@ module.exports = {
 				params['slug'] = slug
 		}
 		
-		if(params.image['original'] != null){
-			var originalUrl = params.image['original']
-			params.image['thumb'] = originalUrl.replace("upload/", "upload/w_300,h_300/")
-    	}
+		// if(params.image['original'] != null){
+		// 	var originalUrl = params.image['original']
+		// 	params.image['thumb'] = originalUrl.replace("upload/", "upload/w_300,h_300/")
+  //   	}
 
     	//handle params for iOS
 		if(params['ownerId[]'] != null)

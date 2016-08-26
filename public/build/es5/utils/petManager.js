@@ -11,8 +11,6 @@ var actions = _interopRequire(require("../actions/actions"));
 module.exports = {
 
 	sendPetEdit: function (petSubmit) {
-		console.log("sendPetEdit pet = " + JSON.stringify(petSubmit));
-
 		var endpoint = "/api/pet/" + petSubmit.id;
 
 		api.handlePut(endpoint, petSubmit, function (err, response) {
@@ -20,7 +18,7 @@ module.exports = {
 				alert(err.message);
 				return;
 			}
-			console.log("sendPetEdit: PUT RESPONSE = " + JSON.stringify(response.result));
+			// console.log('sendPetEdit: PUT RESPONSE = '+JSON.stringify(response.result))
 			store.dispatch(actions.updatePets(response.result));
 		});
 	}

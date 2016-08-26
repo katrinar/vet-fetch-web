@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 var petController = require('../controllers/PetController');
 var profileController = require('../controllers/ProfileController');
+var vetController = require('../controllers/VetController')
 
 var controllers = {
 	pet: petController,
-	profile: profileController
+	profile: profileController,
+	vet: vetController
 }
-
 
 router.get('/:resource', function(req, res, next) {
 	var resource = req.params.resource
@@ -99,31 +100,6 @@ router.post('/:resource', function(req, res, next){
 		return
 	})
 })
-
-// router.post('/upload', function(req, res){
-// 	var resource = req.params.resource
-// 	var controller = controllers[resource]
-
-// 	var imageStream = fs.createReadStream(req.files.image.path, { encoding: 'binary' }), cloudStream = cloudinary.uploader.upload_stream(function() { res.redirect('/'); });
-
-//   imageStream.on('data', cloudStream.write).on('end', cloudStream.end);
-
-//   	petController.post(req.body, function(err, result){
-// 		if(err){
-// 			res.json({
-// 				confirmation: 'Fail',
-// 				message: err.message
-// 			})
-// 			return
-// 		}
-
-// 		res.json({
-// 			confirmation: 'Success',
-// 			result: result
-// 		})
-// 		return
-// 	})
-// })
 
 router.put('/:resource/:id', function(req, res, next){
 	var resource = req.params.resource

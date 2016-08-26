@@ -31,7 +31,7 @@ class HomeContainer extends Component {
 					Welcome, {text.capitalize(this.props.currentUser.firstName)}
 				</h2>
 				<h3><a href={'/pets/'}>Pets</a></h3>
-				<h3><a href={'/'}>Vet</a></h3>
+				<h3><a href={'/vets'}>Find Vets Near You</a></h3>
 				<h3><a href={'/'}>Insurance</a></h3>
 				<h3><a href={'/account'}>Account</a></h3>
 				<button onClick={this.logout}>Logout</button>

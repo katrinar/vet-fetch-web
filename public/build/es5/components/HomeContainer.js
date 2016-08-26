@@ -72,8 +72,8 @@ var HomeContainer = (function (Component) {
 						null,
 						React.createElement(
 							"a",
-							{ href: "/" },
-							"Vet"
+							{ href: "/vets" },
+							"Find Vets Near You"
 						)
 					),
 					React.createElement(

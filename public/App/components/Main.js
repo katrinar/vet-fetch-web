@@ -6,6 +6,7 @@ import Landing from '../components/Landing'
 import HomeContainer from '../components/HomeContainer'
 import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
+import VetsContainer from '../components/VetsContainer'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
@@ -76,6 +77,8 @@ class Main extends Component {
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray} showRegisterPet={this.props.showRegisterPet}/>
 			case 'pet':
 				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet} showHealthRecord={this.props.showHealthRecord}/>
+			case 'vets':
+				return page = <VetsContainer pets={this.props.pets} slug={this.props.slug}/>
 			default: 
 				return page = null
 		}

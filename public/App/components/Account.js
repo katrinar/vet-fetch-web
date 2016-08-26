@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import HomeButton from '../components/HomeButton'
 import text from '../utils/text'
 import EditProfile from '../components/EditProfile'
 import AccountContent from '../components/AccountContent'
