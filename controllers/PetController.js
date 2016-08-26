@@ -86,6 +86,7 @@ module.exports = {
 			params['slug'] = slug
 		}
 
+		//handle params for iOS
 		if(params['ownerId[]'] != null)
 			params['ownerId'] = params['ownerId[]']
 
@@ -139,6 +140,16 @@ module.exports = {
   //   	}
 
     	//handle params for iOS
+
+    	if (params['medications[]'] != null)
+			params['medications'] = params['medications[]']
+
+		if(params['allergies[]'] != null)
+			params['allergies'] = params['allergies[]']
+
+		if(params['vaccines[]'] != null)
+			params['vaccines'] = params['vaccines[]']
+
 		if(params['ownerId[]'] != null)
 			params['ownerId'] = params['ownerId[]']
 		

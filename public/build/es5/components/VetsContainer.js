@@ -56,7 +56,7 @@ var VetsContainer = (function (Component) {
 		searchZip: {
 			value: function searchZip(event) {
 				event.preventDefault();
-				console.log("SEARCH ZIP PARAMS " + JSON.stringify(this.state.zipcode));
+				console.log("SEARCH ZIP PARAMS " + JSON.stringify(this.state.vet));
 
 				api.handlePost("/api/vet", this.state.vet, function (err, response) {
 					if (err) {
@@ -64,6 +64,13 @@ var VetsContainer = (function (Component) {
 						return;
 					}
 					console.log("SEARCH ZIP RESPONSE " + JSON.stringify(response.result));
+					var vet = response.result
+
+					// this.setState({
+					// 	vet: vet
+					// })
+					// console.log('SEARCH ZIP STATE '+JSON.stringify(this.state.vet))
+					;
 				});
 			},
 			writable: true,

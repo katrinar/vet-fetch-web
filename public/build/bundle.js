@@ -26864,7 +26864,7 @@
 			key: 'searchZip',
 			value: function searchZip(event) {
 				event.preventDefault();
-				console.log('SEARCH ZIP PARAMS ' + JSON.stringify(this.state.zipcode));
+				console.log('SEARCH ZIP PARAMS ' + JSON.stringify(this.state.vet));
 	
 				_api2.default.handlePost('/api/vet', this.state.vet, function (err, response) {
 					if (err) {
@@ -26872,6 +26872,12 @@
 						return;
 					}
 					console.log('SEARCH ZIP RESPONSE ' + JSON.stringify(response.result));
+					var vet = response.result;
+	
+					// this.setState({
+					// 	vet: vet
+					// })
+					console.log('SEARCH ZIP STATE ' + JSON.stringify(this.state.vet));
 				});
 			}
 		}, {

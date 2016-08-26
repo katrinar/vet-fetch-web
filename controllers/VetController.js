@@ -74,39 +74,32 @@ module.exports = {
 	post: function(params, callback){	
 		console.log('POST RESPONSE PARAMS = '+JSON.stringify(params))
 
-		if (params.zipcode != null){
-			var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+params.zipcode
+		var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+params.zipcode
 	    
-	    	Request.get(url, {key:'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds'})
+	    Request.get(url, {key:'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds'})
 	    	.then(function(response){
-	    	console.log('POST RESPONSE = '+JSON.stringify(response))
+		    	console.log(JSON.stringify(response))
 
 		    	var results = response.results
 		    	var locationInfo = results[0]
 		    	var geometry = locationInfo.geometry
 		    	var location = geometry.location
+		    	var geo = [location.lat, location.lng]
+		    	params['geo'] = geo	
 
-		    	var lat = location.lat
-		    	var lng = location.lng
-		    	var geo = params['geo']
-		    	geo['lat'] = lat
-		    	geo['lng'] = lng
-			})	
-	 	}
-	  
-	    console.log('POST RESPONSE PARAMS[GEO] = '+JSON.stringify(params['geo']))
-	    console.log('POST RESPONSE PARAMS.GEO = '+JSON.stringify(params.geo))
-	    	
-
-		Vet.create(params, function(err, vet){
-			if(err){
-				if (callback != null)
-					callback(err, null)
-				return
-			}
-			if(callback != null)
-				callback(null, vet.summary())
-		})	
+				Vet.create(params, function(err, vet){
+					if(err){
+						if (callback != null)
+							callback(err, null)
+						return
+					}
+					if(callback != null)
+						callback(null, vet.summary())
+				})	
+			})
+	    	.catch(function(err){
+	    		console.log('ERROR: '+err)
+	    	})
 	},
 
 	put: function(id, params, callback){
