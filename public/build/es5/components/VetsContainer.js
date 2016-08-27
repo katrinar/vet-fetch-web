@@ -15,11 +15,13 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var shouldPureComponentUpdate = _interopRequire(require("react-pure-render/function"));
-
 var HomeButton = _interopRequire(require("../components/HomeButton"));
 
 var GoogleMap = _interopRequire(require("google-map-react"));
+
+var store = _interopRequire(require("../stores/store"));
+
+var actions = _interopRequire(require("../actions/actions"));
 
 var api = _interopRequire(require("../utils/api"));
 
@@ -31,7 +33,7 @@ var VetsContainer = (function (Component) {
 		this.searchZip = this.searchZip.bind(this);
 		this.submitZip = this.submitZip.bind(this);
 		this.state = {
-			vet: {
+			search: {
 				zipcode: "",
 				geo: []
 			}
@@ -47,7 +49,7 @@ var VetsContainer = (function (Component) {
 				var vetSearch = Object.assign({}, this.state.vet);
 				vetSearch[event.target.id] = event.target.value;
 				this.setState({
-					vet: vetSearch
+					search: vetSearch
 				});
 			},
 			writable: true,
@@ -56,21 +58,18 @@ var VetsContainer = (function (Component) {
 		searchZip: {
 			value: function searchZip(event) {
 				event.preventDefault();
-				console.log("SEARCH ZIP PARAMS " + JSON.stringify(this.state.vet));
+				console.log("SEARCH ZIP PARAMS/ SEARCH STATE = " + JSON.stringify(this.state.search));
+				var searchResponse = Object.assign({}, this.state.search);
 
-				api.handlePost("/api/vet", this.state.vet, function (err, response) {
+				api.handlePost("/api/vet", this.state.search, function (err, response) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
-					console.log("SEARCH ZIP RESPONSE " + JSON.stringify(response.result));
-					var vet = response.result
-
-					// this.setState({
-					// 	vet: vet
-					// })
-					// console.log('SEARCH ZIP STATE '+JSON.stringify(this.state.vet))
-					;
+					console.log("SEARCH ZIP RESPONSE.result = " + JSON.stringify(response.result));
+					searchResponse = response.result;
+					console.log("SEARCH ZIP UPDATED SEARCH STATE = " + JSON.stringify(searchResponse));
+					store.dispatch(actions.receivedSearch(searchResponse));
 				});
 			},
 			writable: true,
@@ -78,6 +77,12 @@ var VetsContainer = (function (Component) {
 		},
 		render: {
 			value: function render() {
+				var newCenter = [];
+				if (this.props.search.geo != null) {
+					newCenter = this.props.search.geo;
+					console.log("RENDER: this.props.search.geo = " + JSON.stringify(newCenter));
+				}
+
 				return React.createElement(
 					"div",
 					null,
@@ -107,6 +112,7 @@ var VetsContainer = (function (Component) {
 						null,
 						React.createElement(GoogleMap, {
 							defaultCenter: this.props.center,
+
 							defaultZoom: this.props.zoom, style: this.props.style, yesIWantToUseGoogleMapApiInternals: true })
 					)
 				);
@@ -120,14 +126,16 @@ var VetsContainer = (function (Component) {
 })(Component);
 
 VetsContainer.propTypes = {
-	center: React.PropTypes.objectOf(React.PropTypes.number).isRequired,
+	center: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
 	zoom: React.PropTypes.number.isRequired
 };
 
 VetsContainer.defaultProps = {
-	center: { lat: 40.7058316, lng: -74.2581956 },
+	center: [40.7144522, -73.9601094],
 	zoom: 9,
 	style: { height: 500, width: 500, position: "absolute" }
 };
 
 module.exports = VetsContainer;
+// center={this.props.search.geo}
+// center={this.props.center || this.props.search.geo}

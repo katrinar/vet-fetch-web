@@ -41,7 +41,6 @@ export default {
 			}
 
 			if (completion != null){
-
 				completion(null, res.body)
 				return	
 			}
@@ -62,13 +61,18 @@ export default {
 			}
 
 			if (completion != null){
-				if (res.body.confirmation == 'Success'){
-		    		completion(null, res.body)
-				}
-				else {
-		    		completion({message:res.body.message}, null)
-				}
+		    	completion(null, res.body)
+				return
 			}
+
+			// if (completion != null){
+			// 	if (res.body.confirmation == 'Success'){
+		 //    		completion(null, res.body)
+			// 	}
+			// 	else {
+		 //    		completion({message:res.body.message}, null)
+			// 	}
+			// }
 
 
 		});

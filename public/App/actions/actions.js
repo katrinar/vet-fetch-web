@@ -80,5 +80,12 @@ export default {
 			type: constants.SHOW_EDIT_PROFILE,
 			showContent: showContent
 		}
+	},
+
+	receivedSearch: function(search){
+		return{
+			type: constants.RECEIVED_SEARCH,
+			search: search
+		}
 	}
 }

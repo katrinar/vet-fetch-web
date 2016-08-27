@@ -112,7 +112,7 @@ var Main = (function (Component) {
 					case "pet":
 						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					case "vets":
-						return page = React.createElement(VetsContainer, { pets: this.props.pets, slug: this.props.slug });
+						return page = React.createElement(VetsContainer, { search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -137,6 +137,7 @@ var stateToProps = function (state) {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
 		pets: state.petReducer.pets,
+		search: state.searchReducer.search,
 		displayEditPet: state.displayReducer.displayEditPet,
 		showHealthRecord: state.displayReducer.showHealthRecord,
 		showRegisterPet: state.displayReducer.showRegisterPet,
