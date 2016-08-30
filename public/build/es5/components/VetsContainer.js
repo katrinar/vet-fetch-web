@@ -10,12 +10,16 @@ var _inherits = function (subClass, superClass) { if (typeof superClass !== "fun
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require("react");
 
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
 var HomeButton = _interopRequire(require("../components/HomeButton"));
+
+var Markers = _interopRequire(require("../components/Markers"));
 
 var GoogleMap = _interopRequire(require("google-map-react"));
 
@@ -25,6 +29,11 @@ var actions = _interopRequire(require("../actions/actions"));
 
 var api = _interopRequire(require("../utils/api"));
 
+var request = _interopRequire(require("superagent"));
+
+var GOOGLE_API_KEY = "AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds";
+var GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+
 var VetsContainer = (function (Component) {
 	function VetsContainer(props, context) {
 		_classCallCheck(this, VetsContainer);
@@ -32,6 +41,7 @@ var VetsContainer = (function (Component) {
 		_get(Object.getPrototypeOf(VetsContainer.prototype), "constructor", this).call(this, props, context);
 		this.searchZip = this.searchZip.bind(this);
 		this.submitZip = this.submitZip.bind(this);
+		this.searchVets = this.searchVets.bind(this);
 		this.state = {
 			search: {
 				zipcode: "",
@@ -58,6 +68,7 @@ var VetsContainer = (function (Component) {
 		searchZip: {
 			value: function searchZip(event) {
 				event.preventDefault();
+				var _this = this;
 				console.log("SEARCH ZIP PARAMS/ SEARCH STATE = " + JSON.stringify(this.state.search));
 				var searchResponse = Object.assign({}, this.state.search);
 
@@ -68,21 +79,37 @@ var VetsContainer = (function (Component) {
 					}
 					console.log("SEARCH ZIP RESPONSE.result = " + JSON.stringify(response.result));
 					searchResponse = response.result;
-					console.log("SEARCH ZIP UPDATED SEARCH STATE = " + JSON.stringify(searchResponse));
+					console.log("SEARCH ZIP UPDATED SEARCH STATE GEO= " + JSON.stringify(searchResponse.geo));
+					_this.searchVets(searchResponse.geo[0], searchResponse.geo[1]);
 					store.dispatch(actions.receivedSearch(searchResponse));
 				});
 			},
 			writable: true,
 			configurable: true
 		},
+		searchVets: {
+			value: function searchVets(lat, lng) {
+				console.log("searchVets lat, lng = " + JSON.stringify(lat + ", " + lng));
+				var lat = lat;
+				var lng = lng;
+
+
+				request.get(GOOGLE_API_URL + "location=" + lat + "," + lng)
+				// .query({location: location})
+				.query({ radius: "1000" }).query({ keyword: "vet" }).query({ key: "AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI" }).end(function (err, response) {
+					if (err) {
+						console.error(err);
+					}
+
+					console.log("SearchVets response = " + JSON.stringify(response));
+				});
+
+			},
+			writable: true,
+			configurable: true
+		},
 		render: {
 			value: function render() {
-				var newCenter = [];
-				if (this.props.search.geo != null) {
-					newCenter = this.props.search.geo;
-					console.log("RENDER: this.props.search.geo = " + JSON.stringify(newCenter));
-				}
-
 				return React.createElement(
 					"div",
 					null,
@@ -110,10 +137,15 @@ var VetsContainer = (function (Component) {
 					React.createElement(
 						"div",
 						null,
-						React.createElement(GoogleMap, {
-							defaultCenter: this.props.center,
-
-							defaultZoom: this.props.zoom, style: this.props.style, yesIWantToUseGoogleMapApiInternals: true })
+						React.createElement(
+							GoogleMap,
+							{
+								center: this.props.search.geo,
+								defaultZoom: this.props.zoom,
+								style: this.props.style,
+								yesIWantToUseGoogleMapApiInternals: true },
+							React.createElement(Markers, _extends({}, this.props.search.geo, { text: "A" }))
+						)
 					)
 				);
 			},
@@ -132,10 +164,17 @@ VetsContainer.propTypes = {
 
 VetsContainer.defaultProps = {
 	center: [40.7144522, -73.9601094],
-	zoom: 9,
+	zoom: 10,
 	style: { height: 500, width: 500, position: "absolute" }
 };
 
 module.exports = VetsContainer;
-// center={this.props.search.geo}
-// center={this.props.center || this.props.search.geo}
+// let search = request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+//                    // .query({location: location})
+//                    .query({radius: '1000'})
+//                    .query({keyword: 'vet'})
+//                    .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
+//                    .end(function(err, res){
+//                    	console.log('SearchVets response = '+JSON.stringify(res))
+//                    })
+// defaultCenter={this.props.center}

@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import HomeButton from '../components/HomeButton'
+import Markers from '../components/Markers'
 import GoogleMap from 'google-map-react'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import api from '../utils/api'
+import request from 'superagent'
+
+const GOOGLE_API_KEY = 'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds';
+const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 
 class VetsContainer extends Component {
 
@@ -11,6 +16,7 @@ class VetsContainer extends Component {
     super(props, context)
     this.searchZip = this.searchZip.bind(this)
     this.submitZip = this.submitZip.bind(this)
+    this.searchVets = this.searchVets.bind(this)
     this.state = {
     	search: {
 	    	zipcode: '',
@@ -30,6 +36,7 @@ class VetsContainer extends Component {
 
   searchZip(event){
 		event.preventDefault()
+		var _this = this
 		console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
 		var searchResponse = Object.assign({}, this.state.search)
 
@@ -40,19 +47,45 @@ class VetsContainer extends Component {
 			}
 			console.log('SEARCH ZIP RESPONSE.result = '+JSON.stringify(response.result))
 			searchResponse = response.result
-			console.log('SEARCH ZIP UPDATED SEARCH STATE = '+JSON.stringify(searchResponse))
+			console.log('SEARCH ZIP UPDATED SEARCH STATE GEO= '+JSON.stringify(searchResponse.geo))
+			_this.searchVets(searchResponse.geo[0], searchResponse.geo[1])
 			store.dispatch(actions.receivedSearch(searchResponse))
 		})
 		
 	}
 
+	searchVets(lat, lng) {
+		
+		console.log('searchVets lat, lng = '+JSON.stringify(lat+', '+lng))
+		var lat = lat
+		var lng = lng
+
+
+    	request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+                        // .query({location: location})
+                        .query({radius: '1000'})
+                        .query({keyword: 'vet'})
+                        .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
+                        .end(function(err, response){
+                        	if (err){
+                        		console.error(err)
+                        	}
+                        	
+                        	console.log('SearchVets response = '+JSON.stringify(response))
+                        })
+	
+
+    	// let search = request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+     //                    // .query({location: location})
+     //                    .query({radius: '1000'})
+     //                    .query({keyword: 'vet'})
+     //                    .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
+     //                    .end(function(err, res){
+     //                    	console.log('SearchVets response = '+JSON.stringify(res))
+     //                    })
+  	}
+
 	render(){
-		var newCenter = []
-		if (this.props.search.geo != null){
-			
-			newCenter = this.props.search.geo
-			console.log('RENDER: this.props.search.geo = '+JSON.stringify(newCenter))
-		}
 
 		return(
 			<div>
@@ -69,13 +102,13 @@ class VetsContainer extends Component {
 
 				<div>
 					<GoogleMap
-				        defaultCenter={this.props.center}
-				      
-				        // center={this.props.search.geo}
-				         // center={this.props.center || this.props.search.geo}
-				        defaultZoom={this.props.zoom} style={this.props.style} yesIWantToUseGoogleMapApiInternals>
+				        // defaultCenter={this.props.center}
+				        center={this.props.search.geo}
+				        defaultZoom={this.props.zoom} 
+				        style={this.props.style} 
+				        yesIWantToUseGoogleMapApiInternals>
+				        <Markers {...this.props.search.geo} text={'A'} />
 				    </GoogleMap>
-
 				</div>
 			</div>
 		)
@@ -89,7 +122,7 @@ VetsContainer.propTypes = {
 
 VetsContainer.defaultProps = {
 	center: [40.7144522,-73.9601094],
-	zoom: 9,
+	zoom: 10,
 	style: {height: 500, width: 500, position: 'absolute'}
 }
 
