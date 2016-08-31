@@ -26904,7 +26904,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var GOOGLE_API_KEY = 'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds';
+	var GOOGLE_API_KEY = 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI';
 	var GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 	
 	var VetsContainer = function (_Component) {
@@ -26942,7 +26942,7 @@
 			value: function searchZip(event) {
 				event.preventDefault();
 				var _this = this;
-				console.log('SEARCH ZIP PARAMS/ SEARCH STATE = ' + JSON.stringify(this.state.search));
+				// console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
 				var searchResponse = Object.assign({}, this.state.search);
 	
 				_api2.default.handlePost('/api/vet', this.state.search, function (err, response) {
@@ -26960,29 +26960,34 @@
 		}, {
 			key: 'searchVets',
 			value: function searchVets(lat, lng) {
+				event.preventDefault();
 	
-				console.log('searchVets lat, lng = ' + JSON.stringify(lat + ', ' + lng));
+				// console.log('searchVets lat, lng = '+JSON.stringify(lat+', '+lng))
 				var lat = lat;
 				var lng = lng;
 	
-				_superagent2.default.get(GOOGLE_API_URL + "location=" + lat + "," + lng)
-				// .query({location: location})
-				.query({ radius: '1000' }).query({ keyword: 'vet' }).query({ key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI' }).end(function (err, response) {
+				// request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+				//                    // .query({location: location})
+				//                    .query({radius: '1000'})
+				//                    .query({keyword: 'vet'})
+				//                    .query({key: GOOGLE_API_KEY})
+				//                    .end(function(err, response){
+				//                    	if (err){
+				//                    		console.error(err)
+				//                    	}
+	
+				//                    	console.log('SearchVets response = '+JSON.stringify(response))
+				//                    })
+	
+				_superagent2.default.get(GOOGLE_API_URL + "location=" + lat + "," + lng).query({ radius: '1000' }).query({ keyword: 'vet' }).query({ key: GOOGLE_API_KEY }).end(function (err, response) {
 					if (err) {
 						console.error(err);
 					}
 	
-					console.log('SearchVets response = ' + JSON.stringify(response));
+					if (response.status == 'OK') {
+						console.log('search response = ' + JSON.stringify(response));
+					}
 				});
-	
-				// let search = request.get(GOOGLE_API_URL+"location="+lat+","+lng)
-				//                    // .query({location: location})
-				//                    .query({radius: '1000'})
-				//                    .query({keyword: 'vet'})
-				//                    .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
-				//                    .end(function(err, res){
-				//                    	console.log('SearchVets response = '+JSON.stringify(res))
-				//                    })
 			}
 		}, {
 			key: 'render',

@@ -7,7 +7,7 @@ import actions from '../actions/actions'
 import api from '../utils/api'
 import request from 'superagent'
 
-const GOOGLE_API_KEY = 'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds';
+const GOOGLE_API_KEY = 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI';
 const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 
 class VetsContainer extends Component {
@@ -37,7 +37,7 @@ class VetsContainer extends Component {
   searchZip(event){
 		event.preventDefault()
 		var _this = this
-		console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
+		// console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
 		var searchResponse = Object.assign({}, this.state.search)
 
 		api.handlePost('/api/vet', this.state.search, function(err, response){
@@ -55,34 +55,40 @@ class VetsContainer extends Component {
 	}
 
 	searchVets(lat, lng) {
+		event.preventDefault()
 		
-		console.log('searchVets lat, lng = '+JSON.stringify(lat+', '+lng))
+		// console.log('searchVets lat, lng = '+JSON.stringify(lat+', '+lng))
 		var lat = lat
 		var lng = lng
 
 
-    	request.get(GOOGLE_API_URL+"location="+lat+","+lng)
-                        // .query({location: location})
-                        .query({radius: '1000'})
-                        .query({keyword: 'vet'})
-                        .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
-                        .end(function(err, response){
-                        	if (err){
-                        		console.error(err)
-                        	}
-                        	
-                        	console.log('SearchVets response = '+JSON.stringify(response))
-                        })
-	
-
-    	// let search = request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+    	// request.get(GOOGLE_API_URL+"location="+lat+","+lng)
      //                    // .query({location: location})
      //                    .query({radius: '1000'})
      //                    .query({keyword: 'vet'})
-     //                    .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
-     //                    .end(function(err, res){
-     //                    	console.log('SearchVets response = '+JSON.stringify(res))
+     //                    .query({key: GOOGLE_API_KEY})
+     //                    .end(function(err, response){
+     //                    	if (err){
+     //                    		console.error(err)
+     //                    	}
+                        	
+     //                    	console.log('SearchVets response = '+JSON.stringify(response))
      //                    })
+	
+
+    	request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+                        .query({radius: '1000'})
+                        .query({keyword: 'vet'})
+                        .query({key: GOOGLE_API_KEY})
+        				.end(function(err, response){
+	        					if (err){
+	        						console.error(err)
+	        					}
+
+	        					if (response.status == 'OK'){
+	        						console.log('search response = '+JSON.stringify(response))}
+	        					
+        				})
   	}
 
 	render(){

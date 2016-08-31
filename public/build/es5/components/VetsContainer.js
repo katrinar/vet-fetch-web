@@ -31,7 +31,7 @@ var api = _interopRequire(require("../utils/api"));
 
 var request = _interopRequire(require("superagent"));
 
-var GOOGLE_API_KEY = "AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds";
+var GOOGLE_API_KEY = "AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI";
 var GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
 var VetsContainer = (function (Component) {
@@ -69,7 +69,7 @@ var VetsContainer = (function (Component) {
 			value: function searchZip(event) {
 				event.preventDefault();
 				var _this = this;
-				console.log("SEARCH ZIP PARAMS/ SEARCH STATE = " + JSON.stringify(this.state.search));
+				// console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
 				var searchResponse = Object.assign({}, this.state.search);
 
 				api.handlePost("/api/vet", this.state.search, function (err, response) {
@@ -89,21 +89,36 @@ var VetsContainer = (function (Component) {
 		},
 		searchVets: {
 			value: function searchVets(lat, lng) {
-				console.log("searchVets lat, lng = " + JSON.stringify(lat + ", " + lng));
+				event.preventDefault();
+
+				// console.log('searchVets lat, lng = '+JSON.stringify(lat+', '+lng))
 				var lat = lat;
 				var lng = lng;
 
 
-				request.get(GOOGLE_API_URL + "location=" + lat + "," + lng)
-				// .query({location: location})
-				.query({ radius: "1000" }).query({ keyword: "vet" }).query({ key: "AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI" }).end(function (err, response) {
+				// request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+				//                    // .query({location: location})
+				//                    .query({radius: '1000'})
+				//                    .query({keyword: 'vet'})
+				//                    .query({key: GOOGLE_API_KEY})
+				//                    .end(function(err, response){
+				//                    	if (err){
+				//                    		console.error(err)
+				//                    	}
+
+				//                    	console.log('SearchVets response = '+JSON.stringify(response))
+				//                    })
+
+
+				request.get(GOOGLE_API_URL + "location=" + lat + "," + lng).query({ radius: "1000" }).query({ keyword: "vet" }).query({ key: GOOGLE_API_KEY }).end(function (err, response) {
 					if (err) {
 						console.error(err);
 					}
 
-					console.log("SearchVets response = " + JSON.stringify(response));
+					if (response.status == "OK") {
+						console.log("search response = " + JSON.stringify(response));
+					}
 				});
-
 			},
 			writable: true,
 			configurable: true
@@ -169,12 +184,4 @@ VetsContainer.defaultProps = {
 };
 
 module.exports = VetsContainer;
-// let search = request.get(GOOGLE_API_URL+"location="+lat+","+lng)
-//                    // .query({location: location})
-//                    .query({radius: '1000'})
-//                    .query({keyword: 'vet'})
-//                    .query({key: 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'})
-//                    .end(function(err, res){
-//                    	console.log('SearchVets response = '+JSON.stringify(res))
-//                    })
 // defaultCenter={this.props.center}
