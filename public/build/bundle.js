@@ -24305,7 +24305,8 @@
 		search: {
 			zipcode: '',
 			geo: [],
-			id: ''
+			id: '',
+			vetResults: []
 		}
 	};
 
@@ -26945,35 +26946,23 @@
 					console.log('SEARCH ZIP UPDATED SEARCH RESPONSE= ' + JSON.stringify(searchResponse.geo));
 	
 					_store2.default.dispatch(_actions2.default.receivedSearch(searchResponse));
-					_this.searchVets(searchResponse.geo);
+					_this.searchVets();
 				});
 			}
 		}, {
 			key: 'searchVets',
-			value: function searchVets(coordinates) {
+			value: function searchVets() {
 				event.preventDefault();
 				var endpoint = '/api/vet/' + this.props.search.id;
 				console.log('SEARCH VETS endpoint = ' + JSON.stringify(endpoint));
 	
-				_api2.default.handlePut(endpoint, coordinates, function (err, response) {
+				_api2.default.handlePut(endpoint, this.props.search, function (err, response) {
 					if (err) {
 						alert(err.message);
 						return;
 					}
-					console.log('SEARCH VETS: PUT RESPONSE = ' + JSON.stringify(response));
+					console.log('SEARCH VETS: PUT RESPONSE = ' + JSON.stringify(response.result.vetResults));
 				});
-	
-				// request.get(GOOGLE_API_URL+"location="+lat+","+lng)
-				//        .query({radius: '1000'})
-				//        .query({keyword: 'vet'})
-				//        .query({key: GOOGLE_API_KEY})
-				//    	.end((err, response) => {
-				//     	if (err){
-				//     		console.error(err)
-				//     	}
-				//     	else{
-				//     		console.log('search response = '+JSON.stringify(response))}			
-				//    	})
 			}
 		}, {
 			key: 'render',

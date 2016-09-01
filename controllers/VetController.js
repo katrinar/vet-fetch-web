@@ -81,7 +81,7 @@ module.exports = {
 	
 	    Request.get(url, {key: GOOGLE_API_KEY})
 	    	.then(function(response){
-		    	console.log(JSON.stringify(response))
+		    	// console.log(JSON.stringify(response))
 
 		    	var results = response.results
 		    	var locationInfo = results[0]
@@ -108,8 +108,8 @@ module.exports = {
 
 	put: function(id, params, callback){
 		console.log('PUT RESPONSE PARAMS = '+JSON.stringify(params))
-		var lat = params[0]
-		var lng = params[1]
+		var lat = params.geo[0]
+		var lng = params.geo[1]
 		
 		var GOOGLE_API_KEY = 'AIzaSyBJC_SGcJWr83yZwNSMHzgtft75blNfLcI'
 		var GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat+","+lng+"&radius=1000&keyword=vet&key="+GOOGLE_API_KEY
@@ -119,14 +119,19 @@ module.exports = {
 		Request.get(GOOGLE_API_URL)
             .then(function(response){
 
-		    	console.log('GOOGLE PLACES RESPONSE: '+JSON.stringify(response.results))
+		    	var vetResults = []
+		    	vetResults = response.results
 
-		    	var results = response.results
-
-		    	params['vetResults'] = results
-		    	console.log('RESPONSE: '+JSON.stringify(params['vetResults']))
+		    	console.log('VET_RESULTS [] = '+JSON.stringify(vetResults))
+		    	
+		    	params['vetResults'] = vetResults
+		    	
+		    	console.log('PARAMS[vetResults]: '+JSON.stringify(params['vetResults']))
 
 		    	Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
+
+		    		console.log('FIND_BY_ID_PARAMS: '+JSON.stringify(params))
+
 					if(err){
 						if (callback != null)
 							callback(err, null)
