@@ -75,8 +75,11 @@ module.exports = {
 		console.log('POST RESPONSE PARAMS = '+JSON.stringify(params))
 
 		var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+params.zipcode
-	    
-	    Request.get(url, {key:'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds'})
+		var GOOGLE_API_KEY = 'AIzaSyBJC_SGcJWr83yZwNSMHzgtft75blNfLcI'
+		//old key
+		// var GOOGLE_API_KEY = 'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds'
+	
+	    Request.get(url, {key: GOOGLE_API_KEY})
 	    	.then(function(response){
 		    	console.log(JSON.stringify(response))
 
@@ -85,7 +88,7 @@ module.exports = {
 		    	var geometry = locationInfo.geometry
 		    	var location = geometry.location
 		    	var geo = [location.lat, location.lng]
-		    	params['geo'] = geo	
+		    	params['geo'] = geo
 
 				Vet.create(params, function(err, vet){
 					if(err){
@@ -100,25 +103,49 @@ module.exports = {
 	    	.catch(function(err){
 	    		console.log('ERROR: '+err)
 	    	})
+
 	},
 
 	put: function(id, params, callback){
+		console.log('PUT RESPONSE PARAMS = '+JSON.stringify(params))
+		var lat = params[0]
+		var lng = params[1]
+		
+		var GOOGLE_API_KEY = 'AIzaSyBJC_SGcJWr83yZwNSMHzgtft75blNfLcI'
+		var GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat+","+lng+"&radius=1000&keyword=vet&key="+GOOGLE_API_KEY
 
-		Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
-			if(err){
-				if (callback != null)
-					callback(err, null)
-				return
-			}
+		console.log('GOOGLE URL = '+JSON.stringify(GOOGLE_API_URL))
 
-			if (vet == null){
-				callback(err, null)
-				return
-			}
+		Request.get(GOOGLE_API_URL)
+            .then(function(response){
 
-			if (callback != null)
-				callback(null, vet.summary())
-			return
-		})
+		    	console.log('GOOGLE PLACES RESPONSE: '+JSON.stringify(response.results))
+
+		    	var results = response.results
+
+		    	params['vetResults'] = results
+		    	console.log('RESPONSE: '+JSON.stringify(params['vetResults']))
+
+		    	Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
+					if(err){
+						if (callback != null)
+							callback(err, null)
+						return
+					}
+
+					if (vet == null){
+						callback(err, null)
+						return
+					}
+
+					if (callback != null)
+						callback(null, vet.summary())
+					return
+				})
+		    })
+
+		    .catch(function(err){
+	    		console.log('ERROR: '+err)
+	    	})
 	}
 }

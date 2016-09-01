@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var sessions = require('client-sessions');
 var cloudinary = require('cloudinary');
+var request = require('request');
 var routes = require('./routes/index');
 var api = require('./routes/api');
 var account = require('./routes/account');
@@ -28,15 +29,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
-// cloudinary.config({
-//   cloud_name: 'hsypls36a',
-//   api_key: '463172637736439',
-//   api_secret: 'gcU_bezRE4eFtMyMPuha0cri77I'
-// })
-
-// app.locals.api_key = cloudinary.config().api_key;  
-// app.locals.cloud_name = cloudinary.config().cloud_name;  
-
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -56,6 +48,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api', api);
 app.use('/account', account);
+
+// app.use('/', function(req, res){
+//   res.header("Access-Control-Allow-Origin", "*"); 
+//   res.header('Access-Control-Allow-Methods', 'GET, POST'); 
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.7093358,-73.9565551&radius=1000&keyword=vet&key=AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI'
+//   req.pipe(request(url))
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

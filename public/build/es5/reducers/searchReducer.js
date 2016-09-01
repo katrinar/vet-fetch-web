@@ -8,7 +8,8 @@ var initialState = {
 	search: {
 		zipcode: "",
 		geo: [],
-		id: ""
+		id: "",
+		vetResults: []
 	}
 };
 

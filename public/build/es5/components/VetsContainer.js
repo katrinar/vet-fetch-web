@@ -10,18 +10,12 @@ var _inherits = function (subClass, superClass) { if (typeof superClass !== "fun
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require("react");
 
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
 var HomeButton = _interopRequire(require("../components/HomeButton"));
-
-var Markers = _interopRequire(require("../components/Markers"));
-
-var GoogleMap = _interopRequire(require("google-map-react"));
 
 var store = _interopRequire(require("../stores/store"));
 
@@ -79,45 +73,27 @@ var VetsContainer = (function (Component) {
 					}
 					console.log("SEARCH ZIP RESPONSE.result = " + JSON.stringify(response.result));
 					searchResponse = response.result;
-					console.log("SEARCH ZIP UPDATED SEARCH STATE GEO= " + JSON.stringify(searchResponse.geo));
-					_this.searchVets(searchResponse.geo[0], searchResponse.geo[1]);
+					console.log("SEARCH ZIP UPDATED SEARCH RESPONSE= " + JSON.stringify(searchResponse.geo));
+
 					store.dispatch(actions.receivedSearch(searchResponse));
+					_this.searchVets(searchResponse.geo);
 				});
 			},
 			writable: true,
 			configurable: true
 		},
 		searchVets: {
-			value: function searchVets(lat, lng) {
+			value: function searchVets(coordinates) {
 				event.preventDefault();
+				var endpoint = "/api/vet/" + this.props.search.id;
+				console.log("SEARCH VETS endpoint = " + JSON.stringify(endpoint));
 
-				// console.log('searchVets lat, lng = '+JSON.stringify(lat+', '+lng))
-				var lat = lat;
-				var lng = lng;
-
-
-				// request.get(GOOGLE_API_URL+"location="+lat+","+lng)
-				//                    // .query({location: location})
-				//                    .query({radius: '1000'})
-				//                    .query({keyword: 'vet'})
-				//                    .query({key: GOOGLE_API_KEY})
-				//                    .end(function(err, response){
-				//                    	if (err){
-				//                    		console.error(err)
-				//                    	}
-
-				//                    	console.log('SearchVets response = '+JSON.stringify(response))
-				//                    })
-
-
-				request.get(GOOGLE_API_URL + "location=" + lat + "," + lng).query({ radius: "1000" }).query({ keyword: "vet" }).query({ key: GOOGLE_API_KEY }).end(function (err, response) {
+				api.handlePut(endpoint, coordinates, function (err, response) {
 					if (err) {
-						console.error(err);
+						alert(err.message);
+						return;
 					}
-
-					if (response.status == "OK") {
-						console.log("search response = " + JSON.stringify(response));
-					}
+					console.log("SEARCH VETS: PUT RESPONSE = " + JSON.stringify(response));
 				});
 			},
 			writable: true,
@@ -148,19 +124,6 @@ var VetsContainer = (function (Component) {
 								"Search"
 							)
 						)
-					),
-					React.createElement(
-						"div",
-						null,
-						React.createElement(
-							GoogleMap,
-							{
-								center: this.props.search.geo,
-								defaultZoom: this.props.zoom,
-								style: this.props.style,
-								yesIWantToUseGoogleMapApiInternals: true },
-							React.createElement(Markers, _extends({}, this.props.search.geo, { text: "A" }))
-						)
 					)
 				);
 			},
@@ -172,16 +135,15 @@ var VetsContainer = (function (Component) {
 	return VetsContainer;
 })(Component);
 
-VetsContainer.propTypes = {
-	center: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
-	zoom: React.PropTypes.number.isRequired
-};
-
-VetsContainer.defaultProps = {
-	center: [40.7144522, -73.9601094],
-	zoom: 10,
-	style: { height: 500, width: 500, position: "absolute" }
-};
-
 module.exports = VetsContainer;
-// defaultCenter={this.props.center}
+// request.get(GOOGLE_API_URL+"location="+lat+","+lng)
+//        .query({radius: '1000'})
+//        .query({keyword: 'vet'})
+//        .query({key: GOOGLE_API_KEY})
+//    	.end((err, response) => {
+//     	if (err){
+//     		console.error(err)
+//     	}
+//     	else{
+//     		console.log('search response = '+JSON.stringify(response))}			
+//    	})
