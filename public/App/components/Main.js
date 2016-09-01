@@ -92,7 +92,7 @@ class Main extends Component {
 }
 
 const stateToProps = function(state) {
-	console.log('STATE_TO_PROPS_MAIN: '+JSON.stringify(state))
+	console.log('STATE_TO_PROPS_MAIN: '+JSON.stringify(state.searchReducer))
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,

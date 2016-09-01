@@ -122,11 +122,11 @@ module.exports = {
 		    	var vetResults = []
 		    	vetResults = response.results
 
-		    	console.log('VET_RESULTS [] = '+JSON.stringify(vetResults))
+		    	// console.log('VET_RESULTS [] = '+JSON.stringify(vetResults))
 		    	
 		    	params['vetResults'] = vetResults
 		    	
-		    	console.log('PARAMS[vetResults]: '+JSON.stringify(params['vetResults']))
+		    	// console.log('PARAMS[vetResults]: '+JSON.stringify(params['vetResults']))
 
 		    	Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
 

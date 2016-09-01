@@ -21330,7 +21330,7 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state));
+		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state.searchReducer));
 		return {
 			currentUser: state.accountReducer.currentUser,
 			petsArray: state.petReducer.petsArray,
@@ -24057,7 +24057,9 @@
 		SHOW_HEALTH_RECORD: 'SHOW_HEALTH_RECORD',
 		SHOW_REGISTER_PET: 'SHOW_REGISTER_PET',
 		SHOW_EDIT_PROFILE: 'SHOW_EDIT_PROFILE',
-		RECEIVED_SEARCH: 'RECEIVED_SEARCH'
+		RECEIVED_SEARCH: 'RECEIVED_SEARCH',
+		RECEIVED_SEARCH_RESULTS: 'RECEIVED_SEARCH_RESULTS'
+	
 	};
 
 /***/ },
@@ -24287,7 +24289,21 @@
 			case _constants2.default.RECEIVED_SEARCH:
 				console.log('RECEIVED_SEARCH: action.search' + JSON.stringify(action.search));
 				var newState = Object.assign({}, state);
-				newState['search'] = action.search;
+				var newSearch = Object.assign({}, state.search);
+				newSearch = action.search;
+				newState['search'] = newSearch;
+				// newState['zipcode'] = action.search.zipcode
+				// newState['id'] = action.search.id
+				// newState['geo'] = action.search.geo
+				return newState;
+	
+			case _constants2.default.RECEIVED_SEARCH_RESULTS:
+				console.log('RECEIVED_SEARCH_RESULTS:');
+				var newState = Object.assign({}, state);
+				var newSearch = Object.assign({}, state.search);
+				newSearch = action.searchResults;
+				newState['search'] = newSearch;
+	
 				return newState;
 	
 			default:
@@ -24414,6 +24430,13 @@
 			return {
 				type: _constants2.default.RECEIVED_SEARCH,
 				search: search
+			};
+		},
+	
+		receivedSearchResults: function receivedSearchResults(searchResults) {
+			return {
+				type: _constants2.default.RECEIVED_SEARCH_RESULTS,
+				searchResults: searchResults
 			};
 		}
 	};
@@ -26883,10 +26906,6 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
-	var _superagent = __webpack_require__(174);
-	
-	var _superagent2 = _interopRequireDefault(_superagent);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26933,7 +26952,7 @@
 			value: function searchZip(event) {
 				event.preventDefault();
 				var _this = this;
-				// console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
+	
 				var searchResponse = Object.assign({}, this.state.search);
 	
 				_api2.default.handlePost('/api/vet', this.state.search, function (err, response) {
@@ -26953,6 +26972,7 @@
 			key: 'searchVets',
 			value: function searchVets() {
 				event.preventDefault();
+				console.log('SEARCH VETS : ' + JSON.stringify(this.props.search.id));
 				var endpoint = '/api/vet/' + this.props.search.id;
 				console.log('SEARCH VETS endpoint = ' + JSON.stringify(endpoint));
 	
@@ -26961,7 +26981,9 @@
 						alert(err.message);
 						return;
 					}
-					console.log('SEARCH VETS: PUT RESPONSE = ' + JSON.stringify(response.result.vetResults));
+					var vetResults = response.result;
+					console.log('SEARCH VETS: PUT RESPONSE RECEIVED ');
+					_store2.default.dispatch(_actions2.default.receivedSearchResults(vetResults));
 				});
 			}
 		}, {

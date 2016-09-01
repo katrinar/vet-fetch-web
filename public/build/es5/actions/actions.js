@@ -91,5 +91,12 @@ module.exports = {
 			type: constants.RECEIVED_SEARCH,
 			search: search
 		};
+	},
+
+	receivedSearchResults: function (searchResults) {
+		return {
+			type: constants.RECEIVED_SEARCH_RESULTS,
+			searchResults: searchResults
+		};
 	}
 };

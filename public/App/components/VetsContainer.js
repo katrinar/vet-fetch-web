@@ -3,7 +3,6 @@ import HomeButton from '../components/HomeButton'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import api from '../utils/api'
-import request from 'superagent'
 
 const GOOGLE_API_KEY = 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI';
 const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
@@ -35,7 +34,7 @@ class VetsContainer extends Component {
   searchZip(event){
 		event.preventDefault()
 		var _this = this
-		// console.log('SEARCH ZIP PARAMS/ SEARCH STATE = '+JSON.stringify(this.state.search))
+
 		var searchResponse = Object.assign({}, this.state.search)
 
 		api.handlePost('/api/vet', this.state.search, function(err, response){
@@ -54,6 +53,7 @@ class VetsContainer extends Component {
 
 	searchVets() {
 		event.preventDefault()
+		console.log('SEARCH VETS : '+JSON.stringify(this.props.search.id))
 		var endpoint = '/api/vet/'+this.props.search.id
 		console.log('SEARCH VETS endpoint = '+JSON.stringify(endpoint))
 
@@ -62,7 +62,9 @@ class VetsContainer extends Component {
 				alert(err.message)
 				return
 			}
-			console.log('SEARCH VETS: PUT RESPONSE = '+JSON.stringify(response.result.vetResults))
+			var vetResults = response.result
+			console.log('SEARCH VETS: PUT RESPONSE RECEIVED ')
+			store.dispatch(actions.receivedSearchResults(vetResults))
 		})
   	}
 
