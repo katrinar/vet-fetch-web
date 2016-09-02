@@ -27,11 +27,14 @@ var VetSearchResultsRow = (function (Component) {
 	_prototypeProperties(VetSearchResultsRow, null, {
 		render: {
 			value: function render() {
-				console.log("VET_SEARCH_RESULTS ROW: " + JSON.stringify(this.props.search));
+				var vets = this.props.search || {};
+				var results = vets.vetResults;
+
+				console.log("VET_SEARCH_RESULTS ROW: " + JSON.stringify(vets));
 				return React.createElement(
 					"div",
 					null,
-					this.props.search.vetResults
+					this.props.vet.name
 				);
 			},
 			writable: true,

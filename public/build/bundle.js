@@ -27076,13 +27076,14 @@
 					alert("Hm we couldn't find any vets in your area. Try another zipcode.");
 				}
 	
+				// var vetList = this.props.search.vetResults.map(function(vet, i){
+				// 	return <li key={vet.id}>{vet.name}</li>
+				// })
+	
 				var vetList = this.props.search.vetResults.map(function (vet, i) {
-					return _react2.default.createElement(
-						'li',
-						{ key: vet.id },
-						vet.name
-					);
+					return _react2.default.createElement(_VetSearchResultsRow2.default, { key: vet.id, vet: vet });
 				});
+	
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -27132,11 +27133,15 @@
 		_createClass(VetSearchResultsRow, [{
 			key: 'render',
 			value: function render() {
-				console.log('VET_SEARCH_RESULTS ROW: ' + JSON.stringify(this.props.search));
+	
+				var vets = this.props.search || {};
+				var results = vets.vetResults;
+	
+				console.log('VET_SEARCH_RESULTS ROW: ' + JSON.stringify(vets));
 				return _react2.default.createElement(
 					'div',
 					null,
-					this.props.search.vetResults
+					this.props.vet.name
 				);
 			}
 		}]);

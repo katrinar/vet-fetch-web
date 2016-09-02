@@ -36,13 +36,14 @@ var VetSearchResultsList = (function (Component) {
 					alert("Hm we couldn't find any vets in your area. Try another zipcode.");
 				}
 
+				// var vetList = this.props.search.vetResults.map(function(vet, i){
+				// 	return <li key={vet.id}>{vet.name}</li>
+				// })
+
 				var vetList = this.props.search.vetResults.map(function (vet, i) {
-					return React.createElement(
-						"li",
-						{ key: vet.id },
-						vet.name
-					);
+					return React.createElement(VetSearchResultsRow, { key: vet.id, vet: vet });
 				});
+
 				return React.createElement(
 					"div",
 					null,

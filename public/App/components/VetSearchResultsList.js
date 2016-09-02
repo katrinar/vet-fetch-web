@@ -10,9 +10,14 @@ class VetSearchResultsList extends Component{
 			alert("Hm we couldn't find any vets in your area. Try another zipcode.")
 		}
 
+		// var vetList = this.props.search.vetResults.map(function(vet, i){
+		// 	return <li key={vet.id}>{vet.name}</li>
+		// })
+
 		var vetList = this.props.search.vetResults.map(function(vet, i){
-			return <li key={vet.id}>{vet.name}</li>
+			return <VetSearchResultsRow key={vet.id} vet={vet} />
 		})
+
 		return(
 			<div>{vetList}
 			</div>
