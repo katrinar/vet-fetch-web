@@ -76,8 +76,6 @@ module.exports = {
 
 		var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+params.zipcode
 		var GOOGLE_API_KEY = 'AIzaSyBJC_SGcJWr83yZwNSMHzgtft75blNfLcI'
-		//old key
-		// var GOOGLE_API_KEY = 'AIzaSyA7ubOEswjvE09Hdpii4ZRi__SndjdE7ds'
 	
 	    Request.get(url, {key: GOOGLE_API_KEY})
 	    	.then(function(response){
@@ -119,15 +117,14 @@ module.exports = {
 		Request.get(GOOGLE_API_URL)
             .then(function(response){
 
+            	if (response.status == "ZERO_RESULTS"){
+            		params['searchStatus'] = response.status
+            	}
+
 		    	var vetResults = []
 		    	vetResults = response.results
-
-		    	// console.log('VET_RESULTS [] = '+JSON.stringify(vetResults))
-		    	
 		    	params['vetResults'] = vetResults
-		    	
-		    	// console.log('PARAMS[vetResults]: '+JSON.stringify(params['vetResults']))
-
+		  
 		    	Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
 
 		    		console.log('FIND_BY_ID_PARAMS: '+JSON.stringify(params))

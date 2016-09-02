@@ -71,11 +71,10 @@ var VetsContainer = (function (Component) {
 						alert(err.message);
 						return;
 					}
-					console.log("SEARCH ZIP RESPONSE.result = " + JSON.stringify(response.result));
 					searchResponse = response.result;
-					console.log("SEARCH ZIP UPDATED SEARCH RESPONSE= " + JSON.stringify(searchResponse.geo));
 
 					store.dispatch(actions.receivedSearch(searchResponse));
+
 					_this.searchVets();
 				});
 			},
@@ -87,7 +86,7 @@ var VetsContainer = (function (Component) {
 				event.preventDefault();
 				console.log("SEARCH VETS : " + JSON.stringify(this.props.search.id));
 				var endpoint = "/api/vet/" + this.props.search.id;
-				console.log("SEARCH VETS endpoint = " + JSON.stringify(endpoint));
+				// console.log('SEARCH VETS endpoint = '+JSON.stringify(endpoint))
 
 				api.handlePut(endpoint, this.props.search, function (err, response) {
 					if (err) {
@@ -95,7 +94,10 @@ var VetsContainer = (function (Component) {
 						return;
 					}
 					var vetResults = response.result;
-					console.log("SEARCH VETS: PUT RESPONSE RECEIVED ");
+
+
+					console.log("SEARCH VETS: RESPONSE= " + JSON.stringify(response));
+
 					store.dispatch(actions.receivedSearchResults(vetResults));
 				});
 			},

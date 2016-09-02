@@ -24292,9 +24292,7 @@
 				var newSearch = Object.assign({}, state.search);
 				newSearch = action.search;
 				newState['search'] = newSearch;
-				// newState['zipcode'] = action.search.zipcode
-				// newState['id'] = action.search.id
-				// newState['geo'] = action.search.geo
+	
 				return newState;
 	
 			case _constants2.default.RECEIVED_SEARCH_RESULTS:
@@ -24323,6 +24321,7 @@
 			geo: [],
 			id: '',
 			vetResults: [],
+			searchStatus: '',
 			vetInfo: {}
 		}
 	};
@@ -26965,11 +26964,10 @@
 						alert(err.message);
 						return;
 					}
-					console.log('SEARCH ZIP RESPONSE.result = ' + JSON.stringify(response.result));
 					searchResponse = response.result;
-					console.log('SEARCH ZIP UPDATED SEARCH RESPONSE= ' + JSON.stringify(searchResponse.geo));
 	
 					_store2.default.dispatch(_actions2.default.receivedSearch(searchResponse));
+	
 					_this.searchVets();
 				});
 			}
@@ -26979,7 +26977,7 @@
 				event.preventDefault();
 				console.log('SEARCH VETS : ' + JSON.stringify(this.props.search.id));
 				var endpoint = '/api/vet/' + this.props.search.id;
-				console.log('SEARCH VETS endpoint = ' + JSON.stringify(endpoint));
+				// console.log('SEARCH VETS endpoint = '+JSON.stringify(endpoint))
 	
 				_api2.default.handlePut(endpoint, this.props.search, function (err, response) {
 					if (err) {
@@ -26987,7 +26985,9 @@
 						return;
 					}
 					var vetResults = response.result;
-					console.log('SEARCH VETS: PUT RESPONSE RECEIVED ');
+	
+					console.log('SEARCH VETS: RESPONSE= ' + JSON.stringify(response));
+	
 					_store2.default.dispatch(_actions2.default.receivedSearchResults(vetResults));
 				});
 			}
@@ -27071,6 +27071,10 @@
 			value: function render() {
 				var vets = this.props.search || {};
 				console.log('VET_SEARCH_RESULTS LIST: ' + JSON.stringify(vets));
+	
+				if (vets.searchStatus == "ZERO_RESULTS") {
+					alert("Hm we couldn't find any vets in your area. Try another zipcode.");
+				}
 	
 				var vetList = this.props.search.vetResults.map(function (vet, i) {
 					return _react2.default.createElement(

@@ -10,6 +10,7 @@ var initialState = {
 		geo: [],
 		id: "",
 		vetResults: [],
+		searchStatus: "",
 		vetInfo: {}
 	}
 };
@@ -23,9 +24,7 @@ module.exports = function (_x, action) {
 			var newSearch = Object.assign({}, state.search);
 			newSearch = action.search;
 			newState.search = newSearch;
-			// newState['zipcode'] = action.search.zipcode
-			// newState['id'] = action.search.id
-			// newState['geo'] = action.search.geo
+
 			return newState;
 
 		case constants.RECEIVED_SEARCH_RESULTS:

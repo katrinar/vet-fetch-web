@@ -32,6 +32,10 @@ var VetSearchResultsList = (function (Component) {
 				var vets = this.props.search || {};
 				console.log("VET_SEARCH_RESULTS LIST: " + JSON.stringify(vets));
 
+				if (vets.searchStatus == "ZERO_RESULTS") {
+					alert("Hm we couldn't find any vets in your area. Try another zipcode.");
+				}
+
 				var vetList = this.props.search.vetResults.map(function (vet, i) {
 					return React.createElement(
 						"li",
