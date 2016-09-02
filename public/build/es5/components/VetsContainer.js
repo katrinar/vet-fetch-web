@@ -17,6 +17,8 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var HomeButton = _interopRequire(require("../components/HomeButton"));
 
+var VetSearchResultsList = _interopRequire(require("../components/VetSearchResultsList"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -102,6 +104,8 @@ var VetsContainer = (function (Component) {
 		},
 		render: {
 			value: function render() {
+
+
 				return React.createElement(
 					"div",
 					null,
@@ -118,13 +122,14 @@ var VetsContainer = (function (Component) {
 							"form",
 							null,
 							React.createElement("input", { type: "text", onChange: this.submitZip, id: "zipcode", placeholder: "Zipcode" }),
-							React.createElement("br", null),
-							React.createElement(
-								"button",
-								{ onClick: this.searchZip },
-								"Search"
-							)
-						)
+							React.createElement("br", null)
+						),
+						React.createElement(
+							"button",
+							{ onClick: this.searchZip },
+							"Search"
+						),
+						React.createElement(VetSearchResultsList, { search: this.props.search })
 					)
 				);
 			},

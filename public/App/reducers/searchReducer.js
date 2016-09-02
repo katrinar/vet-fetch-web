@@ -5,7 +5,8 @@ var initialState = {
 		zipcode: '',
 		geo: [],
 		id: '',
-		vetResults: []
+		vetResults: [],
+		vetInfo: {}
 	}
 }
 

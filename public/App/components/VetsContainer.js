@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import HomeButton from '../components/HomeButton'
+import VetSearchResultsList from '../components/VetSearchResultsList'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import api from '../utils/api'
@@ -70,6 +71,7 @@ class VetsContainer extends Component {
 
 	render(){
 
+
 		return(
 			<div>
 				<HomeButton />
@@ -78,9 +80,9 @@ class VetsContainer extends Component {
 
 					<form>
 						<input type="text" onChange={this.submitZip}  id="zipcode" placeholder="Zipcode" /><br />
-						
-						<button onClick={this.searchZip}>Search</button>
 					</form> 
+					<button onClick={this.searchZip}>Search</button>
+					<VetSearchResultsList search={this.props.search}/>
 				</div>
 
 			</div>
