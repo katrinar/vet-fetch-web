@@ -64,7 +64,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _reactRedux = __webpack_require__(226);
+	var _reactRedux = __webpack_require__(227);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21216,7 +21216,11 @@
 	
 	var _PetProfile2 = _interopRequireDefault(_PetProfile);
 	
-	var _VetsContainer = __webpack_require__(223);
+	var _VetProfile = __webpack_require__(223);
+	
+	var _VetProfile2 = _interopRequireDefault(_VetProfile);
+	
+	var _VetsContainer = __webpack_require__(224);
 	
 	var _VetsContainer2 = _interopRequireDefault(_VetsContainer);
 	
@@ -21228,7 +21232,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(226);
+	var _reactRedux = __webpack_require__(227);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21314,6 +21318,8 @@
 						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					case 'vets':
 						return page = _react2.default.createElement(_VetsContainer2.default, { search: this.props.search, pets: this.props.pets, slug: this.props.slug });
+					case 'vet':
+						return page = _react2.default.createElement(_VetProfile2.default, { search: this.props.search, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -21330,7 +21336,7 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state.searchReducer));
+		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state.petReducer));
 		return {
 			currentUser: state.accountReducer.currentUser,
 			petsArray: state.petReducer.petsArray,
@@ -26894,7 +26900,62 @@
 	
 	var _HomeButton2 = _interopRequireDefault(_HomeButton);
 	
-	var _VetSearchResultsList = __webpack_require__(224);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var VetProfile = function (_Component) {
+		_inherits(VetProfile, _Component);
+	
+		function VetProfile() {
+			_classCallCheck(this, VetProfile);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(VetProfile).apply(this, arguments));
+		}
+	
+		_createClass(VetProfile, [{
+			key: 'render',
+			value: function render() {
+				var slug = this.props.slug || {};
+				console.log('VET PROFILE SLUG = ' + JSON.stringify(slug));
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_HomeButton2.default, null)
+				);
+			}
+		}]);
+	
+		return VetProfile;
+	}(_react.Component);
+	
+	exports.default = VetProfile;
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _HomeButton = __webpack_require__(205);
+	
+	var _HomeButton2 = _interopRequireDefault(_HomeButton);
+	
+	var _VetSearchResultsList = __webpack_require__(225);
 	
 	var _VetSearchResultsList2 = _interopRequireDefault(_VetSearchResultsList);
 	
@@ -27030,7 +27091,7 @@
 	exports.default = VetsContainer;
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27045,7 +27106,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _VetSearchResultsRow = __webpack_require__(225);
+	var _VetSearchResultsRow = __webpack_require__(226);
 	
 	var _VetSearchResultsRow2 = _interopRequireDefault(_VetSearchResultsRow);
 	
@@ -27098,7 +27159,7 @@
 	exports.default = VetSearchResultsList;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27141,7 +27202,11 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					this.props.vet.name
+					_react2.default.createElement(
+						'a',
+						{ href: '/vet/' + this.props.vet.slug },
+						this.props.vet.name
+					)
 				);
 			}
 		}]);
@@ -27152,7 +27217,7 @@
 	exports.default = VetSearchResultsRow;
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27160,11 +27225,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(227);
+	var _Provider = __webpack_require__(228);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connect = __webpack_require__(230);
+	var _connect = __webpack_require__(231);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -27174,7 +27239,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27184,11 +27249,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(228);
+	var _storeShape = __webpack_require__(229);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _warning = __webpack_require__(229);
+	var _warning = __webpack_require__(230);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -27258,7 +27323,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27274,7 +27339,7 @@
 	});
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27303,7 +27368,7 @@
 	}
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27315,31 +27380,31 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(228);
+	var _storeShape = __webpack_require__(229);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _shallowEqual = __webpack_require__(231);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _wrapActionCreators = __webpack_require__(232);
+	var _wrapActionCreators = __webpack_require__(233);
 	
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 	
-	var _warning = __webpack_require__(229);
+	var _warning = __webpack_require__(230);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(233);
+	var _isPlainObject = __webpack_require__(234);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(237);
+	var _hoistNonReactStatics = __webpack_require__(238);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(238);
+	var _invariant = __webpack_require__(239);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -27702,7 +27767,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27733,7 +27798,7 @@
 	}
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27750,12 +27815,12 @@
 	}
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(234),
-	    isHostObject = __webpack_require__(235),
-	    isObjectLike = __webpack_require__(236);
+	var getPrototype = __webpack_require__(235),
+	    isHostObject = __webpack_require__(236),
+	    isObjectLike = __webpack_require__(237);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -27826,7 +27891,7 @@
 
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -27847,7 +27912,7 @@
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports) {
 
 	/**
@@ -27873,7 +27938,7 @@
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports) {
 
 	/**
@@ -27908,7 +27973,7 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports) {
 
 	/**
@@ -27964,7 +28029,7 @@
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

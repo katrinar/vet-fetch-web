@@ -29,6 +29,8 @@ var Pets = _interopRequire(require("../components/Pets"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
 
+var VetProfile = _interopRequire(require("../components/VetProfile"));
+
 var VetsContainer = _interopRequire(require("../components/VetsContainer"));
 
 var store = _interopRequire(require("../stores/store"));
@@ -113,6 +115,8 @@ var Main = (function (Component) {
 						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					case "vets":
 						return page = React.createElement(VetsContainer, { search: this.props.search, pets: this.props.pets, slug: this.props.slug });
+					case "vet":
+						return page = React.createElement(VetProfile, { search: this.props.search, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -132,7 +136,7 @@ var Main = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("STATE_TO_PROPS_MAIN: " + JSON.stringify(state.searchReducer));
+	console.log("STATE_TO_PROPS_MAIN: " + JSON.stringify(state.petReducer));
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,

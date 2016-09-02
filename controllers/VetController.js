@@ -79,8 +79,6 @@ module.exports = {
 	
 	    Request.get(url, {key: GOOGLE_API_KEY})
 	    	.then(function(response){
-		    	// console.log(JSON.stringify(response))
-
 		    	var results = response.results
 		    	var locationInfo = results[0]
 		    	var geometry = locationInfo.geometry
@@ -121,9 +119,18 @@ module.exports = {
             		params['searchStatus'] = response.status
             	}
 
+            	if (response.status == "OK"){
+            		params['searchStatus'] = response.status
+            	}
+
 		    	var vetResults = []
 		    	vetResults = response.results
 		    	params['vetResults'] = vetResults
+
+		    	for (var i=0; i<vetResults.length; i++){
+		    		result = vetResults[i]
+		    		result['slug'] = result.place_id
+		    	}
 		  
 		    	Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
 

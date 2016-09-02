@@ -9,7 +9,7 @@ class VetSearchResultsRow extends Component {
 		console.log('VET_SEARCH_RESULTS ROW: '+JSON.stringify(vets))
 		return(
 			<div>
-				{this.props.vet.name}
+				<a href={'/vet/'+this.props.vet.slug}>{this.props.vet.name}</a>
 			</div>
 
 		)

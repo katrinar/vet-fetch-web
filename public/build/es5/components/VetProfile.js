@@ -13,32 +13,24 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var VetSearchResultsRow = (function (Component) {
-	function VetSearchResultsRow() {
-		_classCallCheck(this, VetSearchResultsRow);
+var VetProfile = (function (Component) {
+	function VetProfile() {
+		_classCallCheck(this, VetProfile);
 
 		if (Component != null) {
 			Component.apply(this, arguments);
 		}
 	}
 
-	_inherits(VetSearchResultsRow, Component);
+	_inherits(VetProfile, Component);
 
-	_prototypeProperties(VetSearchResultsRow, null, {
+	_prototypeProperties(VetProfile, null, {
 		render: {
 			value: function render() {
-				var vets = this.props.search || {};
-				var results = vets.vetResults;
-
-				console.log("VET_SEARCH_RESULTS ROW: " + JSON.stringify(vets));
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(
-						"a",
-						{ href: "/vet/" + this.props.vet.slug },
-						this.props.vet.name
-					)
+					"vet profile"
 				);
 			},
 			writable: true,
@@ -46,7 +38,7 @@ var VetSearchResultsRow = (function (Component) {
 		}
 	});
 
-	return VetSearchResultsRow;
+	return VetProfile;
 })(Component);
 
-module.exports = VetSearchResultsRow;
+module.exports = VetProfile;

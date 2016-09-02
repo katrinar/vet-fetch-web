@@ -6,6 +6,7 @@ import Landing from '../components/Landing'
 import HomeContainer from '../components/HomeContainer'
 import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
+import VetProfile from '../components/VetProfile'
 import VetsContainer from '../components/VetsContainer'
 import store from '../stores/store'
 import actions from '../actions/actions'
@@ -79,6 +80,8 @@ class Main extends Component {
 				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet} showHealthRecord={this.props.showHealthRecord}/>
 			case 'vets':
 				return page = <VetsContainer search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
+			case 'vet':
+				return page = <VetProfile search={this.props.search} slug={this.props.slug}/>
 			default: 
 				return page = null
 		}
@@ -92,7 +95,7 @@ class Main extends Component {
 }
 
 const stateToProps = function(state) {
-	console.log('STATE_TO_PROPS_MAIN: '+JSON.stringify(state.searchReducer))
+	console.log('STATE_TO_PROPS_MAIN: '+JSON.stringify(state.petReducer))
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
