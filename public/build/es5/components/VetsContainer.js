@@ -39,7 +39,8 @@ var VetsContainer = (function (Component) {
 		this.state = {
 			search: {
 				zipcode: "",
-				geo: []
+				geo: [],
+				currentUserId: null
 			}
 		};
 	}
@@ -50,8 +51,10 @@ var VetsContainer = (function (Component) {
 		submitZip: {
 			value: function submitZip(event) {
 				event.preventDefault();
+				var user = this.props.currentUser || {};
 				var vetSearch = Object.assign({}, this.state.vet);
 				vetSearch[event.target.id] = event.target.value;
+				vetSearch.currentUserId = user.id;
 				this.setState({
 					search: vetSearch
 				});
@@ -64,6 +67,7 @@ var VetsContainer = (function (Component) {
 				event.preventDefault();
 				var _this = this;
 
+
 				var searchResponse = Object.assign({}, this.state.search);
 
 				api.handlePost("/api/vet", this.state.search, function (err, response) {
@@ -72,6 +76,7 @@ var VetsContainer = (function (Component) {
 						return;
 					}
 					searchResponse = response.result;
+					console.log("response: " + JSON.stringify(searchResponse));
 
 					store.dispatch(actions.receivedSearch(searchResponse));
 
@@ -84,9 +89,8 @@ var VetsContainer = (function (Component) {
 		searchVets: {
 			value: function searchVets() {
 				event.preventDefault();
-				console.log("SEARCH VETS : " + JSON.stringify(this.props.search.id));
+
 				var endpoint = "/api/vet/" + this.props.search.id;
-				// console.log('SEARCH VETS endpoint = '+JSON.stringify(endpoint))
 
 				api.handlePut(endpoint, this.props.search, function (err, response) {
 					if (err) {

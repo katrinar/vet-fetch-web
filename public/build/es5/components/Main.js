@@ -44,6 +44,7 @@ var Main = (function (Component) {
 
 		_get(Object.getPrototypeOf(Main.prototype), "constructor", this).call(this, props, context);
 		this.fetchPets = this.fetchPets.bind(this);
+		this.fetchVetResults = this.fetchVetResults.bind(this);
 	}
 
 	_inherits(Main, Component);
@@ -59,13 +60,10 @@ var Main = (function (Component) {
 						return;
 					}
 
-					if (response.confirmation == "Fail") {
-						return;
-					}
-
 					if (response.confirmation == "Success") {
 						store.dispatch(actions.receivedCurrentUser(response.user));
 						_this.fetchPets();
+						_this.fetchVetResults();
 					}
 				});
 			},
@@ -95,6 +93,30 @@ var Main = (function (Component) {
 			writable: true,
 			configurable: true
 		},
+		fetchVetResults: {
+			value: function fetchVetResults() {
+				var user = this.props.currentUser || {};
+
+
+				if (user.id != null && this.props.page == "vet") {
+					var endpoint = "/api/vet?currentUserId=" + user.id;
+					console.log("FETCH_VET_RESULTS ENDPOINT: " + JSON.stringify(endpoint));
+					api.handleGet(endpoint, null, function (err, response) {
+						if (err) {
+							alert(err.message);
+							return;
+						}
+
+						if (response.confirmation == "Success") {
+							// console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
+							store.dispatch(actions.receivedUserSearchHistory(response.results));
+						}
+					});
+				}
+			},
+			writable: true,
+			configurable: true
+		},
 		render: {
 			value: function render() {
 				var page = null;
@@ -114,9 +136,9 @@ var Main = (function (Component) {
 					case "pet":
 						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					case "vets":
-						return page = React.createElement(VetsContainer, { search: this.props.search, pets: this.props.pets, slug: this.props.slug });
+						return page = React.createElement(VetsContainer, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case "vet":
-						return page = React.createElement(VetProfile, { search: this.props.search, slug: this.props.slug });
+						return page = React.createElement(VetProfile, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -136,12 +158,14 @@ var Main = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("STATE_TO_PROPS_MAIN: " + JSON.stringify(state.petReducer));
+	console.log("STATE_TO_PROPS_MAIN: SEARCH HISTORY = " + JSON.stringify(state.searchReducer.searchHistory) + ", USER = " + JSON.stringify(state.accountReducer.currentUser));
+
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
 		pets: state.petReducer.pets,
 		search: state.searchReducer.search,
+		searchHistory: state.searchReducer.searchHistory,
 		displayEditPet: state.displayReducer.displayEditPet,
 		showHealthRecord: state.displayReducer.showHealthRecord,
 		showRegisterPet: state.displayReducer.showRegisterPet,

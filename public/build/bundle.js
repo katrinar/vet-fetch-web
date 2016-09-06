@@ -21251,6 +21251,7 @@
 			var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props, context));
 	
 			_this2.fetchPets = _this2.fetchPets.bind(_this2);
+			_this2.fetchVetResults = _this2.fetchVetResults.bind(_this2);
 			return _this2;
 		}
 	
@@ -21265,20 +21266,16 @@
 						return;
 					}
 	
-					if (response.confirmation == "Fail") {
-						return;
-					}
-	
 					if (response.confirmation == "Success") {
 						_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.user));
 						_this.fetchPets();
+						_this.fetchVetResults();
 					}
 				});
 			}
 		}, {
 			key: 'fetchPets',
 			value: function fetchPets() {
-	
 				var user = this.props.currentUser || {};
 				//  var storeState = store.getState()
 				// var user = storeState.accountReducer.currentUser || {}
@@ -21294,6 +21291,27 @@
 						_store2.default.dispatch(_actions2.default.receivedPets(response.results));
 	
 						return;
+					});
+				}
+			}
+		}, {
+			key: 'fetchVetResults',
+			value: function fetchVetResults() {
+				var user = this.props.currentUser || {};
+	
+				if (user.id != null && this.props.page == 'vet') {
+					var endpoint = '/api/vet?currentUserId=' + user.id;
+					console.log('FETCH_VET_RESULTS ENDPOINT: ' + JSON.stringify(endpoint));
+					_api2.default.handleGet(endpoint, null, function (err, response) {
+						if (err) {
+							alert(err.message);
+							return;
+						}
+	
+						if (response.confirmation == "Success") {
+							// console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
+							_store2.default.dispatch(_actions2.default.receivedUserSearchHistory(response.results));
+						}
 					});
 				}
 			}
@@ -21317,9 +21335,9 @@
 					case 'pet':
 						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet, showHealthRecord: this.props.showHealthRecord });
 					case 'vets':
-						return page = _react2.default.createElement(_VetsContainer2.default, { search: this.props.search, pets: this.props.pets, slug: this.props.slug });
+						return page = _react2.default.createElement(_VetsContainer2.default, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case 'vet':
-						return page = _react2.default.createElement(_VetProfile2.default, { search: this.props.search, slug: this.props.slug });
+						return page = _react2.default.createElement(_VetProfile2.default, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
 					default:
 						return page = null;
 				}
@@ -21336,12 +21354,14 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('STATE_TO_PROPS_MAIN: ' + JSON.stringify(state.petReducer));
+		console.log('STATE_TO_PROPS_MAIN: SEARCH HISTORY = ' + JSON.stringify(state.searchReducer.searchHistory) + ', USER = ' + JSON.stringify(state.accountReducer.currentUser));
+	
 		return {
 			currentUser: state.accountReducer.currentUser,
 			petsArray: state.petReducer.petsArray,
 			pets: state.petReducer.pets,
 			search: state.searchReducer.search,
+			searchHistory: state.searchReducer.searchHistory,
 			displayEditPet: state.displayReducer.displayEditPet,
 			showHealthRecord: state.displayReducer.showHealthRecord,
 			showRegisterPet: state.displayReducer.showRegisterPet,
@@ -24064,7 +24084,8 @@
 		SHOW_REGISTER_PET: 'SHOW_REGISTER_PET',
 		SHOW_EDIT_PROFILE: 'SHOW_EDIT_PROFILE',
 		RECEIVED_SEARCH: 'RECEIVED_SEARCH',
-		RECEIVED_SEARCH_RESULTS: 'RECEIVED_SEARCH_RESULTS'
+		RECEIVED_SEARCH_RESULTS: 'RECEIVED_SEARCH_RESULTS',
+		RECEIVED_USER_SEARCH_HISTORY: 'RECEIVED_USER_SEARCH_HISTORY'
 	
 	};
 
@@ -24302,11 +24323,44 @@
 				return newState;
 	
 			case _constants2.default.RECEIVED_SEARCH_RESULTS:
-				console.log('RECEIVED_SEARCH_RESULTS:');
+				console.log('RECEIVED_SEARCH_RESULTS: ');
 				var newState = Object.assign({}, state);
 				var newSearch = Object.assign({}, state.search);
 				newSearch = action.searchResults;
 				newState['search'] = newSearch;
+	
+				var updatedVetMap = Object.assign({}, newState.vetMap);
+	
+				var vets = action.searchResults.vetResults;
+	
+				for (var i = 0; i < vets.length; i++) {
+					var vetProfile = vets[i];
+					updatedVetMap[vetProfile.slug] = vetProfile;
+				}
+	
+				newState['vetMap'] = updatedVetMap;
+	
+				return newState;
+	
+			case _constants2.default.RECEIVED_USER_SEARCH_HISTORY:
+				console.log('RECEIVED_USER_SEARCH_HISTORY: ');
+				var newState = Object.assign({}, state);
+				var searchMap = Object.assign({}, newState.searchHistory);
+	
+				for (var i = 0; i < action.searchHistory.length; i++) {
+					var zipcodeSearch = action.searchHistory[i];
+					var slug = '';
+					var individualResult = {};
+					var zipcodeSearchResults = zipcodeSearch.vetResults;
+					for (var j = 0; j < zipcodeSearchResults.length; j++) {
+						individualResult = zipcodeSearchResults[j];
+						slug = individualResult.slug;
+						console.log('RECEIVED_USER_SEARCH_HISTORY: INDIVIDUAL RESULT ' + JSON.stringify(individualResult));
+						searchMap[slug] = individualResult;
+					}
+				}
+	
+				newState['searchHistory'] = searchMap;
 	
 				return newState;
 	
@@ -24328,8 +24382,9 @@
 			id: '',
 			vetResults: [],
 			searchStatus: '',
-			vetInfo: {}
-		}
+			currentUserId: ''
+		},
+		searchHistory: {}
 	};
 
 /***/ },
@@ -24443,6 +24498,13 @@
 			return {
 				type: _constants2.default.RECEIVED_SEARCH_RESULTS,
 				searchResults: searchResults
+			};
+		},
+	
+		receivedUserSearchHistory: function receivedUserSearchHistory(searchHistory) {
+			return {
+				type: _constants2.default.RECEIVED_USER_SEARCH_HISTORY,
+				searchHistory: searchHistory
 			};
 		}
 	};
@@ -26900,6 +26962,14 @@
 	
 	var _HomeButton2 = _interopRequireDefault(_HomeButton);
 	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(200);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26911,21 +26981,34 @@
 	var VetProfile = function (_Component) {
 		_inherits(VetProfile, _Component);
 	
-		function VetProfile() {
+		function VetProfile(props, context) {
 			_classCallCheck(this, VetProfile);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(VetProfile).apply(this, arguments));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(VetProfile).call(this, props, context));
 		}
 	
 		_createClass(VetProfile, [{
 			key: 'render',
 			value: function render() {
-				var slug = this.props.slug || {};
-				console.log('VET PROFILE SLUG = ' + JSON.stringify(slug));
+				var searches = this.props.searchHistory || {};
+				var resultProfile = searches[this.props.slug] || {};
+				console.log('VET PROFILE: SEARCHES = ' + JSON.stringify(searches));
+				console.log('VET PROFILE: RESULT PROFILE VICINITY = ' + JSON.stringify(resultProfile));
+	
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_HomeButton2.default, null)
+					_react2.default.createElement(_HomeButton2.default, null),
+					_react2.default.createElement(
+						'h2',
+						null,
+						resultProfile.name
+					),
+					_react2.default.createElement(
+						'h3',
+						null,
+						resultProfile.vicinity
+					)
 				);
 			}
 		}]);
@@ -26996,7 +27079,8 @@
 			_this2.state = {
 				search: {
 					zipcode: '',
-					geo: []
+					geo: [],
+					currentUserId: null
 				}
 			};
 			return _this2;
@@ -27006,8 +27090,10 @@
 			key: 'submitZip',
 			value: function submitZip(event) {
 				event.preventDefault();
+				var user = this.props.currentUser || {};
 				var vetSearch = Object.assign({}, this.state.vet);
 				vetSearch[event.target.id] = event.target.value;
+				vetSearch['currentUserId'] = user.id;
 				this.setState({
 					search: vetSearch
 				});
@@ -27026,6 +27112,7 @@
 						return;
 					}
 					searchResponse = response.result;
+					console.log('response: ' + JSON.stringify(searchResponse));
 	
 					_store2.default.dispatch(_actions2.default.receivedSearch(searchResponse));
 	
@@ -27036,9 +27123,8 @@
 			key: 'searchVets',
 			value: function searchVets() {
 				event.preventDefault();
-				console.log('SEARCH VETS : ' + JSON.stringify(this.props.search.id));
+	
 				var endpoint = '/api/vet/' + this.props.search.id;
-				// console.log('SEARCH VETS endpoint = '+JSON.stringify(endpoint))
 	
 				_api2.default.handlePut(endpoint, this.props.search, function (err, response) {
 					if (err) {

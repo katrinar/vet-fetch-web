@@ -18,6 +18,7 @@ class Main extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.fetchPets = this.fetchPets.bind(this)
+		this.fetchVetResults = this.fetchVetResults.bind(this)
 	}
 
 	componentDidMount() {
@@ -29,19 +30,16 @@ class Main extends Component {
 				return
 			}
 
-			if (response.confirmation == "Fail"){
-				return
-			}
-
 			if (response.confirmation == "Success"){
 				store.dispatch(actions.receivedCurrentUser(response.user))
 				_this.fetchPets()
+				_this.fetchVetResults()
 			}
+
 		})
 	}
 
 	fetchPets(){
-
 		 var user = this.props.currentUser || {}
 		//  var storeState = store.getState()
 		// var user = storeState.accountReducer.currentUser || {}
@@ -57,6 +55,28 @@ class Main extends Component {
 			store.dispatch(actions.receivedPets(response.results))
 			
 			return
+			})	
+		}
+	}
+
+	fetchVetResults(){
+		var user = this.props.currentUser || {}
+		
+
+		if (user.id != null && this.props.page == 'vet'){
+			var endpoint = '/api/vet?currentUserId='+user.id
+			console.log('FETCH_VET_RESULTS ENDPOINT: '+JSON.stringify(endpoint))
+			api.handleGet(endpoint, null, function(err, response){
+			if (err){
+				alert(err.message)
+				return
+			}
+
+			if (response.confirmation == "Success"){
+				// console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
+				store.dispatch(actions.receivedUserSearchHistory(response.results))
+			}
+
 			})	
 		}
 	}
@@ -79,9 +99,9 @@ class Main extends Component {
 			case 'pet':
 				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet} showHealthRecord={this.props.showHealthRecord}/>
 			case 'vets':
-				return page = <VetsContainer search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
+				return page = <VetsContainer currentUser={this.props.currentUser} search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
 			case 'vet':
-				return page = <VetProfile search={this.props.search} slug={this.props.slug}/>
+				return page = <VetProfile currentUser={this.props.currentUser} searchHistory={this.props.searchHistory} slug={this.props.slug}/>
 			default: 
 				return page = null
 		}
@@ -95,12 +115,14 @@ class Main extends Component {
 }
 
 const stateToProps = function(state) {
-	console.log('STATE_TO_PROPS_MAIN: '+JSON.stringify(state.petReducer))
+	console.log('STATE_TO_PROPS_MAIN: SEARCH HISTORY = '+JSON.stringify(state.searchReducer.searchHistory)+', USER = '+JSON.stringify(state.accountReducer.currentUser))
+	
 	return {
 		currentUser: state.accountReducer.currentUser,
 		petsArray: state.petReducer.petsArray,
 		pets: state.petReducer.pets,
 		search: state.searchReducer.search,
+		searchHistory: state.searchReducer.searchHistory,
 		displayEditPet: state.displayReducer.displayEditPet,
 		showHealthRecord: state.displayReducer.showHealthRecord,
 		showRegisterPet: state.displayReducer.showRegisterPet,

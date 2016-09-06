@@ -5,6 +5,7 @@ var VetSchema = new mongoose.Schema({
 	geo: {type:Array, default:[]},
 	vetResults: {type:Array, default:[]},
 	searchStatus: {type:String, default: ''},
+	currentUserId: {type:String, default: ''},
 	timestamp:{type: String, default: Date.now}
 })
 
@@ -14,7 +15,8 @@ VetSchema.methods.summary = function(){
 		zipcode: this.zipcode,
 		geo: this.geo,
 		vetResults: this.vetResults,
-		searchStatus: this.searchStatus
+		searchStatus: this.searchStatus,
+		currentUserId: this.currentUserId
 	}
 
 	return summary

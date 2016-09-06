@@ -7,8 +7,9 @@ var initialState = {
 		id: '',
 		vetResults: [],
 		searchStatus: '',
-		vetInfo: {}
-	}
+		currentUserId: ''
+	},
+	searchHistory: {}
 }
 
 export default function(state = initialState, action){
@@ -23,12 +24,45 @@ export default function(state = initialState, action){
 			return newState
 
 		case constants.RECEIVED_SEARCH_RESULTS:
-			console.log('RECEIVED_SEARCH_RESULTS:')
+			console.log('RECEIVED_SEARCH_RESULTS: ')
 			var newState = Object.assign({}, state)
 			var newSearch = Object.assign({}, state.search)
 			newSearch = action.searchResults
 			newState['search'] = newSearch
+
+			var updatedVetMap = Object.assign({}, newState.vetMap)
+
+			var vets = action.searchResults.vetResults
+
+			for (var i=0; i<vets.length; i++){
+				var vetProfile = vets[i]
+				updatedVetMap[vetProfile.slug] = vetProfile
+			}
+
+			newState['vetMap'] = updatedVetMap
 			
+			return newState
+
+		case constants.RECEIVED_USER_SEARCH_HISTORY:
+		console.log('RECEIVED_USER_SEARCH_HISTORY: ')
+		var newState = Object.assign({}, state)
+		var searchMap = Object.assign({}, newState.searchHistory)
+
+		for (var i=0; i<action.searchHistory.length; i++){
+			var zipcodeSearch = action.searchHistory[i]
+			var slug = ''
+			var individualResult = {}
+			var zipcodeSearchResults = zipcodeSearch.vetResults
+				for (var j=0; j<zipcodeSearchResults.length; j++){
+					individualResult = zipcodeSearchResults[j]
+					slug = individualResult.slug
+					console.log('RECEIVED_USER_SEARCH_HISTORY: INDIVIDUAL RESULT '+JSON.stringify(individualResult))
+					searchMap[slug] = individualResult
+				}
+		}
+
+		newState['searchHistory'] = searchMap
+
 			return newState
 
 		default:
