@@ -56,7 +56,6 @@ export default function(state = initialState, action){
 				for (var j=0; j<zipcodeSearchResults.length; j++){
 					individualResult = zipcodeSearchResults[j]
 					slug = individualResult.slug
-					console.log('RECEIVED_USER_SEARCH_HISTORY: INDIVIDUAL RESULT '+JSON.stringify(individualResult))
 					searchMap[slug] = individualResult
 				}
 		}

@@ -17,6 +17,7 @@
     "google-map-react": "^0.18.3",
     "google-maps-react": "^1.0.18",
     "hjs": "~0.0.6",
+    "hogan-middleware": "^0.1.0",
     "mongoose": "^4.5.5",
     "morgan": "~1.6.1",
     "node-fs": "^0.1.7",

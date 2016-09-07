@@ -13,8 +13,6 @@ class VetProfile extends Component {
 	render(){
 		var searches = this.props.searchHistory || {}
 		var resultProfile = searches[this.props.slug] || {}
-		console.log('VET PROFILE: SEARCHES = '+JSON.stringify(searches))
-		console.log('VET PROFILE: RESULT PROFILE VICINITY = '+JSON.stringify(resultProfile))
 	
 		return(
 			<div>
