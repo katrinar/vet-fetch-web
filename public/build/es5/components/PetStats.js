@@ -27,6 +27,8 @@ var PetNavigationToggle = _interopRequire(require("../components/PetNavigationTo
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var PetStats = (function (Component) {
 	function PetStats(props, context) {
 		_classCallCheck(this, PetStats);
@@ -108,7 +110,8 @@ var PetStats = (function (Component) {
 							),
 							React.createElement(PetNavigationToggle, null)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

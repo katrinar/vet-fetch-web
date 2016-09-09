@@ -5,6 +5,7 @@ import actions from '../actions/actions'
 import PetNavigation from '../components/PetNavigation'
 import PetNavigationToggle from '../components/PetNavigationToggle'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 
 class PetStats extends Component {
@@ -52,6 +53,7 @@ class PetStats extends Component {
 						<PetNavigationToggle />
 					</div>
 				</div>
+				<Footer />
 
 			</div>
 		)

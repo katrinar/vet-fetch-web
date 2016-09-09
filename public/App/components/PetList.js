@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PetRow from '../components/PetRow'
 import navigation from '../utils/navigation'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 
 class PetList extends Component {
@@ -21,6 +22,8 @@ class PetList extends Component {
 						<button onClick={navigation.registerPet}>Add a Pet</button>
 					</div>
 				</div>
+
+				<Footer />
 				
 			</div>
 		)

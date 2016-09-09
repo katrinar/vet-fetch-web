@@ -19,6 +19,8 @@ var navigation = _interopRequire(require("../utils/navigation"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var PetList = (function (Component) {
 	function PetList() {
 		_classCallCheck(this, PetList);
@@ -59,7 +61,8 @@ var PetList = (function (Component) {
 								"Add a Pet"
 							)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

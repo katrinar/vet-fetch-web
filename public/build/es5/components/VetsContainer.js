@@ -25,6 +25,8 @@ var VetSearchResultsList = _interopRequire(require("../components/VetSearchResul
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var GOOGLE_API_KEY = "AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI";
 var GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
@@ -140,7 +142,8 @@ var VetsContainer = (function (Component) {
 							),
 							React.createElement(VetSearchResultsList, { search: this.props.search })
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

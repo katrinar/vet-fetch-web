@@ -4,6 +4,7 @@ import actions from '../actions/actions'
 import api from '../utils/api'
 import VetSearchResultsList from '../components/VetSearchResultsList'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 const GOOGLE_API_KEY = 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI';
 const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
@@ -94,6 +95,8 @@ class VetsContainer extends Component {
 						<VetSearchResultsList search={this.props.search}/>
 					</div>
 				</div>
+
+				<Footer />
 
 			</div>
 		)

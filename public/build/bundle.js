@@ -26134,6 +26134,10 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
+	var _Footer = __webpack_require__(206);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26180,7 +26184,8 @@
 								'Add a Pet'
 							)
 						)
-					)
+					),
+					_react2.default.createElement(_Footer2.default, null)
 				);
 			}
 		}]);
@@ -27463,6 +27468,10 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
+	var _Footer = __webpack_require__(206);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27552,7 +27561,8 @@
 							),
 							_react2.default.createElement(_PetNavigationToggle2.default, null)
 						)
-					)
+					),
+					_react2.default.createElement(_Footer2.default, null)
 				);
 			}
 		}]);
@@ -27666,6 +27676,10 @@
 	var _Nav = __webpack_require__(204);
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	var _Footer = __webpack_require__(206);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27783,7 +27797,8 @@
 							),
 							_react2.default.createElement(_VetSearchResultsList2.default, { search: this.props.search })
 						)
-					)
+					),
+					_react2.default.createElement(_Footer2.default, null)
 				);
 			}
 		}]);
