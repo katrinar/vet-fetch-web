@@ -64,7 +64,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _reactRedux = __webpack_require__(228);
+	var _reactRedux = __webpack_require__(229);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21224,6 +21224,10 @@
 	
 	var _VetsContainer2 = _interopRequireDefault(_VetsContainer);
 	
+	var _ComingSoon = __webpack_require__(228);
+	
+	var _ComingSoon2 = _interopRequireDefault(_ComingSoon);
+	
 	var _store = __webpack_require__(180);
 	
 	var _store2 = _interopRequireDefault(_store);
@@ -21232,7 +21236,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(228);
+	var _reactRedux = __webpack_require__(229);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21338,6 +21342,8 @@
 						return page = _react2.default.createElement(_VetsContainer2.default, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case 'vet':
 						return page = _react2.default.createElement(_VetProfile2.default, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
+					case 'insurance':
+						return page = _react2.default.createElement(_ComingSoon2.default, null);
 					default:
 						return page = null;
 				}
@@ -25699,7 +25705,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+					value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -25737,111 +25743,155 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var HomeContainer = function (_Component) {
-		_inherits(HomeContainer, _Component);
+					_inherits(HomeContainer, _Component);
 	
-		function HomeContainer(props, context) {
-			_classCallCheck(this, HomeContainer);
+					function HomeContainer(props, context) {
+									_classCallCheck(this, HomeContainer);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HomeContainer).call(this, props, context));
+									var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HomeContainer).call(this, props, context));
 	
-			_this.logout = _this.logout.bind(_this);
-			return _this;
-		}
-	
-		_createClass(HomeContainer, [{
-			key: 'logout',
-			value: function logout(event) {
-				event.preventDefault();
-	
-				_api2.default.handleGet('account/logout', null, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
+									_this.logout = _this.logout.bind(_this);
+									return _this;
 					}
-					window.location.href = '/';
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
 	
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_Nav2.default, null),
-					_react2.default.createElement(
-						'div',
-						{ className: 'section notopmargin nobottommargin nobg' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'container clearfix' },
-							_react2.default.createElement(
-								'h2',
-								null,
-								'Welcome, ',
-								_text2.default.capitalize(this.props.currentUser.firstName)
-							),
-							_react2.default.createElement(
-								'div',
-								{ id: 'posts', className: 'post-grid grid-2 clearfix' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'entry clearfix' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'entry-image' },
-										_react2.default.createElement(
-											'a',
-											{ href: '/pets', 'data-lightbox': 'image' },
-											_react2.default.createElement('img', { className: 'image_fade', src: '/images/dog-with-cat.png', alt: 'Pets' })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'entry-title' },
-										_react2.default.createElement(
-											'h2',
-											null,
-											'Manage your Pets'
-										)
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'entry clearfix' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'entry-image' },
-										_react2.default.createElement(
-											'a',
-											{ href: '/vets', 'data-lightbox': 'image' },
-											_react2.default.createElement('img', { className: 'image_fade', src: '/images/pet-with-family.jpg', alt: 'Vets' })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'entry-title' },
-										_react2.default.createElement(
-											'h2',
-											null,
-											'Find Vets Near You'
-										)
-									)
-								)
-							),
-							_react2.default.createElement(
-								'button',
-								{ onClick: this.logout },
-								'Logout'
-							)
-						)
-					),
-					_react2.default.createElement(_Footer2.default, null)
-				);
-			}
-		}]);
+					_createClass(HomeContainer, [{
+									key: 'logout',
+									value: function logout(event) {
+													event.preventDefault();
 	
-		return HomeContainer;
+													_api2.default.handleGet('account/logout', null, function (err, response) {
+																	if (err) {
+																					alert(err.message);
+																					return;
+																	}
+																	window.location.href = '/';
+													});
+									}
+					}, {
+									key: 'render',
+									value: function render() {
+	
+													return _react2.default.createElement(
+																	'div',
+																	null,
+																	_react2.default.createElement(_Nav2.default, null),
+																	_react2.default.createElement(
+																					'div',
+																					{ className: 'section notopmargin nobottommargin nobg' },
+																					_react2.default.createElement(
+																									'div',
+																									{ className: 'container clearfix' },
+																									_react2.default.createElement(
+																													'h2',
+																													null,
+																													'Welcome, ',
+																													_text2.default.capitalize(this.props.currentUser.firstName)
+																									),
+																									_react2.default.createElement(
+																													'div',
+																													{ id: 'posts', className: 'post-grid grid-2 clearfix' },
+																													_react2.default.createElement(
+																																	'div',
+																																	{ className: 'entry clearfix' },
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-image' },
+																																					_react2.default.createElement(
+																																									'a',
+																																									{ href: '/pets', 'data-lightbox': 'image' },
+																																									_react2.default.createElement('img', { className: 'image_fade', src: '/images/dog-with-cat.png', alt: 'Pets' })
+																																					)
+																																	),
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-title' },
+																																					_react2.default.createElement(
+																																									'h2',
+																																									null,
+																																									'Manage your Pets'
+																																					)
+																																	)
+																													),
+																													_react2.default.createElement(
+																																	'div',
+																																	{ className: 'entry clearfix' },
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-image' },
+																																					_react2.default.createElement(
+																																									'a',
+																																									{ href: '/vets', 'data-lightbox': 'image' },
+																																									_react2.default.createElement('img', { className: 'image_fade', src: '/images/pet-with-family.jpg', alt: 'Vets' })
+																																					)
+																																	),
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-title' },
+																																					_react2.default.createElement(
+																																									'h2',
+																																									null,
+																																									'Find Vets Near You'
+																																					)
+																																	)
+																													),
+																													_react2.default.createElement(
+																																	'div',
+																																	{ className: 'entry clearfix' },
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-image' },
+																																					_react2.default.createElement(
+																																									'a',
+																																									{ href: '/insurance', 'data-lightbox': 'image' },
+																																									_react2.default.createElement('img', { className: 'image_fade', src: '/images/man-at-desk.jpeg', alt: 'Pets' })
+																																					)
+																																	),
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-title' },
+																																					_react2.default.createElement(
+																																									'h2',
+																																									null,
+																																									'Find Insurance Plans for your Furry Friend'
+																																					)
+																																	)
+																													),
+																													_react2.default.createElement(
+																																	'div',
+																																	{ className: 'entry clearfix' },
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-image' },
+																																					_react2.default.createElement(
+																																									'a',
+																																									{ href: '/vets', 'data-lightbox': 'image' },
+																																									_react2.default.createElement('img', { className: 'image_fade', src: '/images/laptop.jpg', alt: 'Vets' })
+																																					)
+																																	),
+																																	_react2.default.createElement(
+																																					'div',
+																																					{ className: 'entry-title' },
+																																					_react2.default.createElement(
+																																									'h2',
+																																									null,
+																																									'Manage your Account'
+																																					)
+																																	)
+																													)
+																									),
+																									_react2.default.createElement(
+																													'button',
+																													{ onClick: this.logout },
+																													'Logout'
+																									)
+																					)
+																	),
+																	_react2.default.createElement(_Footer2.default, null)
+													);
+									}
+					}]);
+	
+					return HomeContainer;
 	}(_react.Component);
 	
 	exports.default = HomeContainer;
@@ -27893,14 +27943,137 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	var _Footer = __webpack_require__(206);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ComingSoon = function (_Component) {
+		_inherits(ComingSoon, _Component);
+	
+		function ComingSoon() {
+			_classCallCheck(this, ComingSoon);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(ComingSoon).apply(this, arguments));
+		}
+	
+		_createClass(ComingSoon, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(
+						'div',
+						{ className: 'content-wrap' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'heading-block title-center nobottomborder' },
+								_react2.default.createElement(
+									'h1',
+									null,
+									'Coming Soon!'
+								),
+								_react2.default.createElement(
+									'span',
+									null,
+									'Please check back again in a few days.'
+								)
+							),
+							_react2.default.createElement('div', { className: 'clear' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'progress progress-striped active topmargin divcenter', style: { height: 10, maxWidth: 600 } },
+								_react2.default.createElement(
+									'div',
+									{ className: 'progress-bar progress-bar-danger', role: 'progressbar', 'aria-valuenow': '80', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { width: 80 } },
+									_react2.default.createElement(
+										'span',
+										{ className: 'sr-only' },
+										'80% Complete'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'divider divider-center divider-short divider-margin' },
+								_react2.default.createElement('i', { className: 'icon-time' })
+							),
+							_react2.default.createElement('div', { id: 'widget-subscribe-form-result', 'data-notify-type': 'success', 'data-notify-msg': '' }),
+							_react2.default.createElement(
+								'form',
+								{ id: 'widget-subscribe-form', action: 'include/subscribe.php', role: 'form', className: 'nobottommargin' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'input-group input-group-lg divcenter', style: { maxWidth: 600 } },
+									_react2.default.createElement(
+										'span',
+										{ className: 'input-group-addon' },
+										_react2.default.createElement('i', { className: 'icon-email2' })
+									),
+									_react2.default.createElement('input', { type: 'email', name: 'widget-subscribe-form-email', className: 'form-control required email', placeholder: 'Enter your Email' }),
+									_react2.default.createElement(
+										'span',
+										{ className: 'input-group-btn' },
+										_react2.default.createElement(
+											'button',
+											{ className: 'btn btn-default', type: 'submit' },
+											'Subscribe Now'
+										)
+									)
+								)
+							)
+						)
+					),
+					_react2.default.createElement(_Footer2.default, null)
+				);
+			}
+		}]);
+	
+		return ComingSoon;
+	}(_react.Component);
+	
+	exports.default = ComingSoon;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(229);
+	var _Provider = __webpack_require__(230);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connect = __webpack_require__(232);
+	var _connect = __webpack_require__(233);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -27910,7 +28083,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27920,11 +28093,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(230);
+	var _storeShape = __webpack_require__(231);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _warning = __webpack_require__(231);
+	var _warning = __webpack_require__(232);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -27994,7 +28167,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28010,7 +28183,7 @@
 	});
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28039,7 +28212,7 @@
 	}
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28051,31 +28224,31 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(230);
+	var _storeShape = __webpack_require__(231);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _shallowEqual = __webpack_require__(233);
+	var _shallowEqual = __webpack_require__(234);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _wrapActionCreators = __webpack_require__(234);
+	var _wrapActionCreators = __webpack_require__(235);
 	
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 	
-	var _warning = __webpack_require__(231);
+	var _warning = __webpack_require__(232);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(235);
+	var _isPlainObject = __webpack_require__(236);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(239);
+	var _hoistNonReactStatics = __webpack_require__(240);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(240);
+	var _invariant = __webpack_require__(241);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -28438,7 +28611,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28469,7 +28642,7 @@
 	}
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28486,12 +28659,12 @@
 	}
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(236),
-	    isHostObject = __webpack_require__(237),
-	    isObjectLike = __webpack_require__(238);
+	var getPrototype = __webpack_require__(237),
+	    isHostObject = __webpack_require__(238),
+	    isObjectLike = __webpack_require__(239);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -28562,7 +28735,7 @@
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -28583,7 +28756,7 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports) {
 
 	/**
@@ -28609,7 +28782,7 @@
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports) {
 
 	/**
@@ -28644,7 +28817,7 @@
 
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	/**
@@ -28700,7 +28873,7 @@
 
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

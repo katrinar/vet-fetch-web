@@ -57,6 +57,24 @@ class HomeContainer extends Component {
                                 <h2>Find Vets Near You</h2>
                             </div>
                         </div>
+
+                        <div className="entry clearfix">
+                            <div className="entry-image">
+                                <a href="/insurance" data-lightbox="image"><img className="image_fade" src="/images/man-at-desk.jpeg" alt="Pets" /></a>
+                            </div>
+                            <div className="entry-title">
+                                <h2>Find Insurance Plans for your Furry Friend</h2>
+                            </div>
+                        </div>
+
+                        <div className="entry clearfix">
+                            <div className="entry-image">
+                                <a href="/vets" data-lightbox="image"><img className="image_fade" src="/images/laptop.jpg" alt="Vets" /></a>
+                            </div>
+                            <div className="entry-title">
+                                <h2>Manage your Account</h2>
+                            </div>
+                        </div>
                     </div>
 
 						

@@ -33,6 +33,8 @@ var VetProfile = _interopRequire(require("../components/VetProfile"));
 
 var VetsContainer = _interopRequire(require("../components/VetsContainer"));
 
+var ComingSoon = _interopRequire(require("../components/ComingSoon"));
+
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -139,6 +141,8 @@ var Main = (function (Component) {
 						return page = React.createElement(VetsContainer, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case "vet":
 						return page = React.createElement(VetProfile, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
+					case "insurance":
+						return page = React.createElement(ComingSoon, null);
 					default:
 						return page = null;
 				}

@@ -8,6 +8,7 @@ import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
 import VetProfile from '../components/VetProfile'
 import VetsContainer from '../components/VetsContainer'
+import ComingSoon from '../components/ComingSoon'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
@@ -102,6 +103,8 @@ class Main extends Component {
 				return page = <VetsContainer currentUser={this.props.currentUser} search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
 			case 'vet':
 				return page = <VetProfile currentUser={this.props.currentUser} searchHistory={this.props.searchHistory} slug={this.props.slug}/>
+			case 'insurance':
+				return page = <ComingSoon />
 			default: 
 				return page = null
 		}

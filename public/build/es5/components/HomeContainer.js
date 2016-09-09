@@ -26,113 +26,157 @@ var Nav = _interopRequire(require("../components/Nav"));
 var Footer = _interopRequire(require("../components/Footer"));
 
 var HomeContainer = (function (Component) {
-	function HomeContainer(props, context) {
-		_classCallCheck(this, HomeContainer);
+				function HomeContainer(props, context) {
+								_classCallCheck(this, HomeContainer);
 
-		_get(Object.getPrototypeOf(HomeContainer.prototype), "constructor", this).call(this, props, context);
-		this.logout = this.logout.bind(this);
-	}
+								_get(Object.getPrototypeOf(HomeContainer.prototype), "constructor", this).call(this, props, context);
+								this.logout = this.logout.bind(this);
+				}
 
-	_inherits(HomeContainer, Component);
+				_inherits(HomeContainer, Component);
 
-	_prototypeProperties(HomeContainer, null, {
-		logout: {
-			value: function logout(event) {
-				event.preventDefault();
+				_prototypeProperties(HomeContainer, null, {
+								logout: {
+												value: function logout(event) {
+																event.preventDefault();
 
-				api.handleGet("account/logout", null, function (err, response) {
-					if (err) {
-						alert(err.message);
-						return;
-					}
-					window.location.href = "/";
+																api.handleGet("account/logout", null, function (err, response) {
+																				if (err) {
+																								alert(err.message);
+																								return;
+																				}
+																				window.location.href = "/";
+																});
+												},
+												writable: true,
+												configurable: true
+								},
+								render: {
+												value: function render() {
+																return React.createElement(
+																				"div",
+																				null,
+																				React.createElement(Nav, null),
+																				React.createElement(
+																								"div",
+																								{ className: "section notopmargin nobottommargin nobg" },
+																								React.createElement(
+																												"div",
+																												{ className: "container clearfix" },
+																												React.createElement(
+																																"h2",
+																																null,
+																																"Welcome, ",
+																																text.capitalize(this.props.currentUser.firstName)
+																												),
+																												React.createElement(
+																																"div",
+																																{ id: "posts", className: "post-grid grid-2 clearfix" },
+																																React.createElement(
+																																				"div",
+																																				{ className: "entry clearfix" },
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-image" },
+																																								React.createElement(
+																																												"a",
+																																												{ href: "/pets", "data-lightbox": "image" },
+																																												React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
+																																								)
+																																				),
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-title" },
+																																								React.createElement(
+																																												"h2",
+																																												null,
+																																												"Manage your Pets"
+																																								)
+																																				)
+																																),
+																																React.createElement(
+																																				"div",
+																																				{ className: "entry clearfix" },
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-image" },
+																																								React.createElement(
+																																												"a",
+																																												{ href: "/vets", "data-lightbox": "image" },
+																																												React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
+																																								)
+																																				),
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-title" },
+																																								React.createElement(
+																																												"h2",
+																																												null,
+																																												"Find Vets Near You"
+																																								)
+																																				)
+																																),
+																																React.createElement(
+																																				"div",
+																																				{ className: "entry clearfix" },
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-image" },
+																																								React.createElement(
+																																												"a",
+																																												{ href: "/insurance", "data-lightbox": "image" },
+																																												React.createElement("img", { className: "image_fade", src: "/images/man-at-desk.jpeg", alt: "Pets" })
+																																								)
+																																				),
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-title" },
+																																								React.createElement(
+																																												"h2",
+																																												null,
+																																												"Find Insurance Plans for your Furry Friend"
+																																								)
+																																				)
+																																),
+																																React.createElement(
+																																				"div",
+																																				{ className: "entry clearfix" },
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-image" },
+																																								React.createElement(
+																																												"a",
+																																												{ href: "/vets", "data-lightbox": "image" },
+																																												React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
+																																								)
+																																				),
+																																				React.createElement(
+																																								"div",
+																																								{ className: "entry-title" },
+																																								React.createElement(
+																																												"h2",
+																																												null,
+																																												"Manage your Account"
+																																								)
+																																				)
+																																)
+																												),
+																												React.createElement(
+																																"button",
+																																{ onClick: this.logout },
+																																"Logout"
+																												)
+																								)
+																				),
+																				React.createElement(Footer, null)
+																);
+												},
+												writable: true,
+												configurable: true
+								}
 				});
-			},
-			writable: true,
-			configurable: true
-		},
-		render: {
-			value: function render() {
-				return React.createElement(
-					"div",
-					null,
-					React.createElement(Nav, null),
-					React.createElement(
-						"div",
-						{ className: "section notopmargin nobottommargin nobg" },
-						React.createElement(
-							"div",
-							{ className: "container clearfix" },
-							React.createElement(
-								"h2",
-								null,
-								"Welcome, ",
-								text.capitalize(this.props.currentUser.firstName)
-							),
-							React.createElement(
-								"div",
-								{ id: "posts", className: "post-grid grid-2 clearfix" },
-								React.createElement(
-									"div",
-									{ className: "entry clearfix" },
-									React.createElement(
-										"div",
-										{ className: "entry-image" },
-										React.createElement(
-											"a",
-											{ href: "/pets", "data-lightbox": "image" },
-											React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
-										)
-									),
-									React.createElement(
-										"div",
-										{ className: "entry-title" },
-										React.createElement(
-											"h2",
-											null,
-											"Manage your Pets"
-										)
-									)
-								),
-								React.createElement(
-									"div",
-									{ className: "entry clearfix" },
-									React.createElement(
-										"div",
-										{ className: "entry-image" },
-										React.createElement(
-											"a",
-											{ href: "/vets", "data-lightbox": "image" },
-											React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
-										)
-									),
-									React.createElement(
-										"div",
-										{ className: "entry-title" },
-										React.createElement(
-											"h2",
-											null,
-											"Find Vets Near You"
-										)
-									)
-								)
-							),
-							React.createElement(
-								"button",
-								{ onClick: this.logout },
-								"Logout"
-							)
-						)
-					),
-					React.createElement(Footer, null)
-				);
-			},
-			writable: true,
-			configurable: true
-		}
-	});
 
-	return HomeContainer;
+				return HomeContainer;
 })(Component);
 
 module.exports = HomeContainer;
