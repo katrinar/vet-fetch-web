@@ -15,8 +15,6 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var HomeButton = _interopRequire(require("../components/HomeButton"));
-
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
@@ -39,7 +37,6 @@ var VetProfile = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(HomeButton, null),
 					React.createElement(
 						"h2",
 						null,

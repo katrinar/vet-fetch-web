@@ -23,6 +23,8 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 var RegisterPet = (function (Component) {
 	function RegisterPet(props, context) {
 		_classCallCheck(this, RegisterPet);
@@ -76,27 +78,36 @@ var RegisterPet = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
-						"p",
-						null,
-						"Register your Pet"
-					),
-					React.createElement(
-						"form",
-						null,
-						React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),
-						React.createElement("br", null),
+						"div",
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
-							"button",
-							{ onClick: this.registerPet },
-							"Register Pet"
-						),
-						React.createElement(
-							"button",
-							{ onClick: navigation.dismissRegisterPet },
-							"Cancel"
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h2",
+								null,
+								"Register your Pet"
+							),
+							React.createElement(
+								"form",
+								null,
+								React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),
+								React.createElement("br", null),
+								React.createElement(
+									"button",
+									{ onClick: this.registerPet },
+									"Register Pet"
+								),
+								React.createElement(
+									"button",
+									{ onClick: navigation.dismissRegisterPet },
+									"Cancel"
+								)
+							)
 						)
 					)
 				);

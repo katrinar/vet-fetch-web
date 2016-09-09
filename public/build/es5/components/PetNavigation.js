@@ -41,11 +41,6 @@ var PetNavigation = (function (Component) {
 						"button",
 						{ onClick: navigation.editPet },
 						"Edit Pet"
-					),
-					React.createElement(
-						"button",
-						{ onClick: navigation.homePage },
-						"Home"
 					)
 				);
 			},

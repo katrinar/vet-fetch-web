@@ -25,6 +25,8 @@ var PetNavigation = _interopRequire(require("../components/PetNavigation"));
 
 var PetNavigationToggle = _interopRequire(require("../components/PetNavigationToggle"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 var PetHealthRecord = (function (Component) {
 	function PetHealthRecord(props, context) {
 		_classCallCheck(this, PetHealthRecord);
@@ -43,81 +45,78 @@ var PetHealthRecord = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
 						"div",
-						{ id: "petHealthRecord" },
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
 							"div",
-							null,
-							React.createElement(PetNavigation, null)
-						),
-						React.createElement(
-							"div",
-							{ id: "healthRecContent" },
+							{ className: "container clearfix" },
+							React.createElement(PetNavigation, null),
 							React.createElement(
 								"div",
-								{ id: "healthRecHeader" },
+								{ id: "healthRecContent" },
 								React.createElement(
-									"h2",
-									null,
-									petProfile.name,
-									" | Health Record"
-								)
-							),
-							React.createElement(
-								"div",
-								{ id: "healthRecStats" },
-								React.createElement(
-									"h4",
-									null,
-									"Vaccines"
-								),
-								React.createElement(
-									"ul",
-									null,
+									"div",
+									{ id: "healthRecHeader" },
 									React.createElement(
-										"li",
+										"h2",
 										null,
-										"Vaccines: ",
-										petProfile.vaccinesString
+										petProfile.name,
+										" | Health Record"
 									)
 								),
 								React.createElement(
-									"h4",
-									null,
-									"Medication"
-								),
-								React.createElement(
-									"ul",
-									null,
+									"div",
+									{ id: "healthRecStats" },
 									React.createElement(
-										"li",
+										"h4",
 										null,
-										"Medication: ",
-										petProfile.medicationsString,
-										" "
+										"Vaccines"
+									),
+									React.createElement(
+										"ul",
+										null,
+										React.createElement(
+											"li",
+											null,
+											"Vaccines: ",
+											petProfile.vaccinesString
+										)
+									),
+									React.createElement(
+										"h4",
+										null,
+										"Medication"
+									),
+									React.createElement(
+										"ul",
+										null,
+										React.createElement(
+											"li",
+											null,
+											"Medication: ",
+											petProfile.medicationsString,
+											" "
+										)
+									),
+									React.createElement(
+										"h4",
+										null,
+										"Allergies"
+									),
+									React.createElement(
+										"ul",
+										null,
+										React.createElement(
+											"li",
+											null,
+											"Allergies: ",
+											petProfile.allergiesString,
+											" "
+										)
 									)
 								),
-								React.createElement(
-									"h4",
-									null,
-									"Allergies"
-								),
-								React.createElement(
-									"ul",
-									null,
-									React.createElement(
-										"li",
-										null,
-										"Allergies: ",
-										petProfile.allergiesString,
-										" "
-									)
-								)
-							),
-							React.createElement(
-								"div",
-								null,
 								React.createElement(PetNavigationToggle, null)
 							)
 						)

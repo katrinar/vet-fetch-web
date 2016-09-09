@@ -15,15 +15,15 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var HomeButton = _interopRequire(require("../components/HomeButton"));
-
-var VetSearchResultsList = _interopRequire(require("../components/VetSearchResultsList"));
-
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
 var api = _interopRequire(require("../utils/api"));
+
+var VetSearchResultsList = _interopRequire(require("../components/VetSearchResultsList"));
+
+var Nav = _interopRequire(require("../components/Nav"));
 
 var GOOGLE_API_KEY = "AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI";
 var GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
@@ -115,27 +115,31 @@ var VetsContainer = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(HomeButton, null),
+					React.createElement(Nav, null),
 					React.createElement(
 						"div",
-						null,
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
-							"h2",
-							null,
-							"Find a vet!"
-						),
-						React.createElement(
-							"form",
-							null,
-							React.createElement("input", { type: "text", onChange: this.submitZip, id: "zipcode", placeholder: "Zipcode" }),
-							React.createElement("br", null)
-						),
-						React.createElement(
-							"button",
-							{ onClick: this.searchZip },
-							"Search"
-						),
-						React.createElement(VetSearchResultsList, { search: this.props.search })
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h2",
+								null,
+								"Find a vet!"
+							),
+							React.createElement(
+								"form",
+								null,
+								React.createElement("input", { type: "text", onChange: this.submitZip, id: "zipcode", placeholder: "Zipcode" }),
+								React.createElement("br", null)
+							),
+							React.createElement(
+								"button",
+								{ onClick: this.searchZip },
+								"Search"
+							),
+							React.createElement(VetSearchResultsList, { search: this.props.search })
+						)
 					)
 				);
 			},

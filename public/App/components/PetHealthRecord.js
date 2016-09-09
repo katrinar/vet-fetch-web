@@ -4,6 +4,7 @@ import actions from '../actions/actions'
 import navigation from '../utils/navigation'
 import PetNavigation from '../components/PetNavigation'
 import PetNavigationToggle from '../components/PetNavigationToggle'
+import Nav from '../components/Nav'
 
 class PetHealthRecord extends Component {
 	constructor(props, context){
@@ -17,30 +18,36 @@ class PetHealthRecord extends Component {
 		return(
 	
 			<div>
-				<div id='petHealthRecord'>
-					<div><PetNavigation /></div>
+			
+				<Nav />
 
-					<div id='healthRecContent'>
-						<div id='healthRecHeader'>
-							<h2>{petProfile.name} | Health Record</h2>
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
+
+						<PetNavigation />
+
+						<div id='healthRecContent'>
+							<div id='healthRecHeader'>
+								<h2>{petProfile.name} | Health Record</h2>
+							</div>
+
+							<div id='healthRecStats'>
+								<h4>Vaccines</h4>
+									<ul>
+										<li>Vaccines: {petProfile.vaccinesString}</li>
+									</ul>
+								<h4>Medication</h4>
+									<ul>
+										<li>Medication: {petProfile.medicationsString} </li>
+									</ul>
+								<h4>Allergies</h4>
+									<ul>
+										<li>Allergies: {petProfile.allergiesString} </li>
+									</ul>
+							</div>
+
+							<PetNavigationToggle />
 						</div>
-
-						<div id='healthRecStats'>
-							<h4>Vaccines</h4>
-								<ul>
-									<li>Vaccines: {petProfile.vaccinesString}</li>
-								</ul>
-							<h4>Medication</h4>
-								<ul>
-									<li>Medication: {petProfile.medicationsString} </li>
-								</ul>
-							<h4>Allergies</h4>
-								<ul>
-									<li>Allergies: {petProfile.allergiesString} </li>
-								</ul>
-						</div>
-
-						<div><PetNavigationToggle /></div>
 					</div>
 				</div>
 				

@@ -31,6 +31,8 @@ var Dropzone = _interopRequire(require("react-dropzone"));
 
 var request = _interopRequire(require("superagent"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 // const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
 var CLOUDINARY_UPLOAD_PRESET = "vxd4nrmq";
 var CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/hsypls36a/image/upload";
@@ -136,106 +138,115 @@ var EditPet = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
-						"form",
-						{ action: "", method: "" },
-						React.createElement(
-							"label",
-							null,
-							"Name"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "name", placeholder: "Name", value: petProfile.name }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Birthday"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "birthday", placeholder: "DD/MM/YYYY", value: petProfile.birthday }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Sex"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "sex", placeholder: "Sex", value: petProfile.sex }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Species"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "species", placeholder: "Species", value: petProfile.species }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Breed"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed", placeholder: "Breed", value: petProfile.breed }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Vaccines"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "vaccinesString", placeholder: "rabies...", value: petProfile.vaccinesString }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Allergies"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergiesString", placeholder: "advil,wheat,etc...", value: petProfile.allergiesString }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Medications"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medicationsString", placeholder: "heartworm,vitamins,etc...", value: petProfile.medicationsString }),
-						React.createElement("br", null),
-						React.createElement("br", null),
-						React.createElement(
-							Dropzone,
-							{ multiple: false, accept: "image/*", style: { width: 100 + "%", marginBottom: 24, background: "#fff", border: "1px solid #ddd" }, onDrop: this.onImageDrop },
-							React.createElement(
-								"div",
-								{ style: { padding: 24 } },
-								"Click to upload an image or drag image here."
-							)
-						),
+						"div",
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
 							"div",
-							null,
-							this.state.uploadedFileCloudinaryUrl === "" ? null : React.createElement(
-								"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"form",
 								null,
 								React.createElement(
-									"p",
+									"label",
 									null,
-									this.state.uploadedFile.name
+									"Name"
 								),
-								React.createElement("img", { src: this.state.uploadedFileCloudinaryUrl })
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "name", placeholder: "Name", value: petProfile.name }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Birthday"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "birthday", placeholder: "DD/MM/YYYY", value: petProfile.birthday }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Sex"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "sex", placeholder: "Sex", value: petProfile.sex }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Species"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "species", placeholder: "Species", value: petProfile.species }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Breed"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "breed", placeholder: "Breed", value: petProfile.breed }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Vaccines"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "vaccinesString", placeholder: "rabies...", value: petProfile.vaccinesString }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Allergies"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "allergiesString", placeholder: "advil,wheat,etc...", value: petProfile.allergiesString }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Medications"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "medicationsString", placeholder: "heartworm,vitamins,etc...", value: petProfile.medicationsString }),
+								React.createElement("br", null),
+								React.createElement("br", null),
+								React.createElement(
+									Dropzone,
+									{ multiple: false, accept: "image/*", style: { width: 100 + "%", marginBottom: 24, background: "#fff", border: "1px solid #ddd" }, onDrop: this.onImageDrop },
+									React.createElement(
+										"div",
+										{ style: { padding: 24 } },
+										"Click to upload an image or drag image here."
+									)
+								),
+								React.createElement(
+									"div",
+									null,
+									this.state.uploadedFileCloudinaryUrl === "" ? null : React.createElement(
+										"div",
+										null,
+										React.createElement(
+											"p",
+											null,
+											this.state.uploadedFile.name
+										),
+										React.createElement("img", { src: this.state.uploadedFileCloudinaryUrl })
+									)
+								),
+								React.createElement(
+									"button",
+									{ onClick: this.submitPetEdit },
+									"Save Edits"
+								),
+								React.createElement(
+									"button",
+									{ onClick: navigation.dismissEditPet },
+									"Cancel"
+								)
 							)
-						),
-						React.createElement(
-							"button",
-							{ onClick: this.submitPetEdit },
-							"Save Edits"
-						),
-						React.createElement(
-							"button",
-							{ onClick: navigation.dismissEditPet },
-							"Cancel"
 						)
 					)
 				);

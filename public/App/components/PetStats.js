@@ -4,6 +4,7 @@ import store from '../stores/store'
 import actions from '../actions/actions'
 import PetNavigation from '../components/PetNavigation'
 import PetNavigationToggle from '../components/PetNavigationToggle'
+import Nav from '../components/Nav'
 
 
 class PetStats extends Component {
@@ -21,29 +22,35 @@ class PetStats extends Component {
 			
 
 			<div>
-				<div><PetNavigation /></div>
+				<Nav />
 
-				<div id='profileContent'>
-					<div id='profileHeader'>
-						<h2>{petProfile.name} | Stats</h2>
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
+
+						<PetNavigation />
+
+						<div id='profileContent'>
+							<div id='profileHeader'>
+								<h2>{petProfile.name} | Stats</h2>
+							</div>
+
+							 <div>
+			        			{petProfileImg['thumb'] === '' ? null :
+							        <div>
+							          <img src={petProfileImg['original']} />
+							        </div>
+							    }
+		      				</div>
+
+							<div id='profileStats'>
+								<h4>Species: {petProfile.species}</h4> 
+								<h4>Breed: {petProfile.breed}</h4>
+								<h4>Sex: {petProfile.sex}</h4>
+								<h4>DoB: {petProfile.birthday}</h4>
+							</div>
+						</div>
+						<PetNavigationToggle />
 					</div>
-
-					   <div>
-	        				{petProfileImg['thumb'] === '' ? null :
-					        <div>
-					          
-					          <img src={petProfileImg['original']} />
-					        </div>}
-      					</div>
-
-					<div id='profileStats'>
-						<h4>{petProfile.species}</h4> 
-						<h4>{petProfile.breed}</h4>
-						<h4>{petProfile.sex}</h4>
-						<h4>DoB: {petProfile.birthday}</h4>
-					</div>
-
-					<div><PetNavigationToggle /></div>
 				</div>
 
 			</div>

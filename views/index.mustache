@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{>head}}
   </head>
-  <body>
-    <h1>Vet Fetch</h1>
-    <div id="app">{{{react}}}</div>
 
-    <script type="text/javascript" src="/build/bundle.js"></script>
-  
+  <body class="stretched">
+  	<div id="wrapper" class="clearfix">
+  		<div id="app">{{{react}}}</div>
+  	</div>
+    
+  		{{>javascripts}}    
+
   </body>
+  
 </html>

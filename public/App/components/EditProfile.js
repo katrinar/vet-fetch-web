@@ -4,6 +4,7 @@ import text from '../utils/text'
 import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
+import Nav from '../components/Nav'
 
 class EditProfile extends Component {
 	constructor(props, context){
@@ -42,19 +43,26 @@ class EditProfile extends Component {
 		
 		return (
 			<div>
-				<form action="" method="">
-					<label>First Name</label><br />
-					<input type="text" onChange={this.submitEdit} id="firstName" placeholder={'First Name'} value={profile.firstName} /><br />
+				<Nav />
 
-					<label>Last Name</label><br />
-					<input type="text" onChange={this.submitEdit} id="lastName"  placeholder={'Last Name'} value={profile.lastName} /><br />
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
 
-					<label>Email</label><br />
-					<input type="text" onChange={this.submitEdit} id="email" placeholder={'Email'} value={profile.email}/><br />
+						<form action="" method="">
+							<label>First Name</label><br />
+							<input type="text" onChange={this.submitEdit} id="firstName" placeholder={'First Name'} value={profile.firstName} /><br />
 
-					<button onClick={this.submitProfileEdit}>Save Edits</button>
-					<button>Cancel</button>
-				</form> 
+							<label>Last Name</label><br />
+							<input type="text" onChange={this.submitEdit} id="lastName"  placeholder={'Last Name'} value={profile.lastName} /><br />
+
+							<label>Email</label><br />
+							<input type="text" onChange={this.submitEdit} id="email" placeholder={'Email'} value={profile.email}/><br />
+						</form>
+
+						<button onClick={this.submitProfileEdit}>Save Edits</button>
+						<button onClick={navigation.accountPage}>Cancel</button>
+					</div>
+				</div>
 			</div>
 		)
 	}

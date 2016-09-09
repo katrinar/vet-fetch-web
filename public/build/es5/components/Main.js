@@ -108,7 +108,7 @@ var Main = (function (Component) {
 						}
 
 						if (response.confirmation == "Success") {
-							// console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
+							console.log("VET SEARCH RESULTS: " + JSON.stringify(response.results));
 							store.dispatch(actions.receivedUserSearchHistory(response.results));
 						}
 					});
@@ -146,7 +146,11 @@ var Main = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					page
+					React.createElement(
+						"div",
+						null,
+						page
+					)
 				);
 			},
 			writable: true,

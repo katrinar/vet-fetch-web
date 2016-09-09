@@ -5,7 +5,6 @@ import actions from '../actions/actions'
 import PetHealthRecord from '../components/PetHealthRecord'
 import PetStats from '../components/PetStats'
 
-
 class PetProfileInfo extends Component {
 	constructor(props, context){
 		super(props, context)

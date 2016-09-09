@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import api from '../utils/api'
 import text from '../utils/text'
 import store from '../stores/store'
+import Nav from '../components/Nav'
 
 class HomeContainer extends Component {
 
@@ -27,14 +28,20 @@ class HomeContainer extends Component {
 		
 		return(
 			<div>
-				<h2>
-					Welcome, {text.capitalize(this.props.currentUser.firstName)}
-				</h2>
-				<h3><a href={'/pets/'}>Pets</a></h3>
-				<h3><a href={'/vets'}>Find Vets Near You</a></h3>
-				<h3><a href={'/'}>Insurance</a></h3>
-				<h3><a href={'/account'}>Account</a></h3>
-				<button onClick={this.logout}>Logout</button>
+
+				<Nav />
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
+						<h2>
+							Welcome, {text.capitalize(this.props.currentUser.firstName)}
+						</h2>
+						<h3><a href={'/pets/'}>Pets</a></h3>
+						<h3><a href={'/vets'}>Find Vets Near You</a></h3>
+						<h3><a href={'/'}>Insurance</a></h3>
+						<h3><a href={'/account'}>Account</a></h3>
+						<button onClick={this.logout}>Logout</button>
+					</div>
+				</div>
 			</div>
 		)
 	}

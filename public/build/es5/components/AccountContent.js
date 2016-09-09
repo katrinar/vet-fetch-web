@@ -13,13 +13,13 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var HomeButton = _interopRequire(require("../components/HomeButton"));
-
 var text = _interopRequire(require("../utils/text"));
 
 var EditProfile = _interopRequire(require("../components/EditProfile"));
 
 var navigation = _interopRequire(require("../utils/navigation"));
+
+var Nav = _interopRequire(require("../components/Nav"));
 
 var AccountContent = (function (Component) {
 	function AccountContent() {
@@ -38,44 +38,52 @@ var AccountContent = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(HomeButton, null),
-					React.createElement(
-						"button",
-						{ onClick: navigation.editProfile },
-						"Edit Profile"
-					),
+					React.createElement(Nav, null),
 					React.createElement(
 						"div",
-						{ id: "profileInfo" },
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
-							"h4",
-							null,
-							"Name"
-						),
-						React.createElement(
-							"ul",
-							null,
+							"div",
+							{ className: "container clearfix" },
 							React.createElement(
-								"li",
-								null,
-								text.capitalize(this.props.currentUser.firstName),
-								" ",
-								text.capitalize(this.props.currentUser.lastName)
-							)
-						),
-						React.createElement(
-							"h4",
-							null,
-							"Email"
-						),
-						React.createElement(
-							"ul",
-							null,
+								"div",
+								{ id: "profileInfo" },
+								React.createElement(
+									"h4",
+									null,
+									"Name"
+								),
+								React.createElement(
+									"ul",
+									null,
+									React.createElement(
+										"li",
+										null,
+										text.capitalize(this.props.currentUser.firstName),
+										" ",
+										text.capitalize(this.props.currentUser.lastName)
+									)
+								),
+								React.createElement(
+									"h4",
+									null,
+									"Email"
+								),
+								React.createElement(
+									"ul",
+									null,
+									React.createElement(
+										"li",
+										null,
+										this.props.currentUser.email,
+										" "
+									)
+								)
+							),
 							React.createElement(
-								"li",
-								null,
-								this.props.currentUser.email,
-								" "
+								"button",
+								{ onClick: navigation.editProfile },
+								"Edit Profile"
 							)
 						)
 					)

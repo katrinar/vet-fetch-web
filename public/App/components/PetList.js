@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PetRow from '../components/PetRow'
 import navigation from '../utils/navigation'
-import HomeButton from '../components/HomeButton'
+import Nav from '../components/Nav'
 
 
 class PetList extends Component {
@@ -12,12 +12,16 @@ class PetList extends Component {
 
 		return(
 			<div>
-				<div>
-					<button onClick={navigation.registerPet}>Add a Pet</button>
-					<HomeButton />
+				<Nav />
+
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
+						<h4>Pets</h4>
+						{petList}
+						<button onClick={navigation.registerPet}>Add a Pet</button>
+					</div>
 				</div>
-				<h4>Pets</h4>
-				{petList}
+				
 			</div>
 		)
 	}

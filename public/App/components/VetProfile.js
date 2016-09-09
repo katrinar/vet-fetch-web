@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import HomeButton from '../components/HomeButton'
 import store from '../stores/store'
 import actions from '../actions/actions'
 
@@ -16,7 +15,6 @@ class VetProfile extends Component {
 	
 		return(
 			<div>
-				<HomeButton />
 				<h2>{resultProfile.name}</h2>
 				<h3>{resultProfile.vicinity}</h3>
 				

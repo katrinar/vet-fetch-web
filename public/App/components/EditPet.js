@@ -7,6 +7,7 @@ import store from '../stores/store'
 import actions from '../actions/actions'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
+import Nav from '../components/Nav'
 
 // const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
 const CLOUDINARY_UPLOAD_PRESET = 'vxd4nrmq';
@@ -96,49 +97,54 @@ class EditPet extends Component {
 		
 		return (
 			<div>
-				<form action="" method="">
-					<label>Name</label><br />
-					<input type="text" onChange={this.submitEdit} id="name" placeholder={'Name'} value={petProfile.name} /><br />
+				<Nav />
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
+						<form>
+							<label>Name</label><br />
+							<input type="text" onChange={this.submitEdit} id="name" placeholder={'Name'} value={petProfile.name} /><br />
 
-					<label>Birthday</label><br />
-					<input type="text" onChange={this.submitEdit} id="birthday"  placeholder={'DD/MM/YYYY'} value={petProfile.birthday} /><br />
+							<label>Birthday</label><br />
+							<input type="text" onChange={this.submitEdit} id="birthday"  placeholder={'DD/MM/YYYY'} value={petProfile.birthday} /><br />
 
-					<label>Sex</label><br />
-					<input type="text" onChange={this.submitEdit} id="sex" placeholder={'Sex'} value={petProfile.sex}/><br />
+							<label>Sex</label><br />
+							<input type="text" onChange={this.submitEdit} id="sex" placeholder={'Sex'} value={petProfile.sex}/><br />
 
-					<label>Species</label><br />
-					<input type="text" onChange={this.submitEdit} id="species" placeholder={'Species'} value={petProfile.species}/><br />
+							<label>Species</label><br />
+							<input type="text" onChange={this.submitEdit} id="species" placeholder={'Species'} value={petProfile.species}/><br />
 
-					<label>Breed</label><br />
-					<input type="text" onChange={this.submitEdit} id="breed" placeholder={'Breed'} value={petProfile.breed}/><br />
+							<label>Breed</label><br />
+							<input type="text" onChange={this.submitEdit} id="breed" placeholder={'Breed'} value={petProfile.breed}/><br />
 
-					<label>Vaccines</label><br />
-					<input type="text" onChange={this.submitEdit} id="vaccinesString" placeholder={'rabies...'} value={petProfile.vaccinesString} /><br />
+							<label>Vaccines</label><br />
+							<input type="text" onChange={this.submitEdit} id="vaccinesString" placeholder={'rabies...'} value={petProfile.vaccinesString} /><br />
 
-					<label>Allergies</label><br />
-					<input type="text" onChange={this.submitEdit} id="allergiesString" placeholder={'advil,wheat,etc...'} value={petProfile.allergiesString} /><br />
+							<label>Allergies</label><br />
+							<input type="text" onChange={this.submitEdit} id="allergiesString" placeholder={'advil,wheat,etc...'} value={petProfile.allergiesString} /><br />
 
-					<label>Medications</label><br />
-						<input type="text" onChange={this.submitEdit} id="medicationsString" placeholder={'heartworm,vitamins,etc...'} value={petProfile.medicationsString} /><br />
-						<br />
+							<label>Medications</label><br />
+								<input type="text" onChange={this.submitEdit} id="medicationsString" placeholder={'heartworm,vitamins,etc...'} value={petProfile.medicationsString} /><br />
+								<br />
 
-					 <Dropzone multiple={false} accept="image/*" style={{width:100+'%', marginBottom:24, background:'#fff', border:'1px solid #ddd'}} onDrop={this.onImageDrop}>
-							<div style={{padding:24}}>
-								Click to upload an image or drag image here.	           
-							</div>
-					 </Dropzone>
+							 <Dropzone multiple={false} accept="image/*" style={{width:100+'%', marginBottom:24, background:'#fff', border:'1px solid #ddd'}} onDrop={this.onImageDrop}>
+									<div style={{padding:24}}>
+										Click to upload an image or drag image here.	           
+									</div>
+							 </Dropzone>
 
-					   <div>
-	        				{this.state.uploadedFileCloudinaryUrl === '' ? null :
-					        <div>
-					          <p>{this.state.uploadedFile.name}</p>
-					          <img src={this.state.uploadedFileCloudinaryUrl} />
-					        </div>}
-      					</div>
+							   <div>
+			        				{this.state.uploadedFileCloudinaryUrl === '' ? null :
+							        <div>
+							          <p>{this.state.uploadedFile.name}</p>
+							          <img src={this.state.uploadedFileCloudinaryUrl} />
+							        </div>}
+		      					</div>
 
-					<button onClick={this.submitPetEdit}>Save Edits</button>
-					<button onClick={navigation.dismissEditPet}>Cancel</button>
-				</form> 
+							<button onClick={this.submitPetEdit}>Save Edits</button>
+							<button onClick={navigation.dismissEditPet}>Cancel</button>
+						</form>
+					</div>
+				</div> 
 			</div>
 		)
 	}

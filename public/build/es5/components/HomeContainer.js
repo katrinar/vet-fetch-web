@@ -21,6 +21,8 @@ var text = _interopRequire(require("../utils/text"));
 
 var store = _interopRequire(require("../stores/store"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 var HomeContainer = (function (Component) {
 	function HomeContainer(props, context) {
 		_classCallCheck(this, HomeContainer);
@@ -52,52 +54,61 @@ var HomeContainer = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
-						"h2",
-						null,
-						"Welcome, ",
-						text.capitalize(this.props.currentUser.firstName)
-					),
-					React.createElement(
-						"h3",
-						null,
+						"div",
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
-							"a",
-							{ href: "/pets/" },
-							"Pets"
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h2",
+								null,
+								"Welcome, ",
+								text.capitalize(this.props.currentUser.firstName)
+							),
+							React.createElement(
+								"h3",
+								null,
+								React.createElement(
+									"a",
+									{ href: "/pets/" },
+									"Pets"
+								)
+							),
+							React.createElement(
+								"h3",
+								null,
+								React.createElement(
+									"a",
+									{ href: "/vets" },
+									"Find Vets Near You"
+								)
+							),
+							React.createElement(
+								"h3",
+								null,
+								React.createElement(
+									"a",
+									{ href: "/" },
+									"Insurance"
+								)
+							),
+							React.createElement(
+								"h3",
+								null,
+								React.createElement(
+									"a",
+									{ href: "/account" },
+									"Account"
+								)
+							),
+							React.createElement(
+								"button",
+								{ onClick: this.logout },
+								"Logout"
+							)
 						)
-					),
-					React.createElement(
-						"h3",
-						null,
-						React.createElement(
-							"a",
-							{ href: "/vets" },
-							"Find Vets Near You"
-						)
-					),
-					React.createElement(
-						"h3",
-						null,
-						React.createElement(
-							"a",
-							{ href: "/" },
-							"Insurance"
-						)
-					),
-					React.createElement(
-						"h3",
-						null,
-						React.createElement(
-							"a",
-							{ href: "/account" },
-							"Account"
-						)
-					),
-					React.createElement(
-						"button",
-						{ onClick: this.logout },
-						"Logout"
 					)
 				);
 			},

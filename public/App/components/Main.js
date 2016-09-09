@@ -73,7 +73,7 @@ class Main extends Component {
 			}
 
 			if (response.confirmation == "Success"){
-				// console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
+				console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
 				store.dispatch(actions.receivedUserSearchHistory(response.results))
 			}
 
@@ -108,7 +108,11 @@ class Main extends Component {
 
 		return (
 			<div>
-				{page}
+
+		        <div>
+		        	{page}
+		        </div>
+	        	
 			</div>
 		)
 	}

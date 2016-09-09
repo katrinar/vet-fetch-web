@@ -25,6 +25,8 @@ var PetNavigation = _interopRequire(require("../components/PetNavigation"));
 
 var PetNavigationToggle = _interopRequire(require("../components/PetNavigationToggle"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 var PetStats = (function (Component) {
 	function PetStats(props, context) {
 		_classCallCheck(this, PetStats);
@@ -45,61 +47,65 @@ var PetStats = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
 						"div",
-						null,
-						React.createElement(PetNavigation, null)
-					),
-					React.createElement(
-						"div",
-						{ id: "profileContent" },
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
 							"div",
-							{ id: "profileHeader" },
+							{ className: "container clearfix" },
+							React.createElement(PetNavigation, null),
 							React.createElement(
-								"h2",
-								null,
-								petProfile.name,
-								" | Stats"
-							)
-						),
-						React.createElement(
-							"div",
-							null,
-							petProfileImg.thumb === "" ? null : React.createElement(
 								"div",
-								null,
-								React.createElement("img", { src: petProfileImg.original })
-							)
-						),
-						React.createElement(
-							"div",
-							{ id: "profileStats" },
-							React.createElement(
-								"h4",
-								null,
-								petProfile.species
+								{ id: "profileContent" },
+								React.createElement(
+									"div",
+									{ id: "profileHeader" },
+									React.createElement(
+										"h2",
+										null,
+										petProfile.name,
+										" | Stats"
+									)
+								),
+								React.createElement(
+									"div",
+									null,
+									petProfileImg.thumb === "" ? null : React.createElement(
+										"div",
+										null,
+										React.createElement("img", { src: petProfileImg.original })
+									)
+								),
+								React.createElement(
+									"div",
+									{ id: "profileStats" },
+									React.createElement(
+										"h4",
+										null,
+										"Species: ",
+										petProfile.species
+									),
+									React.createElement(
+										"h4",
+										null,
+										"Breed: ",
+										petProfile.breed
+									),
+									React.createElement(
+										"h4",
+										null,
+										"Sex: ",
+										petProfile.sex
+									),
+									React.createElement(
+										"h4",
+										null,
+										"DoB: ",
+										petProfile.birthday
+									)
+								)
 							),
-							React.createElement(
-								"h4",
-								null,
-								petProfile.breed
-							),
-							React.createElement(
-								"h4",
-								null,
-								petProfile.sex
-							),
-							React.createElement(
-								"h4",
-								null,
-								"DoB: ",
-								petProfile.birthday
-							)
-						),
-						React.createElement(
-							"div",
-							null,
 							React.createElement(PetNavigationToggle, null)
 						)
 					)

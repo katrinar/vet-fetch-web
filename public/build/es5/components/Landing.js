@@ -17,6 +17,8 @@ var Register = _interopRequire(require("../components/Register"));
 
 var Login = _interopRequire(require("../components/Login"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 var Landing = (function (Component) {
 	function Landing() {
 		_classCallCheck(this, Landing);
@@ -34,9 +36,18 @@ var Landing = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(Register, { currentUser: this.props.currentUser }),
-					React.createElement("br", null),
-					React.createElement(Login, { currentUser: this.props.currentUser })
+					React.createElement(Nav, null),
+					React.createElement(
+						"div",
+						{ className: "section notopmargin nobottommargin" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(Register, { currentUser: this.props.currentUser }),
+							React.createElement("br", null),
+							React.createElement(Login, { currentUser: this.props.currentUser })
+						)
+					)
 				);
 			},
 			writable: true,

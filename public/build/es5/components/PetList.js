@@ -17,7 +17,7 @@ var PetRow = _interopRequire(require("../components/PetRow"));
 
 var navigation = _interopRequire(require("../utils/navigation"));
 
-var HomeButton = _interopRequire(require("../components/HomeButton"));
+var Nav = _interopRequire(require("../components/Nav"));
 
 var PetList = (function (Component) {
 	function PetList() {
@@ -40,22 +40,26 @@ var PetList = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
 						"div",
-						null,
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
-							"button",
-							{ onClick: navigation.registerPet },
-							"Add a Pet"
-						),
-						React.createElement(HomeButton, null)
-					),
-					React.createElement(
-						"h4",
-						null,
-						"Pets"
-					),
-					petList
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h4",
+								null,
+								"Pets"
+							),
+							petList,
+							React.createElement(
+								"button",
+								{ onClick: navigation.registerPet },
+								"Add a Pet"
+							)
+						)
+					)
 				);
 			},
 			writable: true,

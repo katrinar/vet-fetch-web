@@ -21309,7 +21309,7 @@
 						}
 	
 						if (response.confirmation == "Success") {
-							// console.log('VET SEARCH RESULTS: '+JSON.stringify(response.results))
+							console.log('VET SEARCH RESULTS: ' + JSON.stringify(response.results));
 							_store2.default.dispatch(_actions2.default.receivedUserSearchHistory(response.results));
 						}
 					});
@@ -21345,7 +21345,11 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					page
+					_react2.default.createElement(
+						'div',
+						null,
+						page
+					)
 				);
 			}
 		}]);
@@ -24355,7 +24359,6 @@
 					for (var j = 0; j < zipcodeSearchResults.length; j++) {
 						individualResult = zipcodeSearchResults[j];
 						slug = individualResult.slug;
-						console.log('RECEIVED_USER_SEARCH_HISTORY: INDIVIDUAL RESULT ' + JSON.stringify(individualResult));
 						searchMap[slug] = individualResult;
 					}
 				}
@@ -24533,7 +24536,7 @@
 	
 	var _EditProfile2 = _interopRequireDefault(_EditProfile);
 	
-	var _AccountContent = __webpack_require__(204);
+	var _AccountContent = __webpack_require__(205);
 	
 	var _AccountContent2 = _interopRequireDefault(_AccountContent);
 	
@@ -24654,6 +24657,10 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24710,42 +24717,51 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
-						'form',
-						{ action: '', method: '' },
+						'div',
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
-							'label',
-							null,
-							'First Name'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'firstName', placeholder: 'First Name', value: profile.firstName }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Last Name'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'lastName', placeholder: 'Last Name', value: profile.lastName }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Email'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'email', placeholder: 'Email', value: profile.email }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.submitProfileEdit },
-							'Save Edits'
-						),
-						_react2.default.createElement(
-							'button',
-							null,
-							'Cancel'
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'form',
+								{ action: '', method: '' },
+								_react2.default.createElement(
+									'label',
+									null,
+									'First Name'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'firstName', placeholder: 'First Name', value: profile.firstName }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Last Name'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'lastName', placeholder: 'Last Name', value: profile.lastName }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Email'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'email', placeholder: 'Email', value: profile.email }),
+								_react2.default.createElement('br', null)
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.submitProfileEdit },
+								'Save Edits'
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: _navigation2.default.accountPage },
+								'Cancel'
+							)
 						)
 					)
 				);
@@ -24761,6 +24777,142 @@
 /* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Nav = function (_Component) {
+		_inherits(Nav, _Component);
+	
+		function Nav() {
+			_classCallCheck(this, Nav);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Nav).apply(this, arguments));
+		}
+	
+		_createClass(Nav, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"header",
+					{ id: "header", className: "full-header dark" },
+					_react2.default.createElement(
+						"div",
+						{ id: "header-wrap" },
+						_react2.default.createElement(
+							"div",
+							{ className: "container clearfix" },
+							_react2.default.createElement(
+								"div",
+								{ id: "primary-menu-trigger" },
+								_react2.default.createElement("i", { className: "icon-reorder" })
+							),
+							_react2.default.createElement(
+								"div",
+								{ id: "logo" },
+								_react2.default.createElement(
+									"a",
+									{ href: "index.html", className: "standard-logo", "data-dark-logo": "/images/logo-dark.png" },
+									_react2.default.createElement("img", { src: "/images/logo.png", alt: "Canvas Logo" })
+								),
+								_react2.default.createElement(
+									"a",
+									{ href: "index.html", className: "retina-logo", "data-dark-logo": "/images/logo-dark@2x.png" },
+									_react2.default.createElement("img", { src: "/images/logo@2x.png", alt: "Canvas Logo" })
+								)
+							),
+							_react2.default.createElement(
+								"nav",
+								{ id: "primary-menu" },
+								_react2.default.createElement(
+									"ul",
+									null,
+									_react2.default.createElement(
+										"li",
+										null,
+										_react2.default.createElement(
+											"a",
+											{ href: "/" },
+											_react2.default.createElement(
+												"div",
+												null,
+												"Home"
+											)
+										)
+									),
+									_react2.default.createElement(
+										"li",
+										{ className: "mega-menu" },
+										_react2.default.createElement(
+											"a",
+											{ href: "/pets" },
+											_react2.default.createElement(
+												"div",
+												null,
+												"Pets"
+											)
+										),
+										" "
+									),
+									_react2.default.createElement(
+										"li",
+										{ className: "mega-menu" },
+										_react2.default.createElement(
+											"a",
+											{ href: "/vets" },
+											_react2.default.createElement(
+												"div",
+												null,
+												"Vets"
+											)
+										)
+									),
+									_react2.default.createElement(
+										"li",
+										{ className: "mega-menu" },
+										_react2.default.createElement(
+											"a",
+											{ href: "/account" },
+											_react2.default.createElement(
+												"div",
+												null,
+												"Account"
+											)
+										)
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+	
+		return Nav;
+	}(_react.Component);
+	
+	exports.default = Nav;
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -24773,10 +24925,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HomeButton = __webpack_require__(205);
-	
-	var _HomeButton2 = _interopRequireDefault(_HomeButton);
-	
 	var _text = __webpack_require__(202);
 	
 	var _text2 = _interopRequireDefault(_text);
@@ -24788,6 +24936,10 @@
 	var _navigation = __webpack_require__(179);
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
+	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24813,44 +24965,52 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_HomeButton2.default, null),
-					_react2.default.createElement(
-						'button',
-						{ onClick: _navigation2.default.editProfile },
-						'Edit Profile'
-					),
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
 						'div',
-						{ id: 'profileInfo' },
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
-							'h4',
-							null,
-							'Name'
-						),
-						_react2.default.createElement(
-							'ul',
-							null,
+							'div',
+							{ className: 'container clearfix' },
 							_react2.default.createElement(
-								'li',
-								null,
-								_text2.default.capitalize(this.props.currentUser.firstName),
-								' ',
-								_text2.default.capitalize(this.props.currentUser.lastName)
-							)
-						),
-						_react2.default.createElement(
-							'h4',
-							null,
-							'Email'
-						),
-						_react2.default.createElement(
-							'ul',
-							null,
+								'div',
+								{ id: 'profileInfo' },
+								_react2.default.createElement(
+									'h4',
+									null,
+									'Name'
+								),
+								_react2.default.createElement(
+									'ul',
+									null,
+									_react2.default.createElement(
+										'li',
+										null,
+										_text2.default.capitalize(this.props.currentUser.firstName),
+										' ',
+										_text2.default.capitalize(this.props.currentUser.lastName)
+									)
+								),
+								_react2.default.createElement(
+									'h4',
+									null,
+									'Email'
+								),
+								_react2.default.createElement(
+									'ul',
+									null,
+									_react2.default.createElement(
+										'li',
+										null,
+										this.props.currentUser.email,
+										' '
+									)
+								)
+							),
 							_react2.default.createElement(
-								'li',
-								null,
-								this.props.currentUser.email,
-								' '
+								'button',
+								{ onClick: _navigation2.default.editProfile },
+								'Edit Profile'
 							)
 						)
 					)
@@ -24862,59 +25022,6 @@
 	}(_react.Component);
 	
 	exports.default = AccountContent;
-
-/***/ },
-/* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _navigation = __webpack_require__(179);
-	
-	var _navigation2 = _interopRequireDefault(_navigation);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var HomeButton = function (_Component) {
-		_inherits(HomeButton, _Component);
-	
-		function HomeButton() {
-			_classCallCheck(this, HomeButton);
-	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(HomeButton).apply(this, arguments));
-		}
-	
-		_createClass(HomeButton, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'button',
-					{ onClick: _navigation2.default.homePage },
-					'Home'
-				);
-			}
-		}]);
-	
-		return HomeButton;
-	}(_react.Component);
-	
-	exports.default = HomeButton;
 
 /***/ },
 /* 206 */
@@ -24940,6 +25047,10 @@
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24963,9 +25074,18 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Register2.default, { currentUser: this.props.currentUser }),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement(_Login2.default, { currentUser: this.props.currentUser })
+					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(
+						'div',
+						{ className: 'section notopmargin nobottommargin' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(_Register2.default, { currentUser: this.props.currentUser }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(_Login2.default, { currentUser: this.props.currentUser })
+						)
+					)
 				);
 			}
 		}]);
@@ -25214,6 +25334,10 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25254,52 +25378,61 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
-						'h2',
-						null,
-						'Welcome, ',
-						_text2.default.capitalize(this.props.currentUser.firstName)
-					),
-					_react2.default.createElement(
-						'h3',
-						null,
+						'div',
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
-							'a',
-							{ href: '/pets/' },
-							'Pets'
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								'Welcome, ',
+								_text2.default.capitalize(this.props.currentUser.firstName)
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '/pets/' },
+									'Pets'
+								)
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '/vets' },
+									'Find Vets Near You'
+								)
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '/' },
+									'Insurance'
+								)
+							),
+							_react2.default.createElement(
+								'h3',
+								null,
+								_react2.default.createElement(
+									'a',
+									{ href: '/account' },
+									'Account'
+								)
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.logout },
+								'Logout'
+							)
 						)
-					),
-					_react2.default.createElement(
-						'h3',
-						null,
-						_react2.default.createElement(
-							'a',
-							{ href: '/vets' },
-							'Find Vets Near You'
-						)
-					),
-					_react2.default.createElement(
-						'h3',
-						null,
-						_react2.default.createElement(
-							'a',
-							{ href: '/' },
-							'Insurance'
-						)
-					),
-					_react2.default.createElement(
-						'h3',
-						null,
-						_react2.default.createElement(
-							'a',
-							{ href: '/account' },
-							'Account'
-						)
-					),
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.logout },
-						'Logout'
 					)
 				);
 			}
@@ -25416,6 +25549,10 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25475,27 +25612,36 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
-						'p',
-						null,
-						'Register your Pet'
-					),
-					_react2.default.createElement(
-						'form',
-						null,
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'name', placeholder: 'Name' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'species', placeholder: 'Species' }),
-						_react2.default.createElement('br', null),
+						'div',
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
-							'button',
-							{ onClick: this.registerPet },
-							'Register Pet'
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: _navigation2.default.dismissRegisterPet },
-							'Cancel'
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								'Register your Pet'
+							),
+							_react2.default.createElement(
+								'form',
+								null,
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'name', placeholder: 'Name' }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'species', placeholder: 'Species' }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'button',
+									{ onClick: this.registerPet },
+									'Register Pet'
+								),
+								_react2.default.createElement(
+									'button',
+									{ onClick: _navigation2.default.dismissRegisterPet },
+									'Cancel'
+								)
+							)
 						)
 					)
 				);
@@ -25531,9 +25677,9 @@
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _HomeButton = __webpack_require__(205);
+	var _Nav = __webpack_require__(204);
 	
-	var _HomeButton2 = _interopRequireDefault(_HomeButton);
+	var _Nav2 = _interopRequireDefault(_Nav);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25562,22 +25708,26 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
-							'button',
-							{ onClick: _navigation2.default.registerPet },
-							'Add a Pet'
-						),
-						_react2.default.createElement(_HomeButton2.default, null)
-					),
-					_react2.default.createElement(
-						'h4',
-						null,
-						'Pets'
-					),
-					petList
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h4',
+								null,
+								'Pets'
+							),
+							petList,
+							_react2.default.createElement(
+								'button',
+								{ onClick: _navigation2.default.registerPet },
+								'Add a Pet'
+							)
+						)
+					)
 				);
 			}
 		}]);
@@ -25785,6 +25935,10 @@
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25894,106 +26048,115 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
-						'form',
-						{ action: '', method: '' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Name'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name', placeholder: 'Name', value: petProfile.name }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Birthday'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday', placeholder: 'DD/MM/YYYY', value: petProfile.birthday }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Sex'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex', placeholder: 'Sex', value: petProfile.sex }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Species'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species', placeholder: 'Species', value: petProfile.species }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Breed'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed', placeholder: 'Breed', value: petProfile.breed }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Vaccines'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'vaccinesString', placeholder: 'rabies...', value: petProfile.vaccinesString }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Allergies'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergiesString', placeholder: 'advil,wheat,etc...', value: petProfile.allergiesString }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Medications'
-						),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medicationsString', placeholder: 'heartworm,vitamins,etc...', value: petProfile.medicationsString }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							_reactDropzone2.default,
-							{ multiple: false, accept: 'image/*', style: { width: 100 + '%', marginBottom: 24, background: '#fff', border: '1px solid #ddd' }, onDrop: this.onImageDrop },
-							_react2.default.createElement(
-								'div',
-								{ style: { padding: 24 } },
-								'Click to upload an image or drag image here.'
-							)
-						),
+						'div',
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
 							'div',
-							null,
-							this.state.uploadedFileCloudinaryUrl === '' ? null : _react2.default.createElement(
-								'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'form',
 								null,
 								_react2.default.createElement(
-									'p',
+									'label',
 									null,
-									this.state.uploadedFile.name
+									'Name'
 								),
-								_react2.default.createElement('img', { src: this.state.uploadedFileCloudinaryUrl })
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'name', placeholder: 'Name', value: petProfile.name }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Birthday'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'birthday', placeholder: 'DD/MM/YYYY', value: petProfile.birthday }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Sex'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'sex', placeholder: 'Sex', value: petProfile.sex }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Species'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'species', placeholder: 'Species', value: petProfile.species }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Breed'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'breed', placeholder: 'Breed', value: petProfile.breed }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Vaccines'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'vaccinesString', placeholder: 'rabies...', value: petProfile.vaccinesString }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Allergies'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'allergiesString', placeholder: 'advil,wheat,etc...', value: petProfile.allergiesString }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
+									'Medications'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'medicationsString', placeholder: 'heartworm,vitamins,etc...', value: petProfile.medicationsString }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									_reactDropzone2.default,
+									{ multiple: false, accept: 'image/*', style: { width: 100 + '%', marginBottom: 24, background: '#fff', border: '1px solid #ddd' }, onDrop: this.onImageDrop },
+									_react2.default.createElement(
+										'div',
+										{ style: { padding: 24 } },
+										'Click to upload an image or drag image here.'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									null,
+									this.state.uploadedFileCloudinaryUrl === '' ? null : _react2.default.createElement(
+										'div',
+										null,
+										_react2.default.createElement(
+											'p',
+											null,
+											this.state.uploadedFile.name
+										),
+										_react2.default.createElement('img', { src: this.state.uploadedFileCloudinaryUrl })
+									)
+								),
+								_react2.default.createElement(
+									'button',
+									{ onClick: this.submitPetEdit },
+									'Save Edits'
+								),
+								_react2.default.createElement(
+									'button',
+									{ onClick: _navigation2.default.dismissEditPet },
+									'Cancel'
+								)
 							)
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.submitPetEdit },
-							'Save Edits'
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: _navigation2.default.dismissEditPet },
-							'Cancel'
 						)
 					)
 				);
@@ -26568,6 +26731,10 @@
 	
 	var _PetNavigationToggle2 = _interopRequireDefault(_PetNavigationToggle);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26594,81 +26761,78 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
 						'div',
-						{ id: 'petHealthRecord' },
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
 							'div',
-							null,
-							_react2.default.createElement(_PetNavigation2.default, null)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'healthRecContent' },
+							{ className: 'container clearfix' },
+							_react2.default.createElement(_PetNavigation2.default, null),
 							_react2.default.createElement(
 								'div',
-								{ id: 'healthRecHeader' },
+								{ id: 'healthRecContent' },
 								_react2.default.createElement(
-									'h2',
-									null,
-									petProfile.name,
-									' | Health Record'
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ id: 'healthRecStats' },
-								_react2.default.createElement(
-									'h4',
-									null,
-									'Vaccines'
-								),
-								_react2.default.createElement(
-									'ul',
-									null,
+									'div',
+									{ id: 'healthRecHeader' },
 									_react2.default.createElement(
-										'li',
+										'h2',
 										null,
-										'Vaccines: ',
-										petProfile.vaccinesString
+										petProfile.name,
+										' | Health Record'
 									)
 								),
 								_react2.default.createElement(
-									'h4',
-									null,
-									'Medication'
-								),
-								_react2.default.createElement(
-									'ul',
-									null,
+									'div',
+									{ id: 'healthRecStats' },
 									_react2.default.createElement(
-										'li',
+										'h4',
 										null,
-										'Medication: ',
-										petProfile.medicationsString,
-										' '
+										'Vaccines'
+									),
+									_react2.default.createElement(
+										'ul',
+										null,
+										_react2.default.createElement(
+											'li',
+											null,
+											'Vaccines: ',
+											petProfile.vaccinesString
+										)
+									),
+									_react2.default.createElement(
+										'h4',
+										null,
+										'Medication'
+									),
+									_react2.default.createElement(
+										'ul',
+										null,
+										_react2.default.createElement(
+											'li',
+											null,
+											'Medication: ',
+											petProfile.medicationsString,
+											' '
+										)
+									),
+									_react2.default.createElement(
+										'h4',
+										null,
+										'Allergies'
+									),
+									_react2.default.createElement(
+										'ul',
+										null,
+										_react2.default.createElement(
+											'li',
+											null,
+											'Allergies: ',
+											petProfile.allergiesString,
+											' '
+										)
 									)
 								),
-								_react2.default.createElement(
-									'h4',
-									null,
-									'Allergies'
-								),
-								_react2.default.createElement(
-									'ul',
-									null,
-									_react2.default.createElement(
-										'li',
-										null,
-										'Allergies: ',
-										petProfile.allergiesString,
-										' '
-									)
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								null,
 								_react2.default.createElement(_PetNavigationToggle2.default, null)
 							)
 						)
@@ -26734,11 +26898,6 @@
 						'button',
 						{ onClick: _navigation2.default.editPet },
 						'Edit Pet'
-					),
-					_react2.default.createElement(
-						'button',
-						{ onClick: _navigation2.default.homePage },
-						'Home'
 					)
 				);
 			}
@@ -26847,6 +27006,10 @@
 	
 	var _PetNavigationToggle2 = _interopRequireDefault(_PetNavigationToggle);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26875,61 +27038,65 @@
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
 						'div',
-						null,
-						_react2.default.createElement(_PetNavigation2.default, null)
-					),
-					_react2.default.createElement(
-						'div',
-						{ id: 'profileContent' },
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
 							'div',
-							{ id: 'profileHeader' },
+							{ className: 'container clearfix' },
+							_react2.default.createElement(_PetNavigation2.default, null),
 							_react2.default.createElement(
-								'h2',
-								null,
-								petProfile.name,
-								' | Stats'
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							null,
-							petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
 								'div',
-								null,
-								_react2.default.createElement('img', { src: petProfileImg['original'] })
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'profileStats' },
-							_react2.default.createElement(
-								'h4',
-								null,
-								petProfile.species
+								{ id: 'profileContent' },
+								_react2.default.createElement(
+									'div',
+									{ id: 'profileHeader' },
+									_react2.default.createElement(
+										'h2',
+										null,
+										petProfile.name,
+										' | Stats'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									null,
+									petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
+										'div',
+										null,
+										_react2.default.createElement('img', { src: petProfileImg['original'] })
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ id: 'profileStats' },
+									_react2.default.createElement(
+										'h4',
+										null,
+										'Species: ',
+										petProfile.species
+									),
+									_react2.default.createElement(
+										'h4',
+										null,
+										'Breed: ',
+										petProfile.breed
+									),
+									_react2.default.createElement(
+										'h4',
+										null,
+										'Sex: ',
+										petProfile.sex
+									),
+									_react2.default.createElement(
+										'h4',
+										null,
+										'DoB: ',
+										petProfile.birthday
+									)
+								)
 							),
-							_react2.default.createElement(
-								'h4',
-								null,
-								petProfile.breed
-							),
-							_react2.default.createElement(
-								'h4',
-								null,
-								petProfile.sex
-							),
-							_react2.default.createElement(
-								'h4',
-								null,
-								'DoB: ',
-								petProfile.birthday
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							null,
 							_react2.default.createElement(_PetNavigationToggle2.default, null)
 						)
 					)
@@ -26957,10 +27124,6 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _HomeButton = __webpack_require__(205);
-	
-	var _HomeButton2 = _interopRequireDefault(_HomeButton);
 	
 	var _store = __webpack_require__(180);
 	
@@ -26992,13 +27155,10 @@
 			value: function render() {
 				var searches = this.props.searchHistory || {};
 				var resultProfile = searches[this.props.slug] || {};
-				console.log('VET PROFILE: SEARCHES = ' + JSON.stringify(searches));
-				console.log('VET PROFILE: RESULT PROFILE VICINITY = ' + JSON.stringify(resultProfile));
 	
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_HomeButton2.default, null),
 					_react2.default.createElement(
 						'h2',
 						null,
@@ -27034,14 +27194,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HomeButton = __webpack_require__(205);
-	
-	var _HomeButton2 = _interopRequireDefault(_HomeButton);
-	
-	var _VetSearchResultsList = __webpack_require__(225);
-	
-	var _VetSearchResultsList2 = _interopRequireDefault(_VetSearchResultsList);
-	
 	var _store = __webpack_require__(180);
 	
 	var _store2 = _interopRequireDefault(_store);
@@ -27053,6 +27205,14 @@
 	var _api = __webpack_require__(173);
 	
 	var _api2 = _interopRequireDefault(_api);
+	
+	var _VetSearchResultsList = __webpack_require__(225);
+	
+	var _VetSearchResultsList2 = _interopRequireDefault(_VetSearchResultsList);
+	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27145,27 +27305,31 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_HomeButton2.default, null),
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'section notopmargin nobottommargin' },
 						_react2.default.createElement(
-							'h2',
-							null,
-							'Find a vet!'
-						),
-						_react2.default.createElement(
-							'form',
-							null,
-							_react2.default.createElement('input', { type: 'text', onChange: this.submitZip, id: 'zipcode', placeholder: 'Zipcode' }),
-							_react2.default.createElement('br', null)
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.searchZip },
-							'Search'
-						),
-						_react2.default.createElement(_VetSearchResultsList2.default, { search: this.props.search })
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								'Find a vet!'
+							),
+							_react2.default.createElement(
+								'form',
+								null,
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitZip, id: 'zipcode', placeholder: 'Zipcode' }),
+								_react2.default.createElement('br', null)
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.searchZip },
+								'Search'
+							),
+							_react2.default.createElement(_VetSearchResultsList2.default, { search: this.props.search })
+						)
 					)
 				);
 			}
@@ -27271,29 +27435,47 @@
 	var VetSearchResultsRow = function (_Component) {
 		_inherits(VetSearchResultsRow, _Component);
 	
-		function VetSearchResultsRow() {
+		function VetSearchResultsRow(props, context) {
 			_classCallCheck(this, VetSearchResultsRow);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(VetSearchResultsRow).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(VetSearchResultsRow).call(this, props, context));
+	
+			_this.displayVetDetails = _this.displayVetDetails.bind(_this);
+			return _this;
 		}
 	
 		_createClass(VetSearchResultsRow, [{
+			key: 'displayVetDetails',
+			value: function displayVetDetails(event) {
+				console.log('DISPLAY_VET_DETAILS');
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 	
 				var vets = this.props.search || {};
 				var results = vets.vetResults;
 	
-				console.log('VET_SEARCH_RESULTS ROW: ' + JSON.stringify(vets));
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(
-						'a',
-						{ href: '/vet/' + this.props.vet.slug },
+						'h3',
+						{ onClick: this.displayVetDetails },
 						this.props.vet.name
+					),
+					_react2.default.createElement(
+						'h4',
+						null,
+						this.props.vet.vicinity
 					)
 				);
+				// return(
+				// 	<div>
+				// 		<a href={'/vet/'+this.props.vet.slug}>{this.props.vet.name}, {this.props.vet.vicinity}</a>
+				// 	</div>
+	
+				// )
 			}
 		}]);
 	

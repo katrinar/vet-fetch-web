@@ -108,7 +108,7 @@ module.exports = {
 		var lng = params.geo[1]
 		
 		var GOOGLE_API_KEY = 'AIzaSyBJC_SGcJWr83yZwNSMHzgtft75blNfLcI'
-		var GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat+","+lng+"&radius=1000&keyword=vet&key="+GOOGLE_API_KEY
+		var GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat+","+lng+"&radius=1000&types=veterinary_care&key="+GOOGLE_API_KEY
 
 		console.log('GOOGLE URL = '+JSON.stringify(GOOGLE_API_URL))
 
@@ -133,8 +133,6 @@ module.exports = {
 		    	}
 		  
 		    	Vet.findByIdAndUpdate(id, params, {new: true}, function(err, vet){
-
-		    		console.log('FIND_BY_ID_PARAMS: '+JSON.stringify(params))
 
 					if(err){
 						if (callback != null)

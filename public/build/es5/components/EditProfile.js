@@ -25,6 +25,8 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
 var EditProfile = (function (Component) {
 	function EditProfile(props, context) {
 		_classCallCheck(this, EditProfile);
@@ -75,42 +77,51 @@ var EditProfile = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
-						"form",
-						{ action: "", method: "" },
+						"div",
+						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
-							"label",
-							null,
-							"First Name"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "firstName", placeholder: "First Name", value: profile.firstName }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Last Name"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "lastName", placeholder: "Last Name", value: profile.lastName }),
-						React.createElement("br", null),
-						React.createElement(
-							"label",
-							null,
-							"Email"
-						),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitEdit, id: "email", placeholder: "Email", value: profile.email }),
-						React.createElement("br", null),
-						React.createElement(
-							"button",
-							{ onClick: this.submitProfileEdit },
-							"Save Edits"
-						),
-						React.createElement(
-							"button",
-							null,
-							"Cancel"
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"form",
+								{ action: "", method: "" },
+								React.createElement(
+									"label",
+									null,
+									"First Name"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "firstName", placeholder: "First Name", value: profile.firstName }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Last Name"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "lastName", placeholder: "Last Name", value: profile.lastName }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
+									"Email"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "email", placeholder: "Email", value: profile.email }),
+								React.createElement("br", null)
+							),
+							React.createElement(
+								"button",
+								{ onClick: this.submitProfileEdit },
+								"Save Edits"
+							),
+							React.createElement(
+								"button",
+								{ onClick: navigation.accountPage },
+								"Cancel"
+							)
 						)
 					)
 				);

@@ -7,7 +7,6 @@ class PetNavigation extends Component {
 			<div>
 				<button onClick={navigation.petsPage}>Back to Pets</button>
 				<button onClick={navigation.editPet}>Edit Pet</button>
-				<button onClick={navigation.homePage}>Home</button>
 			</div>
 		)
 	}

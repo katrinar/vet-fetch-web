@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import HomeButton from '../components/HomeButton'
-import VetSearchResultsList from '../components/VetSearchResultsList'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import api from '../utils/api'
+import VetSearchResultsList from '../components/VetSearchResultsList'
+import Nav from '../components/Nav'
 
 const GOOGLE_API_KEY = 'AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI';
 const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
@@ -80,15 +80,19 @@ class VetsContainer extends Component {
 
 		return(
 			<div>
-				<HomeButton />
-				<div>
-					<h2>Find a vet!</h2>
+				<Nav />
 
-					<form>
-						<input type="text" onChange={this.submitZip}  id="zipcode" placeholder="Zipcode" /><br />
-					</form> 
-					<button onClick={this.searchZip}>Search</button>
-					<VetSearchResultsList search={this.props.search}/>
+				<div className="section notopmargin nobottommargin">
+					<div className="container clearfix">
+				
+						<h2>Find a vet!</h2>
+
+						<form>
+							<input type="text" onChange={this.submitZip}  id="zipcode" placeholder="Zipcode" /><br />
+						</form> 
+						<button onClick={this.searchZip}>Search</button>
+						<VetSearchResultsList search={this.props.search}/>
+					</div>
 				</div>
 
 			</div>
