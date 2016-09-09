@@ -64,23 +64,54 @@ var Login = (function (Component) {
 			value: function render() {
 				return React.createElement(
 					"div",
-					null,
+					{ className: "col_one_third nobottommargin" },
 					React.createElement(
-						"p",
-						null,
-						"Login"
-					),
-					React.createElement(
-						"form",
-						null,
-						React.createElement("input", { type: "text", onChange: this.submitUser, id: "email", placeholder: "Email" }),
-						React.createElement("br", null),
-						React.createElement("input", { type: "text", onChange: this.submitUser, id: "password", placeholder: "password" }),
-						React.createElement("br", null),
+						"div",
+						{ className: "well well-lg nobottommargin" },
 						React.createElement(
-							"button",
-							{ onClick: this.login },
-							"Login"
+							"form",
+							{ id: "login-form", name: "login-form", className: "nobottommargin" },
+							React.createElement(
+								"h3",
+								null,
+								"Already Have an Account? Login Here."
+							),
+							React.createElement(
+								"div",
+								{ className: "col_full" },
+								React.createElement(
+									"label",
+									{ "for": "login-form-username" },
+									"Username:"
+								),
+								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email", placeholder: "Email" }),
+								React.createElement("br", null)
+							),
+							React.createElement(
+								"div",
+								{ className: "col_full" },
+								React.createElement(
+									"label",
+									{ "for": "login-form-password" },
+									"Password:"
+								),
+								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "password", placeholder: "password" }),
+								React.createElement("br", null)
+							),
+							React.createElement(
+								"div",
+								{ className: "col_full nobottommargin" },
+								React.createElement(
+									"button",
+									{ onClick: this.login, className: "button button-3d nomargin", id: "login-form-submit", name: "login-form-submit" },
+									"Login"
+								),
+								React.createElement(
+									"a",
+									{ href: "#", className: "fright" },
+									"Forgot Password?"
+								)
+							)
 						)
 					)
 				);

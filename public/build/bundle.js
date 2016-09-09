@@ -64,7 +64,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _reactRedux = __webpack_require__(227);
+	var _reactRedux = __webpack_require__(228);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21204,23 +21204,23 @@
 	
 	var _Landing2 = _interopRequireDefault(_Landing);
 	
-	var _HomeContainer = __webpack_require__(209);
+	var _HomeContainer = __webpack_require__(210);
 	
 	var _HomeContainer2 = _interopRequireDefault(_HomeContainer);
 	
-	var _Pets = __webpack_require__(210);
+	var _Pets = __webpack_require__(211);
 	
 	var _Pets2 = _interopRequireDefault(_Pets);
 	
-	var _PetProfile = __webpack_require__(214);
+	var _PetProfile = __webpack_require__(215);
 	
 	var _PetProfile2 = _interopRequireDefault(_PetProfile);
 	
-	var _VetProfile = __webpack_require__(223);
+	var _VetProfile = __webpack_require__(224);
 	
 	var _VetProfile2 = _interopRequireDefault(_VetProfile);
 	
-	var _VetsContainer = __webpack_require__(224);
+	var _VetsContainer = __webpack_require__(225);
 	
 	var _VetsContainer2 = _interopRequireDefault(_VetsContainer);
 	
@@ -21232,7 +21232,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactRedux = __webpack_require__(227);
+	var _reactRedux = __webpack_require__(228);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25030,7 +25030,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -25051,6 +25051,10 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
+	var _Footer = __webpack_require__(209);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25060,37 +25064,162 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Landing = function (_Component) {
-		_inherits(Landing, _Component);
+	    _inherits(Landing, _Component);
 	
-		function Landing() {
-			_classCallCheck(this, Landing);
+	    function Landing() {
+	        _classCallCheck(this, Landing);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Landing).apply(this, arguments));
-		}
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Landing).apply(this, arguments));
+	    }
 	
-		_createClass(Landing, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_Nav2.default, null),
-					_react2.default.createElement(
-						'div',
-						{ className: 'section notopmargin nobottommargin' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'container clearfix' },
-							_react2.default.createElement(_Register2.default, { currentUser: this.props.currentUser }),
-							_react2.default.createElement('br', null),
-							_react2.default.createElement(_Login2.default, { currentUser: this.props.currentUser })
-						)
-					)
-				);
-			}
-		}]);
+	    _createClass(Landing, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_Nav2.default, null),
+	                _react2.default.createElement(
+	                    'section',
+	                    { id: 'slider', className: 'slider-parallax full-screen dark', style: { background: 'url("/images/landing/cover.jpg") center', overflow: 'visible' } },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'container vertical-middle clearfix' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'heading-block title-center nobottomborder' },
+	                            _react2.default.createElement(
+	                                'h1',
+	                                null,
+	                                'All your pet health information in one place.'
+	                            ),
+	                            _react2.default.createElement(
+	                                'span',
+	                                null,
+	                                'Managing your pets health information has never been easier.'
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'section notopmargin nobottommargin' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'container clearfix' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'fancy-title title-dotted-border' },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                'Fetch your pet care today!'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col_one_third' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'feature-box fbox-center fbox-bg fbox-outline fbox-dark fbox-effect' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'fbox-icon' },
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        { href: '#' },
+	                                        _react2.default.createElement(
+	                                            'i',
+	                                            { className: 'i-alt' },
+	                                            '1'
+	                                        )
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    null,
+	                                    'Register Your Pet',
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'subtitle' },
+	                                        'Step 1'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col_one_third' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'feature-box fbox-center fbox-bg fbox-outline fbox-dark fbox-effect' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'fbox-icon' },
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        { href: '#' },
+	                                        _react2.default.createElement(
+	                                            'i',
+	                                            null,
+	                                            '2'
+	                                        )
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    null,
+	                                    'Save Health Record',
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'subtitle' },
+	                                        'Step 2'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col_one_third col_last' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'feature-box fbox-center fbox-bg fbox-outline fbox-dark fbox-effect' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'fbox-icon' },
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        { href: '#' },
+	                                        _react2.default.createElement(
+	                                            'i',
+	                                            { className: 'i-alt' },
+	                                            '3'
+	                                        )
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    null,
+	                                    'Find Vets Near You',
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'subtitle' },
+	                                        'Step 3'
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Register2.default, { currentUser: this.props.currentUser }),
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement(_Login2.default, { currentUser: this.props.currentUser })
+	                    )
+	                ),
+	                _react2.default.createElement(_Footer2.default, null)
+	            );
+	        }
+	    }]);
 	
-		return Landing;
+	    return Landing;
 	}(_react.Component);
 	
 	exports.default = Landing;
@@ -25102,7 +25231,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -25132,71 +25261,135 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Register = function (_Component) {
-		_inherits(Register, _Component);
+	    _inherits(Register, _Component);
 	
-		function Register(props, context) {
-			_classCallCheck(this, Register);
+	    function Register(props, context) {
+	        _classCallCheck(this, Register);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props, context));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props, context));
 	
-			_this.submitProfile = _this.submitProfile.bind(_this);
-			_this.register = _this.register.bind(_this);
-			return _this;
-		}
+	        _this.submitProfile = _this.submitProfile.bind(_this);
+	        _this.register = _this.register.bind(_this);
+	        return _this;
+	    }
 	
-		_createClass(Register, [{
-			key: 'submitProfile',
-			value: function submitProfile(event) {
-				var registerUser = Object.assign({}, this.props.currentUser);
-				registerUser[event.target.id] = event.target.value;
-				_store2.default.dispatch(_actions2.default.receivedCurrentUser(registerUser));
-			}
-		}, {
-			key: 'register',
-			value: function register(event) {
-				event.preventDefault();
+	    _createClass(Register, [{
+	        key: 'submitProfile',
+	        value: function submitProfile(event) {
+	            var registerUser = Object.assign({}, this.props.currentUser);
+	            registerUser[event.target.id] = event.target.value;
+	            _store2.default.dispatch(_actions2.default.receivedCurrentUser(registerUser));
+	        }
+	    }, {
+	        key: 'register',
+	        value: function register(event) {
+	            event.preventDefault();
 	
-				_api2.default.handlePost('/api/profile', this.props.currentUser, function (err, response) {
-					if (err != null) {
-						alert(err.message);
-						return;
-					}
-					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.result));
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'p',
-						null,
-						'Register'
-					),
-					_react2.default.createElement(
-						'form',
-						{ action: '', method: '' },
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'firstName', placeholder: 'First Name' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'lastName', placeholder: 'Last Name' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'email', placeholder: 'Email' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'password', placeholder: 'password' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.register },
-							'Register'
-						)
-					)
-				);
-			}
-		}]);
+	            _api2.default.handlePost('/api/profile', this.props.currentUser, function (err, response) {
+	                if (err != null) {
+	                    alert(err.message);
+	                    return;
+	                }
+	                _store2.default.dispatch(_actions2.default.receivedCurrentUser(response.result));
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'col_two_third col_last nobottommargin' },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    'Register right meow.'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'Register to save your pets health information here. Check back in whenever you need it - desktop or mobile.'
+	                ),
+	                _react2.default.createElement(
+	                    'form',
+	                    { id: 'register-form', name: 'register-form', className: 'nobottommargin', action: '#', method: 'post' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_half' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'register-form-name' },
+	                            'Name:'
+	                        ),
+	                        _react2.default.createElement('input', { type: 'text', id: 'register-form-name', name: 'register-form-name', value: '', className: 'required form-control input-block-level' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_half col_last' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'register-form-email' },
+	                            'Email Address:'
+	                        ),
+	                        _react2.default.createElement('input', { type: 'text', id: 'register-form-email', name: 'register-form-email', value: '', className: 'required form-control input-block-level' })
+	                    ),
+	                    _react2.default.createElement('div', { className: 'clear' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_half' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'register-form-username' },
+	                            'Choose a Username:'
+	                        ),
+	                        _react2.default.createElement('input', { type: 'text', id: 'register-form-username', name: 'register-form-username', value: '', className: 'required form-control input-block-level' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_half col_last' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'register-form-phone' },
+	                            'Phone:'
+	                        ),
+	                        _react2.default.createElement('input', { type: 'text', id: 'register-form-phone', name: 'register-form-phone', value: '', className: 'required form-control input-block-level' })
+	                    ),
+	                    _react2.default.createElement('div', { className: 'clear' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_half' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'register-form-password' },
+	                            'Choose Password:'
+	                        ),
+	                        _react2.default.createElement('input', { type: 'password', id: 'register-form-password', name: 'register-form-password', value: '', className: 'required form-control input-block-level' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_half col_last' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { 'for': 'register-form-repassword' },
+	                            'Re-enter Password:'
+	                        ),
+	                        _react2.default.createElement('input', { type: 'password', id: 'register-form-repassword', name: 'register-form-repassword', value: '', className: 'required form-control input-block-level' })
+	                    ),
+	                    _react2.default.createElement('div', { className: 'clear' }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col_full nobottommargin' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { className: 'button button-3d button-black nomargin', id: 'register-form-submit', name: 'register-form-submit', value: 'register' },
+	                            'Register Now'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
 	
-		return Register;
+	    return Register;
 	}(_react.Component);
 	
 	exports.default = Register;
@@ -25278,23 +25471,54 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'col_one_third nobottommargin' },
 					_react2.default.createElement(
-						'p',
-						null,
-						'Login'
-					),
-					_react2.default.createElement(
-						'form',
-						null,
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitUser, id: 'email', placeholder: 'Email' }),
-						_react2.default.createElement('br', null),
-						_react2.default.createElement('input', { type: 'text', onChange: this.submitUser, id: 'password', placeholder: 'password' }),
-						_react2.default.createElement('br', null),
+						'div',
+						{ className: 'well well-lg nobottommargin' },
 						_react2.default.createElement(
-							'button',
-							{ onClick: this.login },
-							'Login'
+							'form',
+							{ id: 'login-form', name: 'login-form', className: 'nobottommargin' },
+							_react2.default.createElement(
+								'h3',
+								null,
+								'Already Have an Account? Login Here.'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col_full' },
+								_react2.default.createElement(
+									'label',
+									{ 'for': 'login-form-username' },
+									'Username:'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'email', placeholder: 'Email' }),
+								_react2.default.createElement('br', null)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col_full' },
+								_react2.default.createElement(
+									'label',
+									{ 'for': 'login-form-password' },
+									'Password:'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'password', placeholder: 'password' }),
+								_react2.default.createElement('br', null)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col_full nobottommargin' },
+								_react2.default.createElement(
+									'button',
+									{ onClick: this.login, className: 'button button-3d nomargin', id: 'login-form-submit', name: 'login-form-submit' },
+									'Login'
+								),
+								_react2.default.createElement(
+									'a',
+									{ href: '#', className: 'fright' },
+									'Forgot Password?'
+								)
+							)
 						)
 					)
 				);
@@ -25308,6 +25532,114 @@
 
 /***/ },
 /* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Footer = function (_Component) {
+		_inherits(Footer, _Component);
+	
+		function Footer() {
+			_classCallCheck(this, Footer);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
+		}
+	
+		_createClass(Footer, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"footer",
+					{ id: "footer", className: "dark" },
+					_react2.default.createElement(
+						"div",
+						{ id: "copyrights" },
+						_react2.default.createElement(
+							"div",
+							{ className: "container clearfix" },
+							_react2.default.createElement(
+								"div",
+								{ className: "col_half" },
+								"Copyrights © 2016 All Rights Reserved by Milkshake Tech."
+							),
+							_react2.default.createElement(
+								"div",
+								{ className: "col_half col_last tright" },
+								_react2.default.createElement(
+									"div",
+									{ className: "fright clearfix" },
+									_react2.default.createElement(
+										"div",
+										{ className: "copyrights-menu copyright-links nobottommargin" },
+										_react2.default.createElement(
+											"a",
+											{ href: "/" },
+											"Home"
+										),
+										"/",
+										_react2.default.createElement(
+											"a",
+											{ href: "#" },
+											"About"
+										),
+										"/",
+										_react2.default.createElement(
+											"a",
+											{ href: "/pets" },
+											"Pets"
+										),
+										"/",
+										_react2.default.createElement(
+											"a",
+											{ href: "/vets" },
+											"Vets"
+										),
+										"/",
+										_react2.default.createElement(
+											"a",
+											{ href: "/account" },
+											"Account"
+										),
+										"/",
+										_react2.default.createElement(
+											"a",
+											{ href: "#" },
+											"Contact"
+										)
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+	
+		return Footer;
+	}(_react.Component);
+	
+	exports.default = Footer;
+
+/***/ },
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25444,7 +25776,7 @@
 	exports.default = HomeContainer;
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25463,15 +25795,15 @@
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _RegisterPet = __webpack_require__(211);
+	var _RegisterPet = __webpack_require__(212);
 	
 	var _RegisterPet2 = _interopRequireDefault(_RegisterPet);
 	
-	var _PetList = __webpack_require__(212);
+	var _PetList = __webpack_require__(213);
 	
 	var _PetList2 = _interopRequireDefault(_PetList);
 	
-	var _PetProfile = __webpack_require__(214);
+	var _PetProfile = __webpack_require__(215);
 	
 	var _PetProfile2 = _interopRequireDefault(_PetProfile);
 	
@@ -25518,7 +25850,7 @@
 	exports.default = Pets;
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25654,7 +25986,7 @@
 	exports.default = RegisterPet;
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25669,7 +26001,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PetRow = __webpack_require__(213);
+	var _PetRow = __webpack_require__(214);
 	
 	var _PetRow2 = _interopRequireDefault(_PetRow);
 	
@@ -25738,7 +26070,7 @@
 	exports.default = PetList;
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25799,7 +26131,7 @@
 	exports.default = PetRow;
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25830,11 +26162,11 @@
 	
 	var _text2 = _interopRequireDefault(_text);
 	
-	var _EditPet = __webpack_require__(215);
+	var _EditPet = __webpack_require__(216);
 	
 	var _EditPet2 = _interopRequireDefault(_EditPet);
 	
-	var _PetProfileContent = __webpack_require__(218);
+	var _PetProfileContent = __webpack_require__(219);
 	
 	var _PetProfileContent2 = _interopRequireDefault(_PetProfileContent);
 	
@@ -25888,7 +26220,7 @@
 	exports.default = PetProfile;
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25915,7 +26247,7 @@
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _petManager = __webpack_require__(216);
+	var _petManager = __webpack_require__(217);
 	
 	var _petManager2 = _interopRequireDefault(_petManager);
 	
@@ -25927,7 +26259,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _reactDropzone = __webpack_require__(217);
+	var _reactDropzone = __webpack_require__(218);
 	
 	var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
 	
@@ -26169,7 +26501,7 @@
 	exports.default = EditPet;
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26209,7 +26541,7 @@
 	};
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -26607,7 +26939,7 @@
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26634,11 +26966,11 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _PetHealthRecord = __webpack_require__(219);
+	var _PetHealthRecord = __webpack_require__(220);
 	
 	var _PetHealthRecord2 = _interopRequireDefault(_PetHealthRecord);
 	
-	var _PetStats = __webpack_require__(222);
+	var _PetStats = __webpack_require__(223);
 	
 	var _PetStats2 = _interopRequireDefault(_PetStats);
 	
@@ -26696,7 +27028,7 @@
 	exports.default = PetProfileInfo;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26723,11 +27055,11 @@
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _PetNavigation = __webpack_require__(220);
+	var _PetNavigation = __webpack_require__(221);
 	
 	var _PetNavigation2 = _interopRequireDefault(_PetNavigation);
 	
-	var _PetNavigationToggle = __webpack_require__(221);
+	var _PetNavigationToggle = __webpack_require__(222);
 	
 	var _PetNavigationToggle2 = _interopRequireDefault(_PetNavigationToggle);
 	
@@ -26847,7 +27179,7 @@
 	exports.default = PetHealthRecord;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26909,7 +27241,7 @@
 	exports.default = PetNavigation;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26971,7 +27303,7 @@
 	exports.default = PetNavigationToggle;
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26998,11 +27330,11 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _PetNavigation = __webpack_require__(220);
+	var _PetNavigation = __webpack_require__(221);
 	
 	var _PetNavigation2 = _interopRequireDefault(_PetNavigation);
 	
-	var _PetNavigationToggle = __webpack_require__(221);
+	var _PetNavigationToggle = __webpack_require__(222);
 	
 	var _PetNavigationToggle2 = _interopRequireDefault(_PetNavigationToggle);
 	
@@ -27110,7 +27442,7 @@
 	exports.default = PetStats;
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27179,7 +27511,7 @@
 	exports.default = VetProfile;
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27206,7 +27538,7 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
-	var _VetSearchResultsList = __webpack_require__(225);
+	var _VetSearchResultsList = __webpack_require__(226);
 	
 	var _VetSearchResultsList2 = _interopRequireDefault(_VetSearchResultsList);
 	
@@ -27341,7 +27673,7 @@
 	exports.default = VetsContainer;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27356,7 +27688,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _VetSearchResultsRow = __webpack_require__(226);
+	var _VetSearchResultsRow = __webpack_require__(227);
 	
 	var _VetSearchResultsRow2 = _interopRequireDefault(_VetSearchResultsRow);
 	
@@ -27409,7 +27741,7 @@
 	exports.default = VetSearchResultsList;
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27485,7 +27817,7 @@
 	exports.default = VetSearchResultsRow;
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27493,11 +27825,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(228);
+	var _Provider = __webpack_require__(229);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connect = __webpack_require__(231);
+	var _connect = __webpack_require__(232);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -27507,7 +27839,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27517,11 +27849,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(229);
+	var _storeShape = __webpack_require__(230);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _warning = __webpack_require__(230);
+	var _warning = __webpack_require__(231);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -27591,7 +27923,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27607,7 +27939,7 @@
 	});
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27636,7 +27968,7 @@
 	}
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27648,31 +27980,31 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(229);
+	var _storeShape = __webpack_require__(230);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _shallowEqual = __webpack_require__(232);
+	var _shallowEqual = __webpack_require__(233);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _wrapActionCreators = __webpack_require__(233);
+	var _wrapActionCreators = __webpack_require__(234);
 	
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 	
-	var _warning = __webpack_require__(230);
+	var _warning = __webpack_require__(231);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(234);
+	var _isPlainObject = __webpack_require__(235);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(238);
+	var _hoistNonReactStatics = __webpack_require__(239);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(239);
+	var _invariant = __webpack_require__(240);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -28035,7 +28367,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28066,7 +28398,7 @@
 	}
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28083,12 +28415,12 @@
 	}
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(235),
-	    isHostObject = __webpack_require__(236),
-	    isObjectLike = __webpack_require__(237);
+	var getPrototype = __webpack_require__(236),
+	    isHostObject = __webpack_require__(237),
+	    isObjectLike = __webpack_require__(238);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -28159,7 +28491,7 @@
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -28180,7 +28512,7 @@
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports) {
 
 	/**
@@ -28206,7 +28538,7 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports) {
 
 	/**
@@ -28241,7 +28573,7 @@
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports) {
 
 	/**
@@ -28297,7 +28629,7 @@
 
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
