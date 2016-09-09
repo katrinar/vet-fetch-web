@@ -23,6 +23,8 @@ var store = _interopRequire(require("../stores/store"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var HomeContainer = (function (Component) {
 	function HomeContainer(props, context) {
 		_classCallCheck(this, HomeContainer);
@@ -57,7 +59,7 @@ var HomeContainer = (function (Component) {
 					React.createElement(Nav, null),
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin" },
+						{ className: "section notopmargin nobottommargin nobg" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
@@ -68,39 +70,51 @@ var HomeContainer = (function (Component) {
 								text.capitalize(this.props.currentUser.firstName)
 							),
 							React.createElement(
-								"h3",
-								null,
+								"div",
+								{ id: "posts", className: "post-grid grid-2 clearfix" },
 								React.createElement(
-									"a",
-									{ href: "/pets/" },
-									"Pets"
-								)
-							),
-							React.createElement(
-								"h3",
-								null,
+									"div",
+									{ className: "entry clearfix" },
+									React.createElement(
+										"div",
+										{ className: "entry-image" },
+										React.createElement(
+											"a",
+											{ href: "/pets", "data-lightbox": "image" },
+											React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
+										)
+									),
+									React.createElement(
+										"div",
+										{ className: "entry-title" },
+										React.createElement(
+											"h2",
+											null,
+											"Manage your Pets"
+										)
+									)
+								),
 								React.createElement(
-									"a",
-									{ href: "/vets" },
-									"Find Vets Near You"
-								)
-							),
-							React.createElement(
-								"h3",
-								null,
-								React.createElement(
-									"a",
-									{ href: "/" },
-									"Insurance"
-								)
-							),
-							React.createElement(
-								"h3",
-								null,
-								React.createElement(
-									"a",
-									{ href: "/account" },
-									"Account"
+									"div",
+									{ className: "entry clearfix" },
+									React.createElement(
+										"div",
+										{ className: "entry-image" },
+										React.createElement(
+											"a",
+											{ href: "/vets", "data-lightbox": "image" },
+											React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
+										)
+									),
+									React.createElement(
+										"div",
+										{ className: "entry-title" },
+										React.createElement(
+											"h2",
+											null,
+											"Find Vets Near You"
+										)
+									)
 								)
 							),
 							React.createElement(
@@ -109,7 +123,8 @@ var HomeContainer = (function (Component) {
 								"Logout"
 							)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

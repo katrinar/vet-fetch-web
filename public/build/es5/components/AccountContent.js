@@ -21,6 +21,8 @@ var navigation = _interopRequire(require("../utils/navigation"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var AccountContent = (function (Component) {
 	function AccountContent() {
 		_classCallCheck(this, AccountContent);
@@ -86,7 +88,8 @@ var AccountContent = (function (Component) {
 								"Edit Profile"
 							)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

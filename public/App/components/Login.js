@@ -41,18 +41,17 @@ class Login extends Component {
                         <h3>Already Have an Account? Login Here.</h3>
 
                         <div className="col_full">
-                            <label for="login-form-username">Username:</label>
+                            <label>Username:</label>
                             <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" placeholder="Email" /><br />
                         </div>
 
                         <div className="col_full">
-                            <label for="login-form-password">Password:</label>
+                            <label>Password:</label>
                             <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="password" placeholder="password" /><br />
                         </div>
 
                         <div className="col_full nobottommargin">
                             <button onClick={this.login} className="button button-3d nomargin" id="login-form-submit" name="login-form-submit">Login</button>
-                            <a href="#" className="fright">Forgot Password?</a>
                         </div>
                     </form>
                 </div>

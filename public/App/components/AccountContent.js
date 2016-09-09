@@ -3,6 +3,7 @@ import text from '../utils/text'
 import EditProfile from '../components/EditProfile'
 import navigation from '../utils/navigation'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 class AccountContent extends Component {
 
@@ -26,7 +27,9 @@ class AccountContent extends Component {
 						</div>
 						<button onClick={navigation.editProfile}>Edit Profile</button>
 					</div>
-				</div>	
+				</div>
+
+				<Footer />	
 			</div>
 		)
 	}

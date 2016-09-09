@@ -169,9 +169,71 @@ var Landing = (function (Component) {
                                     )
                                 )
                             ),
+                            React.createElement("div", { className: "line" }),
+                            React.createElement(Login, { currentUser: this.props.currentUser }),
                             React.createElement(Register, { currentUser: this.props.currentUser }),
-                            React.createElement("br", null),
-                            React.createElement(Login, { currentUser: this.props.currentUser })
+                            React.createElement("div", { className: "clear" }),
+                            React.createElement("div", { className: "line" }),
+                            React.createElement(
+                                "div",
+                                { className: "col_one_fourth nobottommargin center" },
+                                React.createElement("i", { className: "i-plain i-xlarge divcenter nobottommargin icon-fire" }),
+                                React.createElement(
+                                    "div",
+                                    { className: "counter counter-large", style: { color: "#1abc9c" } },
+                                    React.createElement("span", { "data-from": "0", "data-to": "65", "data-refresh-interval": "30", "data-speed": "2700" })
+                                ),
+                                React.createElement(
+                                    "h5",
+                                    null,
+                                    "Percent of US Pet Owners"
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "col_one_fourth nobottommargin center" },
+                                React.createElement("i", { className: "i-plain i-xlarge divcenter nobottommargin icon-gift" }),
+                                React.createElement(
+                                    "div",
+                                    { className: "counter counter-large", style: { color: "#3498db" } },
+                                    React.createElement("span", { "data-from": "10", "data-to": "85", "data-refresh-interval": "50", "data-speed": "3500" })
+                                ),
+                                React.createElement(
+                                    "h5",
+                                    null,
+                                    "Million Pet Cats"
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "col_one_fourth nobottommargin center" },
+                                React.createElement("i", { className: "i-plain i-xlarge divcenter nobottommargin icon-fire" }),
+                                React.createElement(
+                                    "div",
+                                    { className: "counter counter-large", style: { color: "#9b59b6" } },
+                                    React.createElement("span", { "data-from": "10", "data-to": "78", "data-refresh-interval": "30", "data-speed": "2700" })
+                                ),
+                                React.createElement(
+                                    "h5",
+                                    null,
+                                    "Million Pet Dogs"
+                                )
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "col_one_fourth nobottommargin center col_last" },
+                                React.createElement("i", { className: "i-plain i-xlarge divcenter nobottommargin icon-fire" }),
+                                React.createElement(
+                                    "div",
+                                    { className: "counter counter-large", style: { color: "#F49AC2" } },
+                                    React.createElement("span", { "data-from": "100", "data-to": "1288", "data-refresh-interval": "30", "data-speed": "2700" })
+                                ),
+                                React.createElement(
+                                    "h5",
+                                    null,
+                                    "Dollars Spent on Vet Care a Year"
+                                )
+                            )
                         )
                     ),
                     React.createElement(Footer, null)

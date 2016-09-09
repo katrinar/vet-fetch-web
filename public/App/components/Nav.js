@@ -22,6 +22,7 @@ class Nav extends Component {
 	                            <li className="mega-menu"><a href="/pets"><div>Pets</div></a> </li>
 	                            <li className="mega-menu"><a href="/vets"><div>Vets</div></a></li>
 	                            <li className="mega-menu"><a href="/account"><div>Account</div></a></li>
+	                            <li className="mega-menu"><a href="/"><div>Login/Sign Up</div></a></li>
 	                        </ul>
 	                    </nav>
 	                </div>

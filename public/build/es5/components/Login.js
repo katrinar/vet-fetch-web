@@ -81,7 +81,7 @@ var Login = (function (Component) {
 								{ className: "col_full" },
 								React.createElement(
 									"label",
-									{ "for": "login-form-username" },
+									null,
 									"Username:"
 								),
 								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email", placeholder: "Email" }),
@@ -92,7 +92,7 @@ var Login = (function (Component) {
 								{ className: "col_full" },
 								React.createElement(
 									"label",
-									{ "for": "login-form-password" },
+									null,
 									"Password:"
 								),
 								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "password", placeholder: "password" }),
@@ -105,11 +105,6 @@ var Login = (function (Component) {
 									"button",
 									{ onClick: this.login, className: "button button-3d nomargin", id: "login-form-submit", name: "login-form-submit" },
 									"Login"
-								),
-								React.createElement(
-									"a",
-									{ href: "#", className: "fright" },
-									"Forgot Password?"
 								)
 							)
 						)
