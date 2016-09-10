@@ -62,20 +62,29 @@ var Landing = (function (Component) {
                         )
                     ),
                     React.createElement(
+                        "section",
+                        { id: "page-title" },
+                        React.createElement(
+                            "div",
+                            { className: "container clearfix" },
+                            React.createElement(
+                                "h1",
+                                null,
+                                "Keep track of all your pet health care in one spot."
+                            ),
+                            React.createElement(
+                                "span",
+                                null,
+                                "Track weight, vaccines, medications, and allergies with our pet dashboard. If you need vetinary care, VetFetch will find a few in your zipcode. Check in here or manage on the go with our mobile app. "
+                            )
+                        )
+                    ),
+                    React.createElement(
                         "div",
                         { className: "section notopmargin nobottommargin" },
                         React.createElement(
                             "div",
                             { className: "container clearfix" },
-                            React.createElement(
-                                "div",
-                                { className: "fancy-title title-dotted-border" },
-                                React.createElement(
-                                    "h3",
-                                    null,
-                                    "Fetch your pet care today!"
-                                )
-                            ),
                             React.createElement(
                                 "div",
                                 { className: "col_one_third" },
@@ -169,6 +178,103 @@ var Landing = (function (Component) {
                                     )
                                 )
                             ),
+                            React.createElement(
+                                "div",
+                                { className: "divider" },
+                                React.createElement("i", { className: "icon-circle" })
+                            ),
+                            React.createElement(
+                                "div",
+                                { id: "posts", className: "post-grid grid-2 clearfix" },
+                                React.createElement(
+                                    "div",
+                                    { className: "entry clearfix" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-image" },
+                                        React.createElement(
+                                            "a",
+                                            { href: "/pets", "data-lightbox": "image" },
+                                            React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-title" },
+                                        React.createElement(
+                                            "h2",
+                                            null,
+                                            "Manage from pet dashboard"
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "entry clearfix" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-image" },
+                                        React.createElement(
+                                            "a",
+                                            { href: "/vets", "data-lightbox": "image" },
+                                            React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-title" },
+                                        React.createElement(
+                                            "h2",
+                                            null,
+                                            "Find vetinary care near you"
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "entry clearfix" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-image" },
+                                        React.createElement(
+                                            "a",
+                                            { href: "/insurance", "data-lightbox": "image" },
+                                            React.createElement("img", { className: "image_fade", src: "/images/man-at-desk.jpeg", alt: "Pets" })
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-title" },
+                                        React.createElement(
+                                            "h2",
+                                            null,
+                                            "Pick insurance plans for your pet"
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "entry clearfix" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-image" },
+                                        React.createElement(
+                                            "a",
+                                            { href: "/account", "data-lightbox": "image" },
+                                            React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "entry-title" },
+                                        React.createElement(
+                                            "h2",
+                                            null,
+                                            "Manage your Account"
+                                        )
+                                    )
+                                )
+                            ),
                             React.createElement("div", { className: "line" }),
                             React.createElement(Login, { currentUser: this.props.currentUser }),
                             React.createElement(Register, { currentUser: this.props.currentUser }),
@@ -181,12 +287,12 @@ var Landing = (function (Component) {
                                 React.createElement(
                                     "div",
                                     { className: "counter counter-large", style: { color: "#1abc9c" } },
-                                    React.createElement("span", { "data-from": "0", "data-to": "65", "data-refresh-interval": "30", "data-speed": "2700" })
+                                    React.createElement("span", { "data-from": "0", "data-to": "80", "data-refresh-interval": "10", "data-speed": "2700" })
                                 ),
                                 React.createElement(
                                     "h5",
                                     null,
-                                    "Percent of US Pet Owners"
+                                    "Million American Familes Own Pets"
                                 )
                             ),
                             React.createElement(
@@ -196,7 +302,7 @@ var Landing = (function (Component) {
                                 React.createElement(
                                     "div",
                                     { className: "counter counter-large", style: { color: "#3498db" } },
-                                    React.createElement("span", { "data-from": "10", "data-to": "85", "data-refresh-interval": "50", "data-speed": "3500" })
+                                    React.createElement("span", { "data-from": "10", "data-to": "85", "data-refresh-interval": "15", "data-speed": "3500" })
                                 ),
                                 React.createElement(
                                     "h5",
@@ -207,7 +313,7 @@ var Landing = (function (Component) {
                             React.createElement(
                                 "div",
                                 { className: "col_one_fourth nobottommargin center" },
-                                React.createElement("i", { className: "i-plain i-xlarge divcenter nobottommargin icon-fire" }),
+                                React.createElement("i", { className: "i-plain i-xlarge divcenter nobottommargin icon-gift" }),
                                 React.createElement(
                                     "div",
                                     { className: "counter counter-large", style: { color: "#9b59b6" } },

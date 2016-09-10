@@ -65,7 +65,7 @@ var Register = (function (Component) {
           React.createElement(
             "h3",
             null,
-            "Register right meow."
+            "Register Here"
           ),
           React.createElement(
             "p",

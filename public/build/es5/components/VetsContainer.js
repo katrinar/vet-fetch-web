@@ -27,6 +27,10 @@ var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
 
+var MapContainer = _interopRequire(require("../components/MapContainer"));
+
+var GoogleMap = _interopRequire(require("google-map-react"));
+
 var GOOGLE_API_KEY = "AIzaSyBqcuqe2FA3czjR1JlSlkUSnagT1BGKmJI";
 var GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
@@ -78,7 +82,7 @@ var VetsContainer = (function (Component) {
 						return;
 					}
 					searchResponse = response.result;
-					console.log("response: " + JSON.stringify(searchResponse));
+					// console.log('response: '+JSON.stringify(searchResponse))
 
 					store.dispatch(actions.receivedSearch(searchResponse));
 
@@ -102,7 +106,7 @@ var VetsContainer = (function (Component) {
 					var vetResults = response.result;
 
 
-					console.log("SEARCH VETS: RESPONSE= " + JSON.stringify(response));
+					// console.log('SEARCH VETS: RESPONSE= '+JSON.stringify(response))
 
 					store.dispatch(actions.receivedSearchResults(vetResults));
 				});
@@ -156,13 +160,29 @@ var VetsContainer = (function (Component) {
 								"a",
 								{ href: "#", onClick: this.searchZip, className: "button button-3d button-small button-rounded button-aqua" },
 								"Search"
-							),
-							React.createElement(
-								"div",
-								{ className: "divider" },
-								React.createElement("i", { className: "icon-circle" })
-							),
+							)
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "section notopmargin nobottommargin nobg" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
 							React.createElement(VetSearchResultsList, { search: this.props.search })
+						)
+					),
+					React.createElement("div", { className: "clear" }),
+					React.createElement(
+						"div",
+						{ className: "section notopmargin nobottommargin nobg" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(GoogleMap, {
+								center: this.props.search.geo,
+								defaultZoom: this.props.zoom,
+								style: this.props.style })
 						)
 					),
 					React.createElement(Footer, null)
@@ -176,4 +196,16 @@ var VetsContainer = (function (Component) {
 	return VetsContainer;
 })(Component);
 
+VetsContainer.propTypes = {
+	center: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+	zoom: React.PropTypes.number.isRequired
+};
+
+VetsContainer.defaultProps = {
+	center: [40.7144522, -73.9601094],
+	zoom: 10,
+	style: { height: 500, width: 500, position: "relative" }
+};
+
 module.exports = VetsContainer;
+// defaultCenter={this.props.center}

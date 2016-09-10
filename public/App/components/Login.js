@@ -42,12 +42,12 @@ class Login extends Component {
 
                         <div className="col_full">
                             <label>Username:</label>
-                            <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" placeholder="Email" /><br />
+                            <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" /><br />
                         </div>
 
                         <div className="col_full">
                             <label>Password:</label>
-                            <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="password" placeholder="password" /><br />
+                            <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="password" /><br />
                         </div>
 
                         <div className="col_full nobottommargin">

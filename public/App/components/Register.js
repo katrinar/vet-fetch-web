@@ -33,7 +33,7 @@ class Register extends Component {
 		return(
 			<div className="col_two_third col_last nobottommargin">
 
-                <h3>Register right meow.</h3>
+                <h3>Register Here</h3>
 
                 <p>Register to save your pets health information here. Check back in whenever you need it - desktop or mobile.</p>
 

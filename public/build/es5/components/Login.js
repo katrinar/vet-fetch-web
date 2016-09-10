@@ -84,7 +84,7 @@ var Login = (function (Component) {
 									null,
 									"Username:"
 								),
-								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email", placeholder: "Email" }),
+								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email" }),
 								React.createElement("br", null)
 							),
 							React.createElement(
@@ -95,7 +95,7 @@ var Login = (function (Component) {
 									null,
 									"Password:"
 								),
-								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "password", placeholder: "password" }),
+								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "password" }),
 								React.createElement("br", null)
 							),
 							React.createElement(

@@ -10,8 +10,6 @@ var _inherits = function (subClass, superClass) { if (typeof superClass !== "fun
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require("react");
 
 var React = _interopRequire(_react);
@@ -25,42 +23,26 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var VetsContainer = (function (Component) {
-	function VetsContainer(props, context) {
-		_classCallCheck(this, VetsContainer);
+var MapContainer = (function (Component) {
+	function MapContainer(props, context) {
+		_classCallCheck(this, MapContainer);
 
-		_get(Object.getPrototypeOf(VetsContainer.prototype), "constructor", this).call(this, props, context);
-		this.searchZip = this.searchZip.bind(this);
-		this.submitZip = this.submitZip.bind(this);
-		this.searchVets = this.searchVets.bind(this);
-		this.state = {
-			search: {
-				zipcode: "",
-				geo: []
-			}
-		};
+		_get(Object.getPrototypeOf(MapContainer.prototype), "constructor", this).call(this, props, context);
+		this.state = {};
 	}
 
-	_inherits(VetsContainer, Component);
+	_inherits(MapContainer, Component);
 
-	_prototypeProperties(VetsContainer, null, {
+	_prototypeProperties(MapContainer, null, {
 		render: {
 			value: function render() {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(
-						"div",
-						null,
-						React.createElement(
-							GoogleMap,
-							{
-								center: this.props.search.geo,
-								defaultZoom: this.props.zoom,
-								style: this.props.style },
-							React.createElement(Markers, _extends({}, this.props.search.geo, { text: "A" }))
-						)
-					)
+					React.createElement(GoogleMap, {
+						defaultCenter: this.props.center,
+						defaultZoom: this.props.zoom,
+						style: this.props.style })
 				);
 			},
 			writable: true,
@@ -68,19 +50,19 @@ var VetsContainer = (function (Component) {
 		}
 	});
 
-	return VetsContainer;
+	return MapContainer;
 })(Component);
 
-MapsContainer.propTypes = {
+MapContainer.propTypes = {
 	center: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
 	zoom: React.PropTypes.number.isRequired
 };
 
-MapsContainer.defaultProps = {
+MapContainer.defaultProps = {
 	center: [40.7144522, -73.9601094],
 	zoom: 10,
 	style: { height: 500, width: 500, position: "absolute" }
 };
 
-module.exports = VetsContainer;
-// defaultCenter={this.props.center}
+module.exports = MapContainer;
+// center={this.props.search.geo}

@@ -8,6 +8,7 @@ class VetSearchResultsList extends Component{
 	
 		if (vets.searchStatus == "ZERO_RESULTS"){
 			alert("Hm we couldn't find any vets in your area. Try another zipcode.")
+			
 		}
 
 		// var vetList = this.props.search.vetResults.map(function(vet, i){

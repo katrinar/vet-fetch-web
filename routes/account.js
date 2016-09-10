@@ -79,9 +79,9 @@ router.post('/:action', function(req, res, next){
 		var email = credentials.email.toLowerCase()
 
 		profileController.get({email: email}, true, function(err, results){
-
 			var profile = results[0]
 			var passwordCorrect = bcrypt.compareSync(credentials.password, profile.password)
+
 			if (err){
 				res.json({
 					confirmation: 'fail',
