@@ -25,6 +25,10 @@ var PetHealthRecord = _interopRequire(require("../components/PetHealthRecord"));
 
 var PetStats = _interopRequire(require("../components/PetStats"));
 
+var Nav = _interopRequire(require("../components/Nav"));
+
+var Footer = _interopRequire(require("../components/Footer"));
+
 var PetProfileInfo = (function (Component) {
 	function PetProfileInfo(props, context) {
 		_classCallCheck(this, PetProfileInfo);
@@ -40,27 +44,26 @@ var PetProfileInfo = (function (Component) {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 
-				var display = this.props.showHealthRecord;
-				var content = null;
-
-				switch (display) {
-					case false:
-						return content = React.createElement(PetStats, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord });
-					case true:
-						return content = React.createElement(PetHealthRecord, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord });
-
-					default:
-						return content = null;
-				}
 
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(Nav, null),
 					React.createElement(
-						"div",
-						null,
-						content
-					)
+						"section",
+						{ id: "page-title" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Pet Dashboard"
+							)
+						)
+					),
+					React.createElement(PetStats, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord }),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

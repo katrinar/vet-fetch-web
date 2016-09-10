@@ -36,25 +36,47 @@ var PetRow = (function (Component) {
 
 				return React.createElement(
 					"div",
-					null,
+					{ className: "row" },
 					React.createElement(
 						"div",
-						null,
-						petProfileImg.thumb === "" ? null : React.createElement(
+						{ className: "col-md-6 bottommargin" },
+						React.createElement(
 							"div",
-							null,
-							React.createElement("img", { src: petProfileImg.original })
+							{ className: "team team-list clearfix" },
+							React.createElement(
+								"div",
+								{ className: "team-image" },
+								petProfileImg.thumb === "" ? null : React.createElement(
+									"div",
+									null,
+									React.createElement("img", { src: petProfileImg.original })
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "team-desc" },
+								React.createElement(
+									"div",
+									{ className: "team-title" },
+									React.createElement(
+										"h4",
+										null,
+										text.capitalize(this.props.pet.name)
+									)
+								),
+								React.createElement(
+									"a",
+									{ href: "/pet/" + this.props.pet.slug, className: "button button-rounded button-reveal button-large button-white button-light tright" },
+									React.createElement("i", { className: "icon-line-arrow-right" }),
+									React.createElement(
+										"span",
+										null,
+										"Profile"
+									)
+								)
+							)
 						)
-					),
-					React.createElement(
-						"a",
-						{ href: "/pet/" + this.props.pet.slug },
-						" ",
-						text.capitalize(this.props.pet.name),
-						","
-					),
-					" ",
-					text.capitalize(this.props.pet.species)
+					)
 				);
 			},
 			writable: true,

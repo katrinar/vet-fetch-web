@@ -26300,25 +26300,47 @@
 	
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'row' },
 					_react2.default.createElement(
 						'div',
-						null,
-						petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
+						{ className: 'col-md-6 bottommargin' },
+						_react2.default.createElement(
 							'div',
-							null,
-							_react2.default.createElement('img', { src: petProfileImg['original'] })
+							{ className: 'team team-list clearfix' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'team-image' },
+								petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
+									'div',
+									null,
+									_react2.default.createElement('img', { src: petProfileImg['original'] })
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'team-desc' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'team-title' },
+									_react2.default.createElement(
+										'h4',
+										null,
+										_text2.default.capitalize(this.props.pet.name)
+									)
+								),
+								_react2.default.createElement(
+									'a',
+									{ href: '/pet/' + this.props.pet.slug, className: 'button button-rounded button-reveal button-large button-white button-light tright' },
+									_react2.default.createElement('i', { className: 'icon-line-arrow-right' }),
+									_react2.default.createElement(
+										'span',
+										null,
+										'Profile'
+									)
+								)
+							)
 						)
-					),
-					_react2.default.createElement(
-						'a',
-						{ href: '/pet/' + this.props.pet.slug },
-						' ',
-						_text2.default.capitalize(this.props.pet.name),
-						','
-					),
-					' ',
-					_text2.default.capitalize(this.props.pet.species)
+					)
 				);
 			}
 		}]);
@@ -27190,6 +27212,14 @@
 	
 	var _PetStats2 = _interopRequireDefault(_PetStats);
 	
+	var _Nav = __webpack_require__(204);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	var _Footer = __webpack_require__(206);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27213,27 +27243,25 @@
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 	
-				var display = this.props.showHealthRecord;
-				var content = null;
-	
-				switch (display) {
-					case false:
-						return content = _react2.default.createElement(_PetStats2.default, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord });
-					case true:
-						return content = _react2.default.createElement(_PetHealthRecord2.default, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord });
-	
-					default:
-						return content = null;
-				}
-	
 				return _react2.default.createElement(
 					'div',
 					null,
+					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
-						'div',
-						null,
-						content
-					)
+						'section',
+						{ id: 'page-title' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'Pet Dashboard'
+							)
+						)
+					),
+					_react2.default.createElement(_PetStats2.default, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord }),
+					_react2.default.createElement(_Footer2.default, null)
 				);
 			}
 		}]);
@@ -27312,109 +27340,78 @@
 	
 				return _react2.default.createElement(
 					'div',
-					null,
-					_react2.default.createElement(_Nav2.default, null),
-					_react2.default.createElement(
-						'section',
-						{ id: 'page-title' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'container clearfix' },
-							_react2.default.createElement(
-								'h1',
-								null,
-								'Pet Dashboard'
-							)
-						)
-					),
+					{ className: 'section notopmargin nobottommargin nobg' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'section notopmargin nobottommargin' },
+						{ className: 'container clearfix' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'container clearfix' },
+							{ className: 'accordion accordion-bg clearfix' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'fancy-title title-double-border' },
-								_react2.default.createElement(
-									'h2',
-									null,
-									petProfile.name,
-									' | Health Record'
-								)
+								{ className: 'acctitle' },
+								_react2.default.createElement('i', { className: 'acc-closed icon-ok-circle' }),
+								_react2.default.createElement('i', { className: 'acc-open icon-remove-circle' }),
+								'Vaccines'
 							),
-							_react2.default.createElement(_PetNavigation2.default, null),
 							_react2.default.createElement(
 								'div',
-								{ className: 'accordion accordion-bg clearfix' },
+								{ className: 'acc_content clearfix' },
 								_react2.default.createElement(
-									'div',
-									{ className: 'acctitle' },
-									_react2.default.createElement('i', { className: 'acc-closed icon-ok-circle' }),
-									_react2.default.createElement('i', { className: 'acc-open icon-remove-circle' }),
-									'Vaccines'
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'acc_content clearfix' },
+									'ul',
+									{ className: 'iconlist iconlist-color nobottommargin' },
 									_react2.default.createElement(
-										'ul',
-										{ className: 'iconlist iconlist-color nobottommargin' },
-										_react2.default.createElement(
-											'li',
-											null,
-											_react2.default.createElement('i', { className: 'icon-ok' }),
-											petProfile.vaccinesString
-										)
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'acctitle' },
-									_react2.default.createElement('i', { className: 'acc-closed icon-ok-circle' }),
-									_react2.default.createElement('i', { className: 'acc-open icon-remove-circle' }),
-									'Medication'
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'acc_content clearfix' },
-									_react2.default.createElement(
-										'ul',
-										{ className: 'iconlist iconlist-color nobottommargin' },
-										_react2.default.createElement(
-											'li',
-											null,
-											_react2.default.createElement('i', { className: 'icon-ok' }),
-											petProfile.medicationsString
-										)
-									)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'acctitle' },
-									_react2.default.createElement('i', { className: 'acc-closed icon-ok-circle' }),
-									_react2.default.createElement('i', { className: 'acc-open icon-remove-circle' }),
-									'Allergies'
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'acc_content clearfix' },
-									_react2.default.createElement(
-										'ul',
-										{ className: 'iconlist iconlist-color nobottommargin' },
-										_react2.default.createElement(
-											'li',
-											null,
-											_react2.default.createElement('i', { className: 'icon-ok' }),
-											petProfile.allergiesString
-										)
+										'li',
+										null,
+										_react2.default.createElement('i', { className: 'icon-ok' }),
+										petProfile.vaccinesString
 									)
 								)
 							),
-							_react2.default.createElement(_PetNavigationToggle2.default, null)
+							_react2.default.createElement(
+								'div',
+								{ className: 'acctitle' },
+								_react2.default.createElement('i', { className: 'acc-closed icon-ok-circle' }),
+								_react2.default.createElement('i', { className: 'acc-open icon-remove-circle' }),
+								'Medication'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'acc_content clearfix' },
+								_react2.default.createElement(
+									'ul',
+									{ className: 'iconlist iconlist-color nobottommargin' },
+									_react2.default.createElement(
+										'li',
+										null,
+										_react2.default.createElement('i', { className: 'icon-ok' }),
+										petProfile.medicationsString
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'acctitle' },
+								_react2.default.createElement('i', { className: 'acc-closed icon-ok-circle' }),
+								_react2.default.createElement('i', { className: 'acc-open icon-remove-circle' }),
+								'Allergies'
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'acc_content clearfix' },
+								_react2.default.createElement(
+									'ul',
+									{ className: 'iconlist iconlist-color nobottommargin' },
+									_react2.default.createElement(
+										'li',
+										null,
+										_react2.default.createElement('i', { className: 'icon-ok' }),
+										petProfile.allergiesString
+									)
+								)
+							)
 						)
-					),
-					_react2.default.createElement(_Footer2.default, null)
+					)
 				);
 			}
 		}]);
@@ -27584,13 +27581,9 @@
 	
 	var _PetNavigationToggle2 = _interopRequireDefault(_PetNavigationToggle);
 	
-	var _Nav = __webpack_require__(204);
+	var _PetHealthRecord = __webpack_require__(220);
 	
-	var _Nav2 = _interopRequireDefault(_Nav);
-	
-	var _Footer = __webpack_require__(206);
-	
-	var _Footer2 = _interopRequireDefault(_Footer);
+	var _PetHealthRecord2 = _interopRequireDefault(_PetHealthRecord);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27619,83 +27612,100 @@
 	
 				return _react2.default.createElement(
 					'div',
-					null,
-					_react2.default.createElement(_Nav2.default, null),
-					_react2.default.createElement(
-						'section',
-						{ id: 'page-title' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'container clearfix' },
-							_react2.default.createElement(
-								'h1',
-								null,
-								'Pet Dashboard'
-							)
-						)
-					),
+					{ className: 'section notopmargin nobottommargin nobg' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'section notopmargin nobottommargin' },
+						{ className: 'container clearfix' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'container clearfix' },
+							{ className: 'fancy-title title-double-border' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								petProfile.name,
+								' | Stats'
+							)
+						),
+						_react2.default.createElement(_PetNavigation2.default, null),
+						_react2.default.createElement(
+							'div',
+							null,
+							petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
+								'div',
+								null,
+								_react2.default.createElement('img', { src: petProfileImg['original'] })
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'divider' },
+							_react2.default.createElement('i', { className: 'icon-circle' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'postcontent bothsidebar nobottommargin clearfix' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'fancy-title title-double-border' },
+								{ className: 'col_half nobottommargin' },
 								_react2.default.createElement(
-									'h2',
+									'h4',
 									null,
-									petProfile.name,
-									' | Stats'
-								)
-							),
-							_react2.default.createElement(_PetNavigation2.default, null),
-							_react2.default.createElement(
-								'div',
-								{ id: 'profileContent' },
-								_react2.default.createElement(
-									'div',
-									null,
-									petProfileImg['thumb'] === '' ? null : _react2.default.createElement(
-										'div',
-										null,
-										_react2.default.createElement('img', { src: petProfileImg['original'] })
-									)
+									'Species'
 								),
 								_react2.default.createElement(
 									'div',
-									{ id: 'profileStats' },
-									_react2.default.createElement(
-										'h4',
-										null,
-										'Species: ',
-										petProfile.species
-									),
-									_react2.default.createElement(
-										'h4',
-										null,
-										'Breed: ',
-										petProfile.breed
-									),
-									_react2.default.createElement(
-										'h4',
-										null,
-										'Sex: ',
-										petProfile.sex
-									),
-									_react2.default.createElement(
-										'h4',
-										null,
-										'DoB: ',
-										petProfile.birthday
-									)
+									{ className: 'well well-sm nobottommargin' },
+									petProfile.species
 								)
 							),
-							_react2.default.createElement(_PetNavigationToggle2.default, null)
-						)
-					),
-					_react2.default.createElement(_Footer2.default, null)
+							_react2.default.createElement('div', { className: 'divider' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col_half nobottommargin col_last' },
+								_react2.default.createElement(
+									'h4',
+									null,
+									'Breed'
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'well well-sm nobottommargin' },
+									petProfile.breed
+								)
+							),
+							_react2.default.createElement('div', { className: 'divider' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col_half nobottommargin col_last' },
+								_react2.default.createElement(
+									'h4',
+									null,
+									'Sex'
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'well well-sm nobottommargin' },
+									petProfile.birthday
+								)
+							),
+							_react2.default.createElement('div', { className: 'divider' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col_half nobottommargin col_last' },
+								_react2.default.createElement(
+									'h4',
+									null,
+									'Date of Birth'
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'well well-sm nobottommargin' },
+									petProfile.sex
+								)
+							)
+						),
+						_react2.default.createElement(_PetHealthRecord2.default, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord })
+					)
 				);
 			}
 		}]);
@@ -27915,7 +27925,7 @@
 							_react2.default.createElement(
 								'h1',
 								null,
-								'Vet Locator'
+								'Vet Dashboard'
 							)
 						)
 					),
@@ -27926,9 +27936,13 @@
 							'div',
 							{ className: 'container clearfix' },
 							_react2.default.createElement(
-								'h2',
-								null,
-								'Find a vet!'
+								'div',
+								{ className: 'fancy-title title-double-border' },
+								_react2.default.createElement(
+									'h2',
+									null,
+									'Find Vets Near You'
+								)
 							),
 							_react2.default.createElement(
 								'form',
@@ -28026,7 +28040,7 @@
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -28052,44 +28066,36 @@
 		function VetSearchResultsRow(props, context) {
 			_classCallCheck(this, VetSearchResultsRow);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(VetSearchResultsRow).call(this, props, context));
-	
-			_this.displayVetDetails = _this.displayVetDetails.bind(_this);
-			return _this;
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(VetSearchResultsRow).call(this, props, context));
 		}
 	
 		_createClass(VetSearchResultsRow, [{
-			key: 'displayVetDetails',
-			value: function displayVetDetails(event) {
-				console.log('DISPLAY_VET_DETAILS');
-			}
-		}, {
-			key: 'render',
+			key: "render",
 			value: function render() {
 	
 				var vets = this.props.search || {};
 				var results = vets.vetResults;
 	
 				return _react2.default.createElement(
-					'div',
+					"div",
 					null,
 					_react2.default.createElement(
-						'h3',
-						{ onClick: this.displayVetDetails },
-						this.props.vet.name
-					),
-					_react2.default.createElement(
-						'h4',
-						null,
-						this.props.vet.vicinity
+						"div",
+						{ className: "toggle" },
+						_react2.default.createElement(
+							"div",
+							{ className: "togglet" },
+							_react2.default.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+							_react2.default.createElement("i", { className: "toggle-open icon-remove-circle" }),
+							this.props.vet.name
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "togglec" },
+							this.props.vet.vicinity
+						)
 					)
 				);
-				// return(
-				// 	<div>
-				// 		<a href={'/vet/'+this.props.vet.slug}>{this.props.vet.name}, {this.props.vet.vicinity}</a>
-				// 	</div>
-	
-				// )
 			}
 		}]);
 	

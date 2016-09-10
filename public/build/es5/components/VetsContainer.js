@@ -127,7 +127,7 @@ var VetsContainer = (function (Component) {
 							React.createElement(
 								"h1",
 								null,
-								"Vet Locator"
+								"Vet Dashboard"
 							)
 						)
 					),
@@ -138,9 +138,13 @@ var VetsContainer = (function (Component) {
 							"div",
 							{ className: "container clearfix" },
 							React.createElement(
-								"h2",
-								null,
-								"Find a vet!"
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									"Find Vets Near You"
+								)
 							),
 							React.createElement(
 								"form",

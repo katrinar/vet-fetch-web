@@ -46,109 +46,78 @@ var PetHealthRecord = (function (Component) {
 
 				return React.createElement(
 					"div",
-					null,
-					React.createElement(Nav, null),
-					React.createElement(
-						"section",
-						{ id: "page-title" },
-						React.createElement(
-							"div",
-							{ className: "container clearfix" },
-							React.createElement(
-								"h1",
-								null,
-								"Pet Dashboard"
-							)
-						)
-					),
+					{ className: "section notopmargin nobottommargin nobg" },
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin" },
+						{ className: "container clearfix" },
 						React.createElement(
 							"div",
-							{ className: "container clearfix" },
+							{ className: "accordion accordion-bg clearfix" },
 							React.createElement(
 								"div",
-								{ className: "fancy-title title-double-border" },
-								React.createElement(
-									"h2",
-									null,
-									petProfile.name,
-									" | Health Record"
-								)
+								{ className: "acctitle" },
+								React.createElement("i", { className: "acc-closed icon-ok-circle" }),
+								React.createElement("i", { className: "acc-open icon-remove-circle" }),
+								"Vaccines"
 							),
-							React.createElement(PetNavigation, null),
 							React.createElement(
 								"div",
-								{ className: "accordion accordion-bg clearfix" },
+								{ className: "acc_content clearfix" },
 								React.createElement(
-									"div",
-									{ className: "acctitle" },
-									React.createElement("i", { className: "acc-closed icon-ok-circle" }),
-									React.createElement("i", { className: "acc-open icon-remove-circle" }),
-									"Vaccines"
-								),
-								React.createElement(
-									"div",
-									{ className: "acc_content clearfix" },
+									"ul",
+									{ className: "iconlist iconlist-color nobottommargin" },
 									React.createElement(
-										"ul",
-										{ className: "iconlist iconlist-color nobottommargin" },
-										React.createElement(
-											"li",
-											null,
-											React.createElement("i", { className: "icon-ok" }),
-											petProfile.vaccinesString
-										)
-									)
-								),
-								React.createElement(
-									"div",
-									{ className: "acctitle" },
-									React.createElement("i", { className: "acc-closed icon-ok-circle" }),
-									React.createElement("i", { className: "acc-open icon-remove-circle" }),
-									"Medication"
-								),
-								React.createElement(
-									"div",
-									{ className: "acc_content clearfix" },
-									React.createElement(
-										"ul",
-										{ className: "iconlist iconlist-color nobottommargin" },
-										React.createElement(
-											"li",
-											null,
-											React.createElement("i", { className: "icon-ok" }),
-											petProfile.medicationsString
-										)
-									)
-								),
-								React.createElement(
-									"div",
-									{ className: "acctitle" },
-									React.createElement("i", { className: "acc-closed icon-ok-circle" }),
-									React.createElement("i", { className: "acc-open icon-remove-circle" }),
-									"Allergies"
-								),
-								React.createElement(
-									"div",
-									{ className: "acc_content clearfix" },
-									React.createElement(
-										"ul",
-										{ className: "iconlist iconlist-color nobottommargin" },
-										React.createElement(
-											"li",
-											null,
-											React.createElement("i", { className: "icon-ok" }),
-											petProfile.allergiesString
-										)
+										"li",
+										null,
+										React.createElement("i", { className: "icon-ok" }),
+										petProfile.vaccinesString
 									)
 								)
 							),
-							React.createElement(PetNavigationToggle, null)
+							React.createElement(
+								"div",
+								{ className: "acctitle" },
+								React.createElement("i", { className: "acc-closed icon-ok-circle" }),
+								React.createElement("i", { className: "acc-open icon-remove-circle" }),
+								"Medication"
+							),
+							React.createElement(
+								"div",
+								{ className: "acc_content clearfix" },
+								React.createElement(
+									"ul",
+									{ className: "iconlist iconlist-color nobottommargin" },
+									React.createElement(
+										"li",
+										null,
+										React.createElement("i", { className: "icon-ok" }),
+										petProfile.medicationsString
+									)
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "acctitle" },
+								React.createElement("i", { className: "acc-closed icon-ok-circle" }),
+								React.createElement("i", { className: "acc-open icon-remove-circle" }),
+								"Allergies"
+							),
+							React.createElement(
+								"div",
+								{ className: "acc_content clearfix" },
+								React.createElement(
+									"ul",
+									{ className: "iconlist iconlist-color nobottommargin" },
+									React.createElement(
+										"li",
+										null,
+										React.createElement("i", { className: "icon-ok" }),
+										petProfile.allergiesString
+									)
+								)
+							)
 						)
-					),
-					React.createElement(Footer, null)
+					)
 				);
 			},
 			writable: true,

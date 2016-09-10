@@ -3,12 +3,9 @@ import React, { Component } from 'react'
 class VetSearchResultsRow extends Component {
 	constructor(props, context){
 		super(props, context)
-		this.displayVetDetails = this.displayVetDetails.bind(this)
 	}
 
-	displayVetDetails(event){
-		console.log('DISPLAY_VET_DETAILS')
-	}
+
 	render(){
 
 		var vets = this.props.search || {}
@@ -16,17 +13,12 @@ class VetSearchResultsRow extends Component {
 
 		return(
 			<div>
-				<h3 onClick={this.displayVetDetails}>{this.props.vet.name}</h3> 
-				<h4>{this.props.vet.vicinity}</h4>
+                <div className="toggle">
+                    <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>{this.props.vet.name}</div>
+                    <div className="togglec">{this.props.vet.vicinity}</div>
+                </div>   
 			</div>
-
 		)
-		// return(
-		// 	<div>
-		// 		<a href={'/vet/'+this.props.vet.slug}>{this.props.vet.name}, {this.props.vet.vicinity}</a>
-		// 	</div>
-
-		// )
 	}
 }
 

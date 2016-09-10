@@ -25,9 +25,7 @@ var PetNavigation = _interopRequire(require("../components/PetNavigation"));
 
 var PetNavigationToggle = _interopRequire(require("../components/PetNavigationToggle"));
 
-var Nav = _interopRequire(require("../components/Nav"));
-
-var Footer = _interopRequire(require("../components/Footer"));
+var PetHealthRecord = _interopRequire(require("../components/PetHealthRecord"));
 
 var PetStats = (function (Component) {
 	function PetStats(props, context) {
@@ -48,83 +46,99 @@ var PetStats = (function (Component) {
 
 				return React.createElement(
 					"div",
-					null,
-					React.createElement(Nav, null),
-					React.createElement(
-						"section",
-						{ id: "page-title" },
-						React.createElement(
-							"div",
-							{ className: "container clearfix" },
-							React.createElement(
-								"h1",
-								null,
-								"Pet Dashboard"
-							)
-						)
-					),
+					{ className: "section notopmargin nobottommargin nobg" },
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin" },
+						{ className: "container clearfix" },
 						React.createElement(
 							"div",
-							{ className: "container clearfix" },
+							{ className: "fancy-title title-double-border" },
+							React.createElement(
+								"h2",
+								null,
+								petProfile.name,
+								" | Stats"
+							)
+						),
+						React.createElement(PetNavigation, null),
+						React.createElement(
+							"div",
+							null,
+							petProfileImg.thumb === "" ? null : React.createElement(
+								"div",
+								null,
+								React.createElement("img", { src: petProfileImg.original })
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "divider" },
+							React.createElement("i", { className: "icon-circle" })
+						),
+						React.createElement(
+							"div",
+							{ className: "postcontent bothsidebar nobottommargin clearfix" },
 							React.createElement(
 								"div",
-								{ className: "fancy-title title-double-border" },
+								{ className: "col_half nobottommargin" },
 								React.createElement(
-									"h2",
+									"h4",
 									null,
-									petProfile.name,
-									" | Stats"
-								)
-							),
-							React.createElement(PetNavigation, null),
-							React.createElement(
-								"div",
-								{ id: "profileContent" },
-								React.createElement(
-									"div",
-									null,
-									petProfileImg.thumb === "" ? null : React.createElement(
-										"div",
-										null,
-										React.createElement("img", { src: petProfileImg.original })
-									)
+									"Species"
 								),
 								React.createElement(
 									"div",
-									{ id: "profileStats" },
-									React.createElement(
-										"h4",
-										null,
-										"Species: ",
-										petProfile.species
-									),
-									React.createElement(
-										"h4",
-										null,
-										"Breed: ",
-										petProfile.breed
-									),
-									React.createElement(
-										"h4",
-										null,
-										"Sex: ",
-										petProfile.sex
-									),
-									React.createElement(
-										"h4",
-										null,
-										"DoB: ",
-										petProfile.birthday
-									)
+									{ className: "well well-sm nobottommargin" },
+									petProfile.species
 								)
 							),
-							React.createElement(PetNavigationToggle, null)
+							React.createElement("div", { className: "divider" }),
+							React.createElement(
+								"div",
+								{ className: "col_half nobottommargin col_last" },
+								React.createElement(
+									"h4",
+									null,
+									"Breed"
+								),
+								React.createElement(
+									"div",
+									{ className: "well well-sm nobottommargin" },
+									petProfile.breed
+								)
+							),
+							React.createElement("div", { className: "divider" }),
+							React.createElement(
+								"div",
+								{ className: "col_half nobottommargin col_last" },
+								React.createElement(
+									"h4",
+									null,
+									"Sex"
+								),
+								React.createElement(
+									"div",
+									{ className: "well well-sm nobottommargin" },
+									petProfile.birthday
+								)
+							),
+							React.createElement("div", { className: "divider" }),
+							React.createElement(
+								"div",
+								{ className: "col_half nobottommargin col_last" },
+								React.createElement(
+									"h4",
+									null,
+									"Date of Birth"
+								),
+								React.createElement(
+									"div",
+									{ className: "well well-sm nobottommargin" },
+									petProfile.sex
+								)
+							)
 						)
-					),
-					React.createElement(Footer, null)
+					)
 				);
 			},
 			writable: true,

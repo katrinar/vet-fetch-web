@@ -20,19 +20,11 @@ var VetSearchResultsRow = (function (Component) {
 		_classCallCheck(this, VetSearchResultsRow);
 
 		_get(Object.getPrototypeOf(VetSearchResultsRow.prototype), "constructor", this).call(this, props, context);
-		this.displayVetDetails = this.displayVetDetails.bind(this);
 	}
 
 	_inherits(VetSearchResultsRow, Component);
 
 	_prototypeProperties(VetSearchResultsRow, null, {
-		displayVetDetails: {
-			value: function displayVetDetails(event) {
-				console.log("DISPLAY_VET_DETAILS");
-			},
-			writable: true,
-			configurable: true
-		},
 		render: {
 			value: function render() {
 				var vets = this.props.search || {};
@@ -42,22 +34,22 @@ var VetSearchResultsRow = (function (Component) {
 					"div",
 					null,
 					React.createElement(
-						"h3",
-						{ onClick: this.displayVetDetails },
-						this.props.vet.name
-					),
-					React.createElement(
-						"h4",
-						null,
-						this.props.vet.vicinity
+						"div",
+						{ className: "toggle" },
+						React.createElement(
+							"div",
+							{ className: "togglet" },
+							React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+							React.createElement("i", { className: "toggle-open icon-remove-circle" }),
+							this.props.vet.name
+						),
+						React.createElement(
+							"div",
+							{ className: "togglec" },
+							this.props.vet.vicinity
+						)
 					)
 				);
-				// return(
-				// 	<div>
-				// 		<a href={'/vet/'+this.props.vet.slug}>{this.props.vet.name}, {this.props.vet.vicinity}</a>
-				// 	</div>
-
-				// )
 			},
 			writable: true,
 			configurable: true

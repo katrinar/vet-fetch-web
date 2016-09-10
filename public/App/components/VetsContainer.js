@@ -85,19 +85,23 @@ class VetsContainer extends Component {
 
 				<section id="page-title">
 		            <div className="container clearfix">
-		                <h1>Vet Locator</h1>
+		                <h1>Vet Dashboard</h1>
 		            </div>
         		</section>
 
 				<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
 				
-						<h2>Find a vet!</h2>
+						<div className="fancy-title title-double-border">
+	                        <h2>Find Vets Near You</h2>
+	                	</div>
 
 						<form>
 							<input type="text" onChange={this.submitZip}  id="zipcode" placeholder="Zipcode" /><br />
 						</form> 
+
 						<button onClick={this.searchZip}>Search</button>
+						
 						<VetSearchResultsList search={this.props.search}/>
 					</div>
 				</div>

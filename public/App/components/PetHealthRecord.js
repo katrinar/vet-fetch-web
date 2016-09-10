@@ -18,23 +18,8 @@ class PetHealthRecord extends Component {
 
 		return(
 	
-			<div>
-			
-				<Nav />
-
-				<section id="page-title">
-		            <div className="container clearfix">
-		                <h1>Pet Dashboard</h1>
-		            </div>
-        		</section>
-
-				<div className="section notopmargin nobottommargin">
+				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
-						<div className="fancy-title title-double-border">
-		                        <h2>{petProfile.name} | Health Record</h2>
-		                </div>
-
-						<PetNavigation />
 
 						<div className="accordion accordion-bg clearfix">
 
@@ -60,12 +45,9 @@ class PetHealthRecord extends Component {
                              </div>
 
                         </div>
-                            
-						<PetNavigationToggle />
+
 					</div>
 				</div>
-				<Footer />
-			</div>
 		)
 	}
 }
