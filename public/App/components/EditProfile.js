@@ -45,8 +45,18 @@ class EditProfile extends Component {
 			<div>
 				<Nav />
 
-				<div className="section notopmargin nobottommargin">
+				<section id="page-title">
+			            <div className="container clearfix">
+			                <h1>Account</h1>
+			            </div>
+        		</section>
+
+				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
+
+						<div className="fancy-title title-double-border">
+		                    <h2>Edit Account Settings </h2>
+		                </div>
 
 						<form action="" method="">
 							<label>First Name</label><br />
@@ -59,8 +69,9 @@ class EditProfile extends Component {
 							<input type="text" onChange={this.submitEdit} id="email" placeholder={'Email'} value={profile.email}/><br />
 						</form>
 
-						<button onClick={this.submitProfileEdit}>Save Edits</button>
-						<button onClick={navigation.accountPage}>Cancel</button>
+						<a href="#" onClick={this.submitProfileEdit} className="button button-3d button-small button-rounded button-leaf">Save Edits</a>
+			
+						<a href="#" onClick={navigation.accountPage} className="button button-3d button-small button-rounded button-aqua">Cancel</a>
 					</div>
 				</div>
 			</div>

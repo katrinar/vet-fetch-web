@@ -83,6 +83,16 @@ var AccountContent = (function (Component) {
 								{ className: "container clearfix" },
 								React.createElement(
 									"div",
+									{ className: "fancy-title title-double-border" },
+									React.createElement(
+										"h2",
+										null,
+										"Welcome, ",
+										text.capitalize(this.props.currentUser.firstName)
+									)
+								),
+								React.createElement(
+									"div",
 									{ className: "postcontent bothsidebar nobottommargin clearfix" },
 									React.createElement(
 										"div",

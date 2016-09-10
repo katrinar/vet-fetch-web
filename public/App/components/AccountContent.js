@@ -43,6 +43,10 @@ class AccountContent extends Component {
             		<div className="content-wrap">
             			<div className="container clearfix">
 
+            			<div className="fancy-title title-double-border">
+		                    <h2>Welcome, {text.capitalize(this.props.currentUser.firstName)}</h2>
+		                </div>
+
 		                <div className="postcontent bothsidebar nobottommargin clearfix">
 		                  	
 		                  		<div className="col_half nobottommargin">

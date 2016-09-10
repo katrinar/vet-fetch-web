@@ -24709,11 +24709,33 @@
 					null,
 					_react2.default.createElement(_Nav2.default, null),
 					_react2.default.createElement(
-						'div',
-						{ className: 'section notopmargin nobottommargin' },
+						'section',
+						{ id: 'page-title' },
 						_react2.default.createElement(
 							'div',
 							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'Account'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'section notopmargin nobottommargin nobg' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'fancy-title title-double-border' },
+								_react2.default.createElement(
+									'h2',
+									null,
+									'Edit Account Settings '
+								)
+							),
 							_react2.default.createElement(
 								'form',
 								{ action: '', method: '' },
@@ -24743,13 +24765,13 @@
 								_react2.default.createElement('br', null)
 							),
 							_react2.default.createElement(
-								'button',
-								{ onClick: this.submitProfileEdit },
+								'a',
+								{ href: '#', onClick: this.submitProfileEdit, className: 'button button-3d button-small button-rounded button-leaf' },
 								'Save Edits'
 							),
 							_react2.default.createElement(
-								'button',
-								{ onClick: _navigation2.default.accountPage },
+								'a',
+								{ href: '#', onClick: _navigation2.default.accountPage, className: 'button button-3d button-small button-rounded button-aqua' },
 								'Cancel'
 							)
 						)
@@ -25015,6 +25037,16 @@
 							_react2.default.createElement(
 								'div',
 								{ className: 'container clearfix' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'fancy-title title-double-border' },
+									_react2.default.createElement(
+										'h2',
+										null,
+										'Welcome, ',
+										_text2.default.capitalize(this.props.currentUser.firstName)
+									)
+								),
 								_react2.default.createElement(
 									'div',
 									{ className: 'postcontent bothsidebar nobottommargin clearfix' },

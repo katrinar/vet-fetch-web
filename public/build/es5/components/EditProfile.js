@@ -79,11 +79,33 @@ var EditProfile = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
-						"div",
-						{ className: "section notopmargin nobottommargin" },
+						"section",
+						{ id: "page-title" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Account"
+							)
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "section notopmargin nobottommargin nobg" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									"Edit Account Settings "
+								)
+							),
 							React.createElement(
 								"form",
 								{ action: "", method: "" },
@@ -113,13 +135,13 @@ var EditProfile = (function (Component) {
 								React.createElement("br", null)
 							),
 							React.createElement(
-								"button",
-								{ onClick: this.submitProfileEdit },
+								"a",
+								{ href: "#", onClick: this.submitProfileEdit, className: "button button-3d button-small button-rounded button-leaf" },
 								"Save Edits"
 							),
 							React.createElement(
-								"button",
-								{ onClick: navigation.accountPage },
+								"a",
+								{ href: "#", onClick: navigation.accountPage, className: "button button-3d button-small button-rounded button-aqua" },
 								"Cancel"
 							)
 						)
