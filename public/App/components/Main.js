@@ -98,7 +98,7 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray} showRegisterPet={this.props.showRegisterPet}/>
 			case 'pet':
-				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet} showHealthRecord={this.props.showHealthRecord}/>
+				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet}/>
 			case 'vets':
 				return page = <VetsContainer currentUser={this.props.currentUser} search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
 			case 'vet':
@@ -131,7 +131,6 @@ const stateToProps = function(state) {
 		search: state.searchReducer.search,
 		searchHistory: state.searchReducer.searchHistory,
 		displayEditPet: state.displayReducer.displayEditPet,
-		showHealthRecord: state.displayReducer.showHealthRecord,
 		showRegisterPet: state.displayReducer.showRegisterPet,
 		showEditProfile: state.displayReducer.showEditProfile
 	}

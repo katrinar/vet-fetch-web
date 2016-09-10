@@ -41,7 +41,7 @@ var Landing = (function (Component) {
                     React.createElement(Nav, null),
                     React.createElement(
                         "section",
-                        { id: "slider", className: "slider-parallax full-screen dark", style: { background: "url(\"/images/landing/cover.jpg\") center", overflow: "visible" } },
+                        { id: "slider", className: "slider-parallax full-screen dark", style: { background: "url(\"/images/landing/cover.jpg\") center", opacity: 0.7, overflow: "visible" } },
                         React.createElement(
                             "div",
                             { className: "container vertical-middle clearfix" },

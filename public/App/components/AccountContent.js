@@ -1,11 +1,30 @@
 import React, { Component } from 'react'
 import text from '../utils/text'
+import api from '../utils/api'
 import EditProfile from '../components/EditProfile'
 import navigation from '../utils/navigation'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
 class AccountContent extends Component {
+
+	constructor(props, context){
+		super(props, context)
+		this.logout = this.logout.bind(this)
+	}
+
+	logout(event){
+		event.preventDefault()
+
+		api.handleGet('account/logout', null, function(err, response){
+			if (err){
+				alert(err.message)
+				return
+			}
+			window.location.href = '/'
+		})
+
+	}
 
 	render(){
 
@@ -40,9 +59,9 @@ class AccountContent extends Component {
                         		</div>
 						
                         	<div className="divider"></div>	
-                        	<a href="#" onClick={navigation.editProfile} className="button button-3d button-small button-rounded button-aqua">Edit Account</a>
-							<div className="divider"><i className="icon-circle"></i></div>
-							 
+                        	<a href="#" onClick={navigation.editProfile} className="button button-3d button-small button-rounded button-leaf">Edit Account</a>
+                        	<a href="#" onClick={this.logout} className="button button-3d button-small button-rounded button-aqua">Logout</a>
+							<div className="divider"><i className="icon-circle"></i></div> 
 		                </div>
 		            </div>
                 	</div>

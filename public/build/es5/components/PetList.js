@@ -73,6 +73,11 @@ var PetList = (function (Component) {
 							),
 							petList,
 							React.createElement(
+								"div",
+								{ className: "divider" },
+								React.createElement("i", { className: "icon-circle" })
+							),
+							React.createElement(
 								"a",
 								{ href: "#", onClick: navigation.registerPet, className: "button button-3d button-small button-rounded button-aqua" },
 								"Register your Pet"

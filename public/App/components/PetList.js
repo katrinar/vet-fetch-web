@@ -28,6 +28,8 @@ class PetList extends Component {
 	                	</div>
 						
 						{petList}
+
+						<div className="divider"><i className="icon-circle"></i></div>
 						
 						<a href="#" onClick={navigation.registerPet} className="button button-3d button-small button-rounded button-aqua">Register your Pet</a>
 					</div>

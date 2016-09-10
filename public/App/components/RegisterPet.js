@@ -57,15 +57,22 @@ class RegisterPet extends Component {
 		            </div>
         		</section>
 
-				<div className="section notopmargin nobottommargin">
+				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
-						<h2>Register your Pet</h2>
+						<div className="fancy-title title-double-border">
+		                        <h2>Register your Pet</h2>
+		                </div>
 						<form >
 							<input type="text" onChange={this.submitPet} id="name" placeholder="Name" /><br />
 							<input type="text" onChange={this.submitPet} id="species" placeholder="Species" /><br />
-							<button onClick={this.registerPet}>Register Pet</button>
-							<button onClick={navigation.dismissRegisterPet}>Cancel</button>
+
+							
 						</form> 
+
+						<a href="#" onClick={this.registerPet} className="button button-3d button-small button-rounded button-leaf">Register Pet</a>
+			
+						<a href="#" onClick={navigation.dismissRegisterPet} className="button button-3d button-small button-rounded button-aqua">Cancel</a>
+			
 					</div>
 				</div>
 

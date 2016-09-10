@@ -100,7 +100,8 @@ class VetsContainer extends Component {
 							<input type="text" onChange={this.submitZip}  id="zipcode" placeholder="Zipcode" /><br />
 						</form> 
 
-						<button onClick={this.searchZip}>Search</button>
+						<a href="#" onClick={this.searchZip} className="button button-3d button-small button-rounded button-aqua">Search</a>
+						<div className="divider"><i className="icon-circle"></i></div>
 						
 						<VetSearchResultsList search={this.props.search}/>
 					</div>

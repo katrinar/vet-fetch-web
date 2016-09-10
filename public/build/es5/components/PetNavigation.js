@@ -33,8 +33,8 @@ var PetNavigation = (function (Component) {
 					"div",
 					null,
 					React.createElement(
-						"button",
-						{ onClick: navigation.petsPage },
+						"a",
+						{ href: "#", onClick: navigation.petsPage, className: "button button-3d button-small button-rounded button-leaf" },
 						"Back to Pets"
 					),
 					React.createElement(

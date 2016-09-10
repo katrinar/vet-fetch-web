@@ -21,8 +21,6 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var PetHealthRecord = _interopRequire(require("../components/PetHealthRecord"));
-
 var PetStats = _interopRequire(require("../components/PetStats"));
 
 var Nav = _interopRequire(require("../components/Nav"));
@@ -62,7 +60,7 @@ var PetProfileInfo = (function (Component) {
 							)
 						)
 					),
-					React.createElement(PetStats, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord }),
+					React.createElement(PetStats, { pets: this.props.pets, slug: this.props.slug }),
 					React.createElement(Footer, null)
 				);
 			},

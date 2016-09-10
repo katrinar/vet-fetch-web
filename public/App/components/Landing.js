@@ -10,7 +10,7 @@ class Landing extends Component {
 			<div>
 				<Nav />
 				 	
-		        <section id="slider" className="slider-parallax full-screen dark"style={{background: 'url("/images/landing/cover.jpg") center', overflow:'visible'}}>
+		        <section id="slider" className="slider-parallax full-screen dark"style={{background: 'url("/images/landing/cover.jpg") center', opacity: 0.7, overflow:'visible'}}>
 
 		            <div className="container vertical-middle clearfix">
 

@@ -6,7 +6,6 @@ var constants = _interopRequire(require("../constants/constants"));
 
 var initialState = {
 	displayEditPet: false,
-	showHealthRecord: false,
 	showRegisterPet: false,
 	showEditProfile: false
 };
@@ -18,12 +17,6 @@ module.exports = function (_x, action) {
 			console.log("DISPLAY_EDIT_PET: " + JSON.stringify(action.displayContent));
 			var newState = Object.assign({}, state);
 			newState.displayEditPet = action.displayContent;
-			return newState;
-
-		case constants.SHOW_HEALTH_RECORD:
-			console.log("SHOW_HEALTH_RECORD: " + JSON.stringify(action.showContent));
-			var newState = Object.assign({}, state);
-			newState.showHealthRecord = action.showContent;
 			return newState;
 
 		case constants.SHOW_REGISTER_PET:

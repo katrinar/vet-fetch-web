@@ -153,9 +153,14 @@ var VetsContainer = (function (Component) {
 								React.createElement("br", null)
 							),
 							React.createElement(
-								"button",
-								{ onClick: this.searchZip },
+								"a",
+								{ href: "#", onClick: this.searchZip, className: "button button-3d button-small button-rounded button-aqua" },
 								"Search"
+							),
+							React.createElement(
+								"div",
+								{ className: "divider" },
+								React.createElement("i", { className: "icon-circle" })
 							),
 							React.createElement(VetSearchResultsList, { search: this.props.search })
 						)

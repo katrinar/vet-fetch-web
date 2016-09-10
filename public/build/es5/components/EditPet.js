@@ -156,10 +156,19 @@ var EditPet = (function (Component) {
 					),
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin" },
+						{ className: "section notopmargin nobottommargin nobg" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
+							React.createElement(
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									"Edit Pet Profile"
+								)
+							),
 							React.createElement(
 								"form",
 								null,
@@ -250,17 +259,17 @@ var EditPet = (function (Component) {
 										),
 										React.createElement("img", { src: this.state.uploadedFileCloudinaryUrl })
 									)
-								),
-								React.createElement(
-									"button",
-									{ onClick: this.submitPetEdit },
-									"Save Edits"
-								),
-								React.createElement(
-									"button",
-									{ onClick: navigation.dismissEditPet },
-									"Cancel"
 								)
+							),
+							React.createElement(
+								"a",
+								{ href: "#", onClick: this.submitPetEdit, className: "button button-3d button-small button-rounded button-leaf" },
+								"Save Edits"
+							),
+							React.createElement(
+								"a",
+								{ href: "#", onClick: navigation.dismissEditPet, className: "button button-3d button-small button-rounded button-aqua" },
+								"Cancel"
 							)
 						)
 					),

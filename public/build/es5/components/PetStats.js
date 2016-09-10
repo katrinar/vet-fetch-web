@@ -23,10 +23,6 @@ var actions = _interopRequire(require("../actions/actions"));
 
 var PetNavigation = _interopRequire(require("../components/PetNavigation"));
 
-var PetNavigationToggle = _interopRequire(require("../components/PetNavigationToggle"));
-
-var PetHealthRecord = _interopRequire(require("../components/PetHealthRecord"));
-
 var PetStats = (function (Component) {
 	function PetStats(props, context) {
 		_classCallCheck(this, PetStats);
@@ -57,17 +53,16 @@ var PetStats = (function (Component) {
 								"h2",
 								null,
 								petProfile.name,
-								" | Stats"
+								" "
 							)
 						),
-						React.createElement(PetNavigation, null),
 						React.createElement(
 							"div",
 							null,
 							petProfileImg.thumb === "" ? null : React.createElement(
 								"div",
 								null,
-								React.createElement("img", { src: petProfileImg.original })
+								React.createElement("img", { style: { borderRadius: 200 }, src: petProfileImg.original })
 							)
 						),
 						React.createElement(
@@ -79,66 +74,138 @@ var PetStats = (function (Component) {
 							"div",
 							{ className: "postcontent bothsidebar nobottommargin clearfix" },
 							React.createElement(
+								"h3",
+								null,
+								"Stats"
+							),
+							React.createElement(
 								"div",
-								{ className: "col_half nobottommargin" },
+								{ className: "toggle" },
 								React.createElement(
-									"h4",
-									null,
+									"div",
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
 									"Species"
 								),
 								React.createElement(
 									"div",
-									{ className: "well well-sm nobottommargin" },
+									{ className: "togglec" },
 									petProfile.species
 								)
 							),
-							React.createElement("div", { className: "divider" }),
 							React.createElement(
 								"div",
-								{ className: "col_half nobottommargin col_last" },
+								{ className: "toggle" },
 								React.createElement(
-									"h4",
-									null,
+									"div",
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
 									"Breed"
 								),
 								React.createElement(
 									"div",
-									{ className: "well well-sm nobottommargin" },
+									{ className: "togglec" },
 									petProfile.breed
 								)
 							),
-							React.createElement("div", { className: "divider" }),
 							React.createElement(
 								"div",
-								{ className: "col_half nobottommargin col_last" },
-								React.createElement(
-									"h4",
-									null,
-									"Sex"
-								),
+								{ className: "toggle" },
 								React.createElement(
 									"div",
-									{ className: "well well-sm nobottommargin" },
-									petProfile.birthday
-								)
-							),
-							React.createElement("div", { className: "divider" }),
-							React.createElement(
-								"div",
-								{ className: "col_half nobottommargin col_last" },
-								React.createElement(
-									"h4",
-									null,
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
 									"Date of Birth"
 								),
 								React.createElement(
 									"div",
-									{ className: "well well-sm nobottommargin" },
-									petProfile.sex
+									{ className: "togglec" },
+									petProfile.birthday
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "toggle" },
+								React.createElement(
+									"div",
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
+									"Weight"
+								),
+								React.createElement(
+									"div",
+									{ className: "togglec" },
+									petProfile.weight
 								)
 							)
 						),
-						React.createElement(PetHealthRecord, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord })
+						React.createElement(
+							"div",
+							{ className: "sidebar nobottommargin clearfix" },
+							React.createElement(
+								"h3",
+								null,
+								"Health Record"
+							),
+							React.createElement(
+								"div",
+								{ className: "toggle" },
+								React.createElement(
+									"div",
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
+									"Vaccines"
+								),
+								React.createElement(
+									"div",
+									{ className: "togglec" },
+									petProfile.vaccinesString
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "toggle" },
+								React.createElement(
+									"div",
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
+									"Medication"
+								),
+								React.createElement(
+									"div",
+									{ className: "togglec" },
+									petProfile.medicationsString
+								)
+							),
+							React.createElement(
+								"div",
+								{ className: "toggle" },
+								React.createElement(
+									"div",
+									{ className: "togglet" },
+									React.createElement("i", { className: "toggle-closed icon-ok-circle" }),
+									React.createElement("i", { className: "toggle-open icon-remove-circle" }),
+									"Allergies"
+								),
+								React.createElement(
+									"div",
+									{ className: "togglec" },
+									petProfile.allergiesString
+								)
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "divider" },
+							React.createElement("i", { className: "icon-circle" })
+						),
+						React.createElement(PetNavigation, null)
 					)
 				);
 			},

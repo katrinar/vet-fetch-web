@@ -106,8 +106,13 @@ class EditPet extends Component {
 		            </div>
         		</section>
 
-				<div className="section notopmargin nobottommargin">
+				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
+
+						<div className="fancy-title title-double-border">
+		                        <h2>Edit Pet Profile</h2>
+		                </div>
+
 						<form>
 							<label>Name</label><br />
 							<input type="text" onChange={this.submitEdit} id="name" placeholder={'Name'} value={petProfile.name} /><br />
@@ -148,9 +153,11 @@ class EditPet extends Component {
 							        </div>}
 		      					</div>
 
-							<button onClick={this.submitPetEdit}>Save Edits</button>
-							<button onClick={navigation.dismissEditPet}>Cancel</button>
 						</form>
+
+						<a href="#" onClick={this.submitPetEdit} className="button button-3d button-small button-rounded button-leaf">Save Edits</a>
+			
+						<a href="#" onClick={navigation.dismissEditPet} className="button button-3d button-small button-rounded button-aqua">Cancel</a>
 					</div>
 				</div> 
 				<Footer />

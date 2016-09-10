@@ -18,7 +18,7 @@ class PetRow extends Component {
                         <div className="team team-list clearfix">
                             <div className="team-image">
 	                            {petProfileImg['thumb'] === '' ? null :
-								<div><img src={petProfileImg['original']} /></div>
+								<div><img style ={{borderRadius:200}} src={petProfileImg['original']} /></div>
 								}
                             </div>
                              <div className="team-desc">

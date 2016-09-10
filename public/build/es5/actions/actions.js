@@ -65,13 +65,6 @@ module.exports = {
 		};
 	},
 
-	showHealthRecord: function (showContent) {
-		return {
-			type: constants.SHOW_HEALTH_RECORD,
-			showContent: showContent
-		};
-	},
-
 	showRegisterPet: function (showContent) {
 		return {
 			type: constants.SHOW_REGISTER_PET,

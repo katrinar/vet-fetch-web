@@ -9,20 +9,6 @@ class HomeContainer extends Component {
 
 	constructor(props, context){
 		super(props, context)
-		this.logout = this.logout.bind(this)
-	}
-
-	logout(event){
-		event.preventDefault()
-
-		api.handleGet('account/logout', null, function(err, response){
-			if (err){
-				alert(err.message)
-				return
-			}
-			window.location.href = '/'
-		})
-
 	}
 
 	render(){
@@ -76,10 +62,6 @@ class HomeContainer extends Component {
                             </div>
                         </div>
                     </div>
-
-						
-					
-						<button onClick={this.logout}>Logout</button>
 					</div>
 				</div>
 

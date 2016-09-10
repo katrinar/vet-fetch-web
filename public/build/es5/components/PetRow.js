@@ -49,7 +49,7 @@ var PetRow = (function (Component) {
 								petProfileImg.thumb === "" ? null : React.createElement(
 									"div",
 									null,
-									React.createElement("img", { src: petProfileImg.original })
+									React.createElement("img", { style: { borderRadius: 200 }, src: petProfileImg.original })
 								)
 							),
 							React.createElement(

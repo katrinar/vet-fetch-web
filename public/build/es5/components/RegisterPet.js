@@ -96,14 +96,18 @@ var RegisterPet = (function (Component) {
 					),
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin" },
+						{ className: "section notopmargin nobottommargin nobg" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
 							React.createElement(
-								"h2",
-								null,
-								"Register your Pet"
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									"Register your Pet"
+								)
 							),
 							React.createElement(
 								"form",
@@ -111,17 +115,17 @@ var RegisterPet = (function (Component) {
 								React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
 								React.createElement("br", null),
 								React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),
-								React.createElement("br", null),
-								React.createElement(
-									"button",
-									{ onClick: this.registerPet },
-									"Register Pet"
-								),
-								React.createElement(
-									"button",
-									{ onClick: navigation.dismissRegisterPet },
-									"Cancel"
-								)
+								React.createElement("br", null)
+							),
+							React.createElement(
+								"a",
+								{ href: "#", onClick: this.registerPet, className: "button button-3d button-small button-rounded button-leaf" },
+								"Register Pet"
+							),
+							React.createElement(
+								"a",
+								{ href: "#", onClick: navigation.dismissRegisterPet, className: "button button-3d button-small button-rounded button-aqua" },
+								"Cancel"
 							)
 						)
 					),

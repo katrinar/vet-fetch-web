@@ -3,9 +3,6 @@ import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import PetNavigation from '../components/PetNavigation'
-import PetNavigationToggle from '../components/PetNavigationToggle'
-import PetHealthRecord from '../components/PetHealthRecord'
-
 
 class PetStats extends Component {
 	constructor(props, context){
@@ -23,15 +20,13 @@ class PetStats extends Component {
 				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
 						<div className="fancy-title title-double-border">
-		                        <h2>{petProfile.name} | Stats</h2>
+		                        <h2>{petProfile.name} </h2>
 		                </div>
-
-						<PetNavigation />
 
 						<div>
 			        		{petProfileImg['thumb'] === '' ? null :
 							        <div>
-							          <img src={petProfileImg['original']} />
+							          <img style={{borderRadius:200}}src={petProfileImg['original']} />
 							        </div>
 							    }
 		      			</div>
@@ -39,37 +34,51 @@ class PetStats extends Component {
 		      			<div className="divider"><i className="icon-circle"></i></div>
 
 						<div className="postcontent bothsidebar nobottommargin clearfix">
-		                  	
-		                  	<div className="col_half nobottommargin">
-		                  		<h4>Species</h4>
-		                  		 	
-                            	<div className="well well-sm nobottommargin">{petProfile.species}</div>
-                        	</div>
 
-                        	<div className="divider"></div>
+                        	<h3>Stats</h3>
 
-                        	<div className="col_half nobottommargin col_last">
-                        		<h4>Breed</h4>
-                            	<div className="well well-sm nobottommargin">{petProfile.breed}</div>
-                        	</div>
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Species</div>
+	                            <div className="togglec">{petProfile.species}</div>
+	                        </div>
 
-							<div className="divider"></div>
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Breed</div>
+	                            <div className="togglec">{petProfile.breed}</div>
+	                        </div>
 
-                        	<div className="col_half nobottommargin col_last">
-                        		<h4>Sex</h4>
-                            	<div className="well well-sm nobottommargin">{petProfile.birthday}</div>
-                        	</div>
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Date of Birth</div>
+	                            <div className="togglec">{petProfile.birthday}</div>
+	                        </div>
 
-                        	<div className="divider"></div>
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Weight</div>
+	                            <div className="togglec">{petProfile.weight}</div>
+	                        </div>
+                       </div>
 
-                        	<div className="col_half nobottommargin col_last">
-                        		<h4>Date of Birth</h4>
-                            	<div className="well well-sm nobottommargin">{petProfile.sex}</div>
-                        	</div>
- 
-		                </div>
+                        <div className="sidebar nobottommargin clearfix">
+                       		<h3>Health Record</h3>
 
-						<PetHealthRecord pets={this.props.pets} slug={this.props.slug} showHealthRecord={this.props.showHealthRecord}/>
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Vaccines</div>
+	                            <div className="togglec">{petProfile.vaccinesString}</div>
+	                        </div>
+
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Medication</div>
+	                            <div className="togglec">{petProfile.medicationsString}</div>
+	                        </div>
+
+	                        <div className="toggle">
+	                            <div className="togglet"><i className="toggle-closed icon-ok-circle"></i><i className="toggle-open icon-remove-circle"></i>Allergies</div>
+	                            <div className="togglec">{petProfile.allergiesString}</div>
+	                        </div>
+                       </div>
+
+                       <div className="divider"><i className="icon-circle"></i></div>
+						<PetNavigation />
 					</div>
 				</div>
 
