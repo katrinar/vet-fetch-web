@@ -27931,7 +27931,7 @@
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'section notopmargin nobottommargin' },
+						{ className: 'section notopmargin nobottommargin nobg' },
 						_react2.default.createElement(
 							'div',
 							{ className: 'container clearfix' },

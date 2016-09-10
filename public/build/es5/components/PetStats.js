@@ -137,7 +137,8 @@ var PetStats = (function (Component) {
 									petProfile.sex
 								)
 							)
-						)
+						),
+						React.createElement(PetHealthRecord, { pets: this.props.pets, slug: this.props.slug, showHealthRecord: this.props.showHealthRecord })
 					)
 				);
 			},

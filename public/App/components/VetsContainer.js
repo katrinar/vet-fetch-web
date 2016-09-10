@@ -89,7 +89,7 @@ class VetsContainer extends Component {
 		            </div>
         		</section>
 
-				<div className="section notopmargin nobottommargin">
+				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
 				
 						<div className="fancy-title title-double-border">

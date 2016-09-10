@@ -133,7 +133,7 @@ var VetsContainer = (function (Component) {
 					),
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin" },
+						{ className: "section notopmargin nobottommargin nobg" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
