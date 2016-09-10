@@ -27,6 +27,8 @@ var PetNavigationToggle = _interopRequire(require("../components/PetNavigationTo
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var PetHealthRecord = (function (Component) {
 	function PetHealthRecord(props, context) {
 		_classCallCheck(this, PetHealthRecord);
@@ -47,80 +49,106 @@ var PetHealthRecord = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
+						"section",
+						{ id: "page-title" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Pet Dashboard"
+							)
+						)
+					),
+					React.createElement(
 						"div",
 						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
+							React.createElement(
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									petProfile.name,
+									" | Health Record"
+								)
+							),
 							React.createElement(PetNavigation, null),
 							React.createElement(
 								"div",
-								{ id: "healthRecContent" },
+								{ className: "accordion accordion-bg clearfix" },
 								React.createElement(
 									"div",
-									{ id: "healthRecHeader" },
-									React.createElement(
-										"h2",
-										null,
-										petProfile.name,
-										" | Health Record"
-									)
+									{ className: "acctitle" },
+									React.createElement("i", { className: "acc-closed icon-ok-circle" }),
+									React.createElement("i", { className: "acc-open icon-remove-circle" }),
+									"Vaccines"
 								),
 								React.createElement(
 									"div",
-									{ id: "healthRecStats" },
-									React.createElement(
-										"h4",
-										null,
-										"Vaccines"
-									),
+									{ className: "acc_content clearfix" },
 									React.createElement(
 										"ul",
-										null,
+										{ className: "iconlist iconlist-color nobottommargin" },
 										React.createElement(
 											"li",
 											null,
-											"Vaccines: ",
+											React.createElement("i", { className: "icon-ok" }),
 											petProfile.vaccinesString
 										)
-									),
-									React.createElement(
-										"h4",
-										null,
-										"Medication"
-									),
+									)
+								),
+								React.createElement(
+									"div",
+									{ className: "acctitle" },
+									React.createElement("i", { className: "acc-closed icon-ok-circle" }),
+									React.createElement("i", { className: "acc-open icon-remove-circle" }),
+									"Medication"
+								),
+								React.createElement(
+									"div",
+									{ className: "acc_content clearfix" },
 									React.createElement(
 										"ul",
-										null,
+										{ className: "iconlist iconlist-color nobottommargin" },
 										React.createElement(
 											"li",
 											null,
-											"Medication: ",
-											petProfile.medicationsString,
-											" "
-										)
-									),
-									React.createElement(
-										"h4",
-										null,
-										"Allergies"
-									),
-									React.createElement(
-										"ul",
-										null,
-										React.createElement(
-											"li",
-											null,
-											"Allergies: ",
-											petProfile.allergiesString,
-											" "
+											React.createElement("i", { className: "icon-ok" }),
+											petProfile.medicationsString
 										)
 									)
 								),
-								React.createElement(PetNavigationToggle, null)
-							)
+								React.createElement(
+									"div",
+									{ className: "acctitle" },
+									React.createElement("i", { className: "acc-closed icon-ok-circle" }),
+									React.createElement("i", { className: "acc-open icon-remove-circle" }),
+									"Allergies"
+								),
+								React.createElement(
+									"div",
+									{ className: "acc_content clearfix" },
+									React.createElement(
+										"ul",
+										{ className: "iconlist iconlist-color nobottommargin" },
+										React.createElement(
+											"li",
+											null,
+											React.createElement("i", { className: "icon-ok" }),
+											petProfile.allergiesString
+										)
+									)
+								)
+							),
+							React.createElement(PetNavigationToggle, null)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

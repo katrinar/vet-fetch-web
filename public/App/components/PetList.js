@@ -15,11 +15,21 @@ class PetList extends Component {
 			<div>
 				<Nav />
 
-				<div className="section notopmargin nobottommargin">
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Pet Dashboard</h1>
+		            </div>
+        		</section>
+
+				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
-						<h4>Pets</h4>
+						<div className="fancy-title title-double-border">
+	                        <h2>My Pets</h2>
+	                	</div>
+						
 						{petList}
-						<button onClick={navigation.registerPet}>Add a Pet</button>
+						
+						<a href="#" onClick={navigation.registerPet} className="button button-3d button-small button-rounded button-aqua">Register your Pet</a>
 					</div>
 				</div>
 

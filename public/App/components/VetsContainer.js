@@ -83,6 +83,12 @@ class VetsContainer extends Component {
 			<div>
 				<Nav />
 
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Vet Locator</h1>
+		            </div>
+        		</section>
+
 				<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
 				

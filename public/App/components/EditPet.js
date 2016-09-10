@@ -8,6 +8,7 @@ import actions from '../actions/actions'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 // const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
 const CLOUDINARY_UPLOAD_PRESET = 'vxd4nrmq';
@@ -98,6 +99,13 @@ class EditPet extends Component {
 		return (
 			<div>
 				<Nav />
+
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Pet Dashboard</h1>
+		            </div>
+        		</section>
+
 				<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
 						<form>
@@ -145,6 +153,7 @@ class EditPet extends Component {
 						</form>
 					</div>
 				</div> 
+				<Footer />
 			</div>
 		)
 	}

@@ -5,6 +5,7 @@ import navigation from '../utils/navigation'
 import PetNavigation from '../components/PetNavigation'
 import PetNavigationToggle from '../components/PetNavigationToggle'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 class PetHealthRecord extends Component {
 	constructor(props, context){
@@ -21,36 +22,49 @@ class PetHealthRecord extends Component {
 			
 				<Nav />
 
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Pet Dashboard</h1>
+		            </div>
+        		</section>
+
 				<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
+						<div className="fancy-title title-double-border">
+		                        <h2>{petProfile.name} | Health Record</h2>
+		                </div>
 
 						<PetNavigation />
 
-						<div id='healthRecContent'>
-							<div id='healthRecHeader'>
-								<h2>{petProfile.name} | Health Record</h2>
-							</div>
+						<div className="accordion accordion-bg clearfix">
 
-							<div id='healthRecStats'>
-								<h4>Vaccines</h4>
-									<ul>
-										<li>Vaccines: {petProfile.vaccinesString}</li>
-									</ul>
-								<h4>Medication</h4>
-									<ul>
-										<li>Medication: {petProfile.medicationsString} </li>
-									</ul>
-								<h4>Allergies</h4>
-									<ul>
-										<li>Allergies: {petProfile.allergiesString} </li>
-									</ul>
-							</div>
+                            <div className="acctitle"><i className="acc-closed icon-ok-circle"></i><i className="acc-open icon-remove-circle"></i>Vaccines</div>
+                            <div className="acc_content clearfix">
+                                <ul className="iconlist iconlist-color nobottommargin">
+                                    <li><i className="icon-ok"></i>{petProfile.vaccinesString}</li>
+                                </ul>
+                            </div>
 
-							<PetNavigationToggle />
-						</div>
+                            <div className="acctitle"><i className="acc-closed icon-ok-circle"></i><i className="acc-open icon-remove-circle"></i>Medication</div>
+                            <div className="acc_content clearfix">
+                                <ul className="iconlist iconlist-color nobottommargin">
+                                    <li><i className="icon-ok"></i>{petProfile.medicationsString}</li>
+                                </ul>
+                            </div>
+
+                            <div className="acctitle"><i className="acc-closed icon-ok-circle"></i><i className="acc-open icon-remove-circle"></i>Allergies</div>
+                            <div className="acc_content clearfix">
+	                            <ul className="iconlist iconlist-color nobottommargin">
+	                                <li><i className="icon-ok"></i>{petProfile.allergiesString}</li>   
+	                            </ul>
+                             </div>
+
+                        </div>
+                            
+						<PetNavigationToggle />
 					</div>
 				</div>
-				
+				<Footer />
 			</div>
 		)
 	}

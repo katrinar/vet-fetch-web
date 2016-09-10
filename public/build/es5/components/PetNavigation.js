@@ -38,9 +38,9 @@ var PetNavigation = (function (Component) {
 						"Back to Pets"
 					),
 					React.createElement(
-						"button",
-						{ onClick: navigation.editPet },
-						"Edit Pet"
+						"a",
+						{ href: "#", onClick: navigation.editPet, className: "button button-3d button-small button-rounded button-aqua" },
+						"Edit Pet Profile"
 					)
 				);
 			},

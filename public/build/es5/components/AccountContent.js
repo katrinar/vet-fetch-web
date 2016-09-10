@@ -42,50 +42,74 @@ var AccountContent = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
-						"div",
-						{ className: "section notopmargin nobottommargin" },
+						"section",
+						{ id: "page-title" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
 							React.createElement(
+								"h1",
+								null,
+								"Account"
+							)
+						)
+					),
+					React.createElement(
+						"section",
+						{ id: "content" },
+						React.createElement(
+							"div",
+							{ className: "content-wrap" },
+							React.createElement(
 								"div",
-								{ id: "profileInfo" },
+								{ className: "container clearfix" },
 								React.createElement(
-									"h4",
-									null,
-									"Name"
-								),
-								React.createElement(
-									"ul",
-									null,
+									"div",
+									{ className: "postcontent bothsidebar nobottommargin clearfix" },
 									React.createElement(
-										"li",
-										null,
-										text.capitalize(this.props.currentUser.firstName),
-										" ",
-										text.capitalize(this.props.currentUser.lastName)
-									)
-								),
-								React.createElement(
-									"h4",
-									null,
-									"Email"
-								),
-								React.createElement(
-									"ul",
-									null,
+										"div",
+										{ className: "col_half nobottommargin" },
+										React.createElement(
+											"h4",
+											null,
+											"Name"
+										),
+										React.createElement(
+											"div",
+											{ className: "well well-sm nobottommargin" },
+											text.capitalize(this.props.currentUser.firstName),
+											" ",
+											text.capitalize(this.props.currentUser.lastName)
+										)
+									),
+									React.createElement("div", { className: "divider" }),
 									React.createElement(
-										"li",
-										null,
-										this.props.currentUser.email,
-										" "
+										"div",
+										{ className: "col_half nobottommargin col_last" },
+										React.createElement(
+											"h4",
+											null,
+											"Email"
+										),
+										React.createElement(
+											"div",
+											{ className: "well well-sm nobottommargin" },
+											this.props.currentUser.email,
+											" "
+										)
+									),
+									React.createElement("div", { className: "divider" }),
+									React.createElement(
+										"a",
+										{ href: "#", onClick: navigation.editProfile, className: "button button-3d button-small button-rounded button-aqua" },
+										"Edit Account"
+									),
+									React.createElement(
+										"div",
+										{ className: "divider" },
+										React.createElement("i", { className: "icon-circle" })
 									)
 								)
-							),
-							React.createElement(
-								"button",
-								{ onClick: navigation.editProfile },
-								"Edit Profile"
 							)
 						)
 					),

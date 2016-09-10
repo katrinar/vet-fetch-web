@@ -146,7 +146,7 @@ var HomeContainer = (function (Component) {
 																																								{ className: "entry-image" },
 																																								React.createElement(
 																																												"a",
-																																												{ href: "/vets", "data-lightbox": "image" },
+																																												{ href: "/account", "data-lightbox": "image" },
 																																												React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
 																																								)
 																																				),

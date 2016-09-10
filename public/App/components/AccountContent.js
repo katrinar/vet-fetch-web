@@ -13,21 +13,41 @@ class AccountContent extends Component {
 			<div>
 				<Nav />
 
-				<div className="section notopmargin nobottommargin">
-					<div className="container clearfix">
-						<div id='profileInfo'>
-							<h4>Name</h4>
-								<ul>
-									<li>{text.capitalize(this.props.currentUser.firstName)} {text.capitalize(this.props.currentUser.lastName)}</li>
-								</ul>
-							<h4>Email</h4>
-								<ul>
-									<li>{this.props.currentUser.email} </li>
-								</ul>
-						</div>
-						<button onClick={navigation.editProfile}>Edit Profile</button>
-					</div>
-				</div>
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Account</h1>
+		            </div>
+        		</section>
+
+        		<section id="content">
+
+            		<div className="content-wrap">
+            			<div className="container clearfix">
+
+		                <div className="postcontent bothsidebar nobottommargin clearfix">
+		                  	
+		                  		<div className="col_half nobottommargin">
+		                  		 	<h4>Name</h4>
+		                  		 	
+                            		<div className="well well-sm nobottommargin">{text.capitalize(this.props.currentUser.firstName)} {text.capitalize(this.props.currentUser.lastName)}</div>
+                        		</div>
+
+                        		<div className="divider"></div>
+
+                        		<div className="col_half nobottommargin col_last">
+                        			<h4>Email</h4>
+                            		<div className="well well-sm nobottommargin">{this.props.currentUser.email} </div>
+                        		</div>
+						
+                        	<div className="divider"></div>	
+                        	<a href="#" onClick={navigation.editProfile} className="button button-3d button-small button-rounded button-aqua">Edit Account</a>
+							<div className="divider"><i className="icon-circle"></i></div>
+							 
+		                </div>
+		            </div>
+                	</div>
+
+        		</section>
 
 				<Footer />	
 			</div>

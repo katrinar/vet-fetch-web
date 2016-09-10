@@ -25,6 +25,8 @@ var actions = _interopRequire(require("../actions/actions"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 var RegisterPet = (function (Component) {
 	function RegisterPet(props, context) {
 		_classCallCheck(this, RegisterPet);
@@ -80,6 +82,19 @@ var RegisterPet = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
+						"section",
+						{ id: "page-title" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Pet Dashboard"
+							)
+						)
+					),
+					React.createElement(
 						"div",
 						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
@@ -109,7 +124,8 @@ var RegisterPet = (function (Component) {
 								)
 							)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,

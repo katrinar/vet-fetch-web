@@ -119,6 +119,19 @@ var VetsContainer = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
+						"section",
+						{ id: "page-title" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Vet Locator"
+							)
+						)
+					),
+					React.createElement(
 						"div",
 						{ className: "section notopmargin nobottommargin" },
 						React.createElement(

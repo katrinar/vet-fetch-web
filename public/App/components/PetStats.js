@@ -25,16 +25,21 @@ class PetStats extends Component {
 			<div>
 				<Nav />
 
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Pet Dashboard</h1>
+		            </div>
+        		</section>
+
 				<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
+						<div className="fancy-title title-double-border">
+		                        <h2>{petProfile.name} | Stats</h2>
+		                </div>
 
 						<PetNavigation />
 
 						<div id='profileContent'>
-							<div id='profileHeader'>
-								<h2>{petProfile.name} | Stats</h2>
-							</div>
-
 							 <div>
 			        			{petProfileImg['thumb'] === '' ? null :
 							        <div>

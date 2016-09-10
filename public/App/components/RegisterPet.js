@@ -4,6 +4,7 @@ import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 
 class RegisterPet extends Component {
@@ -50,6 +51,12 @@ class RegisterPet extends Component {
 			<div>
 				<Nav />
 
+				<section id="page-title">
+		            <div className="container clearfix">
+		                <h1>Pet Dashboard</h1>
+		            </div>
+        		</section>
+
 				<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
 						<h2>Register your Pet</h2>
@@ -60,7 +67,9 @@ class RegisterPet extends Component {
 							<button onClick={navigation.dismissRegisterPet}>Cancel</button>
 						</form> 
 					</div>
-				</div>			 
+				</div>
+
+				<Footer />			 
 			</div>
 
 		)

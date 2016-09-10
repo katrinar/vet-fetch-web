@@ -44,21 +44,38 @@ var PetList = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
-						"div",
-						{ className: "section notopmargin nobottommargin" },
+						"section",
+						{ id: "page-title" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
 							React.createElement(
-								"h4",
+								"h1",
 								null,
-								"Pets"
+								"Pet Dashboard"
+							)
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "section notopmargin nobottommargin nobg" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									"My Pets"
+								)
 							),
 							petList,
 							React.createElement(
-								"button",
-								{ onClick: navigation.registerPet },
-								"Add a Pet"
+								"a",
+								{ href: "#", onClick: navigation.registerPet, className: "button button-3d button-small button-rounded button-aqua" },
+								"Register your Pet"
 							)
 						)
 					),

@@ -6,7 +6,7 @@ class PetNavigation extends Component {
 		return(
 			<div>
 				<button onClick={navigation.petsPage}>Back to Pets</button>
-				<button onClick={navigation.editPet}>Edit Pet</button>
+				<a href="#" onClick={navigation.editPet} className="button button-3d button-small button-rounded button-aqua">Edit Pet Profile</a>
 			</div>
 		)
 	}

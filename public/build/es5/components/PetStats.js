@@ -51,25 +51,38 @@ var PetStats = (function (Component) {
 					null,
 					React.createElement(Nav, null),
 					React.createElement(
+						"section",
+						{ id: "page-title" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Pet Dashboard"
+							)
+						)
+					),
+					React.createElement(
 						"div",
 						{ className: "section notopmargin nobottommargin" },
 						React.createElement(
 							"div",
 							{ className: "container clearfix" },
+							React.createElement(
+								"div",
+								{ className: "fancy-title title-double-border" },
+								React.createElement(
+									"h2",
+									null,
+									petProfile.name,
+									" | Stats"
+								)
+							),
 							React.createElement(PetNavigation, null),
 							React.createElement(
 								"div",
 								{ id: "profileContent" },
-								React.createElement(
-									"div",
-									{ id: "profileHeader" },
-									React.createElement(
-										"h2",
-										null,
-										petProfile.name,
-										" | Stats"
-									)
-								),
 								React.createElement(
 									"div",
 									null,

@@ -29,9 +29,23 @@ var PetRow = (function (Component) {
 	_prototypeProperties(PetRow, null, {
 		render: {
 			value: function render() {
+
+
+				var pet = this.props.pet || {};
+				var petProfileImg = pet.image || {};
+
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(
+						"div",
+						null,
+						petProfileImg.thumb === "" ? null : React.createElement(
+							"div",
+							null,
+							React.createElement("img", { src: petProfileImg.original })
+						)
+					),
 					React.createElement(
 						"a",
 						{ href: "/pet/" + this.props.pet.slug },

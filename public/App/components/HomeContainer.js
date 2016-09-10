@@ -69,7 +69,7 @@ class HomeContainer extends Component {
 
                         <div className="entry clearfix">
                             <div className="entry-image">
-                                <a href="/vets" data-lightbox="image"><img className="image_fade" src="/images/laptop.jpg" alt="Vets" /></a>
+                                <a href="/account" data-lightbox="image"><img className="image_fade" src="/images/laptop.jpg" alt="Vets" /></a>
                             </div>
                             <div className="entry-title">
                                 <h2>Manage your Account</h2>

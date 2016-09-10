@@ -33,6 +33,8 @@ var request = _interopRequire(require("superagent"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
+var Footer = _interopRequire(require("../components/Footer"));
+
 // const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
 var CLOUDINARY_UPLOAD_PRESET = "vxd4nrmq";
 var CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/hsypls36a/image/upload";
@@ -139,6 +141,19 @@ var EditPet = (function (Component) {
 					"div",
 					null,
 					React.createElement(Nav, null),
+					React.createElement(
+						"section",
+						{ id: "page-title" },
+						React.createElement(
+							"div",
+							{ className: "container clearfix" },
+							React.createElement(
+								"h1",
+								null,
+								"Pet Dashboard"
+							)
+						)
+					),
 					React.createElement(
 						"div",
 						{ className: "section notopmargin nobottommargin" },
@@ -248,7 +263,8 @@ var EditPet = (function (Component) {
 								)
 							)
 						)
-					)
+					),
+					React.createElement(Footer, null)
 				);
 			},
 			writable: true,
