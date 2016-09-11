@@ -58,12 +58,6 @@ var Footer = (function (Component) {
 										"/",
 										React.createElement(
 											"a",
-											{ href: "#" },
-											"About"
-										),
-										"/",
-										React.createElement(
-											"a",
 											{ href: "/pets" },
 											"Pets"
 										),
@@ -78,12 +72,6 @@ var Footer = (function (Component) {
 											"a",
 											{ href: "/account" },
 											"Account"
-										),
-										"/",
-										React.createElement(
-											"a",
-											{ href: "#" },
-											"Contact"
 										)
 									)
 								)

@@ -113,19 +113,6 @@ var Nav = (function (Component) {
 												"Account"
 											)
 										)
-									),
-									React.createElement(
-										"li",
-										{ className: "mega-menu" },
-										React.createElement(
-											"a",
-											{ href: "/" },
-											React.createElement(
-												"div",
-												null,
-												"Login/Sign Up"
-											)
-										)
 									)
 								)
 							)

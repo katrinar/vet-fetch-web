@@ -192,11 +192,7 @@ var Landing = (function (Component) {
                                     React.createElement(
                                         "div",
                                         { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/pets", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
-                                        )
+                                        React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
                                     ),
                                     React.createElement(
                                         "div",
@@ -214,11 +210,7 @@ var Landing = (function (Component) {
                                     React.createElement(
                                         "div",
                                         { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/vets", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
-                                        )
+                                        React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
                                     ),
                                     React.createElement(
                                         "div",
@@ -236,11 +228,7 @@ var Landing = (function (Component) {
                                     React.createElement(
                                         "div",
                                         { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/insurance", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/man-at-desk.jpeg", alt: "Pets" })
-                                        )
+                                        React.createElement("img", { className: "image_fade", src: "/images/man-at-desk.jpeg", alt: "Pets" })
                                     ),
                                     React.createElement(
                                         "div",
@@ -258,11 +246,7 @@ var Landing = (function (Component) {
                                     React.createElement(
                                         "div",
                                         { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/account", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
-                                        )
+                                        React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
                                     ),
                                     React.createElement(
                                         "div",

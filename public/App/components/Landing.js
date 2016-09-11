@@ -65,7 +65,7 @@ class Landing extends Component {
 
                         <div className="entry clearfix">
                             <div className="entry-image">
-                                <a href="/pets" data-lightbox="image"><img className="image_fade" src="/images/dog-with-cat.png" alt="Pets" /></a>
+                                <img className="image_fade" src="/images/dog-with-cat.png" alt="Pets" />
                             </div>
                             <div className="entry-title">
                                 <h2>Manage from pet dashboard</h2>
@@ -74,7 +74,7 @@ class Landing extends Component {
 
                         <div className="entry clearfix">
                             <div className="entry-image">
-                                <a href="/vets" data-lightbox="image"><img className="image_fade" src="/images/pet-with-family.jpg" alt="Vets" /></a>
+                                <img className="image_fade" src="/images/pet-with-family.jpg" alt="Vets" />
                             </div>
                             <div className="entry-title">
                                 <h2>Find vetinary care near you</h2>
@@ -83,7 +83,7 @@ class Landing extends Component {
 
                         <div className="entry clearfix">
                             <div className="entry-image">
-                                <a href="/insurance" data-lightbox="image"><img className="image_fade" src="/images/man-at-desk.jpeg" alt="Pets" /></a>
+                                <img className="image_fade" src="/images/man-at-desk.jpeg" alt="Pets" />
                             </div>
                             <div className="entry-title">
                                 <h2>Pick insurance plans for your pet</h2>
@@ -92,7 +92,7 @@ class Landing extends Component {
 
                         <div className="entry clearfix">
                             <div className="entry-image">
-                                <a href="/account" data-lightbox="image"><img className="image_fade" src="/images/laptop.jpg" alt="Vets" /></a>
+                                <img className="image_fade" src="/images/laptop.jpg" alt="Vets" />
                             </div>
                             <div className="entry-title">
                                 <h2>Manage your Account</h2>

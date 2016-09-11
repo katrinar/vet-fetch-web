@@ -24907,19 +24907,6 @@
 												"Account"
 											)
 										)
-									),
-									_react2.default.createElement(
-										"li",
-										{ className: "mega-menu" },
-										_react2.default.createElement(
-											"a",
-											{ href: "/" },
-											_react2.default.createElement(
-												"div",
-												null,
-												"Login/Sign Up"
-											)
-										)
 									)
 								)
 							)
@@ -25179,12 +25166,6 @@
 										"/",
 										_react2.default.createElement(
 											"a",
-											{ href: "#" },
-											"About"
-										),
-										"/",
-										_react2.default.createElement(
-											"a",
 											{ href: "/pets" },
 											"Pets"
 										),
@@ -25199,12 +25180,6 @@
 											"a",
 											{ href: "/account" },
 											"Account"
-										),
-										"/",
-										_react2.default.createElement(
-											"a",
-											{ href: "#" },
-											"Contact"
 										)
 									)
 								)
@@ -25429,11 +25404,7 @@
 	                                _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'entry-image' },
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: '/pets', 'data-lightbox': 'image' },
-	                                        _react2.default.createElement('img', { className: 'image_fade', src: '/images/dog-with-cat.png', alt: 'Pets' })
-	                                    )
+	                                    _react2.default.createElement('img', { className: 'image_fade', src: '/images/dog-with-cat.png', alt: 'Pets' })
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
@@ -25451,11 +25422,7 @@
 	                                _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'entry-image' },
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: '/vets', 'data-lightbox': 'image' },
-	                                        _react2.default.createElement('img', { className: 'image_fade', src: '/images/pet-with-family.jpg', alt: 'Vets' })
-	                                    )
+	                                    _react2.default.createElement('img', { className: 'image_fade', src: '/images/pet-with-family.jpg', alt: 'Vets' })
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
@@ -25473,11 +25440,7 @@
 	                                _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'entry-image' },
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: '/insurance', 'data-lightbox': 'image' },
-	                                        _react2.default.createElement('img', { className: 'image_fade', src: '/images/man-at-desk.jpeg', alt: 'Pets' })
-	                                    )
+	                                    _react2.default.createElement('img', { className: 'image_fade', src: '/images/man-at-desk.jpeg', alt: 'Pets' })
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
@@ -25495,11 +25458,7 @@
 	                                _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'entry-image' },
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: '/account', 'data-lightbox': 'image' },
-	                                        _react2.default.createElement('img', { className: 'image_fade', src: '/images/laptop.jpg', alt: 'Vets' })
-	                                    )
+	                                    _react2.default.createElement('img', { className: 'image_fade', src: '/images/laptop.jpg', alt: 'Vets' })
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
