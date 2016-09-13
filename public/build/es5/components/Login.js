@@ -86,7 +86,7 @@ var Login = (function (Component) {
 								React.createElement(
 									"label",
 									null,
-									"Username:"
+									"Email:"
 								),
 								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email" }),
 								React.createElement("br", null)

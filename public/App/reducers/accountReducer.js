@@ -5,6 +5,7 @@ var initialState = {
 		id: null,
 		firstName: '',
 		lastName: '',
+		username: '',
 		email: '',
 		password: ''
 	}

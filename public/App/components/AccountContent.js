@@ -44,7 +44,7 @@ class AccountContent extends Component {
             			<div className="container clearfix">
 
             			<div className="fancy-title title-double-border">
-		                    <h2>Welcome, {text.capitalize(this.props.currentUser.firstName)}</h2>
+		                    <h2>Welcome, {text.capitalize(this.props.currentUser.username)}</h2>
 		                </div>
 
 		                <div className="postcontent bothsidebar nobottommargin clearfix">
@@ -53,6 +53,12 @@ class AccountContent extends Component {
 		                  		 	<h4>Name</h4>
 		                  		 	
                             		<div className="well well-sm nobottommargin">{text.capitalize(this.props.currentUser.firstName)} {text.capitalize(this.props.currentUser.lastName)}</div>
+                        		</div>
+
+                        		<div className="col_half nobottommargin">
+		                  		 	<h4>Username</h4>
+		                  		 	
+                            		<div className="well well-sm nobottommargin">{text.capitalize(this.props.currentUser.username)} </div>
                         		</div>
 
                         		<div className="divider"></div>

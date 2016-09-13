@@ -18,6 +18,8 @@ class Landing extends Component {
 		                    <h1>All your pet health information in one place.</h1>
 		                    <span>Managing your pets health information has never been easier.</span>
 		                </div>
+
+                        <Register currentUser={this.props.currentUser} />
 		            </div>
 
 		        </section>
@@ -59,7 +61,7 @@ class Landing extends Component {
                             </div>
                         </div>
 
-                        <div className="divider"><i className="icon-circle"></i></div>
+                        <div className="line"></div>
 
                         <div id="portfolio" className="portfolio-2 clearfix">
 
@@ -67,8 +69,18 @@ class Landing extends Component {
                                 <div className="portfolio-image">
                                     <img src="/images/search-vets.png" alt="Search Vets" />
                                 </div>
-                                <div className="portfolio-desc">
-                                    <h3>Fetch on the go - use Vet Fetch on desktop or mobile</h3>        
+
+                                <div className="fancy-title title-bottom-border title-center">
+                                    <h3>Fetch on the go - use on desktop or mobile</h3>        
+                                </div>
+                            </article>
+
+                             <article className="portfolio-item pf-illustrations">
+                                <div className="portfolio-image">
+                                    <img src="/images/pet-dashboard.png" alt="Open Imagination" />  
+                                </div>
+                                <div className="fancy-title title-bottom-border title-center">
+                                    <h3>Manage all your pets from the Pet Dashboard</h3> 
                                 </div>
                             </article>
 
@@ -76,17 +88,8 @@ class Landing extends Component {
                                 <div className="portfolio-image">
                                     <img src="/images/pet-profile.png" alt="Pet Profile" />
                                 </div>
-                                <div className="portfolio-desc">
-                                    <h3>Pull up your pet health record and update whenever</h3>        
-                                </div>
-                            </article>
-
-                            <article className="portfolio-item pf-illustrations">
-                                <div className="portfolio-image">
-                                    <img src="/images/pet-dashboard.png" alt="Open Imagination" />  
-                                </div>
-                                <div className="portfolio-desc">
-                                    <h3>Manage all your pets from the Pet Dashboard</h3> 
+                                <div className="fancy-title title-bottom-border title-center">
+                                    <h3>Pull up health records and update whenever</h3>        
                                 </div>
                             </article>
 
@@ -94,20 +97,12 @@ class Landing extends Component {
                                 <div className="portfolio-image">
                                     <img src="/images/typing.png" alt="Insurance Search" />
                                 </div>
-                                <div className="portfolio-desc">
+                                <div className="fancy-title title-bottom-border title-center">
                                     <h3>Find the right insurance coverage for your pet</h3>        
                                 </div>
                             </article>
  
                         </div>
-
-
-                        <div className="line"></div>
-
-                        <Login currentUser={this.props.currentUser} />
-						<Register currentUser={this.props.currentUser} />
-
-                        <div className="clear"></div>
 
                         <div className="line"></div>
 

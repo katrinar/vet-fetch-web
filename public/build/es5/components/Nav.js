@@ -46,12 +46,12 @@ var Nav = (function (Component) {
 								{ id: "logo" },
 								React.createElement(
 									"a",
-									{ href: "index.html", className: "standard-logo", "data-dark-logo": "/images/vet-fetch.png" },
+									{ href: "/", className: "standard-logo", "data-dark-logo": "/images/vet-fetch.png" },
 									React.createElement("img", { src: "/images/vet-fetch.png", alt: "Vet Fetch Logo" })
 								),
 								React.createElement(
 									"a",
-									{ href: "index.html", className: "retina-logo", "data-dark-logo": "/images/vet-fetch@2x.png" },
+									{ href: "/", className: "retina-logo", "data-dark-logo": "/images/vet-fetch@2x.png" },
 									React.createElement("img", { src: "/images/vet-fetch@2x.png", alt: "Vet Fetch Logo" })
 								)
 							),

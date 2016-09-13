@@ -22,119 +22,82 @@ var store = _interopRequire(require("../stores/store"));
 var actions = _interopRequire(require("../actions/actions"));
 
 var Register = (function (Component) {
-  function Register(props, context) {
-    _classCallCheck(this, Register);
+	function Register(props, context) {
+		_classCallCheck(this, Register);
 
-    _get(Object.getPrototypeOf(Register.prototype), "constructor", this).call(this, props, context);
-    this.submitProfile = this.submitProfile.bind(this);
-    this.register = this.register.bind(this);
-  }
+		_get(Object.getPrototypeOf(Register.prototype), "constructor", this).call(this, props, context);
+		this.submitProfile = this.submitProfile.bind(this);
+		this.register = this.register.bind(this);
+	}
 
-  _inherits(Register, Component);
+	_inherits(Register, Component);
 
-  _prototypeProperties(Register, null, {
-    submitProfile: {
-      value: function submitProfile(event) {
-        var registerUser = Object.assign({}, this.props.currentUser);
-        registerUser[event.target.id] = event.target.value;
-        store.dispatch(actions.receivedCurrentUser(registerUser));
-      },
-      writable: true,
-      configurable: true
-    },
-    register: {
-      value: function register(event) {
-        event.preventDefault();
+	_prototypeProperties(Register, null, {
+		submitProfile: {
+			value: function submitProfile(event) {
+				var registerUser = Object.assign({}, this.props.currentUser);
+				registerUser[event.target.id] = event.target.value;
+				store.dispatch(actions.receivedCurrentUser(registerUser));
+			},
+			writable: true,
+			configurable: true
+		},
+		register: {
+			value: function register(event) {
+				event.preventDefault();
 
-        api.handlePost("/api/profile", this.props.currentUser, function (err, response) {
-          if (err != null) {
-            alert(err.message);
-            return;
-          }
-          store.dispatch(actions.receivedCurrentUser(response.result));
-        });
-      },
-      writable: true,
-      configurable: true
-    },
-    render: {
-      value: function render() {
-        return React.createElement(
-          "div",
-          { className: "col_two_third col_last nobottommargin" },
-          React.createElement(
-            "h3",
-            null,
-            "Register Here"
-          ),
-          React.createElement(
-            "p",
-            null,
-            "Register to save your pets health information here. Check back in whenever you need it - desktop or mobile."
-          ),
-          React.createElement(
-            "form",
-            { id: "register-form", name: "register-form", className: "nobottommargin" },
-            React.createElement(
-              "div",
-              { className: "col_half" },
-              React.createElement(
-                "label",
-                null,
-                "First Name:"
-              ),
-              React.createElement("input", { type: "text", onChange: this.submitProfile, id: "firstName", name: "register-form-name", className: "required form-control input-block-level" })
-            ),
-            React.createElement(
-              "div",
-              { className: "col_half col_last" },
-              React.createElement(
-                "label",
-                null,
-                "Last Name:"
-              ),
-              React.createElement("input", { type: "text", onChange: this.submitProfile, id: "lastName", name: "register-form-email", className: "required form-control input-block-level" })
-            ),
-            React.createElement("div", { className: "clear" }),
-            React.createElement(
-              "div",
-              { className: "col_half" },
-              React.createElement(
-                "label",
-                null,
-                "Email:"
-              ),
-              React.createElement("input", { type: "text", onChange: this.submitProfile, id: "email", name: "register-form-username", className: "required form-control input-block-level" })
-            ),
-            React.createElement(
-              "div",
-              { className: "col_half col_last" },
-              React.createElement(
-                "label",
-                null,
-                "Password:"
-              ),
-              React.createElement("input", { type: "password", onChange: this.submitProfile, id: "password", name: "register-form-phone", className: "required form-control input-block-level" })
-            ),
-            React.createElement("div", { className: "clear" }),
-            React.createElement(
-              "div",
-              { className: "col_full nobottommargin" },
-              React.createElement(
-                "button",
-                { onClick: this.register, className: "button button-3d button-black nomargin", id: "register-form-submit", name: "register-form-submit", value: "register" },
-                "Register"
-              )
-            )
-          )
-        );
-      },
-      writable: true,
-      configurable: true
-    }
-  });
+				api.handlePost("/api/profile", this.props.currentUser, function (err, response) {
+					if (err != null) {
+						alert(err.message);
+						return;
+					}
+					store.dispatch(actions.receivedCurrentUser(response.result));
+				});
+			},
+			writable: true,
+			configurable: true
+		},
+		render: {
+			value: function render() {
+				return React.createElement(
+					"form",
+					{ className: "landing-wide-form clearfix" },
+					React.createElement(
+						"div",
+						{ className: "col_four_fifth nobottommargin" },
+						React.createElement(
+							"div",
+							{ className: "col_one_third nobottommargin" },
+							React.createElement("input", { onChange: this.submitProfile, id: "username", type: "text", className: "form-control input-lg not-dark", placeholder: "Username*" })
+						),
+						React.createElement(
+							"div",
+							{ className: "col_one_third nobottommargin" },
+							React.createElement("input", { onChange: this.submitProfile, id: "email", type: "email", className: "form-control input-lg not-dark", placeholder: "Email*" })
+						),
+						React.createElement(
+							"div",
+							{ className: "col_one_third col_last nobottommargin" },
+							React.createElement("input", { onChange: this.submitProfile, id: "password", type: "password", className: "form-control input-lg not-dark", placeholder: "Password*" })
+						)
+					),
+					React.createElement(
+						"div",
+						{ className: "col_one_fifth col_last nobottommargin" },
+						React.createElement(
+							"button",
+							{ onClick: this.register, className: "btn btn-lg btn-danger btn-block nomargin" },
+							"FETCH"
+						)
+					)
+				);
+			},
+			writable: true,
+			configurable: true
+		}
+	});
 
-  return Register;
+	return Register;
 })(Component);
 
 module.exports = Register;

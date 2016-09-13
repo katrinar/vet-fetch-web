@@ -51,7 +51,7 @@ var HomeContainer = (function (Component) {
                                 "h2",
                                 null,
                                 "Welcome, ",
-                                text.capitalize(this.props.currentUser.firstName)
+                                text.capitalize(this.props.currentUser.username)
                             ),
                             React.createElement(
                                 "div",

@@ -58,7 +58,8 @@ var Landing = (function (Component) {
                                     null,
                                     "Managing your pets health information has never been easier."
                                 )
-                            )
+                            ),
+                            React.createElement(Register, { currentUser: this.props.currentUser })
                         )
                     ),
                     React.createElement(
@@ -178,11 +179,7 @@ var Landing = (function (Component) {
                                     )
                                 )
                             ),
-                            React.createElement(
-                                "div",
-                                { className: "divider" },
-                                React.createElement("i", { className: "icon-circle" })
-                            ),
+                            React.createElement("div", { className: "line" }),
                             React.createElement(
                                 "div",
                                 { id: "portfolio", className: "portfolio-2 clearfix" },
@@ -196,29 +193,11 @@ var Landing = (function (Component) {
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "portfolio-desc" },
+                                        { className: "fancy-title title-bottom-border title-center" },
                                         React.createElement(
                                             "h3",
                                             null,
-                                            "Fetch on the go - use Vet Fetch on desktop or mobile"
-                                        )
-                                    )
-                                ),
-                                React.createElement(
-                                    "article",
-                                    { className: "portfolio-item pf-illustrations" },
-                                    React.createElement(
-                                        "div",
-                                        { className: "portfolio-image" },
-                                        React.createElement("img", { src: "/images/pet-profile.png", alt: "Pet Profile" })
-                                    ),
-                                    React.createElement(
-                                        "div",
-                                        { className: "portfolio-desc" },
-                                        React.createElement(
-                                            "h3",
-                                            null,
-                                            "Pull up your pet health record and update whenever"
+                                            "Fetch on the go - use on desktop or mobile"
                                         )
                                     )
                                 ),
@@ -232,7 +211,7 @@ var Landing = (function (Component) {
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "portfolio-desc" },
+                                        { className: "fancy-title title-bottom-border title-center" },
                                         React.createElement(
                                             "h3",
                                             null,
@@ -246,11 +225,29 @@ var Landing = (function (Component) {
                                     React.createElement(
                                         "div",
                                         { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/pet-profile.png", alt: "Pet Profile" })
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "fancy-title title-bottom-border title-center" },
+                                        React.createElement(
+                                            "h3",
+                                            null,
+                                            "Pull up health records and update whenever"
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    "article",
+                                    { className: "portfolio-item pf-illustrations" },
+                                    React.createElement(
+                                        "div",
+                                        { className: "portfolio-image" },
                                         React.createElement("img", { src: "/images/typing.png", alt: "Insurance Search" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "portfolio-desc" },
+                                        { className: "fancy-title title-bottom-border title-center" },
                                         React.createElement(
                                             "h3",
                                             null,
@@ -259,10 +256,6 @@ var Landing = (function (Component) {
                                     )
                                 )
                             ),
-                            React.createElement("div", { className: "line" }),
-                            React.createElement(Login, { currentUser: this.props.currentUser }),
-                            React.createElement(Register, { currentUser: this.props.currentUser }),
-                            React.createElement("div", { className: "clear" }),
                             React.createElement("div", { className: "line" }),
                             React.createElement(
                                 "div",

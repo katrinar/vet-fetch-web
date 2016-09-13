@@ -21,7 +21,7 @@ class HomeContainer extends Component {
 					<div className="container clearfix">
 
 					<h2>
-						Welcome, {text.capitalize(this.props.currentUser.firstName)}
+						Welcome, {text.capitalize(this.props.currentUser.username)}
 					</h2>
 
 					<div id="posts" className="post-grid grid-2 clearfix">

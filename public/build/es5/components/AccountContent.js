@@ -88,7 +88,7 @@ var AccountContent = (function (Component) {
 										"h2",
 										null,
 										"Welcome, ",
-										text.capitalize(this.props.currentUser.firstName)
+										text.capitalize(this.props.currentUser.username)
 									)
 								),
 								React.createElement(
@@ -108,6 +108,21 @@ var AccountContent = (function (Component) {
 											text.capitalize(this.props.currentUser.firstName),
 											" ",
 											text.capitalize(this.props.currentUser.lastName)
+										)
+									),
+									React.createElement(
+										"div",
+										{ className: "col_half nobottommargin" },
+										React.createElement(
+											"h4",
+											null,
+											"Username"
+										),
+										React.createElement(
+											"div",
+											{ className: "well well-sm nobottommargin" },
+											text.capitalize(this.props.currentUser.username),
+											" "
 										)
 									),
 									React.createElement("div", { className: "divider" }),

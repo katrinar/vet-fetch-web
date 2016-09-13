@@ -24069,6 +24069,7 @@
 			id: null,
 			firstName: '',
 			lastName: '',
+			username: '',
 			email: '',
 			password: ''
 		}
@@ -24840,12 +24841,12 @@
 								{ id: "logo" },
 								_react2.default.createElement(
 									"a",
-									{ href: "index.html", className: "standard-logo", "data-dark-logo": "/images/vet-fetch.png" },
+									{ href: "/", className: "standard-logo", "data-dark-logo": "/images/vet-fetch.png" },
 									_react2.default.createElement("img", { src: "/images/vet-fetch.png", alt: "Vet Fetch Logo" })
 								),
 								_react2.default.createElement(
 									"a",
-									{ href: "index.html", className: "retina-logo", "data-dark-logo": "/images/vet-fetch@2x.png" },
+									{ href: "/", className: "retina-logo", "data-dark-logo": "/images/vet-fetch@2x.png" },
 									_react2.default.createElement("img", { src: "/images/vet-fetch@2x.png", alt: "Vet Fetch Logo" })
 								)
 							),
@@ -25031,7 +25032,7 @@
 										'h2',
 										null,
 										'Welcome, ',
-										_text2.default.capitalize(this.props.currentUser.firstName)
+										_text2.default.capitalize(this.props.currentUser.username)
 									)
 								),
 								_react2.default.createElement(
@@ -25051,6 +25052,21 @@
 											_text2.default.capitalize(this.props.currentUser.firstName),
 											' ',
 											_text2.default.capitalize(this.props.currentUser.lastName)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'col_half nobottommargin' },
+										_react2.default.createElement(
+											'h4',
+											null,
+											'Username'
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'well well-sm nobottommargin' },
+											_text2.default.capitalize(this.props.currentUser.username),
+											' '
 										)
 									),
 									_react2.default.createElement('div', { className: 'divider' }),
@@ -25270,7 +25286,8 @@
 	                                null,
 	                                'Managing your pets health information has never been easier.'
 	                            )
-	                        )
+	                        ),
+	                        _react2.default.createElement(_Register2.default, { currentUser: this.props.currentUser })
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -25390,11 +25407,7 @@
 	                                )
 	                            )
 	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'divider' },
-	                            _react2.default.createElement('i', { className: 'icon-circle' })
-	                        ),
+	                        _react2.default.createElement('div', { className: 'line' }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { id: 'portfolio', className: 'portfolio-2 clearfix' },
@@ -25408,29 +25421,11 @@
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
-	                                    { className: 'portfolio-desc' },
+	                                    { className: 'fancy-title title-bottom-border title-center' },
 	                                    _react2.default.createElement(
 	                                        'h3',
 	                                        null,
-	                                        'Fetch on the go - use Vet Fetch on desktop or mobile'
-	                                    )
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'article',
-	                                { className: 'portfolio-item pf-illustrations' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'portfolio-image' },
-	                                    _react2.default.createElement('img', { src: '/images/pet-profile.png', alt: 'Pet Profile' })
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'portfolio-desc' },
-	                                    _react2.default.createElement(
-	                                        'h3',
-	                                        null,
-	                                        'Pull up your pet health record and update whenever'
+	                                        'Fetch on the go - use on desktop or mobile'
 	                                    )
 	                                )
 	                            ),
@@ -25444,7 +25439,7 @@
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
-	                                    { className: 'portfolio-desc' },
+	                                    { className: 'fancy-title title-bottom-border title-center' },
 	                                    _react2.default.createElement(
 	                                        'h3',
 	                                        null,
@@ -25458,11 +25453,29 @@
 	                                _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'portfolio-image' },
+	                                    _react2.default.createElement('img', { src: '/images/pet-profile.png', alt: 'Pet Profile' })
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'fancy-title title-bottom-border title-center' },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'Pull up health records and update whenever'
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'article',
+	                                { className: 'portfolio-item pf-illustrations' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'portfolio-image' },
 	                                    _react2.default.createElement('img', { src: '/images/typing.png', alt: 'Insurance Search' })
 	                                ),
 	                                _react2.default.createElement(
 	                                    'div',
-	                                    { className: 'portfolio-desc' },
+	                                    { className: 'fancy-title title-bottom-border title-center' },
 	                                    _react2.default.createElement(
 	                                        'h3',
 	                                        null,
@@ -25471,10 +25484,6 @@
 	                                )
 	                            )
 	                        ),
-	                        _react2.default.createElement('div', { className: 'line' }),
-	                        _react2.default.createElement(_Login2.default, { currentUser: this.props.currentUser }),
-	                        _react2.default.createElement(_Register2.default, { currentUser: this.props.currentUser }),
-	                        _react2.default.createElement('div', { className: 'clear' }),
 	                        _react2.default.createElement('div', { className: 'line' }),
 	                        _react2.default.createElement(
 	                            'div',
@@ -25555,7 +25564,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -25585,114 +25594,77 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Register = function (_Component) {
-	  _inherits(Register, _Component);
+		_inherits(Register, _Component);
 	
-	  function Register(props, context) {
-	    _classCallCheck(this, Register);
+		function Register(props, context) {
+			_classCallCheck(this, Register);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props, context));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Register).call(this, props, context));
 	
-	    _this.submitProfile = _this.submitProfile.bind(_this);
-	    _this.register = _this.register.bind(_this);
-	    return _this;
-	  }
+			_this.submitProfile = _this.submitProfile.bind(_this);
+			_this.register = _this.register.bind(_this);
+			return _this;
+		}
 	
-	  _createClass(Register, [{
-	    key: 'submitProfile',
-	    value: function submitProfile(event) {
-	      var registerUser = Object.assign({}, this.props.currentUser);
-	      registerUser[event.target.id] = event.target.value;
-	      _store2.default.dispatch(_actions2.default.receivedCurrentUser(registerUser));
-	    }
-	  }, {
-	    key: 'register',
-	    value: function register(event) {
-	      event.preventDefault();
+		_createClass(Register, [{
+			key: 'submitProfile',
+			value: function submitProfile(event) {
+				var registerUser = Object.assign({}, this.props.currentUser);
+				registerUser[event.target.id] = event.target.value;
+				_store2.default.dispatch(_actions2.default.receivedCurrentUser(registerUser));
+			}
+		}, {
+			key: 'register',
+			value: function register(event) {
+				event.preventDefault();
 	
-	      _api2.default.handlePost('/api/profile', this.props.currentUser, function (err, response) {
-	        if (err != null) {
-	          alert(err.message);
-	          return;
-	        }
-	        _store2.default.dispatch(_actions2.default.receivedCurrentUser(response.result));
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'col_two_third col_last nobottommargin' },
-	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Register Here'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Register to save your pets health information here. Check back in whenever you need it - desktop or mobile.'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { id: 'register-form', name: 'register-form', className: 'nobottommargin' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col_half' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'First Name:'
-	            ),
-	            _react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'firstName', name: 'register-form-name', className: 'required form-control input-block-level' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col_half col_last' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Last Name:'
-	            ),
-	            _react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'lastName', name: 'register-form-email', className: 'required form-control input-block-level' })
-	          ),
-	          _react2.default.createElement('div', { className: 'clear' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col_half' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Email:'
-	            ),
-	            _react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'email', name: 'register-form-username', className: 'required form-control input-block-level' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col_half col_last' },
-	            _react2.default.createElement(
-	              'label',
-	              null,
-	              'Password:'
-	            ),
-	            _react2.default.createElement('input', { type: 'password', onChange: this.submitProfile, id: 'password', name: 'register-form-phone', className: 'required form-control input-block-level' })
-	          ),
-	          _react2.default.createElement('div', { className: 'clear' }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col_full nobottommargin' },
-	            _react2.default.createElement(
-	              'button',
-	              { onClick: this.register, className: 'button button-3d button-black nomargin', id: 'register-form-submit', name: 'register-form-submit', value: 'register' },
-	              'Register'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
+				_api2.default.handlePost('/api/profile', this.props.currentUser, function (err, response) {
+					if (err != null) {
+						alert(err.message);
+						return;
+					}
+					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.result));
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'form',
+					{ className: 'landing-wide-form clearfix' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'col_four_fifth nobottommargin' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'col_one_third nobottommargin' },
+							_react2.default.createElement('input', { onChange: this.submitProfile, id: 'username', type: 'text', className: 'form-control input-lg not-dark', placeholder: 'Username*' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'col_one_third nobottommargin' },
+							_react2.default.createElement('input', { onChange: this.submitProfile, id: 'email', type: 'email', className: 'form-control input-lg not-dark', placeholder: 'Email*' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'col_one_third col_last nobottommargin' },
+							_react2.default.createElement('input', { onChange: this.submitProfile, id: 'password', type: 'password', className: 'form-control input-lg not-dark', placeholder: 'Password*' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'col_one_fifth col_last nobottommargin' },
+						_react2.default.createElement(
+							'button',
+							{ onClick: this.register, className: 'btn btn-lg btn-danger btn-block nomargin' },
+							'FETCH'
+						)
+					)
+				);
+			}
+		}]);
 	
-	  return Register;
+		return Register;
 	}(_react.Component);
 	
 	exports.default = Register;
@@ -25796,7 +25768,7 @@
 								_react2.default.createElement(
 									'label',
 									null,
-									'Username:'
+									'Email:'
 								),
 								_react2.default.createElement('input', { type: 'text', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'email' }),
 								_react2.default.createElement('br', null)
@@ -25903,7 +25875,7 @@
 	                            'h2',
 	                            null,
 	                            'Welcome, ',
-	                            _text2.default.capitalize(this.props.currentUser.firstName)
+	                            _text2.default.capitalize(this.props.currentUser.username)
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',

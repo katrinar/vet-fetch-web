@@ -46,7 +46,7 @@ class Login extends Component {
                         <h3>Already Have an Account? Login Here.</h3>
 
                         <div className="col_full">
-                            <label>Username:</label>
+                            <label>Email:</label>
                             <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" /><br />
                         </div>
 
