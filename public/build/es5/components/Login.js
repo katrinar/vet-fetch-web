@@ -51,7 +51,6 @@ var Login = (function (Component) {
 						alert(err.message);
 						return;
 					}
-					// console.log('Login post: '+JSON.stringify(response))
 
 					if (response.confirmation == "Fail") {
 						alert(response.message);
@@ -100,7 +99,7 @@ var Login = (function (Component) {
 									null,
 									"Password:"
 								),
-								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "password" }),
+								React.createElement("input", { type: "password", className: "required form-control input-block-level", onChange: this.submitUser, id: "password" }),
 								React.createElement("br", null)
 							),
 							React.createElement(

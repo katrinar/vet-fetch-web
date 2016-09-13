@@ -114,7 +114,7 @@ var Register = (function (Component) {
                 null,
                 "Password:"
               ),
-              React.createElement("input", { type: "text", onChange: this.submitProfile, id: "password", name: "register-form-phone", className: "required form-control input-block-level" })
+              React.createElement("input", { type: "password", onChange: this.submitProfile, id: "password", name: "register-form-phone", className: "required form-control input-block-level" })
             ),
             React.createElement("div", { className: "clear" }),
             React.createElement(

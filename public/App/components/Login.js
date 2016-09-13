@@ -25,7 +25,6 @@ class Login extends Component {
 				alert(err.message)
 				return
 			}
-			// console.log('Login post: '+JSON.stringify(response))
 
 			if (response.confirmation == "Fail"){
 				alert(response.message)
@@ -53,7 +52,7 @@ class Login extends Component {
 
                         <div className="col_full">
                             <label>Password:</label>
-                            <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="password" /><br />
+                            <input type="password" className="required form-control input-block-level" onChange={this.submitUser} id="password" /><br />
                         </div>
 
                         <div className="col_full nobottommargin">

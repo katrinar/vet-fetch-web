@@ -25675,7 +25675,7 @@
 	              null,
 	              'Password:'
 	            ),
-	            _react2.default.createElement('input', { type: 'text', onChange: this.submitProfile, id: 'password', name: 'register-form-phone', className: 'required form-control input-block-level' })
+	            _react2.default.createElement('input', { type: 'password', onChange: this.submitProfile, id: 'password', name: 'register-form-phone', className: 'required form-control input-block-level' })
 	          ),
 	          _react2.default.createElement('div', { className: 'clear' }),
 	          _react2.default.createElement(
@@ -25763,7 +25763,6 @@
 						alert(err.message);
 						return;
 					}
-					// console.log('Login post: '+JSON.stringify(response))
 	
 					if (response.confirmation == "Fail") {
 						alert(response.message);
@@ -25810,7 +25809,7 @@
 									null,
 									'Password:'
 								),
-								_react2.default.createElement('input', { type: 'text', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'password' }),
+								_react2.default.createElement('input', { type: 'password', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'password' }),
 								_react2.default.createElement('br', null)
 							),
 							_react2.default.createElement(

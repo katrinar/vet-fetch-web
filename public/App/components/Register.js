@@ -58,7 +58,7 @@ class Register extends Component {
 
                     <div className="col_half col_last">
                         <label>Password:</label>
-                        <input type="text" onChange={this.submitProfile} id="password" name="register-form-phone" className="required form-control input-block-level" />
+                        <input type="password" onChange={this.submitProfile} id="password" name="register-form-phone" className="required form-control input-block-level" />
                     </div>
 
                     <div className="clear"></div>
