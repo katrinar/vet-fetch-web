@@ -12,8 +12,8 @@ class Nav extends Component {
 	                    <div id="primary-menu-trigger"><i className="icon-reorder"></i></div>
 
 	                    <div id="logo">
-	                        <a href="index.html" className="standard-logo" data-dark-logo="/images/logo-dark.png"><img src="/images/logo.png" alt="Canvas Logo" /></a>
-	                        <a href="index.html" className="retina-logo" data-dark-logo="/images/logo-dark@2x.png"><img src="/images/logo@2x.png" alt="Canvas Logo" /></a>
+	                        <a href="index.html" className="standard-logo" data-dark-logo="/images/vet-fetch.png"><img src="/images/vet-fetch.png" alt="Vet Fetch Logo" /></a>
+	                        <a href="index.html" className="retina-logo" data-dark-logo="/images/vet-fetch@2x.png"><img src="/images/vet-fetch@2x.png" alt="Vet Fetch Logo" /></a>
 	                    </div>
 	                    
 	                    <nav id="primary-menu">

@@ -24840,13 +24840,13 @@
 								{ id: "logo" },
 								_react2.default.createElement(
 									"a",
-									{ href: "index.html", className: "standard-logo", "data-dark-logo": "/images/logo-dark.png" },
-									_react2.default.createElement("img", { src: "/images/logo.png", alt: "Canvas Logo" })
+									{ href: "index.html", className: "standard-logo", "data-dark-logo": "/images/vet-fetch.png" },
+									_react2.default.createElement("img", { src: "/images/vet-fetch.png", alt: "Vet Fetch Logo" })
 								),
 								_react2.default.createElement(
 									"a",
-									{ href: "index.html", className: "retina-logo", "data-dark-logo": "/images/logo-dark@2x.png" },
-									_react2.default.createElement("img", { src: "/images/logo@2x.png", alt: "Canvas Logo" })
+									{ href: "index.html", className: "retina-logo", "data-dark-logo": "/images/vet-fetch@2x.png" },
+									_react2.default.createElement("img", { src: "/images/vet-fetch@2x.png", alt: "Vet Fetch Logo" })
 								)
 							),
 							_react2.default.createElement(
