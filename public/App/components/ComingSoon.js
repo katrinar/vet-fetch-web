@@ -6,7 +6,7 @@ class ComingSoon extends Component {
 	render(){
 		return(
 			<div>
-				<Nav />
+				<Nav currentUser={this.props.currentUser}/>
 
 				<div className="content-wrap">
 					<div className="container clearfix">

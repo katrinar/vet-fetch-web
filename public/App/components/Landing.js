@@ -8,7 +8,7 @@ class Landing extends Component {
 	render(){
 		return(
 			<div>
-				<Nav />
+				<Nav currentUser={this.props.currentUser} />
 				 	
 		        <section id="slider" className="slider-parallax full-screen dark"style={{background: 'url("/images/landing/cover.jpg") center', opacity: 0.7, overflow:'visible'}}>
 

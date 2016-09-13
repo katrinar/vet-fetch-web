@@ -16,7 +16,7 @@ class HomeContainer extends Component {
 		return(
 			<div>
 
-				<Nav />
+				<Nav currentUser={this.props.currentUser} />
 				<div className="section notopmargin nobottommargin nobg">
 					<div className="container clearfix">
 

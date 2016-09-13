@@ -40,7 +40,7 @@ var HomeContainer = (function (Component) {
                 return React.createElement(
                     "div",
                     null,
-                    React.createElement(Nav, null),
+                    React.createElement(Nav, { currentUser: this.props.currentUser }),
                     React.createElement(
                         "div",
                         { className: "section notopmargin nobottommargin nobg" },

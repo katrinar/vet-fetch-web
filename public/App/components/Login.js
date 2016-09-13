@@ -39,28 +39,42 @@ class Login extends Component {
 
 	render(){
 		return(
-			<div className="col_one_third nobottommargin">
-                <div className="well well-lg nobottommargin">
-                    <form id="login-form" name="login-form" className="nobottommargin">
+		
+            <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-body">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 className="modal-title" id="myModalLabel">Login</h4>
+                            </div>
+                            <div className="modal-body">
+                                <form className="nobottommargin">
+						            <div className="col_full">
+						                <label>Email:</label>
+						                <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" /><br />
+						            </div>
 
-                        <h3>Already Have an Account? Login Here.</h3>
+						            <div className="col_full">
+						                <label>Password:</label>
+						                <input type="password" className="required form-control input-block-level" onChange={this.submitUser} id="password" /><br />
+						            </div>
 
-                        <div className="col_full">
-                            <label>Email:</label>
-                            <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" /><br />
+						            <div className="col_full nobottommargin">
+						                <button onClick={this.login} className="button button-3d nomargin" id="login-form-submit" name="login-form-submit">Login</button>
+						            </div>
+						        </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-
-                        <div className="col_full">
-                            <label>Password:</label>
-                            <input type="password" className="required form-control input-block-level" onChange={this.submitUser} id="password" /><br />
-                        </div>
-
-                        <div className="col_full nobottommargin">
-                            <button onClick={this.login} className="button button-3d nomargin" id="login-form-submit" name="login-form-submit">Login</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
+
+
+        
 					
 		)
 	}

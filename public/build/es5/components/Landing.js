@@ -38,7 +38,7 @@ var Landing = (function (Component) {
                 return React.createElement(
                     "div",
                     null,
-                    React.createElement(Nav, null),
+                    React.createElement(Nav, { currentUser: this.props.currentUser }),
                     React.createElement(
                         "section",
                         { id: "slider", className: "slider-parallax full-screen dark", style: { background: "url(\"/images/landing/cover.jpg\") center", opacity: 0.7, overflow: "visible" } },

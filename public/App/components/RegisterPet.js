@@ -49,7 +49,7 @@ class RegisterPet extends Component {
 		return(
 
 			<div>
-				<Nav />
+				<Nav currentUser={this.props.currentUser} />
 
 				<section id="page-title">
 		            <div className="container clearfix">

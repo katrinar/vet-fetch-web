@@ -13,6 +13,8 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
+var Login = _interopRequire(require("../components/Login"));
+
 var Nav = (function (Component) {
 	function Nav() {
 		_classCallCheck(this, Nav);
@@ -76,7 +78,7 @@ var Nav = (function (Component) {
 									),
 									React.createElement(
 										"li",
-										{ className: "mega-menu" },
+										null,
 										React.createElement(
 											"a",
 											{ href: "/pets" },
@@ -90,7 +92,7 @@ var Nav = (function (Component) {
 									),
 									React.createElement(
 										"li",
-										{ className: "mega-menu" },
+										null,
 										React.createElement(
 											"a",
 											{ href: "/vets" },
@@ -103,7 +105,7 @@ var Nav = (function (Component) {
 									),
 									React.createElement(
 										"li",
-										{ className: "mega-menu" },
+										null,
 										React.createElement(
 											"a",
 											{ href: "/account" },
@@ -113,10 +115,24 @@ var Nav = (function (Component) {
 												"Account"
 											)
 										)
+									),
+									React.createElement(
+										"li",
+										null,
+										React.createElement(
+											"a",
+											{ href: "#", "data-toggle": "modal", "data-target": "#myModal" },
+											React.createElement(
+												"div",
+												null,
+												"Login"
+											)
+										)
 									)
 								)
 							)
-						)
+						),
+						React.createElement(Login, { currentUser: this.props.currentUser })
 					)
 				);
 			},

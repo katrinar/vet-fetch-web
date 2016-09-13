@@ -19,7 +19,7 @@ class PetProfileInfo extends Component {
 
 		return(
 			<div>
-				<Nav />
+				<Nav currentUser={this.props.currentUser} />
 				<section id="page-title">
 		            <div className="container clearfix">
 		                <h1>Pet Dashboard</h1>

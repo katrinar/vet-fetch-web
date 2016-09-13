@@ -68,47 +68,77 @@ var Login = (function (Component) {
 			value: function render() {
 				return React.createElement(
 					"div",
-					{ className: "col_one_third nobottommargin" },
+					{ className: "modal fade", id: "myModal", tabindex: "-1", role: "dialog", "aria-labelledby": "myModalLabel", "aria-hidden": "true" },
 					React.createElement(
 						"div",
-						{ className: "well well-lg nobottommargin" },
+						{ className: "modal-dialog" },
 						React.createElement(
-							"form",
-							{ id: "login-form", name: "login-form", className: "nobottommargin" },
-							React.createElement(
-								"h3",
-								null,
-								"Already Have an Account? Login Here."
-							),
+							"div",
+							{ className: "modal-body" },
 							React.createElement(
 								"div",
-								{ className: "col_full" },
+								{ className: "modal-content" },
 								React.createElement(
-									"label",
-									null,
-									"Email:"
+									"div",
+									{ className: "modal-header" },
+									React.createElement(
+										"button",
+										{ type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" },
+										"×"
+									),
+									React.createElement(
+										"h4",
+										{ className: "modal-title", id: "myModalLabel" },
+										"Login"
+									)
 								),
-								React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email" }),
-								React.createElement("br", null)
-							),
-							React.createElement(
-								"div",
-								{ className: "col_full" },
 								React.createElement(
-									"label",
-									null,
-									"Password:"
+									"div",
+									{ className: "modal-body" },
+									React.createElement(
+										"form",
+										{ className: "nobottommargin" },
+										React.createElement(
+											"div",
+											{ className: "col_full" },
+											React.createElement(
+												"label",
+												null,
+												"Email:"
+											),
+											React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email" }),
+											React.createElement("br", null)
+										),
+										React.createElement(
+											"div",
+											{ className: "col_full" },
+											React.createElement(
+												"label",
+												null,
+												"Password:"
+											),
+											React.createElement("input", { type: "password", className: "required form-control input-block-level", onChange: this.submitUser, id: "password" }),
+											React.createElement("br", null)
+										),
+										React.createElement(
+											"div",
+											{ className: "col_full nobottommargin" },
+											React.createElement(
+												"button",
+												{ onClick: this.login, className: "button button-3d nomargin", id: "login-form-submit", name: "login-form-submit" },
+												"Login"
+											)
+										)
+									)
 								),
-								React.createElement("input", { type: "password", className: "required form-control input-block-level", onChange: this.submitUser, id: "password" }),
-								React.createElement("br", null)
-							),
-							React.createElement(
-								"div",
-								{ className: "col_full nobottommargin" },
 								React.createElement(
-									"button",
-									{ onClick: this.login, className: "button button-3d nomargin", id: "login-form-submit", name: "login-form-submit" },
-									"Login"
+									"div",
+									{ className: "modal-footer" },
+									React.createElement(
+										"button",
+										{ type: "button", className: "btn btn-default", "data-dismiss": "modal" },
+										"Close"
+									)
 								)
 							)
 						)

@@ -21200,7 +21200,7 @@
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
-	var _Landing = __webpack_require__(207);
+	var _Landing = __webpack_require__(208);
 	
 	var _Landing2 = _interopRequireDefault(_Landing);
 	
@@ -21337,13 +21337,13 @@
 					case 'pets':
 						return page = _react2.default.createElement(_Pets2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray, showRegisterPet: this.props.showRegisterPet });
 					case 'pet':
-						return page = _react2.default.createElement(_PetProfile2.default, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet });
+						return page = _react2.default.createElement(_PetProfile2.default, { currentUser: this.props.currentUser, pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet });
 					case 'vets':
 						return page = _react2.default.createElement(_VetsContainer2.default, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case 'vet':
 						return page = _react2.default.createElement(_VetProfile2.default, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
 					case 'insurance':
-						return page = _react2.default.createElement(_ComingSoon2.default, null);
+						return page = _react2.default.createElement(_ComingSoon2.default, { currentUser: this.props.currentUser });
 					default:
 						return page = null;
 				}
@@ -24527,7 +24527,7 @@
 	
 	var _EditProfile2 = _interopRequireDefault(_EditProfile);
 	
-	var _AccountContent = __webpack_require__(205);
+	var _AccountContent = __webpack_require__(206);
 	
 	var _AccountContent2 = _interopRequireDefault(_AccountContent);
 	
@@ -24790,7 +24790,7 @@
 /* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -24801,6 +24801,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _Login = __webpack_require__(205);
+	
+	var _Login2 = _interopRequireDefault(_Login);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24820,98 +24824,112 @@
 		}
 	
 		_createClass(Nav, [{
-			key: "render",
+			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					"header",
-					{ id: "header", className: "full-header dark" },
+					'header',
+					{ id: 'header', className: 'full-header dark' },
 					_react2.default.createElement(
-						"div",
-						{ id: "header-wrap" },
+						'div',
+						{ id: 'header-wrap' },
 						_react2.default.createElement(
-							"div",
-							{ className: "container clearfix" },
+							'div',
+							{ className: 'container clearfix' },
 							_react2.default.createElement(
-								"div",
-								{ id: "primary-menu-trigger" },
-								_react2.default.createElement("i", { className: "icon-reorder" })
+								'div',
+								{ id: 'primary-menu-trigger' },
+								_react2.default.createElement('i', { className: 'icon-reorder' })
 							),
 							_react2.default.createElement(
-								"div",
-								{ id: "logo" },
+								'div',
+								{ id: 'logo' },
 								_react2.default.createElement(
-									"a",
-									{ href: "/", className: "standard-logo", "data-dark-logo": "/images/vet-fetch.png" },
-									_react2.default.createElement("img", { src: "/images/vet-fetch.png", alt: "Vet Fetch Logo" })
+									'a',
+									{ href: '/', className: 'standard-logo', 'data-dark-logo': '/images/vet-fetch.png' },
+									_react2.default.createElement('img', { src: '/images/vet-fetch.png', alt: 'Vet Fetch Logo' })
 								),
 								_react2.default.createElement(
-									"a",
-									{ href: "/", className: "retina-logo", "data-dark-logo": "/images/vet-fetch@2x.png" },
-									_react2.default.createElement("img", { src: "/images/vet-fetch@2x.png", alt: "Vet Fetch Logo" })
+									'a',
+									{ href: '/', className: 'retina-logo', 'data-dark-logo': '/images/vet-fetch@2x.png' },
+									_react2.default.createElement('img', { src: '/images/vet-fetch@2x.png', alt: 'Vet Fetch Logo' })
 								)
 							),
 							_react2.default.createElement(
-								"nav",
-								{ id: "primary-menu" },
+								'nav',
+								{ id: 'primary-menu' },
 								_react2.default.createElement(
-									"ul",
+									'ul',
 									null,
 									_react2.default.createElement(
-										"li",
+										'li',
 										null,
 										_react2.default.createElement(
-											"a",
-											{ href: "/" },
+											'a',
+											{ href: '/' },
 											_react2.default.createElement(
-												"div",
+												'div',
 												null,
-												"Home"
+												'Home'
 											)
 										)
 									),
 									_react2.default.createElement(
-										"li",
-										{ className: "mega-menu" },
+										'li',
+										null,
 										_react2.default.createElement(
-											"a",
-											{ href: "/pets" },
+											'a',
+											{ href: '/pets' },
 											_react2.default.createElement(
-												"div",
+												'div',
 												null,
-												"Pets"
+												'Pets'
 											)
 										),
-										" "
+										' '
 									),
 									_react2.default.createElement(
-										"li",
-										{ className: "mega-menu" },
+										'li',
+										null,
 										_react2.default.createElement(
-											"a",
-											{ href: "/vets" },
+											'a',
+											{ href: '/vets' },
 											_react2.default.createElement(
-												"div",
+												'div',
 												null,
-												"Vets"
+												'Vets'
 											)
 										)
 									),
 									_react2.default.createElement(
-										"li",
-										{ className: "mega-menu" },
+										'li',
+										null,
 										_react2.default.createElement(
-											"a",
-											{ href: "/account" },
+											'a',
+											{ href: '#', 'data-toggle': 'modal', 'data-target': '#myModal' },
 											_react2.default.createElement(
-												"div",
+												'div',
 												null,
-												"Account"
+												'Login'
+											)
+										)
+									),
+									_react2.default.createElement(
+										'li',
+										null,
+										_react2.default.createElement(
+											'a',
+											{ href: '/account' },
+											_react2.default.createElement(
+												'div',
+												null,
+												'Account'
 											)
 										)
 									)
 								)
 							)
-						)
+						),
+						_react2.default.createElement(_Login2.default, { currentUser: this.props.currentUser })
 					)
 				);
 			}
@@ -24924,6 +24942,171 @@
 
 /***/ },
 /* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(200);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Login = function (_Component) {
+		_inherits(Login, _Component);
+	
+		function Login(props, context) {
+			_classCallCheck(this, Login);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props, context));
+	
+			_this.submitUser = _this.submitUser.bind(_this);
+			_this.login = _this.login.bind(_this);
+			return _this;
+		}
+	
+		_createClass(Login, [{
+			key: 'submitUser',
+			value: function submitUser(event) {
+				var loginUser = Object.assign({}, this.props.currentUser);
+				loginUser[event.target.id] = event.target.value;
+				_store2.default.dispatch(_actions2.default.receivedCurrentUser(loginUser));
+			}
+		}, {
+			key: 'login',
+			value: function login(event) {
+				event.preventDefault();
+	
+				_api2.default.handlePost('/account/login', this.props.currentUser, function (err, response) {
+					if (err != null) {
+						alert(err.message);
+						return;
+					}
+	
+					if (response.confirmation == "Fail") {
+						alert(response.message);
+					}
+	
+					if (response.confirmation == "Success") {
+						_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.currentUser));
+					}
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'modal fade', id: 'myModal', tabindex: '-1', role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'modal-dialog' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'modal-body' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'modal-content' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'modal-header' },
+									_react2.default.createElement(
+										'button',
+										{ type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-hidden': 'true' },
+										'×'
+									),
+									_react2.default.createElement(
+										'h4',
+										{ className: 'modal-title', id: 'myModalLabel' },
+										'Login'
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'modal-body' },
+									_react2.default.createElement(
+										'form',
+										{ className: 'nobottommargin' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'col_full' },
+											_react2.default.createElement(
+												'label',
+												null,
+												'Email:'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'email' }),
+											_react2.default.createElement('br', null)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'col_full' },
+											_react2.default.createElement(
+												'label',
+												null,
+												'Password:'
+											),
+											_react2.default.createElement('input', { type: 'password', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'password' }),
+											_react2.default.createElement('br', null)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'col_full nobottommargin' },
+											_react2.default.createElement(
+												'button',
+												{ onClick: this.login, className: 'button button-3d nomargin', id: 'login-form-submit', name: 'login-form-submit' },
+												'Login'
+											)
+										)
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'modal-footer' },
+									_react2.default.createElement(
+										'button',
+										{ type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+										'Close'
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+	
+		return Login;
+	}(_react.Component);
+	
+	exports.default = Login;
+
+/***/ },
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24958,7 +25141,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -25116,7 +25299,7 @@
 	exports.default = AccountContent;
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25212,7 +25395,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25227,11 +25410,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Register = __webpack_require__(208);
+	var _Register = __webpack_require__(209);
 	
 	var _Register2 = _interopRequireDefault(_Register);
 	
-	var _Login = __webpack_require__(209);
+	var _Login = __webpack_require__(205);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -25239,7 +25422,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -25266,7 +25449,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_Nav2.default, null),
+	                _react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 	                _react2.default.createElement(
 	                    'section',
 	                    { id: 'slider', className: 'slider-parallax full-screen dark', style: { background: 'url("/images/landing/cover.jpg") center', opacity: 0.7, overflow: 'visible' } },
@@ -25558,7 +25741,7 @@
 	exports.default = Landing;
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25670,141 +25853,6 @@
 	exports.default = Register;
 
 /***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _api = __webpack_require__(173);
-	
-	var _api2 = _interopRequireDefault(_api);
-	
-	var _store = __webpack_require__(180);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _actions = __webpack_require__(200);
-	
-	var _actions2 = _interopRequireDefault(_actions);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Login = function (_Component) {
-		_inherits(Login, _Component);
-	
-		function Login(props, context) {
-			_classCallCheck(this, Login);
-	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props, context));
-	
-			_this.submitUser = _this.submitUser.bind(_this);
-			_this.login = _this.login.bind(_this);
-			return _this;
-		}
-	
-		_createClass(Login, [{
-			key: 'submitUser',
-			value: function submitUser(event) {
-				var loginUser = Object.assign({}, this.props.currentUser);
-				loginUser[event.target.id] = event.target.value;
-				_store2.default.dispatch(_actions2.default.receivedCurrentUser(loginUser));
-			}
-		}, {
-			key: 'login',
-			value: function login(event) {
-				event.preventDefault();
-	
-				_api2.default.handlePost('/account/login', this.props.currentUser, function (err, response) {
-					if (err != null) {
-						alert(err.message);
-						return;
-					}
-	
-					if (response.confirmation == "Fail") {
-						alert(response.message);
-					}
-	
-					if (response.confirmation == "Success") {
-						_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.currentUser));
-					}
-				});
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'col_one_third nobottommargin' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'well well-lg nobottommargin' },
-						_react2.default.createElement(
-							'form',
-							{ id: 'login-form', name: 'login-form', className: 'nobottommargin' },
-							_react2.default.createElement(
-								'h3',
-								null,
-								'Already Have an Account? Login Here.'
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'col_full' },
-								_react2.default.createElement(
-									'label',
-									null,
-									'Email:'
-								),
-								_react2.default.createElement('input', { type: 'text', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'email' }),
-								_react2.default.createElement('br', null)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'col_full' },
-								_react2.default.createElement(
-									'label',
-									null,
-									'Password:'
-								),
-								_react2.default.createElement('input', { type: 'password', className: 'required form-control input-block-level', onChange: this.submitUser, id: 'password' }),
-								_react2.default.createElement('br', null)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'col_full nobottommargin' },
-								_react2.default.createElement(
-									'button',
-									{ onClick: this.login, className: 'button button-3d nomargin', id: 'login-form-submit', name: 'login-form-submit' },
-									'Login'
-								)
-							)
-						)
-					)
-				);
-			}
-		}]);
-	
-		return Login;
-	}(_react.Component);
-	
-	exports.default = Login;
-
-/***/ },
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25836,7 +25884,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -25864,7 +25912,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_Nav2.default, null),
+	                _react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'section notopmargin nobottommargin nobg' },
@@ -26091,7 +26139,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -26154,7 +26202,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 					_react2.default.createElement(
 						'section',
 						{ id: 'page-title' },
@@ -26241,7 +26289,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -26272,7 +26320,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 					_react2.default.createElement(
 						'section',
 						{ id: 'page-title' },
@@ -26561,7 +26609,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -27299,7 +27347,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -27329,7 +27377,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 					_react2.default.createElement(
 						'section',
 						{ id: 'page-title' },
@@ -27754,7 +27802,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -27857,7 +27905,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 					_react2.default.createElement(
 						'section',
 						{ id: 'page-title' },
@@ -31266,7 +31314,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Footer = __webpack_require__(206);
+	var _Footer = __webpack_require__(207);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
@@ -31293,7 +31341,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(_Nav2.default, { currentUser: this.props.currentUser }),
 					_react2.default.createElement(
 						'div',
 						{ className: 'content-wrap' },

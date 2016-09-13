@@ -98,13 +98,13 @@ class Main extends Component {
 			case 'pets':
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray} showRegisterPet={this.props.showRegisterPet}/>
 			case 'pet':
-				return page = <PetProfile pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet}/>
+				return page = <PetProfile currentUser={this.props.currentUser} pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet}/>
 			case 'vets':
 				return page = <VetsContainer currentUser={this.props.currentUser} search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
 			case 'vet':
 				return page = <VetProfile currentUser={this.props.currentUser} searchHistory={this.props.searchHistory} slug={this.props.slug}/>
 			case 'insurance':
-				return page = <ComingSoon />
+				return page = <ComingSoon currentUser={this.props.currentUser}/>
 			default: 
 				return page = null
 		}

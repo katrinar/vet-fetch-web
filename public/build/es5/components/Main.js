@@ -136,13 +136,13 @@ var Main = (function (Component) {
 					case "pets":
 						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray, showRegisterPet: this.props.showRegisterPet });
 					case "pet":
-						return page = React.createElement(PetProfile, { pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet });
+						return page = React.createElement(PetProfile, { currentUser: this.props.currentUser, pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet });
 					case "vets":
 						return page = React.createElement(VetsContainer, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case "vet":
 						return page = React.createElement(VetProfile, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
 					case "insurance":
-						return page = React.createElement(ComingSoon, null);
+						return page = React.createElement(ComingSoon, { currentUser: this.props.currentUser });
 					default:
 						return page = null;
 				}
