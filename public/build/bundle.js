@@ -26777,6 +26777,14 @@
 								_react2.default.createElement(
 									'label',
 									null,
+									'Weight'
+								),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'weight', placeholder: 'Weight', value: petProfile.weight }),
+								_react2.default.createElement('br', null),
+								_react2.default.createElement(
+									'label',
+									null,
 									'Vaccines'
 								),
 								_react2.default.createElement('br', null),

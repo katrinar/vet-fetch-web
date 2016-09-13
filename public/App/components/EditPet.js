@@ -129,6 +129,9 @@ class EditPet extends Component {
 							<label>Breed</label><br />
 							<input type="text" onChange={this.submitEdit} id="breed" placeholder={'Breed'} value={petProfile.breed}/><br />
 
+							<label>Weight</label><br />
+							<input type="text" onChange={this.submitEdit} id="weight" placeholder={'Weight'} value={petProfile.weight}/><br />
+
 							<label>Vaccines</label><br />
 							<input type="text" onChange={this.submitEdit} id="vaccinesString" placeholder={'rabies...'} value={petProfile.vaccinesString} /><br />
 

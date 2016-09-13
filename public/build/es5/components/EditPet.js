@@ -215,6 +215,14 @@ var EditPet = (function (Component) {
 								React.createElement(
 									"label",
 									null,
+									"Weight"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "weight", placeholder: "Weight", value: petProfile.weight }),
+								React.createElement("br", null),
+								React.createElement(
+									"label",
+									null,
 									"Vaccines"
 								),
 								React.createElement("br", null),
