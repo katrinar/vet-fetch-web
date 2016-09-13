@@ -45,16 +45,21 @@ var Login = (function (Component) {
 		login: {
 			value: function login(event) {
 				event.preventDefault();
-				console.log("login = " + JSON.stringify(this.props.currentUser));
 
 				api.handlePost("/account/login", this.props.currentUser, function (err, response) {
 					if (err != null) {
 						alert(err.message);
 						return;
 					}
-					console.log("login post: " + JSON.stringify(response.currentUser));
+					// console.log('Login post: '+JSON.stringify(response))
 
-					store.dispatch(actions.receivedCurrentUser(response.currentUser));
+					if (response.confirmation == "Fail") {
+						alert(response.message);
+					}
+
+					if (response.confirmation == "Success") {
+						store.dispatch(actions.receivedCurrentUser(response.currentUser));
+					}
 				});
 			},
 			writable: true,

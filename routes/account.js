@@ -79,21 +79,23 @@ router.post('/:action', function(req, res, next){
 		var email = credentials.email.toLowerCase()
 
 		profileController.get({email: email}, true, function(err, results){
+			// console.log("ACCOUNT ROUTER GET RESULTS:" +JSON.stringify(results))
+
+			if (results.length == 0){
+				res.json({
+					confirmation: 'Fail',
+					message: 'User Email Not Found. Please check spelling and try again.'
+				})
+				return
+			}
+
 			var profile = results[0]
 			var passwordCorrect = bcrypt.compareSync(credentials.password, profile.password)
 
 			if (err){
 				res.json({
-					confirmation: 'fail',
-					message: err
-				})
-				return
-			}
-
-			if (results.length == 0){
-				res.json({
 					confirmation: 'Fail',
-					message: 'User Not Found. Please check spelling.'
+					message: err
 				})
 				return
 			}
@@ -101,7 +103,7 @@ router.post('/:action', function(req, res, next){
 			if (passwordCorrect == false){
 				res.json({
 					confirmation: 'Fail',
-					message: 'Incorrect Password'
+					message: 'Incorrect Password. Please check spelling and try again.'
 				})
 				return
 			}

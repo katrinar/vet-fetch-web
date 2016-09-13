@@ -25757,16 +25757,21 @@
 			key: 'login',
 			value: function login(event) {
 				event.preventDefault();
-				console.log('login = ' + JSON.stringify(this.props.currentUser));
 	
 				_api2.default.handlePost('/account/login', this.props.currentUser, function (err, response) {
 					if (err != null) {
 						alert(err.message);
 						return;
 					}
-					console.log('login post: ' + JSON.stringify(response.currentUser));
+					// console.log('Login post: '+JSON.stringify(response))
 	
-					_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.currentUser));
+					if (response.confirmation == "Fail") {
+						alert(response.message);
+					}
+	
+					if (response.confirmation == "Success") {
+						_store2.default.dispatch(_actions2.default.receivedCurrentUser(response.currentUser));
+					}
 				});
 			}
 		}, {

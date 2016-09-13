@@ -31,9 +31,17 @@ module.exports = {
 		}
 		
 		Profile.find(params, function(err, profiles){
+
 			if(err){
 				if(callback != null)
 					callback(err, null)
+				return
+			}
+
+			if (profiles == null){
+
+				callback(err, null)
+				
 				return
 			}
 
