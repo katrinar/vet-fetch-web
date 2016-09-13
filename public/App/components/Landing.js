@@ -61,44 +61,46 @@ class Landing extends Component {
 
                         <div className="divider"><i className="icon-circle"></i></div>
 
-                        <div id="posts" className="post-grid grid-2 clearfix">
+                        <div id="portfolio" className="portfolio-2 clearfix">
 
-                        <div className="entry clearfix">
-                            <div className="entry-image">
-                                <img className="image_fade" src="/images/dog-with-cat.png" alt="Pets" />
-                            </div>
-                            <div className="entry-title">
-                                <h2>Manage from pet dashboard</h2>
-                            </div>
+                            <article className="portfolio-item pf-illustrations">
+                                <div className="portfolio-image">
+                                    <img src="/images/search-vets.png" alt="Search Vets" />
+                                </div>
+                                <div className="portfolio-desc">
+                                    <h3>Fetch on the go - use Vet Fetch on desktop or mobile</h3>        
+                                </div>
+                            </article>
+
+                            <article className="portfolio-item pf-illustrations">
+                                <div className="portfolio-image">
+                                    <img src="/images/pet-profile.png" alt="Pet Profile" />
+                                </div>
+                                <div className="portfolio-desc">
+                                    <h3>Pull up your pet health record and update whenever</h3>        
+                                </div>
+                            </article>
+
+                            <article className="portfolio-item pf-illustrations">
+                                <div className="portfolio-image">
+                                    <img src="/images/pet-dashboard.png" alt="Open Imagination" />  
+                                </div>
+                                <div className="portfolio-desc">
+                                    <h3>Manage all your pets from the Pet Dashboard</h3> 
+                                </div>
+                            </article>
+
+                            <article className="portfolio-item pf-illustrations">
+                                <div className="portfolio-image">
+                                    <img src="/images/typing.png" alt="Insurance Search" />
+                                </div>
+                                <div className="portfolio-desc">
+                                    <h3>Find the right insurance coverage for your pet</h3>        
+                                </div>
+                            </article>
+ 
                         </div>
 
-                        <div className="entry clearfix">
-                            <div className="entry-image">
-                                <img className="image_fade" src="/images/pet-with-family.jpg" alt="Vets" />
-                            </div>
-                            <div className="entry-title">
-                                <h2>Find vetinary care near you</h2>
-                            </div>
-                        </div>
-
-                        <div className="entry clearfix">
-                            <div className="entry-image">
-                                <img className="image_fade" src="/images/man-at-desk.jpeg" alt="Pets" />
-                            </div>
-                            <div className="entry-title">
-                                <h2>Pick insurance plans for your pet</h2>
-                            </div>
-                        </div>
-
-                        <div className="entry clearfix">
-                            <div className="entry-image">
-                                <img className="image_fade" src="/images/laptop.jpg" alt="Vets" />
-                            </div>
-                            <div className="entry-title">
-                                <h2>Manage your Account</h2>
-                            </div>
-                        </div>
-                    </div>
 
                         <div className="line"></div>
 

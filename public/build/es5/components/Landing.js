@@ -185,76 +185,76 @@ var Landing = (function (Component) {
                             ),
                             React.createElement(
                                 "div",
-                                { id: "posts", className: "post-grid grid-2 clearfix" },
+                                { id: "portfolio", className: "portfolio-2 clearfix" },
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-illustrations" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/search-vets.png", alt: "Search Vets" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Manage from pet dashboard"
+                                            "Fetch on the go - use Vet Fetch on desktop or mobile"
                                         )
                                     )
                                 ),
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-illustrations" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/pet-profile.png", alt: "Pet Profile" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Find vetinary care near you"
+                                            "Pull up your pet health record and update whenever"
                                         )
                                     )
                                 ),
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-illustrations" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement("img", { className: "image_fade", src: "/images/man-at-desk.jpeg", alt: "Pets" })
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/pet-dashboard.png", alt: "Open Imagination" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Pick insurance plans for your pet"
+                                            "Manage all your pets from the Pet Dashboard"
                                         )
                                     )
                                 ),
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-illustrations" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/typing.png", alt: "Insurance Search" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Manage your Account"
+                                            "Find the right insurance coverage for your pet"
                                         )
                                     )
                                 )
