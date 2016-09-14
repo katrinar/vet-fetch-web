@@ -21,6 +21,7 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
+var connect = require("react-redux").connect;
 var Login = (function (Component) {
 	function Login(props, context) {
 		_classCallCheck(this, Login);
@@ -45,12 +46,17 @@ var Login = (function (Component) {
 		login: {
 			value: function login(event) {
 				event.preventDefault();
+				var checkCurrentUser = this.props.currentUser || {};
+				console.log("CHECK_CURRENT_USER: " + JSON.stringify(checkCurrentUser));
 
-				api.handlePost("/account/login", this.props.currentUser, function (err, response) {
+				api.handlePost("/account/login", checkCurrentUser, function (err, response) {
+					console.log("POST LOGIN CHECK_CURRENT_USER: " + JSON.stringify(checkCurrentUser));
 					if (err != null) {
 						alert(err.message);
 						return;
 					}
+
+					console.log("POST LOGIN: " + JSON.stringify(response));
 
 					if (response.confirmation == "Fail") {
 						alert(response.message);
@@ -67,81 +73,38 @@ var Login = (function (Component) {
 		render: {
 			value: function render() {
 				return React.createElement(
-					"div",
-					{ className: "modal fade", id: "myModal", tabindex: "-1", role: "dialog", "aria-labelledby": "myModalLabel", "aria-hidden": "true" },
+					"form",
+					{ id: "top-login", role: "form" },
 					React.createElement(
 						"div",
-						{ className: "modal-dialog" },
+						{ className: "input-group", id: "top-login-username" },
 						React.createElement(
-							"div",
-							{ className: "modal-body" },
-							React.createElement(
-								"div",
-								{ className: "modal-content" },
-								React.createElement(
-									"div",
-									{ className: "modal-header" },
-									React.createElement(
-										"button",
-										{ type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" },
-										"×"
-									),
-									React.createElement(
-										"h4",
-										{ className: "modal-title", id: "myModalLabel" },
-										"Login"
-									)
-								),
-								React.createElement(
-									"div",
-									{ className: "modal-body" },
-									React.createElement(
-										"form",
-										{ className: "nobottommargin" },
-										React.createElement(
-											"div",
-											{ className: "col_full" },
-											React.createElement(
-												"label",
-												null,
-												"Email:"
-											),
-											React.createElement("input", { type: "text", className: "required form-control input-block-level", onChange: this.submitUser, id: "email" }),
-											React.createElement("br", null)
-										),
-										React.createElement(
-											"div",
-											{ className: "col_full" },
-											React.createElement(
-												"label",
-												null,
-												"Password:"
-											),
-											React.createElement("input", { type: "password", className: "required form-control input-block-level", onChange: this.submitUser, id: "password" }),
-											React.createElement("br", null)
-										),
-										React.createElement(
-											"div",
-											{ className: "col_full nobottommargin" },
-											React.createElement(
-												"button",
-												{ onClick: this.login, className: "button button-3d nomargin", id: "login-form-submit", name: "login-form-submit" },
-												"Login"
-											)
-										)
-									)
-								),
-								React.createElement(
-									"div",
-									{ className: "modal-footer" },
-									React.createElement(
-										"button",
-										{ type: "button", className: "btn btn-default", "data-dismiss": "modal" },
-										"Close"
-									)
-								)
-							)
-						)
+							"span",
+							{ className: "input-group-addon" },
+							React.createElement("i", { className: "icon-user" })
+						),
+						React.createElement("input", { onChange: this.submitUser, id: "email", type: "email", className: "form-control", placeholder: "Email" })
+					),
+					React.createElement(
+						"div",
+						{ className: "input-group", id: "top-login-password" },
+						React.createElement(
+							"span",
+							{ className: "input-group-addon" },
+							React.createElement("i", { className: "icon-key" })
+						),
+						React.createElement("input", { onChange: this.submitUser, id: "password", type: "password", className: "form-control", placeholder: "Password" })
+					),
+					React.createElement(
+						"label",
+						{ className: "checkbox" },
+						React.createElement("input", { type: "checkbox", value: "remember-me" }),
+						" Remember me"
+					),
+					React.createElement(
+						"button",
+						{ onClick: this.login, className: "btn btn-danger btn-block", type: "submit" },
+						"Sign in"
 					)
 				);
 			},
@@ -153,4 +116,13 @@ var Login = (function (Component) {
 	return Login;
 })(Component);
 
-module.exports = Login;
+var stateToProps = function (state) {
+	console.log("STATE_TO_PROPS_LOGIN: USER = " + JSON.stringify(state.accountReducer.currentUser));
+
+	return {
+		currentUser: state.accountReducer.currentUser
+	};
+};
+
+module.exports = connect(stateToProps)(Login);
+// window.location.href = '/'

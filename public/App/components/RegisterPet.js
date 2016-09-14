@@ -3,6 +3,7 @@ import api from '../utils/api'
 import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -47,9 +48,9 @@ class RegisterPet extends Component {
 
 	render(){
 		return(
-
 			<div>
-				<Nav currentUser={this.props.currentUser} />
+				<TopBar />
+				<Nav />
 
 				<section id="page-title">
 		            <div className="container clearfix">

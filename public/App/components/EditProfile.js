@@ -4,6 +4,7 @@ import text from '../utils/text'
 import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 
 class EditProfile extends Component {
@@ -43,6 +44,7 @@ class EditProfile extends Component {
 		
 		return (
 			<div>
+				<TopBar />
 				<Nav />
 
 				<section id="page-title">
@@ -59,6 +61,9 @@ class EditProfile extends Component {
 		                </div>
 
 						<form action="" method="">
+							<label>Username</label><br />
+							<input type="text" onChange={this.submitEdit} id="username" placeholder={'Username'} value={profile.username} /><br />
+
 							<label>First Name</label><br />
 							<input type="text" onChange={this.submitEdit} id="firstName" placeholder={'First Name'} value={profile.firstName} /><br />
 

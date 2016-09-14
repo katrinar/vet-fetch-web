@@ -23,6 +23,8 @@ var EditProfile = _interopRequire(require("../components/EditProfile"));
 
 var navigation = _interopRequire(require("../utils/navigation"));
 
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -58,6 +60,7 @@ var AccountContent = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(TopBar, null),
 					React.createElement(Nav, null),
 					React.createElement(
 						"section",
@@ -110,6 +113,7 @@ var AccountContent = (function (Component) {
 											text.capitalize(this.props.currentUser.lastName)
 										)
 									),
+									React.createElement("div", { className: "divider" }),
 									React.createElement(
 										"div",
 										{ className: "col_half nobottommargin" },

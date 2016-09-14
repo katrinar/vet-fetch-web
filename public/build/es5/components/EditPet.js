@@ -31,6 +31,8 @@ var Dropzone = _interopRequire(require("react-dropzone"));
 
 var request = _interopRequire(require("superagent"));
 
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -140,6 +142,7 @@ var EditPet = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(TopBar, null),
 					React.createElement(Nav, null),
 					React.createElement(
 						"section",

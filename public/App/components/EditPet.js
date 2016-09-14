@@ -7,6 +7,7 @@ import store from '../stores/store'
 import actions from '../actions/actions'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -98,6 +99,7 @@ class EditPet extends Component {
 		
 		return (
 			<div>
+				<TopBar />
 				<Nav />
 
 				<section id="page-title">

@@ -21,18 +21,19 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var SignUp = (function (Component) {
-	function SignUp(props, context) {
-		_classCallCheck(this, SignUp);
+var connect = require("react-redux").connect;
+var TopBarSignUp = (function (Component) {
+	function TopBarSignUp(props, context) {
+		_classCallCheck(this, TopBarSignUp);
 
-		_get(Object.getPrototypeOf(SignUp.prototype), "constructor", this).call(this, props, context);
+		_get(Object.getPrototypeOf(TopBarSignUp.prototype), "constructor", this).call(this, props, context);
 		this.submitProfile = this.submitProfile.bind(this);
 		this.register = this.register.bind(this);
 	}
 
-	_inherits(SignUp, Component);
+	_inherits(TopBarSignUp, Component);
 
-	_prototypeProperties(SignUp, null, {
+	_prototypeProperties(TopBarSignUp, null, {
 		submitProfile: {
 			value: function submitProfile(event) {
 				var registerUser = Object.assign({}, this.props.currentUser);
@@ -61,34 +62,47 @@ var SignUp = (function (Component) {
 			value: function render() {
 				return React.createElement(
 					"form",
-					{ className: "landing-wide-form clearfix" },
+					{ id: "top-login", role: "form" },
 					React.createElement(
 						"div",
-						{ className: "col_four_fifth nobottommargin" },
+						{ className: "input-group", id: "top-login-username" },
 						React.createElement(
-							"div",
-							{ className: "col_one_third nobottommargin" },
-							React.createElement("input", { onChange: this.submitProfile, id: "username", type: "text", className: "form-control input-lg not-dark", placeholder: "Username*" })
+							"span",
+							{ className: "input-group-addon" },
+							React.createElement("i", { className: "icon-user" })
 						),
-						React.createElement(
-							"div",
-							{ className: "col_one_third nobottommargin" },
-							React.createElement("input", { onChange: this.submitProfile, id: "email", type: "email", className: "form-control input-lg not-dark", placeholder: "Email*" })
-						),
-						React.createElement(
-							"div",
-							{ className: "col_one_third col_last nobottommargin" },
-							React.createElement("input", { onChange: this.submitProfile, id: "password", type: "password", className: "form-control input-lg not-dark", placeholder: "Password*" })
-						)
+						React.createElement("input", { onChange: this.submitProfile, id: "username", className: "form-control", placeholder: "Username" })
 					),
 					React.createElement(
 						"div",
-						{ className: "col_one_fifth col_last nobottommargin" },
+						{ className: "input-group", id: "top-login-username" },
 						React.createElement(
-							"button",
-							{ onClick: this.register, className: "btn btn-lg btn-danger btn-block nomargin" },
-							"SIGN UP"
-						)
+							"span",
+							{ className: "input-group-addon" },
+							React.createElement("i", { className: "icon-email" })
+						),
+						React.createElement("input", { onChange: this.submitProfile, id: "email", type: "email", className: "form-control", placeholder: "Email" })
+					),
+					React.createElement(
+						"div",
+						{ className: "input-group", id: "top-login-password" },
+						React.createElement(
+							"span",
+							{ className: "input-group-addon" },
+							React.createElement("i", { className: "icon-key" })
+						),
+						React.createElement("input", { onChange: this.submitProfile, id: "password", type: "password", className: "form-control", placeholder: "Password" })
+					),
+					React.createElement(
+						"label",
+						{ className: "checkbox" },
+						React.createElement("input", { type: "checkbox", value: "remember-me" }),
+						" Remember me"
+					),
+					React.createElement(
+						"button",
+						{ onClick: this.register, className: "btn btn-danger btn-block", type: "submit" },
+						"Sign in"
 					)
 				);
 			},
@@ -97,7 +111,15 @@ var SignUp = (function (Component) {
 		}
 	});
 
-	return SignUp;
+	return TopBarSignUp;
 })(Component);
 
-module.exports = SignUp;
+var stateToProps = function (state) {
+	console.log("STATE_TO_PROPS_REGISTER: USER = " + JSON.stringify(state.accountReducer.currentUser));
+
+	return {
+		currentUser: state.accountReducer.currentUser
+	};
+};
+
+module.exports = connect(stateToProps)(TopBarSignUp);

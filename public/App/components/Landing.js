@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import Register from '../components/Register'
+import SignUp from '../components/SignUp'
 import Login from '../components/Login'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -8,7 +9,8 @@ class Landing extends Component {
 	render(){
 		return(
 			<div>
-				<Nav currentUser={this.props.currentUser} />
+                <TopBar />
+				<Nav />
 				 	
 		        <section id="slider" className="slider-parallax full-screen dark"style={{background: 'url("/images/landing/cover.jpg") center', opacity: 0.7, overflow:'visible'}}>
 
@@ -19,14 +21,14 @@ class Landing extends Component {
 		                    <span>Managing your pets health information has never been easier.</span>
 		                </div>
 
-                        <Register currentUser={this.props.currentUser} />
+                        <SignUp currentUser={this.props.currentUser} />
 		            </div>
 
 		        </section>
 
                 <section id="page-title">
                     <div className="container clearfix">
-                        <h1>Keep track of all your pet health care in one spot.</h1>
+                        <h1>Find a Vet for your Pet</h1>
                         <span>Track weight, vaccines, medications, and allergies with our pet dashboard. If you need vetinary care, VetFetch will find a few in your zipcode. Check in here or manage on the go with our mobile app. </span>
                     </div>
                 </section>

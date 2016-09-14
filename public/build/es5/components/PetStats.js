@@ -38,7 +38,7 @@ var PetStats = (function (Component) {
 				var petSlug = this.props.slug;
 				var petProfile = this.props.pets[petSlug] || {};
 				var petProfileImg = petProfile.image || {};
-				console.log("petStats image[thumb] = " + JSON.stringify(petProfileImg.thumb));
+				// console.log('petStats image[thumb] = '+JSON.stringify(petProfileImg['thumb']))
 
 				return React.createElement(
 					"div",

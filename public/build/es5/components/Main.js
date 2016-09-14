@@ -29,6 +29,8 @@ var Pets = _interopRequire(require("../components/Pets"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
 
+var RegisterPet = _interopRequire(require("../components/RegisterPet"));
+
 var VetProfile = _interopRequire(require("../components/VetProfile"));
 
 var VetsContainer = _interopRequire(require("../components/VetsContainer"));
@@ -137,12 +139,14 @@ var Main = (function (Component) {
 						return page = React.createElement(Pets, { currentUser: this.props.currentUser, petsArray: this.props.petsArray, showRegisterPet: this.props.showRegisterPet });
 					case "pet":
 						return page = React.createElement(PetProfile, { currentUser: this.props.currentUser, pets: this.props.pets, slug: this.props.slug, displayEditPet: this.props.displayEditPet });
+					case "register-pet":
+						return page = React.createElement(RegisterPet, { currentUser: this.props.currentUser });
 					case "vets":
 						return page = React.createElement(VetsContainer, { currentUser: this.props.currentUser, search: this.props.search, pets: this.props.pets, slug: this.props.slug });
 					case "vet":
 						return page = React.createElement(VetProfile, { currentUser: this.props.currentUser, searchHistory: this.props.searchHistory, slug: this.props.slug });
 					case "insurance":
-						return page = React.createElement(ComingSoon, { currentUser: this.props.currentUser });
+						return page = React.createElement(ComingSoon, null);
 					default:
 						return page = null;
 				}
@@ -166,7 +170,7 @@ var Main = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("STATE_TO_PROPS_MAIN: SEARCH HISTORY = " + JSON.stringify(state.searchReducer.searchHistory) + ", USER = " + JSON.stringify(state.accountReducer.currentUser));
+	console.log("STATE_TO_PROPS_MAIN: ");
 
 	return {
 		currentUser: state.accountReducer.currentUser,

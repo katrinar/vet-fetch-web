@@ -25,6 +25,8 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var EditProfile = (function (Component) {
@@ -77,6 +79,7 @@ var EditProfile = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
+					React.createElement(TopBar, null),
 					React.createElement(Nav, null),
 					React.createElement(
 						"section",
@@ -109,6 +112,14 @@ var EditProfile = (function (Component) {
 							React.createElement(
 								"form",
 								{ action: "", method: "" },
+								React.createElement(
+									"label",
+									null,
+									"Username"
+								),
+								React.createElement("br", null),
+								React.createElement("input", { type: "text", onChange: this.submitEdit, id: "username", placeholder: "Username", value: profile.username }),
+								React.createElement("br", null),
 								React.createElement(
 									"label",
 									null,

@@ -23,6 +23,8 @@ var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -80,7 +82,8 @@ var RegisterPet = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(Nav, { currentUser: this.props.currentUser }),
+					React.createElement(TopBar, null),
+					React.createElement(Nav, null),
 					React.createElement(
 						"section",
 						{ id: "page-title" },

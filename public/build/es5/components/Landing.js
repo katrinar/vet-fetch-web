@@ -13,9 +13,11 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var Register = _interopRequire(require("../components/Register"));
+var SignUp = _interopRequire(require("../components/SignUp"));
 
 var Login = _interopRequire(require("../components/Login"));
+
+var TopBar = _interopRequire(require("../components/TopBar"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
@@ -38,7 +40,8 @@ var Landing = (function (Component) {
                 return React.createElement(
                     "div",
                     null,
-                    React.createElement(Nav, { currentUser: this.props.currentUser }),
+                    React.createElement(TopBar, null),
+                    React.createElement(Nav, null),
                     React.createElement(
                         "section",
                         { id: "slider", className: "slider-parallax full-screen dark", style: { background: "url(\"/images/landing/cover.jpg\") center", opacity: 0.7, overflow: "visible" } },
@@ -59,7 +62,7 @@ var Landing = (function (Component) {
                                     "Managing your pets health information has never been easier."
                                 )
                             ),
-                            React.createElement(Register, { currentUser: this.props.currentUser })
+                            React.createElement(SignUp, { currentUser: this.props.currentUser })
                         )
                     ),
                     React.createElement(
@@ -71,7 +74,7 @@ var Landing = (function (Component) {
                             React.createElement(
                                 "h1",
                                 null,
-                                "Keep track of all your pet health care in one spot."
+                                "Find a Vet for your Pet"
                             ),
                             React.createElement(
                                 "span",

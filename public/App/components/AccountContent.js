@@ -3,6 +3,7 @@ import text from '../utils/text'
 import api from '../utils/api'
 import EditProfile from '../components/EditProfile'
 import navigation from '../utils/navigation'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -30,6 +31,7 @@ class AccountContent extends Component {
 
 		return(
 			<div>
+				<TopBar />
 				<Nav />
 
 				<section id="page-title">
@@ -54,6 +56,8 @@ class AccountContent extends Component {
 		                  		 	
                             		<div className="well well-sm nobottommargin">{text.capitalize(this.props.currentUser.firstName)} {text.capitalize(this.props.currentUser.lastName)}</div>
                         		</div>
+
+                        		<div className="divider"></div>
 
                         		<div className="col_half nobottommargin">
 		                  		 	<h4>Username</h4>

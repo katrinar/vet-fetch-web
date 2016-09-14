@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import api from '../utils/api'
 import store from '../stores/store'
 import actions from '../actions/actions'
+import { connect } from 'react-redux'
 
 class Login extends Component {
 
@@ -19,12 +20,17 @@ class Login extends Component {
 
 	login(event){
 		event.preventDefault()
+		var checkCurrentUser = this.props.currentUser || {}
+		console.log('CHECK_CURRENT_USER: '+JSON.stringify(checkCurrentUser))
 
-		api.handlePost('/account/login', this.props.currentUser, function(err, response){
+		api.handlePost('/account/login', checkCurrentUser, function(err, response){
+			console.log('POST LOGIN CHECK_CURRENT_USER: '+JSON.stringify(checkCurrentUser))
 			if (err != null){
 				alert(err.message)
 				return
 			}
+
+			console.log('POST LOGIN: '+JSON.stringify(response))
 
 			if (response.confirmation == "Fail"){
 				alert(response.message)
@@ -32,6 +38,7 @@ class Login extends Component {
 
 			if (response.confirmation == "Success"){
 				store.dispatch(actions.receivedCurrentUser(response.currentUser))
+				// window.location.href = '/'
 			}	
 			
 		})
@@ -39,45 +46,31 @@ class Login extends Component {
 
 	render(){
 		return(
-		
-            <div className="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-body">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 className="modal-title" id="myModalLabel">Login</h4>
-                            </div>
-                            <div className="modal-body">
-                                <form className="nobottommargin">
-						            <div className="col_full">
-						                <label>Email:</label>
-						                <input type="text" className="required form-control input-block-level" onChange={this.submitUser} id="email" /><br />
-						            </div>
-
-						            <div className="col_full">
-						                <label>Password:</label>
-						                <input type="password" className="required form-control input-block-level" onChange={this.submitUser} id="password" /><br />
-						            </div>
-
-						            <div className="col_full nobottommargin">
-						                <button onClick={this.login} className="button button-3d nomargin" id="login-form-submit" name="login-form-submit">Login</button>
-						            </div>
-						        </form>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
+	
+         	<form id="top-login" role="form">
+                <div className="input-group" id="top-login-username">
+                    <span className="input-group-addon"><i className="icon-user"></i></span>
+                    <input onChange={this.submitUser} id="email" type="email" className="form-control" placeholder="Email" />
                 </div>
-            </div>
-
-
-        
-					
+                <div className="input-group" id="top-login-password">
+                    <span className="input-group-addon"><i className="icon-key"></i></span>
+                    <input onChange={this.submitUser} id="password" type="password" className="form-control" placeholder="Password" />
+                </div>
+                <label className="checkbox">
+                    <input type="checkbox" value="remember-me" /> Remember me
+                </label>
+                <button onClick={this.login} className="btn btn-danger btn-block" type="submit">Sign in</button>
+            </form>		
 		)
 	}
 }
 
-export default Login
+const stateToProps = function(state) {
+	console.log('STATE_TO_PROPS_LOGIN: USER = '+JSON.stringify(state.accountReducer.currentUser))
+	
+	return {
+		currentUser: state.accountReducer.currentUser
+	}
+}
+
+export default connect (stateToProps)(Login) 

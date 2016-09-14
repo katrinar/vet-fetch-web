@@ -3,7 +3,7 @@ import api from '../utils/api'
 import store from '../stores/store'
 import actions from '../actions/actions'
 
-class Register extends Component {
+class SignUp extends Component {
 
 	constructor(props, context){
 		super(props, context)
@@ -44,11 +44,11 @@ class Register extends Component {
                     </div>
                 </div>
                 <div className="col_one_fifth col_last nobottommargin">
-                    <button onClick={this.register} className="btn btn-lg btn-danger btn-block nomargin">FETCH</button>
+                    <button onClick={this.register} className="btn btn-lg btn-danger btn-block nomargin">SIGN UP</button>
                 </div>
             </form>
 		)
 	}
 }
 
-export default Register
+export default SignUp

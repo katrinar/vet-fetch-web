@@ -23,6 +23,8 @@ var api = _interopRequire(require("../utils/api"));
 
 var VetSearchResultsList = _interopRequire(require("../components/VetSearchResultsList"));
 
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -105,9 +107,6 @@ var VetsContainer = (function (Component) {
 					}
 					var vetResults = response.result;
 
-
-					// console.log('SEARCH VETS: RESPONSE= '+JSON.stringify(response))
-
 					store.dispatch(actions.receivedSearchResults(vetResults));
 				});
 			},
@@ -121,7 +120,8 @@ var VetsContainer = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(Nav, { currentUser: this.props.currentUser }),
+					React.createElement(TopBar, null),
+					React.createElement(Nav, null),
 					React.createElement(
 						"section",
 						{ id: "page-title" },

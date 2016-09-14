@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PetRow from '../components/PetRow'
 import navigation from '../utils/navigation'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -13,7 +14,8 @@ class PetList extends Component {
 
 		return(
 			<div>
-				<Nav currentUser={this.props.currentUser} />
+				<TopBar />
+				<Nav />
 
 				<section id="page-title">
 		            <div className="container clearfix">

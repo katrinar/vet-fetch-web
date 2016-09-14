@@ -15,12 +15,6 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var api = _interopRequire(require("../utils/api"));
-
-var text = _interopRequire(require("../utils/text"));
-
-var store = _interopRequire(require("../stores/store"));
-
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -40,107 +34,141 @@ var HomeContainer = (function (Component) {
                 return React.createElement(
                     "div",
                     null,
-                    React.createElement(Nav, { currentUser: this.props.currentUser }),
+                    React.createElement(Nav, null),
                     React.createElement(
-                        "div",
-                        { className: "section notopmargin nobottommargin nobg" },
+                        "section",
+                        { id: "page-title" },
                         React.createElement(
                             "div",
                             { className: "container clearfix" },
                             React.createElement(
-                                "h2",
+                                "h1",
                                 null,
                                 "Welcome, ",
-                                text.capitalize(this.props.currentUser.username)
-                            ),
+                                this.props.currentUser.username
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "section notopmargin nobottommargin" },
+                        React.createElement(
+                            "div",
+                            { className: "container clearfix" },
                             React.createElement(
                                 "div",
-                                { id: "posts", className: "post-grid grid-2 clearfix" },
+                                { id: "portfolio", className: "portfolio-1 clearfix" },
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-media pf-icons clearfix" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/pets", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/dog-with-cat.png", alt: "Pets" })
-                                        )
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/iphone-on-desk-2.png", alt: "Pet Dashboard" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Manage your Pets"
+                                            React.createElement(
+                                                "a",
+                                                { href: "/pets" },
+                                                "Pet Dashboard"
+                                            )
+                                        ),
+                                        React.createElement(
+                                            "ul",
+                                            { className: "iconlist" },
+                                            React.createElement(
+                                                "li",
+                                                null,
+                                                React.createElement("i", { className: "icon-ok" }),
+                                                "Register Pet"
+                                            ),
+                                            React.createElement(
+                                                "li",
+                                                null,
+                                                React.createElement("i", { className: "icon-ok" }),
+                                                "My Pets"
+                                            )
                                         )
                                     )
                                 ),
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-media pf-icons clearfix" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/vets", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/pet-with-family.jpg", alt: "Vets" })
-                                        )
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/writing.png", alt: "Vet Insurance" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Find Vets Near You"
+                                            React.createElement(
+                                                "a",
+                                                { href: "/vets" },
+                                                "Vet Search"
+                                            )
+                                        ),
+                                        React.createElement(
+                                            "ul",
+                                            { className: "iconlist" },
+                                            React.createElement(
+                                                "li",
+                                                null,
+                                                React.createElement("i", { className: "icon-ok" }),
+                                                "Find Vets"
+                                            ),
+                                            React.createElement(
+                                                "li",
+                                                null,
+                                                React.createElement("i", { className: "icon-ok" }),
+                                                "Coming Soon: Bookmarked Vets"
+                                            )
                                         )
                                     )
                                 ),
                                 React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
+                                    "article",
+                                    { className: "portfolio-item pf-media pf-icons clearfix" },
                                     React.createElement(
                                         "div",
-                                        { className: "entry-image" },
-                                        React.createElement(
-                                            "a",
-                                            { href: "/insurance", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/man-at-desk.jpeg", alt: "Pets" })
-                                        )
+                                        { className: "portfolio-image" },
+                                        React.createElement("img", { src: "/images/woman-at-desk.png", alt: "Pet Insurance" })
                                     ),
                                     React.createElement(
                                         "div",
-                                        { className: "entry-title" },
+                                        { className: "portfolio-desc" },
                                         React.createElement(
-                                            "h2",
+                                            "h3",
                                             null,
-                                            "Find Insurance Plans for your Furry Friend"
-                                        )
-                                    )
-                                ),
-                                React.createElement(
-                                    "div",
-                                    { className: "entry clearfix" },
-                                    React.createElement(
-                                        "div",
-                                        { className: "entry-image" },
+                                            React.createElement(
+                                                "a",
+                                                { href: "/insurance" },
+                                                "Pet Insurance"
+                                            )
+                                        ),
                                         React.createElement(
-                                            "a",
-                                            { href: "/account", "data-lightbox": "image" },
-                                            React.createElement("img", { className: "image_fade", src: "/images/laptop.jpg", alt: "Vets" })
-                                        )
-                                    ),
-                                    React.createElement(
-                                        "div",
-                                        { className: "entry-title" },
-                                        React.createElement(
-                                            "h2",
-                                            null,
-                                            "Manage your Account"
+                                            "ul",
+                                            { className: "iconlist" },
+                                            React.createElement(
+                                                "li",
+                                                null,
+                                                React.createElement("i", { className: "icon-ok" }),
+                                                "Coming Soon: Insurance 101"
+                                            ),
+                                            React.createElement(
+                                                "li",
+                                                null,
+                                                React.createElement("i", { className: "icon-ok" }),
+                                                "Coming Soon: Find a Plan for your Pet"
+                                            )
                                         )
                                     )
                                 )

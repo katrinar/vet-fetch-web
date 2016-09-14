@@ -3,6 +3,7 @@ import store from '../stores/store'
 import actions from '../actions/actions'
 import api from '../utils/api'
 import VetSearchResultsList from '../components/VetSearchResultsList'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import MapContainer from '../components/MapContainer'
@@ -71,9 +72,6 @@ class VetsContainer extends Component {
 			}
 			var vetResults = response.result
 			
-
-			// console.log('SEARCH VETS: RESPONSE= '+JSON.stringify(response))
-			
 			store.dispatch(actions.receivedSearchResults(vetResults))
 		})
   	}
@@ -83,7 +81,8 @@ class VetsContainer extends Component {
 
 		return(
 			<div>
-				<Nav currentUser={this.props.currentUser} />
+				<TopBar />
+				<Nav />
 
 				<section id="page-title">
 		            <div className="container clearfix">

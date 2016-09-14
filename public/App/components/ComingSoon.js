@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -6,7 +7,8 @@ class ComingSoon extends Component {
 	render(){
 		return(
 			<div>
-				<Nav currentUser={this.props.currentUser}/>
+				<TopBar />
+				<Nav />
 
 				<div className="content-wrap">
 					<div className="container clearfix">

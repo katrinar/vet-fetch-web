@@ -17,6 +17,8 @@ var PetRow = _interopRequire(require("../components/PetRow"));
 
 var navigation = _interopRequire(require("../utils/navigation"));
 
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -42,7 +44,8 @@ var PetList = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(Nav, { currentUser: this.props.currentUser }),
+					React.createElement(TopBar, null),
+					React.createElement(Nav, null),
 					React.createElement(
 						"section",
 						{ id: "page-title" },

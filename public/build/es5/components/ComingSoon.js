@@ -13,6 +13,8 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
+var TopBar = _interopRequire(require("../components/TopBar"));
+
 var Nav = _interopRequire(require("../components/Nav"));
 
 var Footer = _interopRequire(require("../components/Footer"));
@@ -34,7 +36,8 @@ var ComingSoon = (function (Component) {
 				return React.createElement(
 					"div",
 					null,
-					React.createElement(Nav, { currentUser: this.props.currentUser }),
+					React.createElement(TopBar, null),
+					React.createElement(Nav, null),
 					React.createElement(
 						"div",
 						{ className: "content-wrap" },

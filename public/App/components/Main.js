@@ -6,6 +6,7 @@ import Landing from '../components/Landing'
 import HomeContainer from '../components/HomeContainer'
 import Pets from '../components/Pets'
 import PetProfile from '../components/PetProfile'
+import RegisterPet from '../components/RegisterPet'
 import VetProfile from '../components/VetProfile'
 import VetsContainer from '../components/VetsContainer'
 import ComingSoon from '../components/ComingSoon'
@@ -99,12 +100,14 @@ class Main extends Component {
 				return page = <Pets currentUser={this.props.currentUser} petsArray={this.props.petsArray} showRegisterPet={this.props.showRegisterPet}/>
 			case 'pet':
 				return page = <PetProfile currentUser={this.props.currentUser} pets={this.props.pets} slug={this.props.slug} displayEditPet={this.props.displayEditPet}/>
+			case 'register-pet':
+				return page = <RegisterPet currentUser={this.props.currentUser} />
 			case 'vets':
 				return page = <VetsContainer currentUser={this.props.currentUser} search={this.props.search} pets={this.props.pets} slug={this.props.slug}/>
 			case 'vet':
 				return page = <VetProfile currentUser={this.props.currentUser} searchHistory={this.props.searchHistory} slug={this.props.slug}/>
 			case 'insurance':
-				return page = <ComingSoon currentUser={this.props.currentUser}/>
+				return page = <ComingSoon />
 			default: 
 				return page = null
 		}
@@ -122,7 +125,7 @@ class Main extends Component {
 }
 
 const stateToProps = function(state) {
-	console.log('STATE_TO_PROPS_MAIN: SEARCH HISTORY = '+JSON.stringify(state.searchReducer.searchHistory)+', USER = '+JSON.stringify(state.accountReducer.currentUser))
+	console.log('STATE_TO_PROPS_MAIN: ')
 	
 	return {
 		currentUser: state.accountReducer.currentUser,

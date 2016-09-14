@@ -3,6 +3,7 @@ import navigation from '../utils/navigation'
 import store from '../stores/store'
 import actions from '../actions/actions'
 import PetStats from '../components/PetStats'
+import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -19,7 +20,8 @@ class PetProfileInfo extends Component {
 
 		return(
 			<div>
-				<Nav currentUser={this.props.currentUser} />
+				<TopBar />
+				<Nav />
 				<section id="page-title">
 		            <div className="container clearfix">
 		                <h1>Pet Dashboard</h1>
