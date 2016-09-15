@@ -7,7 +7,7 @@ import actions from '../actions/actions'
 import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 
-class EditProfile extends Component {
+class EditAccount extends Component {
 	constructor(props, context){
 		super(props, context)
 		this.submitEdit = this.submitEdit.bind(this)
@@ -43,7 +43,7 @@ class EditProfile extends Component {
 		const profile = this.props.currentUser || {}
 		
 		return (
-			<div className="modal fade" id="editProfileModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div className="modal fade" id="editAccountModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-body">
                         <div className="modal-content">
@@ -53,8 +53,14 @@ class EditProfile extends Component {
                             </div>
                             <div className="modal-body">
                                 <form action="" method="">
-									<label>Username</label><br />
-									<input type="text" onChange={this.submitEdit} id="username" placeholder={'Username'} value={profile.username} /><br />	
+									<label>First Name</label><br />
+									<input type="text" onChange={this.submitEdit} id="firstName" placeholder={'First Name'} value={profile.firstName} /><br />	
+									<label>Last Name</label><br />
+									<input type="text" onChange={this.submitEdit} id="lastName" placeholder={'Last Name'} value={profile.lastName} /><br />
+									<label>Email</label><br />
+									<input type="text" onChange={this.submitEdit} id="email" placeholder={'Email'} value={profile.email} /><br />
+									<label>Password</label><br />
+									<input type="text" onChange={this.submitEdit} id="password" placeholder={'****'} value={profile.password} /><br />			
 								</form>
                             </div>
                             <div className="modal-footer">
@@ -69,4 +75,4 @@ class EditProfile extends Component {
 	}
 }
 
-export default EditProfile
+export default EditAccount

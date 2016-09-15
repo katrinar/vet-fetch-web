@@ -29,18 +29,18 @@ var TopBar = _interopRequire(require("../components/TopBar"));
 
 var Nav = _interopRequire(require("../components/Nav"));
 
-var EditProfile = (function (Component) {
-	function EditProfile(props, context) {
-		_classCallCheck(this, EditProfile);
+var EditAccount = (function (Component) {
+	function EditAccount(props, context) {
+		_classCallCheck(this, EditAccount);
 
-		_get(Object.getPrototypeOf(EditProfile.prototype), "constructor", this).call(this, props, context);
+		_get(Object.getPrototypeOf(EditAccount.prototype), "constructor", this).call(this, props, context);
 		this.submitEdit = this.submitEdit.bind(this);
 		this.submitProfileEdit = this.submitProfileEdit.bind(this);
 	}
 
-	_inherits(EditProfile, Component);
+	_inherits(EditAccount, Component);
 
-	_prototypeProperties(EditProfile, null, {
+	_prototypeProperties(EditAccount, null, {
 		submitEdit: {
 			value: function submitEdit(event) {
 				event.preventDefault();
@@ -78,7 +78,7 @@ var EditProfile = (function (Component) {
 
 				return React.createElement(
 					"div",
-					{ className: "modal fade", id: "editProfileModal", tabIndex: "-1", role: "dialog", "aria-labelledby": "myModalLabel", "aria-hidden": "true" },
+					{ className: "modal fade", id: "editAccountModal", tabIndex: "-1", role: "dialog", "aria-labelledby": "myModalLabel", "aria-hidden": "true" },
 					React.createElement(
 						"div",
 						{ className: "modal-dialog" },
@@ -111,10 +111,34 @@ var EditProfile = (function (Component) {
 										React.createElement(
 											"label",
 											null,
-											"Username"
+											"First Name"
 										),
 										React.createElement("br", null),
-										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "username", placeholder: "Username", value: profile.username }),
+										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "firstName", placeholder: "First Name", value: profile.firstName }),
+										React.createElement("br", null),
+										React.createElement(
+											"label",
+											null,
+											"Last Name"
+										),
+										React.createElement("br", null),
+										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "lastName", placeholder: "Last Name", value: profile.lastName }),
+										React.createElement("br", null),
+										React.createElement(
+											"label",
+											null,
+											"Email"
+										),
+										React.createElement("br", null),
+										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "email", placeholder: "Email", value: profile.email }),
+										React.createElement("br", null),
+										React.createElement(
+											"label",
+											null,
+											"Password"
+										),
+										React.createElement("br", null),
+										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "password", placeholder: "****", value: profile.password }),
 										React.createElement("br", null)
 									)
 								),
@@ -142,7 +166,7 @@ var EditProfile = (function (Component) {
 		}
 	});
 
-	return EditProfile;
+	return EditAccount;
 })(Component);
 
-module.exports = EditProfile;
+module.exports = EditAccount;
