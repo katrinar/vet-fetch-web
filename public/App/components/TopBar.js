@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
-import Login from '../components/Login'
+import TopBarLogin from '../components/TopBarLogin'
 import TopBarSignUp from '../components/TopBarSignUp'
 
 class TopBar extends Component {
@@ -26,7 +26,7 @@ class TopBar extends Component {
                             </li>
                             <li><a href="#">Log In</a>
                                 <div className="top-link-section">
-                                    <Login />
+                                    <TopBarLogin />
                                 </div>
                             </li>
                         </ul>
@@ -39,12 +39,10 @@ class TopBar extends Component {
                  
                     <div id="top-social">
                         <ul>
-                            <li><a href="#" className="si-facebook"><span className="ts-icon"><i className="icon-facebook"></i></span><span className="ts-text">Facebook</span></a></li>
-                            <li><a href="#" className="si-twitter"><span className="ts-icon"><i className="icon-twitter"></i></span><span className="ts-text">Twitter</span></a></li>
-                          
-                            <li><a href="#" className="si-github"><span className="ts-icon"><i className="icon-github-circled"></i></span><span className="ts-text">Github</span></a></li>
-                            <li><a href="#" className="si-pinterest"><span className="ts-icon"><i className="icon-pinterest"></i></span><span className="ts-text">Pinterest</span></a></li>
-                            <li><a href="#" className="si-instagram"><span className="ts-icon"><i className="icon-instagram2"></i></span><span className="ts-text">Instagram</span></a></li>
+                            <li><a href="https://twitter.com/milkshakeTech" className="si-twitter"><span className="ts-icon"><i className="icon-twitter"></i></span><span className="ts-text">Twitter</span></a></li>
+                            <li><a href="https://github.com/katrinar" className="si-github"><span className="ts-icon"><i className="icon-github-circled"></i></span><span className="ts-text">Github</span></a></li>
+                            <li><a href="https://www.pinterest.com/milkshaketech/" className="si-pinterest"><span className="ts-icon"><i className="icon-pinterest"></i></span><span className="ts-text">Pinterest</span></a></li>
+                            <li><a href="https://www.instagram.com/milkshakenyc/" className="si-instagram"><span className="ts-icon"><i className="icon-instagram2"></i></span><span className="ts-text">Instagram</span></a></li>
                             <li><a href="tel:+91.11.85412542" className="si-call"><span className="ts-icon"><i className="icon-call"></i></span><span className="ts-text">703.362.7371</span></a></li>
                             <li><a href="mailto:info@canvas.com" className="si-email3"><span className="ts-icon"><i className="icon-email3"></i></span><span className="ts-text">katrina@milkshake.tech</span></a></li>
                         </ul>

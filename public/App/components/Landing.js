@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import SignUp from '../components/SignUp'
-import Login from '../components/Login'
+import LandingSignUp from '../components/LandingSignUp'
 import TopBar from '../components/TopBar'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
@@ -21,7 +20,7 @@ class Landing extends Component {
 		                    <span>Managing your pets health information has never been easier.</span>
 		                </div>
 
-                        <SignUp currentUser={this.props.currentUser} />
+                        <LandingSignUp currentUser={this.props.currentUser} />
 		            </div>
 
 		        </section>
@@ -130,9 +129,7 @@ class Landing extends Component {
                             <i className="i-plain i-xlarge divcenter nobottommargin icon-fire"></i>
                             <div className="counter counter-large" style={{color: '#F49AC2'}}><span data-from="100" data-to="1288" data-refresh-interval="30" data-speed="2700"></span></div>
                             <h5>Dollars Spent on Vet Care a Year</h5>
-                        </div>
-
-                        
+                        </div>    
 					</div>
 				</div>
 

@@ -24825,9 +24825,9 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
-	var _Login = __webpack_require__(205);
+	var _TopBarLogin = __webpack_require__(205);
 	
-	var _Login2 = _interopRequireDefault(_Login);
+	var _TopBarLogin2 = _interopRequireDefault(_TopBarLogin);
 	
 	var _TopBarSignUp = __webpack_require__(219);
 	
@@ -24893,7 +24893,7 @@
 	                                    _react2.default.createElement(
 	                                        'div',
 	                                        { className: 'top-link-section' },
-	                                        _react2.default.createElement(_Login2.default, null)
+	                                        _react2.default.createElement(_TopBarLogin2.default, null)
 	                                    )
 	                                )
 	                            )
@@ -24913,25 +24913,7 @@
 	                                    null,
 	                                    _react2.default.createElement(
 	                                        'a',
-	                                        { href: '#', className: 'si-facebook' },
-	                                        _react2.default.createElement(
-	                                            'span',
-	                                            { className: 'ts-icon' },
-	                                            _react2.default.createElement('i', { className: 'icon-facebook' })
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            'span',
-	                                            { className: 'ts-text' },
-	                                            'Facebook'
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    null,
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: '#', className: 'si-twitter' },
+	                                        { href: 'https://twitter.com/milkshakeTech', className: 'si-twitter' },
 	                                        _react2.default.createElement(
 	                                            'span',
 	                                            { className: 'ts-icon' },
@@ -24949,7 +24931,7 @@
 	                                    null,
 	                                    _react2.default.createElement(
 	                                        'a',
-	                                        { href: '#', className: 'si-github' },
+	                                        { href: 'https://github.com/katrinar', className: 'si-github' },
 	                                        _react2.default.createElement(
 	                                            'span',
 	                                            { className: 'ts-icon' },
@@ -24967,7 +24949,7 @@
 	                                    null,
 	                                    _react2.default.createElement(
 	                                        'a',
-	                                        { href: '#', className: 'si-pinterest' },
+	                                        { href: 'https://www.pinterest.com/milkshaketech/', className: 'si-pinterest' },
 	                                        _react2.default.createElement(
 	                                            'span',
 	                                            { className: 'ts-icon' },
@@ -24985,7 +24967,7 @@
 	                                    null,
 	                                    _react2.default.createElement(
 	                                        'a',
-	                                        { href: '#', className: 'si-instagram' },
+	                                        { href: 'https://www.instagram.com/milkshakenyc/', className: 'si-instagram' },
 	                                        _react2.default.createElement(
 	                                            'span',
 	                                            { className: 'ts-icon' },
@@ -25085,20 +25067,20 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Login = function (_Component) {
-		_inherits(Login, _Component);
+	var TopBarLogin = function (_Component) {
+		_inherits(TopBarLogin, _Component);
 	
-		function Login(props, context) {
-			_classCallCheck(this, Login);
+		function TopBarLogin(props, context) {
+			_classCallCheck(this, TopBarLogin);
 	
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props, context));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TopBarLogin).call(this, props, context));
 	
 			_this.submitUser = _this.submitUser.bind(_this);
 			_this.login = _this.login.bind(_this);
 			return _this;
 		}
 	
-		_createClass(Login, [{
+		_createClass(TopBarLogin, [{
 			key: 'submitUser',
 			value: function submitUser(event) {
 				var loginUser = Object.assign({}, this.props.currentUser);
@@ -25172,7 +25154,7 @@
 			}
 		}]);
 	
-		return Login;
+		return TopBarLogin;
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
@@ -25183,7 +25165,7 @@
 		};
 	};
 	
-	exports.default = (0, _reactRedux.connect)(stateToProps)(Login);
+	exports.default = (0, _reactRedux.connect)(stateToProps)(TopBarLogin);
 
 /***/ },
 /* 206 */
@@ -26726,13 +26708,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SignUp = __webpack_require__(224);
+	var _LandingSignUp = __webpack_require__(224);
 	
-	var _SignUp2 = _interopRequireDefault(_SignUp);
-	
-	var _Login = __webpack_require__(205);
-	
-	var _Login2 = _interopRequireDefault(_Login);
+	var _LandingSignUp2 = _interopRequireDefault(_LandingSignUp);
 	
 	var _TopBar = __webpack_require__(204);
 	
@@ -26791,7 +26769,7 @@
 	                                'Managing your pets health information has never been easier.'
 	                            )
 	                        ),
-	                        _react2.default.createElement(_SignUp2.default, { currentUser: this.props.currentUser })
+	                        _react2.default.createElement(_LandingSignUp2.default, { currentUser: this.props.currentUser })
 	                    )
 	                ),
 	                _react2.default.createElement(

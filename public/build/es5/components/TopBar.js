@@ -17,7 +17,7 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
-var Login = _interopRequire(require("../components/Login"));
+var TopBarLogin = _interopRequire(require("../components/TopBarLogin"));
 
 var TopBarSignUp = _interopRequire(require("../components/TopBarSignUp"));
 
@@ -73,7 +73,7 @@ var TopBar = (function (Component) {
                                         React.createElement(
                                             "div",
                                             { className: "top-link-section" },
-                                            React.createElement(Login, null)
+                                            React.createElement(TopBarLogin, null)
                                         )
                                     )
                                 )
@@ -93,25 +93,7 @@ var TopBar = (function (Component) {
                                         null,
                                         React.createElement(
                                             "a",
-                                            { href: "#", className: "si-facebook" },
-                                            React.createElement(
-                                                "span",
-                                                { className: "ts-icon" },
-                                                React.createElement("i", { className: "icon-facebook" })
-                                            ),
-                                            React.createElement(
-                                                "span",
-                                                { className: "ts-text" },
-                                                "Facebook"
-                                            )
-                                        )
-                                    ),
-                                    React.createElement(
-                                        "li",
-                                        null,
-                                        React.createElement(
-                                            "a",
-                                            { href: "#", className: "si-twitter" },
+                                            { href: "https://twitter.com/milkshakeTech", className: "si-twitter" },
                                             React.createElement(
                                                 "span",
                                                 { className: "ts-icon" },
@@ -129,7 +111,7 @@ var TopBar = (function (Component) {
                                         null,
                                         React.createElement(
                                             "a",
-                                            { href: "#", className: "si-github" },
+                                            { href: "https://github.com/katrinar", className: "si-github" },
                                             React.createElement(
                                                 "span",
                                                 { className: "ts-icon" },
@@ -147,7 +129,7 @@ var TopBar = (function (Component) {
                                         null,
                                         React.createElement(
                                             "a",
-                                            { href: "#", className: "si-pinterest" },
+                                            { href: "https://www.pinterest.com/milkshaketech/", className: "si-pinterest" },
                                             React.createElement(
                                                 "span",
                                                 { className: "ts-icon" },
@@ -165,7 +147,7 @@ var TopBar = (function (Component) {
                                         null,
                                         React.createElement(
                                             "a",
-                                            { href: "#", className: "si-instagram" },
+                                            { href: "https://www.instagram.com/milkshakenyc/", className: "si-instagram" },
                                             React.createElement(
                                                 "span",
                                                 { className: "ts-icon" },

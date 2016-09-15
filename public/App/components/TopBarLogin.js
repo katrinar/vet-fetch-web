@@ -4,7 +4,7 @@ import store from '../stores/store'
 import actions from '../actions/actions'
 import { connect } from 'react-redux'
 
-class Login extends Component {
+class TopBarLogin extends Component {
 
 	constructor(props, context){
 		super(props, context)
@@ -73,4 +73,4 @@ const stateToProps = function(state) {
 	}
 }
 
-export default connect (stateToProps)(Login) 
+export default connect (stateToProps)(TopBarLogin) 

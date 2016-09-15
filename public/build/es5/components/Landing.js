@@ -13,9 +13,7 @@ var _react = require("react");
 var React = _interopRequire(_react);
 
 var Component = _react.Component;
-var SignUp = _interopRequire(require("../components/SignUp"));
-
-var Login = _interopRequire(require("../components/Login"));
+var LandingSignUp = _interopRequire(require("../components/LandingSignUp"));
 
 var TopBar = _interopRequire(require("../components/TopBar"));
 
@@ -62,7 +60,7 @@ var Landing = (function (Component) {
                                     "Managing your pets health information has never been easier."
                                 )
                             ),
-                            React.createElement(SignUp, { currentUser: this.props.currentUser })
+                            React.createElement(LandingSignUp, { currentUser: this.props.currentUser })
                         )
                     ),
                     React.createElement(
