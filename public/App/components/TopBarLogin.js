@@ -66,8 +66,6 @@ class TopBarLogin extends Component {
 }
 
 const stateToProps = function(state) {
-	console.log('STATE_TO_PROPS_LOGIN: USER = '+JSON.stringify(state.accountReducer.currentUser))
-	
 	return {
 		currentUser: state.accountReducer.currentUser
 	}

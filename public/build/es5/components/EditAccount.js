@@ -107,39 +107,58 @@ var EditAccount = (function (Component) {
 									{ className: "modal-body" },
 									React.createElement(
 										"form",
-										{ action: "", method: "" },
+										null,
 										React.createElement(
-											"label",
-											null,
-											"First Name"
-										),
-										React.createElement("br", null),
-										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "firstName", placeholder: "First Name", value: profile.firstName }),
-										React.createElement("br", null),
-										React.createElement(
-											"label",
-											null,
-											"Last Name"
-										),
-										React.createElement("br", null),
-										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "lastName", placeholder: "Last Name", value: profile.lastName }),
-										React.createElement("br", null),
-										React.createElement(
-											"label",
-											null,
-											"Email"
-										),
-										React.createElement("br", null),
-										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "email", placeholder: "Email", value: profile.email }),
-										React.createElement("br", null),
-										React.createElement(
-											"label",
-											null,
-											"Password"
-										),
-										React.createElement("br", null),
-										React.createElement("input", { type: "text", onChange: this.submitEdit, id: "password", placeholder: "****", value: profile.password }),
-										React.createElement("br", null)
+											"div",
+											{ className: "portfolio-2 portfolio-masonry clearfix" },
+											React.createElement(
+												"article",
+												{ className: "portfolio-item pf-illustrations" },
+												React.createElement(
+													"label",
+													null,
+													"First Name"
+												),
+												React.createElement("br", null),
+												React.createElement("input", { type: "text", onChange: this.submitEdit, id: "firstName", placeholder: "First Name", value: profile.firstName }),
+												React.createElement("br", null)
+											),
+											React.createElement(
+												"article",
+												{ className: "portfolio-item pf-illustrations" },
+												React.createElement(
+													"label",
+													null,
+													"Email"
+												),
+												React.createElement("br", null),
+												React.createElement("input", { type: "text", onChange: this.submitEdit, id: "email", placeholder: "Email", value: profile.email }),
+												React.createElement("br", null)
+											),
+											React.createElement(
+												"article",
+												{ className: "portfolio-item pf-illustrations" },
+												React.createElement(
+													"label",
+													null,
+													"Last Name"
+												),
+												React.createElement("br", null),
+												React.createElement("input", { type: "text", onChange: this.submitEdit, id: "lastName", placeholder: "Last Name", value: profile.lastName }),
+												React.createElement("br", null)
+											),
+											React.createElement(
+												"article",
+												{ className: "portfolio-item pf-illustrations" },
+												React.createElement(
+													"label",
+													null,
+													"Password"
+												),
+												React.createElement("br", null),
+												React.createElement("input", { type: "password", onChange: this.submitEdit, id: "password", placeholder: "****", value: profile.password })
+											)
+										)
 									)
 								),
 								React.createElement(

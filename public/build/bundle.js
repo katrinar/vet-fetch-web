@@ -21220,15 +21220,15 @@
 	
 	var _RegisterPet2 = _interopRequireDefault(_RegisterPet);
 	
-	var _VetProfile = __webpack_require__(238);
+	var _VetProfile = __webpack_require__(240);
 	
 	var _VetProfile2 = _interopRequireDefault(_VetProfile);
 	
-	var _VetsContainer = __webpack_require__(239);
+	var _VetsContainer = __webpack_require__(241);
 	
 	var _VetsContainer2 = _interopRequireDefault(_VetsContainer);
 	
-	var _ComingSoon = __webpack_require__(268);
+	var _ComingSoon = __webpack_require__(270);
 	
 	var _ComingSoon2 = _interopRequireDefault(_ComingSoon);
 	
@@ -25136,8 +25136,6 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('STATE_TO_PROPS_LOGIN: USER = ' + JSON.stringify(state.accountReducer.currentUser));
-	
 		return {
 			currentUser: state.accountReducer.currentUser
 		};
@@ -26141,8 +26139,6 @@
 	}(_react.Component);
 	
 	var stateToProps = function stateToProps(state) {
-		console.log('STATE_TO_PROPS_REGISTER: USER = ' + JSON.stringify(state.accountReducer.currentUser));
-	
 		return {
 			currentUser: state.accountReducer.currentUser
 		};
@@ -26829,39 +26825,58 @@
 									{ className: 'modal-body' },
 									_react2.default.createElement(
 										'form',
-										{ action: '', method: '' },
+										null,
 										_react2.default.createElement(
-											'label',
-											null,
-											'First Name'
-										),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'firstName', placeholder: 'First Name', value: profile.firstName }),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement(
-											'label',
-											null,
-											'Last Name'
-										),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'lastName', placeholder: 'Last Name', value: profile.lastName }),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement(
-											'label',
-											null,
-											'Email'
-										),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'email', placeholder: 'Email', value: profile.email }),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement(
-											'label',
-											null,
-											'Password'
-										),
-										_react2.default.createElement('br', null),
-										_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'password', placeholder: '****', value: profile.password }),
-										_react2.default.createElement('br', null)
+											'div',
+											{ className: 'portfolio-2 portfolio-masonry clearfix' },
+											_react2.default.createElement(
+												'article',
+												{ className: 'portfolio-item pf-illustrations' },
+												_react2.default.createElement(
+													'label',
+													null,
+													'First Name'
+												),
+												_react2.default.createElement('br', null),
+												_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'firstName', placeholder: 'First Name', value: profile.firstName }),
+												_react2.default.createElement('br', null)
+											),
+											_react2.default.createElement(
+												'article',
+												{ className: 'portfolio-item pf-illustrations' },
+												_react2.default.createElement(
+													'label',
+													null,
+													'Email'
+												),
+												_react2.default.createElement('br', null),
+												_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'email', placeholder: 'Email', value: profile.email }),
+												_react2.default.createElement('br', null)
+											),
+											_react2.default.createElement(
+												'article',
+												{ className: 'portfolio-item pf-illustrations' },
+												_react2.default.createElement(
+													'label',
+													null,
+													'Last Name'
+												),
+												_react2.default.createElement('br', null),
+												_react2.default.createElement('input', { type: 'text', onChange: this.submitEdit, id: 'lastName', placeholder: 'Last Name', value: profile.lastName }),
+												_react2.default.createElement('br', null)
+											),
+											_react2.default.createElement(
+												'article',
+												{ className: 'portfolio-item pf-illustrations' },
+												_react2.default.createElement(
+													'label',
+													null,
+													'Password'
+												),
+												_react2.default.createElement('br', null),
+												_react2.default.createElement('input', { type: 'password', onChange: this.submitEdit, id: 'password', placeholder: '****', value: profile.password })
+											)
+										)
 									)
 								),
 								_react2.default.createElement(
@@ -27675,6 +27690,10 @@
 	
 	var _PetProfile2 = _interopRequireDefault(_PetProfile);
 	
+	var _PetsLanding = __webpack_require__(238);
+	
+	var _PetsLanding2 = _interopRequireDefault(_PetsLanding);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27695,13 +27714,19 @@
 		_createClass(Pets, [{
 			key: 'render',
 			value: function render() {
+				var loggedIn = this.props.currentUser || {};
+				console.log('PETS user: ' + JSON.stringify(loggedIn));
 	
 				var content = null;
-				switch (this.props.showRegisterPet) {
-					case false:
-						return content = _react2.default.createElement(_PetList2.default, { petsArray: this.props.petsArray });
-					case true:
-						return content = _react2.default.createElement(_RegisterPet2.default, { currentUser: this.props.currentUser });
+				if (loggedIn.id != null) {
+					switch (this.props.showRegisterPet) {
+						case false:
+							return content = _react2.default.createElement(_PetList2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
+						case true:
+							return content = _react2.default.createElement(_RegisterPet2.default, { currentUser: this.props.currentUser });
+					}
+				} else {
+					content = _react2.default.createElement(_PetsLanding2.default, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 				}
 	
 				return _react2.default.createElement(
@@ -27804,6 +27829,14 @@
 			key: 'registerPet',
 			value: function registerPet(event) {
 				event.preventDefault();
+	
+				var loggedIn = this.props.currentUser || {};
+				console.log('REGISTER PET: currentUser ' + JSON.stringify(loggedIn));
+	
+				if (loggedIn.id == null) {
+					alert("Please login or register to save your pets");
+				}
+	
 				_api2.default.handlePost('/api/pet', this.state.registerPet, function (err, response) {
 					if (err) {
 						alert(err.message);
@@ -27811,7 +27844,6 @@
 					}
 					console.log(JSON.stringify(response.result));
 					_store2.default.dispatch(_actions2.default.registerPet(response.result));
-					_navigation2.default.dismissRegisterPet();
 				});
 			}
 		}, {
@@ -27865,7 +27897,7 @@
 							),
 							_react2.default.createElement(
 								'a',
-								{ href: '#', onClick: _navigation2.default.dismissRegisterPet, className: 'button button-3d button-small button-rounded button-aqua' },
+								{ href: '/pets', className: 'button button-3d button-small button-rounded button-aqua' },
 								'Cancel'
 							)
 						)
@@ -29347,6 +29379,285 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _PetRow = __webpack_require__(230);
+	
+	var _PetRow2 = _interopRequireDefault(_PetRow);
+	
+	var _navigation = __webpack_require__(179);
+	
+	var _navigation2 = _interopRequireDefault(_navigation);
+	
+	var _TopBar = __webpack_require__(204);
+	
+	var _TopBar2 = _interopRequireDefault(_TopBar);
+	
+	var _Nav = __webpack_require__(220);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
+	
+	var _Footer = __webpack_require__(223);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	var _RegisterPetLanding = __webpack_require__(239);
+	
+	var _RegisterPetLanding2 = _interopRequireDefault(_RegisterPetLanding);
+	
+	var _LandingSignUp = __webpack_require__(225);
+	
+	var _LandingSignUp2 = _interopRequireDefault(_LandingSignUp);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PetsLanding = function (_Component) {
+		_inherits(PetsLanding, _Component);
+	
+		function PetsLanding() {
+			_classCallCheck(this, PetsLanding);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PetsLanding).apply(this, arguments));
+		}
+	
+		_createClass(PetsLanding, [{
+			key: 'render',
+			value: function render() {
+	
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_TopBar2.default, null),
+					_react2.default.createElement(_Nav2.default, null),
+					_react2.default.createElement(
+						'section',
+						{ id: 'slider', className: 'slider-parallax full-screen dark', style: { background: 'url("/images/landing/cover2.jpg") center', opacity: 0.7, overflow: 'visible' } },
+						_react2.default.createElement(
+							'div',
+							{ className: 'container vertical-middle clearfix' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'heading-block title-left nobottomborder' },
+								_react2.default.createElement(
+									'h1',
+									null,
+									'Register your furry friend'
+								),
+								_react2.default.createElement(
+									'span',
+									null,
+									'Save health record and access whenever, wherever'
+								)
+							),
+							_react2.default.createElement(_LandingSignUp2.default, { currentUser: this.props.currentUser })
+						)
+					),
+					_react2.default.createElement(
+						'section',
+						{ id: 'page-title' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'container clearfix' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'Pet Dashboard'
+							),
+							_react2.default.createElement(
+								'span',
+								null,
+								'Get started today - log in or sign up to register your pet and save their healh information.'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'section notopmargin nobottommargin' },
+						_react2.default.createElement('div', { className: 'container clearfix' })
+					),
+					_react2.default.createElement(_Footer2.default, null)
+				);
+			}
+		}]);
+	
+		return PetsLanding;
+	}(_react.Component);
+	
+	exports.default = PetsLanding;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _api = __webpack_require__(173);
+	
+	var _api2 = _interopRequireDefault(_api);
+	
+	var _text = __webpack_require__(202);
+	
+	var _text2 = _interopRequireDefault(_text);
+	
+	var _navigation = __webpack_require__(179);
+	
+	var _navigation2 = _interopRequireDefault(_navigation);
+	
+	var _petManager = __webpack_require__(233);
+	
+	var _petManager2 = _interopRequireDefault(_petManager);
+	
+	var _store = __webpack_require__(180);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _actions = __webpack_require__(200);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _reactDropzone = __webpack_require__(234);
+	
+	var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+	
+	var _superagent = __webpack_require__(174);
+	
+	var _superagent2 = _interopRequireDefault(_superagent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+	var CLOUDINARY_UPLOAD_PRESET = 'vxd4nrmq';
+	var CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hsypls36a/image/upload';
+	
+	var RegisterPetLanding = function (_Component) {
+		_inherits(RegisterPetLanding, _Component);
+	
+		function RegisterPetLanding(props, context) {
+			_classCallCheck(this, RegisterPetLanding);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterPetLanding).call(this, props, context));
+	
+			_this.submitPet = _this.submitPet.bind(_this);
+			_this.registerPet = _this.registerPet.bind(_this);
+			_this.state = {
+				registerPet: {
+					name: '',
+					species: '',
+					ownerId: null,
+					slug: null
+				}
+			};
+			return _this;
+		}
+	
+		_createClass(RegisterPetLanding, [{
+			key: 'submitPet',
+			value: function submitPet(event) {
+				var registerPet = Object.assign({}, this.state.registerPet);
+				registerPet[event.target.id] = event.target.value;
+				registerPet['ownerId'] = this.props.currentUser.id;
+				this.setState({
+					registerPet: registerPet
+				});
+			}
+		}, {
+			key: 'registerPet',
+			value: function registerPet(event) {
+				event.preventDefault();
+	
+				var loggedIn = this.props.currentUser || {};
+				console.log('REGISTER PET: currentUser ' + JSON.stringify(loggedIn));
+	
+				if (loggedIn.id == null) {
+					alert("Please login or register to save your pets");
+				}
+	
+				_api2.default.handlePost('/api/pet', this.state.registerPet, function (err, response) {
+					if (err) {
+						alert(err.message);
+						return;
+					}
+					console.log(JSON.stringify(response.result));
+					_store2.default.dispatch(_actions2.default.registerPet(response.result));
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'section notopmargin nobottommargin' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'container clearfix' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'fancy-title title-double-border' },
+							_react2.default.createElement(
+								'h2',
+								null,
+								'Register your Pet'
+							)
+						),
+						_react2.default.createElement(
+							'form',
+							null,
+							_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'name', placeholder: 'Name' }),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('input', { type: 'text', onChange: this.submitPet, id: 'species', placeholder: 'Species' }),
+							_react2.default.createElement('br', null)
+						),
+						_react2.default.createElement(
+							'a',
+							{ href: '#', onClick: this.registerPet, className: 'button button-3d button-small button-rounded button-aqua' },
+							'Register your Pet'
+						)
+					)
+				);
+			}
+		}]);
+	
+		return RegisterPetLanding;
+	}(_react.Component);
+	
+	exports.default = RegisterPetLanding;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _store = __webpack_require__(180);
 	
 	var _store2 = _interopRequireDefault(_store);
@@ -29401,7 +29712,7 @@
 	exports.default = VetProfile;
 
 /***/ },
-/* 239 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29428,7 +29739,7 @@
 	
 	var _api2 = _interopRequireDefault(_api);
 	
-	var _VetSearchResultsList = __webpack_require__(240);
+	var _VetSearchResultsList = __webpack_require__(242);
 	
 	var _VetSearchResultsList2 = _interopRequireDefault(_VetSearchResultsList);
 	
@@ -29444,11 +29755,11 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _MapContainer = __webpack_require__(242);
+	var _MapContainer = __webpack_require__(244);
 	
 	var _MapContainer2 = _interopRequireDefault(_MapContainer);
 	
-	var _googleMapReact = __webpack_require__(244);
+	var _googleMapReact = __webpack_require__(246);
 	
 	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
 	
@@ -29629,7 +29940,7 @@
 	exports.default = VetsContainer;
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29644,7 +29955,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _VetSearchResultsRow = __webpack_require__(241);
+	var _VetSearchResultsRow = __webpack_require__(243);
 	
 	var _VetSearchResultsRow2 = _interopRequireDefault(_VetSearchResultsRow);
 	
@@ -29697,7 +30008,7 @@
 	exports.default = VetSearchResultsList;
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29765,7 +30076,7 @@
 	exports.default = VetSearchResultsRow;
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29780,11 +30091,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Markers = __webpack_require__(243);
+	var _Markers = __webpack_require__(245);
 	
 	var _Markers2 = _interopRequireDefault(_Markers);
 	
-	var _googleMapReact = __webpack_require__(244);
+	var _googleMapReact = __webpack_require__(246);
 	
 	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
 	
@@ -29849,7 +30160,7 @@
 	exports.default = MapContainer;
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29904,7 +30215,7 @@
 	exports.default = Markers;
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29914,7 +30225,7 @@
 	});
 	exports.default = undefined;
 	
-	var _google_map = __webpack_require__(245);
+	var _google_map = __webpack_require__(247);
 	
 	var _google_map2 = _interopRequireDefault(_google_map);
 	
@@ -29923,7 +30234,7 @@
 	exports.default = _google_map2.default;
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -29944,67 +30255,67 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _shallowEqual = __webpack_require__(246);
+	var _shallowEqual = __webpack_require__(248);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _marker_dispatcher = __webpack_require__(247);
+	var _marker_dispatcher = __webpack_require__(249);
 	
 	var _marker_dispatcher2 = _interopRequireDefault(_marker_dispatcher);
 	
-	var _google_map_map = __webpack_require__(249);
+	var _google_map_map = __webpack_require__(251);
 	
 	var _google_map_map2 = _interopRequireDefault(_google_map_map);
 	
-	var _google_map_markers = __webpack_require__(250);
+	var _google_map_markers = __webpack_require__(252);
 	
 	var _google_map_markers2 = _interopRequireDefault(_google_map_markers);
 	
-	var _google_map_markers_prerender = __webpack_require__(252);
+	var _google_map_markers_prerender = __webpack_require__(254);
 	
 	var _google_map_markers_prerender2 = _interopRequireDefault(_google_map_markers_prerender);
 	
-	var _google_map_loader = __webpack_require__(253);
+	var _google_map_loader = __webpack_require__(255);
 	
 	var _google_map_loader2 = _interopRequireDefault(_google_map_loader);
 	
-	var _detect = __webpack_require__(255);
+	var _detect = __webpack_require__(257);
 	
 	var _detect2 = _interopRequireDefault(_detect);
 	
-	var _geo = __webpack_require__(256);
+	var _geo = __webpack_require__(258);
 	
 	var _geo2 = _interopRequireDefault(_geo);
 	
-	var _array_helper = __webpack_require__(261);
+	var _array_helper = __webpack_require__(263);
 	
 	var _array_helper2 = _interopRequireDefault(_array_helper);
 	
-	var _is_plain_object = __webpack_require__(262);
+	var _is_plain_object = __webpack_require__(264);
 	
 	var _is_plain_object2 = _interopRequireDefault(_is_plain_object);
 	
-	var _pick = __webpack_require__(263);
+	var _pick = __webpack_require__(265);
 	
 	var _pick2 = _interopRequireDefault(_pick);
 	
-	var _raf = __webpack_require__(264);
+	var _raf = __webpack_require__(266);
 	
 	var _raf2 = _interopRequireDefault(_raf);
 	
-	var _log = __webpack_require__(265);
+	var _log = __webpack_require__(267);
 	
 	var _log2 = _interopRequireDefault(_log);
 	
-	var _isNumber = __webpack_require__(266);
+	var _isNumber = __webpack_require__(268);
 	
 	var _isNumber2 = _interopRequireDefault(_isNumber);
 	
-	var _omit = __webpack_require__(251);
+	var _omit = __webpack_require__(253);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
-	var _detectElementResize = __webpack_require__(267);
+	var _detectElementResize = __webpack_require__(269);
 	
 	var _detectElementResize2 = _interopRequireDefault(_detectElementResize);
 	
@@ -30924,7 +31235,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports) {
 
 	/**
@@ -30995,7 +31306,7 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 247 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31006,7 +31317,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventemitter = __webpack_require__(248);
+	var _eventemitter = __webpack_require__(250);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
@@ -31059,7 +31370,7 @@
 	exports.default = MarkerDispatcher;
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31354,7 +31665,7 @@
 
 
 /***/ },
-/* 249 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31414,7 +31725,7 @@
 	exports.default = GoogleMapMap;
 
 /***/ },
-/* 250 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31431,11 +31742,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _shallowEqual = __webpack_require__(246);
+	var _shallowEqual = __webpack_require__(248);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _omit = __webpack_require__(251);
+	var _omit = __webpack_require__(253);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -31749,7 +32060,7 @@
 	exports.default = GoogleMapMarkers;
 
 /***/ },
-/* 251 */
+/* 253 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31776,7 +32087,7 @@
 	exports.default = omit;
 
 /***/ },
-/* 252 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31799,7 +32110,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _google_map_markers = __webpack_require__(250);
+	var _google_map_markers = __webpack_require__(252);
 	
 	var _google_map_markers2 = _interopRequireDefault(_google_map_markers);
 	
@@ -31817,7 +32128,7 @@
 	};
 
 /***/ },
-/* 253 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31838,7 +32149,7 @@
 	// TODO add libraries language and other map options
 	function googleMapLoader(bootstrapURLKeys) {
 	  if (!$script_) {
-	    $script_ = __webpack_require__(254); // eslint-disable-line
+	    $script_ = __webpack_require__(256); // eslint-disable-line
 	  }
 	
 	  // call from outside google-map-react
@@ -31895,7 +32206,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 254 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -32024,7 +32335,7 @@
 
 
 /***/ },
-/* 255 */
+/* 257 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32073,7 +32384,7 @@
 	}
 
 /***/ },
-/* 256 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32086,15 +32397,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lat_lng = __webpack_require__(257);
+	var _lat_lng = __webpack_require__(259);
 	
 	var _lat_lng2 = _interopRequireDefault(_lat_lng);
 	
-	var _pointGeometry = __webpack_require__(259);
+	var _pointGeometry = __webpack_require__(261);
 	
 	var _pointGeometry2 = _interopRequireDefault(_pointGeometry);
 	
-	var _transform = __webpack_require__(260);
+	var _transform = __webpack_require__(262);
 	
 	var _transform2 = _interopRequireDefault(_transform);
 	
@@ -32229,7 +32540,7 @@
 	exports.default = Geo;
 
 /***/ },
-/* 257 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32240,7 +32551,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _wrap2 = __webpack_require__(258);
+	var _wrap2 = __webpack_require__(260);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -32284,7 +32595,7 @@
 	exports.default = LatLng;
 
 /***/ },
-/* 258 */
+/* 260 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32299,7 +32610,7 @@
 	}
 
 /***/ },
-/* 259 */
+/* 261 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32436,7 +32747,7 @@
 
 
 /***/ },
-/* 260 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32447,15 +32758,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lat_lng = __webpack_require__(257);
+	var _lat_lng = __webpack_require__(259);
 	
 	var _lat_lng2 = _interopRequireDefault(_lat_lng);
 	
-	var _pointGeometry = __webpack_require__(259);
+	var _pointGeometry = __webpack_require__(261);
 	
 	var _pointGeometry2 = _interopRequireDefault(_pointGeometry);
 	
-	var _wrap = __webpack_require__(258);
+	var _wrap = __webpack_require__(260);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32616,7 +32927,7 @@
 	exports.default = Transform;
 
 /***/ },
-/* 261 */
+/* 263 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32638,7 +32949,7 @@
 	}
 
 /***/ },
-/* 262 */
+/* 264 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32676,7 +32987,7 @@
 	}
 
 /***/ },
-/* 263 */
+/* 265 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32697,7 +33008,7 @@
 	}
 
 /***/ },
-/* 264 */
+/* 266 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32717,7 +33028,7 @@
 	}
 
 /***/ },
-/* 265 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32733,7 +33044,7 @@
 	exports.default = log2;
 
 /***/ },
-/* 266 */
+/* 268 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32758,7 +33069,7 @@
 	}
 
 /***/ },
-/* 267 */
+/* 269 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32932,7 +33243,7 @@
 	};
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

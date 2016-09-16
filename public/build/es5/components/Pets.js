@@ -23,6 +23,8 @@ var PetList = _interopRequire(require("../components/PetList"));
 
 var PetProfile = _interopRequire(require("../components/PetProfile"));
 
+var PetsLanding = _interopRequire(require("../components/PetsLanding"));
+
 var Pets = (function (Component) {
 	function Pets(props, context) {
 		_classCallCheck(this, Pets);
@@ -35,13 +37,22 @@ var Pets = (function (Component) {
 	_prototypeProperties(Pets, null, {
 		render: {
 			value: function render() {
+				var loggedIn = this.props.currentUser || {};
+				console.log("PETS user: " + JSON.stringify(loggedIn));
+
 				var content = null;
-				switch (this.props.showRegisterPet) {
-					case false:
-						return content = React.createElement(PetList, { petsArray: this.props.petsArray });
-					case true:
-						return content = React.createElement(RegisterPet, { currentUser: this.props.currentUser });
+				if (loggedIn.id != null) {
+					switch (this.props.showRegisterPet) {
+						case false:
+							return content = React.createElement(PetList, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
+						case true:
+							return content = React.createElement(RegisterPet, { currentUser: this.props.currentUser });
+					}
+				} else {
+					content = React.createElement(PetsLanding, { currentUser: this.props.currentUser, petsArray: this.props.petsArray });
 				}
+
+
 
 				return React.createElement(
 					"div",

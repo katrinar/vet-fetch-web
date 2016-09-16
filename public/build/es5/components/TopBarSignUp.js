@@ -115,8 +115,6 @@ var TopBarSignUp = (function (Component) {
 })(Component);
 
 var stateToProps = function (state) {
-	console.log("STATE_TO_PROPS_REGISTER: USER = " + JSON.stringify(state.accountReducer.currentUser));
-
 	return {
 		currentUser: state.accountReducer.currentUser
 	};

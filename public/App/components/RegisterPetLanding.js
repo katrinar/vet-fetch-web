@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import api from '../utils/api'
+import text from '../utils/text'
 import navigation from '../utils/navigation'
+import petManager from '../utils/petManager'
 import store from '../stores/store'
 import actions from '../actions/actions'
-import TopBar from '../components/TopBar'
-import Nav from '../components/Nav'
-import Footer from '../components/Footer'
+import Dropzone from 'react-dropzone'
+import request from 'superagent'
 
 
-class RegisterPet extends Component {
+// const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+const CLOUDINARY_UPLOAD_PRESET = 'vxd4nrmq';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hsypls36a/image/upload';
+
+class RegisterPetLanding extends Component {
 
 	constructor(props, context){
 		super(props, context)
@@ -56,17 +61,7 @@ class RegisterPet extends Component {
 
 	render(){
 		return(
-			<div>
-				<TopBar />
-				<Nav />
-
-				<section id="page-title">
-		            <div className="container clearfix">
-		                <h1>Pet Dashboard</h1>
-		            </div>
-        		</section>
-
-				<div className="section notopmargin nobottommargin nobg">
+			<div className="section notopmargin nobottommargin">
 					<div className="container clearfix">
 						<div className="fancy-title title-double-border">
 		                        <h2>Register your Pet</h2>
@@ -76,17 +71,12 @@ class RegisterPet extends Component {
 							<input type="text" onChange={this.submitPet} id="species" placeholder="Species" /><br />	
 						</form> 
 
-						<a href="#" onClick={this.registerPet} className="button button-3d button-small button-rounded button-leaf">Register Pet</a>
-			
-						<a href="/pets" className="button button-3d button-small button-rounded button-aqua">Cancel</a>
+					<a href="#" onClick={this.registerPet} className="button button-3d button-small button-rounded button-aqua">Register your Pet</a>
 					</div>
 				</div>
 
-				<Footer />			 
-			</div>
-
-		)
+			)
 	}
 }
 
-export default RegisterPet
+export default RegisterPetLanding

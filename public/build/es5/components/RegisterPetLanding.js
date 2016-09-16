@@ -17,23 +17,32 @@ var React = _interopRequire(_react);
 var Component = _react.Component;
 var api = _interopRequire(require("../utils/api"));
 
+var text = _interopRequire(require("../utils/text"));
+
 var navigation = _interopRequire(require("../utils/navigation"));
+
+var petManager = _interopRequire(require("../utils/petManager"));
 
 var store = _interopRequire(require("../stores/store"));
 
 var actions = _interopRequire(require("../actions/actions"));
 
-var TopBar = _interopRequire(require("../components/TopBar"));
+var Dropzone = _interopRequire(require("react-dropzone"));
 
-var Nav = _interopRequire(require("../components/Nav"));
+var request = _interopRequire(require("superagent"));
 
-var Footer = _interopRequire(require("../components/Footer"));
 
-var RegisterPet = (function (Component) {
-	function RegisterPet(props, context) {
-		_classCallCheck(this, RegisterPet);
 
-		_get(Object.getPrototypeOf(RegisterPet.prototype), "constructor", this).call(this, props, context);
+
+// const CLOUDINARY_UPLOAD_PRESET = 'lpqeur5v';
+var CLOUDINARY_UPLOAD_PRESET = "vxd4nrmq";
+var CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/hsypls36a/image/upload";
+
+var RegisterPetLanding = (function (Component) {
+	function RegisterPetLanding(props, context) {
+		_classCallCheck(this, RegisterPetLanding);
+
+		_get(Object.getPrototypeOf(RegisterPetLanding.prototype), "constructor", this).call(this, props, context);
 		this.submitPet = this.submitPet.bind(this);
 		this.registerPet = this.registerPet.bind(this);
 		this.state = {
@@ -46,9 +55,9 @@ var RegisterPet = (function (Component) {
 		};
 	}
 
-	_inherits(RegisterPet, Component);
+	_inherits(RegisterPetLanding, Component);
 
-	_prototypeProperties(RegisterPet, null, {
+	_prototypeProperties(RegisterPetLanding, null, {
 		submitPet: {
 			value: function submitPet(event) {
 				var registerPet = Object.assign({}, this.state.registerPet);
@@ -88,58 +97,33 @@ var RegisterPet = (function (Component) {
 			value: function render() {
 				return React.createElement(
 					"div",
-					null,
-					React.createElement(TopBar, null),
-					React.createElement(Nav, null),
-					React.createElement(
-						"section",
-						{ id: "page-title" },
-						React.createElement(
-							"div",
-							{ className: "container clearfix" },
-							React.createElement(
-								"h1",
-								null,
-								"Pet Dashboard"
-							)
-						)
-					),
+					{ className: "section notopmargin nobottommargin" },
 					React.createElement(
 						"div",
-						{ className: "section notopmargin nobottommargin nobg" },
+						{ className: "container clearfix" },
 						React.createElement(
 							"div",
-							{ className: "container clearfix" },
+							{ className: "fancy-title title-double-border" },
 							React.createElement(
-								"div",
-								{ className: "fancy-title title-double-border" },
-								React.createElement(
-									"h2",
-									null,
-									"Register your Pet"
-								)
-							),
-							React.createElement(
-								"form",
+								"h2",
 								null,
-								React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
-								React.createElement("br", null),
-								React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),
-								React.createElement("br", null)
-							),
-							React.createElement(
-								"a",
-								{ href: "#", onClick: this.registerPet, className: "button button-3d button-small button-rounded button-leaf" },
-								"Register Pet"
-							),
-							React.createElement(
-								"a",
-								{ href: "/pets", className: "button button-3d button-small button-rounded button-aqua" },
-								"Cancel"
+								"Register your Pet"
 							)
+						),
+						React.createElement(
+							"form",
+							null,
+							React.createElement("input", { type: "text", onChange: this.submitPet, id: "name", placeholder: "Name" }),
+							React.createElement("br", null),
+							React.createElement("input", { type: "text", onChange: this.submitPet, id: "species", placeholder: "Species" }),
+							React.createElement("br", null)
+						),
+						React.createElement(
+							"a",
+							{ href: "#", onClick: this.registerPet, className: "button button-3d button-small button-rounded button-aqua" },
+							"Register your Pet"
 						)
-					),
-					React.createElement(Footer, null)
+					)
 				);
 			},
 			writable: true,
@@ -147,7 +131,7 @@ var RegisterPet = (function (Component) {
 		}
 	});
 
-	return RegisterPet;
+	return RegisterPetLanding;
 })(Component);
 
-module.exports = RegisterPet;
+module.exports = RegisterPetLanding;

@@ -43,6 +43,7 @@ class EditAccount extends Component {
 		const profile = this.props.currentUser || {}
 		
 		return (
+
 			<div className="modal fade" id="editAccountModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-body">
@@ -52,15 +53,25 @@ class EditAccount extends Component {
                                 <h4 className="modal-title" id="myModalLabel">Edit Profile</h4>
                             </div>
                             <div className="modal-body">
-                                <form action="" method="">
-									<label>First Name</label><br />
-									<input type="text" onChange={this.submitEdit} id="firstName" placeholder={'First Name'} value={profile.firstName} /><br />	
-									<label>Last Name</label><br />
-									<input type="text" onChange={this.submitEdit} id="lastName" placeholder={'Last Name'} value={profile.lastName} /><br />
-									<label>Email</label><br />
-									<input type="text" onChange={this.submitEdit} id="email" placeholder={'Email'} value={profile.email} /><br />
-									<label>Password</label><br />
-									<input type="text" onChange={this.submitEdit} id="password" placeholder={'****'} value={profile.password} /><br />			
+                                <form >
+                                	<div className="portfolio-2 portfolio-masonry clearfix">
+	                                	<article className="portfolio-item pf-illustrations">
+											<label>First Name</label><br />
+											<input type="text" onChange={this.submitEdit} id="firstName" placeholder={'First Name'} value={profile.firstName} /><br />	
+										</article>	
+										<article className="portfolio-item pf-illustrations">	
+											<label>Email</label><br />
+											<input type="text" onChange={this.submitEdit} id="email" placeholder={'Email'} value={profile.email} /><br />
+										</article>
+										<article className="portfolio-item pf-illustrations">	
+											<label>Last Name</label><br />
+											<input type="text" onChange={this.submitEdit} id="lastName" placeholder={'Last Name'} value={profile.lastName} /><br />
+										</article>	
+										<article className="portfolio-item pf-illustrations">	
+											<label>Password</label><br />
+											<input type="password" onChange={this.submitEdit} id="password" placeholder={'****'} value={profile.password} />	
+										</article>
+									</div>	
 								</form>
                             </div>
                             <div className="modal-footer">
