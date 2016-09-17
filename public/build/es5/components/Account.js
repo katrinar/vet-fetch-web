@@ -19,6 +19,8 @@ var EditProfile = _interopRequire(require("../components/EditProfile"));
 
 var AccountContent = _interopRequire(require("../components/AccountContent"));
 
+var AccountLanding = _interopRequire(require("../components/AccountLanding"));
+
 var Account = (function (Component) {
 	function Account() {
 		_classCallCheck(this, Account);
@@ -33,14 +35,22 @@ var Account = (function (Component) {
 	_prototypeProperties(Account, null, {
 		render: {
 			value: function render() {
+				var loggedIn = this.props.currentUser || {};
+				console.log("ACCOUNT user: " + JSON.stringify(loggedIn));
 				var content = null;
 
-				switch (this.props.showEditProfile) {
-					case false:
-						return content = React.createElement(AccountContent, { showEditProfile: this.props.showEditProfile, currentUser: this.props.currentUser });
-					case true:
-						return content = React.createElement(EditProfile, { showEditProfile: this.props.showEditProfile, currentUser: this.props.currentUser });
+				if (loggedIn.id != null) {
+					switch (this.props.showEditProfile) {
+						case false:
+							return content = React.createElement(AccountContent, { showEditProfile: this.props.showEditProfile, currentUser: this.props.currentUser });
+						case true:
+							return content = React.createElement(EditProfile, { showEditProfile: this.props.showEditProfile, currentUser: this.props.currentUser });
+					}
+				} else {
+					content = React.createElement(AccountLanding, { currentUser: this.props.currentUser, showEditProfile: this.props.showEditProfile });
 				}
+
+
 
 				return React.createElement(
 					"div",
