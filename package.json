@@ -29,6 +29,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "request": "^2.74.0",
+    "sendgrid": "^4.3.0",
     "serve-favicon": "~2.3.0",
     "superagent": "^2.1.0"
   },

@@ -72,6 +72,26 @@ router.get('/:resource/:id', function(req, res, next){
 router.post('/:resource', function(req, res, next){
 	var resource = req.params.resource
 	var controller = controllers[resource]
+
+	if (resource == 'profile'){
+		var params = req.body
+		
+		console.log('SIGN UP POST PARAMS: '+JSON.stringify(params))
+
+		var sendgrid = require('sendgrid')(process.env.SENDGRID_API_KEY)
+
+		var welcomeSignUp = "Hi there! Welcome to Vet Fetch!"
+
+		sendgrid.send({
+				to: 'katrina@milkshake.tech',
+				from: 'katrina@milkshake.tech',
+				subject: "Welcome!",
+				text: welcomeSignUp
+		}, function(err){
+				
+		})
+	}
+
 	if (controller == null){
 		res.json({
 			confirmation: 'Fail',

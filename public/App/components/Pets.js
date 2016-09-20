@@ -18,11 +18,11 @@ class Pets extends Component {
 		var content = null
 		if (loggedIn.id != null){
 			switch(this.props.showRegisterPet){
-			case false: 
-				return content = <PetList currentUser={this.props.currentUser} petsArray={this.props.petsArray}/> 
-			case true: 
-				return content = <RegisterPet currentUser={this.props.currentUser} />
-		}
+				case false: 
+					return content = <PetList currentUser={this.props.currentUser} petsArray={this.props.petsArray}/> 
+				case true: 
+					return content = <RegisterPet currentUser={this.props.currentUser} />
+			}
 		}
 
 		else {
