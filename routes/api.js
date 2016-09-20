@@ -73,24 +73,7 @@ router.post('/:resource', function(req, res, next){
 	var resource = req.params.resource
 	var controller = controllers[resource]
 
-	if (resource == 'profile'){
-		var params = req.body
-		
-		console.log('SIGN UP POST PARAMS: '+JSON.stringify(params))
 
-		var sendgrid = require('sendgrid')(process.env.SENDGRID_API_KEY)
-
-		var welcomeSignUp = "Hi there! Welcome to Vet Fetch!"
-
-		sendgrid.send({
-				to: 'katrina@milkshake.tech',
-				from: 'katrina@milkshake.tech',
-				subject: "Welcome!",
-				text: welcomeSignUp
-		}, function(err){
-				
-		})
-	}
 
 	if (controller == null){
 		res.json({
@@ -111,12 +94,41 @@ router.post('/:resource', function(req, res, next){
 
 		if (resource == 'profile') //install cookie
 			req.session.user = result.id
-
+		
 			res.json({
 				confirmation: 'Success',
 				result: result
 			})
 
+				var params = req.body
+			
+			console.log('SIGN UP POST PARAMS: '+JSON.stringify(params))
+
+			var sendgrid = require('sendgrid')(process.env.SENDGRID_API_KEY)
+			var request = sendgrid.emptyRequest({
+				method: 'POST',
+				path: '/v3/mail/send',
+				body: {
+					personalizations: [
+					{
+						to: [
+						{email: 'katrina@milkshake.tech',},
+						],
+						subject: 'Welcome to VET FETCH',
+					},
+					],
+					from: {
+						email: 'katrina@milkshake.tech',
+					},
+					content: [
+						{
+							type: 'text/plain',
+							value: 'Hello, Email!',
+						},
+					],
+				},
+			})
+			
 		return
 	})
 })
